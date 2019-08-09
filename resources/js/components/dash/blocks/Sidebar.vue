@@ -1,92 +1,103 @@
 <template>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a role="button" class="brand-link">logo</a>
 
-    <aside class="main-sidebar" >
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar" >
+            <!-- Sidebar -->
+            <div class="sidebar">
 
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header" v-if='admin'>Header</li>
 
-                <li v-if='admin'>
-                    <a role="button" href="/"><i class="fas fa-home"></i>
-                        <span>HOME</span></a>
-                </li>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" 
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
 
-                <li v-if='admin'>
-                    <a role="button" @click="change_page('dashboard')"><i class="fas fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
 
-                <li class="treeview" v-if='admin'>
-                    <a role="button">
-                        <i class="fas fa-edit"></i>
-                        <span>Sections</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a role="button" @click="change_page('NavEdit')"><i class="far fa-circle"></i> Navbar</a>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    sections
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('NavEdit')"><i class="far fa-circle nav-icon"></i>
+                                        Navbar</a>
+                                </li>
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('SlidersEdit')"><i class="far fa-circle nav-icon"></i>
+                                        Slieders</a>
+                                </li>
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('AboutusEdit')"><i class="far fa-circle nav-icon"></i>
+                                        About us</a>
+                                </li>
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('TrainersEdit')"><i class="far fa-circle nav-icon"></i>
+                                        Our trainers</a>
+                                </li>
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('FooterEdit')"><i class="far fa-circle nav-icon"></i>
+                                        Footer</a>
+                                </li>
+
+                            </ul>
                         </li>
-                        <li><a role="button" @click="change_page('SlidersEdit')"><i class="far fa-circle"></i> Slieders</a>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Users
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('userAll')"><i class="far fa-circle nav-icon"></i> all users</a>
+                                    </li>
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('userAdd')"><i class="far fa-circle nav-icon"></i> add user</a>
+                                </li>
+
+                            </ul>
                         </li>
-                        <li><a role="button" @click="change_page('AboutusEdit')"><i class="far fa-circle"></i> About us</a>
-                        </li>
-                        <li><a role="button" @click="change_page('TrainersEdit')"><i class="far fa-circle"></i> Our trainers</a>
-                        </li>
-                        <li><a role="button" @click="change_page('FooterEdit')"><i class="far fa-circle"></i> Footer</a>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-newspaper"></i>
+                                <p>
+                                    Article
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('articleAll')"><i class="far fa-circle nav-icon"></i> all articles</a>
+                                    </li>
+                                <li class="nav-item"><a role="button" class="nav-link" @click="change_page('articleAdd')"><i class="far fa-circle nav-icon"></i> add articles</a>
+                                </li>
+
+                            </ul>
                         </li>
                     </ul>
-                </li>
-
-                <li class="treeview" v-if='admin'>
-                    <a role="button">
-                        <i class="fas fa-users"></i>
-                        <span>Users</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a role="button" @click="change_page('userAll')"><i class="far fa-circle"></i> all users</a>
-                        </li>
-                        <li><a role="button" @click="change_page('userAdd')"><i class="far fa-circle"></i> add user</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="treeview" v-if='admin'>
-                    <a href="#">
-                        <i class="fas fa-newspaper"></i>
-                        <span>Articles</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a role="button" @click="change_page('articleAll')"><i class="far fa-circle"></i> All
-                                articles</a></li>
-                        <li><a role="button" @click="change_page('articleAdd')"><i class="far fa-circle"></i> add
-                                article</a></li>
-
-                    </ul>
-                </li>
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
 </template>
 
 <style lang="scss" scoped>
-    i{
-        margin-right: 10px;
-    }
-    .main-sidebar{
-        min-height: 124%;
-    }
+.brand-link{
+    padding: 10px;
+    color: white !important;
+}
+.layout-navbar-fixed.layout-fixed .wrapper .sidebar {
+    margin-top: calc(3.5rem + 50px) ;
+}
+a{
+    cursor: pointer;
+}
 </style>
 
 
@@ -96,10 +107,12 @@
             change_page(payload) {
                 this.$store.commit('change_current_page', payload)
             }
-        },computed: {
+        },
+        computed: {
             admin() {
                 return this.$store.state.AdminPanel.loged
             },
         }
     }
+
 </script>

@@ -1,40 +1,54 @@
 <template>
 <div>
     <loginPage v-if="!admin"></loginPage>
+    <div class="wrapper">
 
-    <div>
-        <Header v-if='admin' ></Header>
-        <!-- Left side column. contains the logo and sidebar -->
-        <Sidebar></Sidebar>
+        <Header v-show="admin"></Header>
+        <!-- Main Sidebar Container -->
+        <Sidebar v-show="admin"></Sidebar>
+
         <!-- Content Wrapper. Contains page content -->
-        <div v-if='admin' class="content-wrapper">
+        <div class="content-wrapper" v-if="admin">
+
             <!-- Main content -->
             <section class="content">
-                <transition name="fade" mode="out-in">
-                    <component :is="currentPage"></component>
-                </transition>
+                <div class="container-fluid">
+                    <section class="content">
+                        <transition name="fade" mode="out-in">
+                            <component :is="currentPage"></component>
+                        </transition>
+                    </section>
+                </div>
+                <!--/. container-fluid -->
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer v-if='admin' class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0
-            </div>
-            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
-            reserved.
-        </footer>
 
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 3.0.0-beta.2
+            </div>
+        </footer>
     </div>
     <!-- ./wrapper -->
-</div>
+    </div>
+
 </template>
 
-<style>
-    .content-header {
-        padding: 0 !important;
-        margin-bottom: 20px;
-    }
+<style lang="scss" scoped>
+.wrapper{
+        padding-top: 33px;
+}
 </style>
 
 
@@ -78,15 +92,27 @@
             AboutusEdit
         },
         computed: {
-            admin() {
-                return this.$store.state.AdminPanel.loged
-            },
+                 admin() {
+                     return this.$store.state.AdminPanel.loged
+                 },
             currentPage() {
                 return this.$store.state.AdminPanel.currentPage
             },
-            user_data() {
-                return this.$store.state.user
-            }
+            //     user_data() {
+            //         return this.$store.state.user
+            //     }
+        },updated(){
+            $(function () {
+                $("#example1").DataTable();
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                });
+            });
         }
     }
 
