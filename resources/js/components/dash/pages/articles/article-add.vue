@@ -65,7 +65,7 @@
                 fileReader.onload = (e) => {
                     this.article.img = e.target.result;
                 }
-
+                
             },
             sendArticle() {
                 Axios.post(`api/addArticle`,

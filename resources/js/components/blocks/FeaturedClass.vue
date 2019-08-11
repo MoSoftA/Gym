@@ -5,7 +5,7 @@
     <hr/>
     <div class="owl-carousel owl-theme">
     
-    <div class="item" :key="article.title" v-for="article in articles">
+    <div class="item" :key="index" v-for="(article, index) in articles">
         <div class="card"><img class="card-img-top" :src="article.img"/>
         <div class="card-body border">
             <h5 class="card-title">{{ article.title  }}</h5>

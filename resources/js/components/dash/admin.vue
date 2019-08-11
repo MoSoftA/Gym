@@ -1,11 +1,11 @@
 <template>
 <div>
-    <loginPage v-if="!admin"></loginPage>
     <div class="wrapper">
+    <loginPage v-if="!admin"></loginPage>
 
         <Header v-show="admin"></Header>
         <!-- Main Sidebar Container -->
-        <Sidebar v-show="admin"></Sidebar>
+        <Sidebar v-if="admin"></Sidebar>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" v-if="admin">
@@ -48,6 +48,10 @@
 <style lang="scss" scoped>
 .wrapper{
         padding-top: 33px;
+}
+
+*{
+    direction: ltr
 }
 </style>
 

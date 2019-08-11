@@ -38,6 +38,12 @@ const router = new VueRouter({
             name: 'articles',
             component: articles
         }
+        ,
+        {
+            path: '/Admin',
+            name: 'Admin',
+            component: Admin
+        }
     ]
 })
 
@@ -45,13 +51,6 @@ const app = new Vue({
     el: '#app',
     router,
     store,
+
     components: {App}
 });
-
-
-const dash = new Vue({
-    el: '#admin',
-    store,
-    components: {Admin}
-});
-

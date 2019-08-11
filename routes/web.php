@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dash', function () {
-    return view('dash');
-});
+// Route::get('dash', function () {
+//     return view('dash');
+// });
 
 
 Route::group(["middleware"=>"auth"], function (){

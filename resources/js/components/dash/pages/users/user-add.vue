@@ -102,13 +102,18 @@
 
                             console.log(res);
                          }
-                    }).catch(err => console.log(err.message))
-                // Swal.fire({
-                //     title: 'Something Wrong',
-                //     text: 'Make sure you inserted the data in right way' ,
-                //     type: 'error',
-                //     confirmButtonText: 'ok'
-                // }));                
+                    }).catch(
+
+                        (err) => {
+                            console.log(err.message)
+
+                        Swal.fire({
+                            title: 'Something Wrong',
+                            text: err.message,
+                            type: 'error',
+                            confirmButtonText: 'ok'
+                        })                
+                        })
             }
         }
     }

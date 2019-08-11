@@ -92,14 +92,12 @@
                     },
                 })
                 .then(res => {
-                    console.log(res.data.data)
                     let users = res.data.data
                     users.forEach(user => {
                         delete user.admin;
 
                         this.head = Object.keys(user);
                         this.rows.push(Object.values(user));
-                        console.log('rows', this.rows);
                     })
                 })
                 .catch(err => err.message);
