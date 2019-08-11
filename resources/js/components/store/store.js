@@ -16,12 +16,26 @@ export const store = new Vuex.Store({
                 end: 0,
             },
         },
+        sections:{
+            navbar: {
+                logo: {
+                    text: '',
+                    img: ''
+                },
+                color: {
+                    bg: '',
+                    bf: '',
+                    font: '',
+                    active: ''
+                }
+            }
+        },
         inp: false,
         loged: false,
         // Start Admin Panel
         AdminPanel: {
-            currentPage: 'userAll',
-            loged: false ,
+            currentPage: 'SlidersEdit',
+            loged: true ,
             token: '',
             userEdit: {
                 name: '',
@@ -101,13 +115,16 @@ export const store = new Vuex.Store({
         subscriptionDateEnd: (state, payload) => {
             state.user.subscription.end = payload
         },
-        Edit_Navbar: (state, payload, value) => {
-            if( payload == 'text'){
-                state.sections.Navbar.logo.name == value
-            } else if (payload == 'bgcolor'){
-                state.sections.Navbar.colors.background == value
-            }
+        Edit_Navbar: (state, payload) => {
+            Object.assign(state.sections.navbar, payload)
         }
+        // Edit_Navbar: (state, payload, value) => {
+        //     if( payload == 'text'){
+        //         state.sections.Navbar.logo.name == value
+        //     } else if (payload == 'bgcolor'){
+        //         state.sections.Navbar.colors.background == value
+        //     }
+        // }
     },
     getters: {
         article: (state) => (id) => {

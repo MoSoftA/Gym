@@ -1,29 +1,29 @@
 <template>
 <div id="navbar">
-	<nav class="navbar navbar-expand-lg navbar-dark">
-		<div class="container"><a class="navbar-brand" href="#">logo</a>
+	<nav class="navbar navbar-expand-lg navbar-dark" :style='{backgroundColor: Navbar.color.bg}'>
+		<div class="container"><a class="navbar-brand" href="#">{{ Navbar.logo.text }}</a>
 			<button class="navbar-toggler" @click="show()"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse justify-content-end d-lg-flex">
 				<button type="button" @click="show()" class="close d-xl-none d-lg-none" data-dismiss="modal">&times;</button>
 				<ul class="navbar-nav">
 					<li class="nav-item ml-3">
-						<router-link to="/" active-class="active" class="nav-link" exact>الرئيسية<span
+						<router-link to="/" active-class="active" class="nav-link" :style='{color: Navbar.color.font}' exact>الرئيسية<span
 								class="sr-only">(current)</span></router-link>
 					<li class="nav-item ml-3" v-if="loged">
-						<router-link to="/profile" active-class="active" class="nav-link" exact>حسابك<span
+						<router-link to="/profile" active-class="active" class="nav-link" :style='{color: Navbar.color.font}' exact>حسابك<span
 								class="sr-only">(current)</span></router-link>
 					</li>
 					<li class="nav-item ml-3">
-						<router-link to="/news" active-class="active" class="nav-link" exact>آخر الأخبار<span
+						<router-link to="/news" :active-class="active1" class="nav-link" :style='{color: Navbar.color.font}' exact>آخر الأخبار<span
 								class="sr-only">(current)</span></router-link>
 					</li>
 					<li class="nav-item ml-3">
-						<router-link to="/Admin" active-class="active" class="nav-link" exact>لوحة التحكم<span
+						<router-link to="/Admin" active-class="active" class="nav-link" :style='{color: Navbar.color.font}' exact>لوحة التحكم<span
 								class="sr-only">(current)</span></router-link>
 					</li>
 					<li class="nav-item ml-3" v-if="!loged">
 						<form class="form-inline my-2 my-lg-0">
-							<button class="btn btn-secondary rounded-pill ml-3" @click="changeRegisterState('l'); show()" data-toggle="modal" data-target="#myModal" type="button" >سجل دخول</button>
+							<button class="btn btn-secondary rounded-pill border-0 ml-3" @click="changeRegisterState('l'); show()" :style='{color: Navbar.color.bf, backgroundColor: Navbar.color.bgc}' data-toggle="modal" data-target="#myModal" type="button" >سجل دخول</button>
 						</form>
 					</li>
 					<li class="mt-1 nav-item ml-3" v-if="loged">
@@ -31,7 +31,7 @@
 					</li>
 
 					<li class="mt-1 nav-item ml-3" v-if="loged">
-						<button class="btn btn-danger rounded-pill mt-xl-0 mt-lg-0 mr-2 d-md-block mt-sm-1 d-sm-block" @click="logout()">تسجيل الخروج</button>
+						<button class="btn btn-danger rounded-pill mt-xl-0 mt-lg-0 mr-2 d-md-block mt-sm-1 d-sm-block"  @click="logout()">تسجيل الخروج</button>
 					</li>
 				</ul>
 			</div>
@@ -76,6 +76,11 @@ Vue.use(axios);
 
 export default {
 	name: 'Nav',
+	data(){
+		return {
+			active1: {color: Navbar.color.active}
+		}
+	},
 	computed: {
 		// Get user
 		get_user_email:{
@@ -94,6 +99,10 @@ export default {
 				this.$store.commit('get_user_password', value)
 			}
 		},
+		Navbar(){
+			return this.$store.state.sections.navbar
+		},
+	
 		...mapState([
 			'inp',
 			'user',

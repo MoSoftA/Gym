@@ -94,20 +94,6 @@
 <script src="{{ asset('Admin/dist/js/adminlte.js') }}"></script>
 
 <script src=" {{ asset('Admin/dist/js/pages/dashboard2.js') }}"></script>
-<!-- OPTIONAL SCRIPTS -->
-<script src=" {{ asset('Admin/dist/js/demo.js') }}"></script>
-
-
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-<script src="{{ asset('Admin/plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
-<script src="{{ asset('Admin/plugins/raphael/raphael.min.js') }}"></script>
-<script src="{{ asset('Admin/plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
-<script src="{{ asset('Admin/plugins/jquery-mapael/maps/world_countries.min.js') }}"></script>
-<!-- ChartJS -->
-<script src=" {{ asset('Admin/plugins/chart.js/Chart.min.js') }}"></script>
-
-<!-- PAGE SCRIPTS -->
 
 <!-- DataTables -->
 <script src=" {{ asset('Admin/plugins/datatables/jquery.dataTables.js') }}"></script>
