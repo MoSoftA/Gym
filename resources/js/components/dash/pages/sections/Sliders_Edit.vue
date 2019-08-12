@@ -1,19 +1,12 @@
 <template>
-    <div>
-        <p class="h1">Navbar</p>
-        <label for="image">Image</label>
-        <div class="input-group">
-            <input type="file" id="image" class="form-control" @change="get_image($event)">
-        </div>
+   <div class="container">
+        <div class="card">
+            <div class="card-body">
 
-        <label for="text">title</label>
-        <div class="input-group">
-            <input type="text" id="text" class="form-control" v-model="text" placeholder="Title" >
+                <p class="h1 mt-5">SLider Edit</p>
+            </div>
         </div>
-
-        <br>
-        <button class="btn btn-success">Done </button>
-    </div>
+   </div>
 </template>
 
 <style lang='scss' scoped>

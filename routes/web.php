@@ -15,11 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('dash', function () {
-//     return view('dash');
-// });
-
-
 Route::group(["middleware"=>"auth"], function (){
 	// articles
 	Route::name('articles')->get('articles', 'ArticleController@index');

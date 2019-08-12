@@ -1858,6 +1858,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2052,13 +2059,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Nav',
-  data: function data() {
-    return {
-      active1: {
-        color: Navbar.color.active
-      }
-    };
-  },
   computed: _objectSpread({
     // Get user
     get_user_email: {
@@ -3141,13 +3141,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3922,10 +3915,9 @@ exports.push([module.i, ".row[data-v-2655c76f] {\n  text-align: right;\n}\nul[da
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Imports
 var getUrl = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
-var ___CSS_LOADER_URL___0___ = getUrl(__webpack_require__(/*! ../../assets/hero_bg_1.jpg */ "./resources/js/assets/hero_bg_1.jpg"));
-var ___CSS_LOADER_URL___1___ = getUrl(__webpack_require__(/*! ../../assets/hero_bg_2.jpg */ "./resources/js/assets/hero_bg_2.jpg"));
+var ___CSS_LOADER_URL___0___ = getUrl(__webpack_require__(/*! ../../assets/hero_bg_2.jpg */ "./resources/js/assets/hero_bg_2.jpg"));
 // Module
-exports.push([module.i, ".bd-example .carousel-inner .carousel-item[data-v-fb6b5024] {\n  height: 90vh !important;\n  background-position: top center;\n  background-size: cover;\n  background-attachment: fixed;\n}\n.bd-example .carousel-inner .carousel-item[data-v-fb6b5024]:first-child {\n  background-image: url(" + ___CSS_LOADER_URL___0___ + ");\n}\n.bd-example .carousel-inner .carousel-item[data-v-fb6b5024]:last-child {\n  background-image: url(" + ___CSS_LOADER_URL___1___ + ");\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption[data-v-fb6b5024] {\n  padding: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  text-align: center !important;\n  transform: translate(-50%, -50%);\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption p[data-v-fb6b5024] {\n  font-weight: bolder;\n  font-size: 80px;\n}\n.bd-example .carousel-control-next[data-v-fb6b5024], .bd-example .carousel-control-prev[data-v-fb6b5024] {\n  width: 50px;\n  height: 50px;\n  position: absolute;\n  top: 50%;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.bd-example .carousel-control-next[data-v-fb6b5024]:hover, .bd-example .carousel-control-prev[data-v-fb6b5024]:hover {\n  background-color: #000;\n}\n@media (max-width: 576px) {\n.bd-example .carousel-inner .carousel-item .carousel-caption p.h1[data-v-fb6b5024] {\n    font-weight: bolder;\n    font-size: 60px !important;\n}\n}", ""]);
+exports.push([module.i, ".bd-example .carousel-inner .carousel-item[data-v-fb6b5024] {\n  height: 90vh !important;\n  background-position: top center;\n  background-size: cover;\n  background-attachment: fixed;\n}\n.bd-example .carousel-inner .carousel-item img[data-v-fb6b5024] {\n  position: fixed;\n}\n.bd-example .carousel-inner .carousel-item[data-v-fb6b5024]:first-child {\n  background-image: url(" + ___CSS_LOADER_URL___0___ + ");\n}\n.bd-example .carousel-inner .carousel-item[data-v-fb6b5024]:last-child {\n  background-image: url(" + ___CSS_LOADER_URL___0___ + ");\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption[data-v-fb6b5024] {\n  padding: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  text-align: center !important;\n  transform: translate(-50%, -50%);\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption p[data-v-fb6b5024] {\n  font-weight: bolder;\n  font-size: 80px;\n}\n.bd-example .carousel-control-next[data-v-fb6b5024],\n.bd-example .carousel-control-prev[data-v-fb6b5024] {\n  width: 50px;\n  height: 50px;\n  position: absolute;\n  top: 50%;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.bd-example .carousel-control-next[data-v-fb6b5024]:hover,\n.bd-example .carousel-control-prev[data-v-fb6b5024]:hover {\n  background-color: #000;\n}\n@media (max-width: 576px) {\n.bd-example .carousel-inner .carousel-item .carousel-caption p.h1[data-v-fb6b5024] {\n    font-weight: bolder;\n    font-size: 60px !important;\n}\n}", ""]);
 
 
 /***/ }),
@@ -6621,11 +6613,7 @@ var render = function() {
                     {
                       staticClass: "nav-link",
                       style: { color: _vm.Navbar.color.font },
-                      attrs: {
-                        to: "/news",
-                        "active-class": _vm.active1,
-                        exact: ""
-                      }
+                      attrs: { to: "/news", exact: "" }
                     },
                     [
                       _vm._v("آخر الأخبار"),
@@ -7329,55 +7317,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "wrapper" },
-      [
-        !_vm.admin ? _c("loginPage") : _vm._e(),
-        _vm._v(" "),
-        _c("Header", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.admin,
-              expression: "admin"
-            }
-          ]
-        }),
-        _vm._v(" "),
-        _vm.admin ? _c("Sidebar") : _vm._e(),
-        _vm._v(" "),
-        _vm.admin
-          ? _c("div", { staticClass: "content-wrapper" }, [
-              _c("section", { staticClass: "content" }, [
-                _c("div", { staticClass: "container-fluid" }, [
-                  _c(
-                    "section",
-                    { staticClass: "content" },
-                    [
-                      _c(
-                        "transition",
-                        { attrs: { name: "fade", mode: "out-in" } },
-                        [_c(_vm.currentPage, { tag: "component" })],
-                        1
-                      )
-                    ],
-                    1
-                  )
+  return _c(
+    "div",
+    [
+      !_vm.admin ? _c("loginPage") : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "wrapper" },
+        [
+          _c("Header", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.admin,
+                expression: "admin"
+              }
+            ]
+          }),
+          _vm._v(" "),
+          _vm.admin ? _c("Sidebar") : _vm._e(),
+          _vm._v(" "),
+          _vm.admin
+            ? _c("div", { staticClass: "content-wrapper" }, [
+                _c("section", { staticClass: "content" }, [
+                  _c("div", { staticClass: "container-fluid" }, [
+                    _c(
+                      "section",
+                      { staticClass: "content" },
+                      [
+                        _c(
+                          "transition",
+                          { attrs: { name: "fade", mode: "out-in" } },
+                          [_c(_vm.currentPage, { tag: "component" })],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ])
                 ])
               ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("aside", { staticClass: "control-sidebar control-sidebar-dark" }),
-        _vm._v(" "),
-        _vm._m(0)
-      ],
-      1
-    )
-  ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("aside", { staticClass: "control-sidebar control-sidebar-dark" }),
+          _vm._v(" "),
+          _vm._m(0)
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -7421,42 +7413,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "nav",
+    {
+      staticClass: "main-header navbar navbar-expand navbar-white navbar-light"
+    },
+    [
+      _c("ul", { staticClass: "navbar-nav" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item d-none d-sm-inline-block" },
+          [
+            _c("router-link", { attrs: { to: "/", exact: "" } }, [
+              _vm._v("Home"),
+              _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
+            ])
+          ],
+          1
+        )
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "nav",
-      {
-        staticClass:
-          "main-header navbar navbar-expand navbar-white navbar-light"
-      },
-      [
-        _c("ul", { staticClass: "navbar-nav" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { "data-widget": "pushmenu", href: "#" }
-              },
-              [_c("i", { staticClass: "fas fa-bars" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item d-none d-sm-inline-block" }, [
-            _c(
-              "a",
-              { staticClass: "nav-link", attrs: { href: "index3.html" } },
-              [_vm._v("Home")]
-            )
-          ])
-        ])
-      ]
-    )
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link",
+          attrs: { "data-widget": "pushmenu", href: "#" }
+        },
+        [_c("i", { staticClass: "fas fa-bars" })]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -8813,55 +8808,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("p", { staticClass: "h1" }, [_vm._v("Navbar")]),
-    _vm._v(" "),
-    _c("label", { attrs: { for: "image" } }, [_vm._v("Image")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "input-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "file", id: "image" },
-        on: {
-          change: function($event) {
-            return _vm.get_image($event)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("label", { attrs: { for: "text" } }, [_vm._v("title")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "input-group" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.text,
-            expression: "text"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", id: "text", placeholder: "Title" },
-        domProps: { value: _vm.text },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.text = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("button", { staticClass: "btn btn-success" }, [_vm._v("Done ")])
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("p", { staticClass: "h1 mt-5" }, [_vm._v("SLider Edit")])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -28170,8 +28132,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     loged: false,
     // Start Admin Panel
     AdminPanel: {
-      currentPage: 'SlidersEdit',
-      loged: true,
+      currentPage: 'dashboard',
+      loged: false,
       token: '',
       userEdit: {
         name: '',

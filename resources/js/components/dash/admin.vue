@@ -1,7 +1,7 @@
 <template>
 <div>
-    <div class="wrapper">
     <loginPage v-if="!admin"></loginPage>
+    <div class="wrapper">
 
         <Header v-show="admin"></Header>
         <!-- Main Sidebar Container -->

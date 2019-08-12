@@ -14,7 +14,7 @@
 								class="sr-only">(current)</span></router-link>
 					</li>
 					<li class="nav-item ml-3">
-						<router-link to="/news" :active-class="active1" class="nav-link" :style='{color: Navbar.color.font}' exact>آخر الأخبار<span
+						<router-link to="/news" class="nav-link" :style='{color: Navbar.color.font}' exact>آخر الأخبار<span
 								class="sr-only">(current)</span></router-link>
 					</li>
 					<li class="nav-item ml-3">
@@ -76,11 +76,6 @@ Vue.use(axios);
 
 export default {
 	name: 'Nav',
-	data(){
-		return {
-			active1: {color: Navbar.color.active}
-		}
-	},
 	computed: {
 		// Get user
 		get_user_email:{
