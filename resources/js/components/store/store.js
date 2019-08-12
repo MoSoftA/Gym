@@ -34,7 +34,7 @@ export const store = new Vuex.Store({
         loged: false,
         // Start Admin Panel
         AdminPanel: {
-            currentPage: 'dashboard',
+            currentPage: 'NavEdit',
             loged: false ,
             token: '',
             userEdit: {

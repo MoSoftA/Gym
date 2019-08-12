@@ -4,15 +4,15 @@
                with font-awesome or any other icon font library -->
 
 
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
+        <li class="nav-item has-treeview"  @click="drop($event)">
+            <a href="#" class="nav-link" data-drop='1'>
+                <i class="nav-icon fas fa-edit"  data-drop='1'></i>
+                <p data-drop='1'>
                     sections
-                    <i class="fas fa-angle-left right"></i>
+                    <i class="fas fa-angle-left right" data-drop='1'></i>
                 </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" data-drop='1'>
 
                 <li class="nav-item"><a role="button" class="nav-link" @click="change_page('NavEdit')"><i
                             class="far fa-circle nav-icon"></i>
@@ -38,15 +38,15 @@
             </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
+        <li class="nav-item has-treeview" data-drop='2' @click="drop($event)">
+            <a href="#" class="nav-link"  data-drop='2'>
+                <i class="nav-icon fas fa-users"  data-drop='2'></i>
+                <p  data-drop='2'>
                     Users
-                    <i class="fas fa-angle-left right"></i>
+                    <i class="fas fa-angle-left right"  data-drop='2'></i>
                 </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" data-drop='2'>
 
                 <li class="nav-item"><a role="button" class="nav-link" @click="change_page('userAll')"><i
                             class="far fa-circle nav-icon"></i> all users</a>
@@ -58,15 +58,15 @@
             </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-newspaper"></i>
-                <p>
+        <li class="nav-item has-treeview" data-drop='3' @click="drop($event)">
+            <a href="#" class="nav-link" data-drop='3'>
+                <i class="nav-icon fas fa-newspaper" data-drop='3'></i>
+                <p data-drop='3'>
                     Article
-                    <i class="fas fa-angle-left right"></i>
+                    <i class="fas fa-angle-left right" data-drop='3'></i>
                 </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" data-drop='3'>
 
                 <li class="nav-item"><a role="button" class="nav-link" @click="change_page('articleAll')"><i
                             class="far fa-circle nav-icon"></i> all articles</a>
@@ -85,6 +85,19 @@
         methods: {
             change_page(payload) {
                 this.$store.commit('change_current_page', payload)
+            },
+            drop(e){
+                if ($(`ul[data-drop="${e.target.getAttribute('data-drop')}"]`).css('display') == 'block')
+                    {
+                        $(`i.right[data-drop="${e.target.getAttribute('data-drop')}"]`).css({ 'transition': 'all 0.4s ease', 'transform' : 'rotate(0)' });
+                        $(`ul[data-drop="${e.target.getAttribute('data-drop')}"]`).slideUp(400);
+                    } else {
+                        $('ul[data-drop]').slideUp(400);
+                        $(`i.right[data-drop="${e.target.getAttribute('data-drop')}"]`).css({ 'transition': 'all 0.4s ease', 'transform' : 'rotate(-90deg)' })
+                        $(`ul[data-drop="${e.target.getAttribute('data-drop')}"]`).slideDown(400);
+                    }
+                
+                    console.log($(`ul[data-drop="${e.target.getAttribute('data-drop')}"]`).css('display'))
             }
         },
         computed: {

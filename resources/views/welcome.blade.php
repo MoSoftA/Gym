@@ -56,13 +56,29 @@
             background-color: rgb(242, 58, 46) !important;
         }
 
+        .fade-enter-active,
+        .fade-leave-active {
+        transition-duration: 0.3s;
+        transition-property: opacity;
+        transition-timing-function: ease;
+        }
+
+        .fade-enter,
+        .fade-leave-active {
+        opacity: 0
+        }
+
     </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
     <div id="app">
-        <App></App>
+    <transition name="fade" mode="out-in">
+
+        <router-view></router-view>
+    </transition>
+
     </div>
 
 </body>

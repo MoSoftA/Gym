@@ -10,7 +10,7 @@ import Profile from "./components/pages/Profile.vue";
 import News from "./components/pages/News.vue";
 import articles from "./components/pages/articles.vue";
 
-import Admin from "./components/dash/admin.vue"
+import Admin from "./components/dash/admin.vue";
 
 Vue.use(axios);
 Vue.use(VueRouter);
@@ -40,7 +40,7 @@ const router = new VueRouter({
         }
         ,
         {
-            path: '/Admin',
+            path: '/adminpanel',
             name: 'Admin',
             component: Admin
         }
@@ -51,6 +51,5 @@ const app = new Vue({
     el: '#app',
     router,
     store,
-
     components: {App}
 });

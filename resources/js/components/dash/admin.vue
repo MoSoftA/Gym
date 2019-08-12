@@ -1,7 +1,7 @@
 <template>
 <div>
-    <loginPage v-if="!admin"></loginPage>
     <div class="wrapper">
+    <loginPage v-if="!admin"></loginPage>
 
         <Header v-show="admin"></Header>
         <!-- Main Sidebar Container -->
@@ -57,6 +57,7 @@
 
 
 <script>
+
     import Header from './blocks/Header';
     import Sidebar from './blocks/Sidebar';
 
@@ -96,15 +97,12 @@
             AboutusEdit
         },
         computed: {
-                 admin() {
-                     return this.$store.state.AdminPanel.loged
-                 },
+            admin() {
+                return this.$store.state.AdminPanel.loged
+            },
             currentPage() {
                 return this.$store.state.AdminPanel.currentPage
             },
-            //     user_data() {
-            //         return this.$store.state.user
-            //     }
         },updated(){
             $(function () {
                 $("#example1").DataTable();

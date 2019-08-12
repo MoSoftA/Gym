@@ -18,7 +18,7 @@
 								class="sr-only">(current)</span></router-link>
 					</li>
 					<li class="nav-item ml-3">
-						<router-link to="/Admin" active-class="active" class="nav-link" :style='{color: Navbar.color.font}' exact>لوحة التحكم<span
+						<router-link to="/adminpanel" active-class="active" class="nav-link" :style='{color: Navbar.color.font}' exact>لوحة التحكم<span
 								class="sr-only">(current)</span></router-link>
 					</li>
 					<li class="nav-item ml-3" v-if="!loged">

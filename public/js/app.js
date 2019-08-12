@@ -2510,6 +2510,24 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     change_page: function change_page(payload) {
       this.$store.commit('change_current_page', payload);
+    },
+    drop: function drop(e) {
+      if ($("ul[data-drop=\"".concat(e.target.getAttribute('data-drop'), "\"]")).css('display') == 'block') {
+        $("i.right[data-drop=\"".concat(e.target.getAttribute('data-drop'), "\"]")).css({
+          'transition': 'all 0.4s ease',
+          'transform': 'rotate(0)'
+        });
+        $("ul[data-drop=\"".concat(e.target.getAttribute('data-drop'), "\"]")).slideUp(400);
+      } else {
+        $('ul[data-drop]').slideUp(400);
+        $("i.right[data-drop=\"".concat(e.target.getAttribute('data-drop'), "\"]")).css({
+          'transition': 'all 0.4s ease',
+          'transform': 'rotate(-90deg)'
+        });
+        $("ul[data-drop=\"".concat(e.target.getAttribute('data-drop'), "\"]")).slideDown(400);
+      }
+
+      console.log($("ul[data-drop=\"".concat(e.target.getAttribute('data-drop'), "\"]")).css('display'));
     }
   },
   computed: {
@@ -6636,7 +6654,7 @@ var render = function() {
                       staticClass: "nav-link",
                       style: { color: _vm.Navbar.color.font },
                       attrs: {
-                        to: "/Admin",
+                        to: "/adminpanel",
                         "active-class": "active",
                         exact: ""
                       }
@@ -7317,59 +7335,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      !_vm.admin ? _c("loginPage") : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "wrapper" },
-        [
-          _c("Header", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.admin,
-                expression: "admin"
-              }
-            ]
-          }),
-          _vm._v(" "),
-          _vm.admin ? _c("Sidebar") : _vm._e(),
-          _vm._v(" "),
-          _vm.admin
-            ? _c("div", { staticClass: "content-wrapper" }, [
-                _c("section", { staticClass: "content" }, [
-                  _c("div", { staticClass: "container-fluid" }, [
-                    _c(
-                      "section",
-                      { staticClass: "content" },
-                      [
-                        _c(
-                          "transition",
-                          { attrs: { name: "fade", mode: "out-in" } },
-                          [_c(_vm.currentPage, { tag: "component" })],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ])
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "wrapper" },
+      [
+        !_vm.admin ? _c("loginPage") : _vm._e(),
+        _vm._v(" "),
+        _c("Header", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.admin,
+              expression: "admin"
+            }
+          ]
+        }),
+        _vm._v(" "),
+        _vm.admin ? _c("Sidebar") : _vm._e(),
+        _vm._v(" "),
+        _vm.admin
+          ? _c("div", { staticClass: "content-wrapper" }, [
+              _c("section", { staticClass: "content" }, [
+                _c("div", { staticClass: "container-fluid" }, [
+                  _c(
+                    "section",
+                    { staticClass: "content" },
+                    [
+                      _c(
+                        "transition",
+                        { attrs: { name: "fade", mode: "out-in" } },
+                        [_c(_vm.currentPage, { tag: "component" })],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 ])
               ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("aside", { staticClass: "control-sidebar control-sidebar-dark" }),
-          _vm._v(" "),
-          _vm._m(0)
-        ],
-        1
-      )
-    ],
-    1
-  )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("aside", { staticClass: "control-sidebar control-sidebar-dark" }),
+        _vm._v(" "),
+        _vm._m(0)
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -7523,194 +7537,241 @@ var render = function() {
       }
     },
     [
-      _c("li", { staticClass: "nav-item has-treeview" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("ul", { staticClass: "nav nav-treeview" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("NavEdit")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v("\n                    Navbar")
-              ]
-            )
-          ]),
+      _c(
+        "li",
+        {
+          staticClass: "nav-item has-treeview",
+          on: {
+            click: function($event) {
+              return _vm.drop($event)
+            }
+          }
+        },
+        [
+          _vm._m(0),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("SlidersEdit")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v("\n                    Slieders")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("AboutusEdit")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v("\n                    About us")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("TrainersEdit")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v("\n                    Our trainers")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("FooterEdit")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v("\n                    Footer")
-              ]
-            )
-          ])
-        ])
-      ]),
+          _c(
+            "ul",
+            { staticClass: "nav nav-treeview", attrs: { "data-drop": "1" } },
+            [
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("NavEdit")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v("\n                    Navbar")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("SlidersEdit")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v("\n                    Slieders")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("AboutusEdit")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v("\n                    About us")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("TrainersEdit")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v("\n                    Our trainers")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("FooterEdit")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v("\n                    Footer")
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("li", { staticClass: "nav-item has-treeview" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("ul", { staticClass: "nav nav-treeview" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("userAll")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v(" all users")
-              ]
-            )
-          ]),
+      _c(
+        "li",
+        {
+          staticClass: "nav-item has-treeview",
+          attrs: { "data-drop": "2" },
+          on: {
+            click: function($event) {
+              return _vm.drop($event)
+            }
+          }
+        },
+        [
+          _vm._m(1),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("userAdd")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v(" add user")
-              ]
-            )
-          ])
-        ])
-      ]),
+          _c(
+            "ul",
+            { staticClass: "nav nav-treeview", attrs: { "data-drop": "2" } },
+            [
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("userAll")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v(" all users")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("userAdd")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v(" add user")
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("li", { staticClass: "nav-item has-treeview" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c("ul", { staticClass: "nav nav-treeview" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("articleAll")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v(" all articles")
-              ]
-            )
-          ]),
+      _c(
+        "li",
+        {
+          staticClass: "nav-item has-treeview",
+          attrs: { "data-drop": "3" },
+          on: {
+            click: function($event) {
+              return _vm.drop($event)
+            }
+          }
+        },
+        [
+          _vm._m(2),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { role: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.change_page("articleAdd")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-circle nav-icon" }),
-                _vm._v(" add articles")
-              ]
-            )
-          ])
-        ])
-      ])
+          _c(
+            "ul",
+            { staticClass: "nav nav-treeview", attrs: { "data-drop": "3" } },
+            [
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("articleAll")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v(" all articles")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { role: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change_page("articleAdd")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v(" add articles")
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      )
     ]
   )
 }
@@ -7719,40 +7780,70 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "nav-icon fas fa-edit" }),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("\n                sections\n                "),
-        _c("i", { staticClass: "fas fa-angle-left right" })
-      ])
-    ])
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "#", "data-drop": "1" } },
+      [
+        _c("i", {
+          staticClass: "nav-icon fas fa-edit",
+          attrs: { "data-drop": "1" }
+        }),
+        _vm._v(" "),
+        _c("p", { attrs: { "data-drop": "1" } }, [
+          _vm._v("\n                sections\n                "),
+          _c("i", {
+            staticClass: "fas fa-angle-left right",
+            attrs: { "data-drop": "1" }
+          })
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "nav-icon fas fa-users" }),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("\n                Users\n                "),
-        _c("i", { staticClass: "fas fa-angle-left right" })
-      ])
-    ])
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "#", "data-drop": "2" } },
+      [
+        _c("i", {
+          staticClass: "nav-icon fas fa-users",
+          attrs: { "data-drop": "2" }
+        }),
+        _vm._v(" "),
+        _c("p", { attrs: { "data-drop": "2" } }, [
+          _vm._v("\n                Users\n                "),
+          _c("i", {
+            staticClass: "fas fa-angle-left right",
+            attrs: { "data-drop": "2" }
+          })
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "nav-icon fas fa-newspaper" }),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("\n                Article\n                "),
-        _c("i", { staticClass: "fas fa-angle-left right" })
-      ])
-    ])
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "#", "data-drop": "3" } },
+      [
+        _c("i", {
+          staticClass: "nav-icon fas fa-newspaper",
+          attrs: { "data-drop": "3" }
+        }),
+        _vm._v(" "),
+        _c("p", { attrs: { "data-drop": "3" } }, [
+          _vm._v("\n                Article\n                "),
+          _c("i", {
+            staticClass: "fas fa-angle-left right",
+            attrs: { "data-drop": "3" }
+          })
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -25598,7 +25689,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'articles',
     component: _components_pages_articles_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
-    path: '/Admin',
+    path: '/adminpanel',
     name: 'Admin',
     component: _components_dash_admin_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
@@ -28132,7 +28223,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     loged: false,
     // Start Admin Panel
     AdminPanel: {
-      currentPage: 'dashboard',
+      currentPage: 'NavEdit',
       loged: false,
       token: '',
       userEdit: {
