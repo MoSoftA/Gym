@@ -64,8 +64,8 @@
     Vue.use(axios);
 
     export default {
-        data(){
-            return{
+        data() {
+            return {
                 name: '',
                 email: '',
                 password: '',
@@ -86,33 +86,25 @@
                     })
                     .then(res => {
                         // Todo
-                         if (res.data.code == 200) {
-                             Swal.fire({
-                                 title: 'you add user',
-                                 text: null,
-                                 type: 'success',
-                                 confirmButtonText: 'Cool!'
-                             });
-
-                             this.$store.state.user.name = '';
-                             this.$store.state.user.email = '';
-                             this.$store.state.user.password = '';
-                             this.date_start = '';
-                             this.date_end = '';
-
-                            console.log(res);
-                         }
+                        if (res.data.code == 200) {
+                            Swal.fire({
+                                title: 'you add user',
+                                text: null,
+                                type: 'success',
+                                confirmButtonText: 'Cool!'
+                            });
+                        }
                     }).catch(
 
                         (err) => {
                             console.log(err.message)
 
-                        Swal.fire({
-                            title: 'Something Wrong',
-                            text: err.message,
-                            type: 'error',
-                            confirmButtonText: 'ok'
-                        })                
+                            Swal.fire({
+                                title: 'Something Wrong',
+                                text: err.message,
+                                type: 'error',
+                                confirmButtonText: 'ok'
+                            })
                         })
             }
         }

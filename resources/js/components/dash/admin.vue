@@ -1,9 +1,9 @@
 <template>
 <div>
     <div class="wrapper">
-    <loginPage v-if="!admin"></loginPage>
+     <loginPage v-if="!admin"></loginPage> 
 
-        <Header v-show="admin"></Header>
+        <Header v-if="admin"></Header>
         <!-- Main Sidebar Container -->
         <Sidebar v-if="admin"></Sidebar>
 
@@ -98,23 +98,11 @@
         },
         computed: {
             admin() {
-                return this.$store.state.AdminPanel.loged
+                return this.$store.state.user.loged
             },
             currentPage() {
-                return this.$store.state.AdminPanel.currentPage
+                return this.$store.state.currentPage
             },
-        },updated(){
-            $(function () {
-                $("#example1").DataTable();
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                });
-            });
         }
     }
 

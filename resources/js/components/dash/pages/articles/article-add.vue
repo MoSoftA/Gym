@@ -75,7 +75,7 @@
                     {
                     headers: {
                         Accept: 'application/json',
-                        Authorization: 'Bearer ' + this.$store.state.AdminPanel.token
+                        Authorization: 'Bearer ' + this.$store.state.user.token
                     },
 
                     })

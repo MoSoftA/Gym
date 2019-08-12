@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">All users</h3>
+            <h3 class="card-title">All Articles</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -18,13 +18,11 @@
                         <tr :key='index' v-for="(user, index) in rows">
                             <td :key='index' v-for="(val, index) in user">{{ val }}</td>
                             <td>
-                                <button class="btn btn-success" title="Edit user"
+                                <button class="btn btn-success" title="Edit Article"
                                     @click="change_component($event, 'userEdit')"><i class="fas fa-edit"></i></button>
 
-                                <button class="btn btn-danger" title="Delete user" @click="deleteUser($event)"><i
+                                <button class="btn btn-danger" title="Delete Article" @click="deleteUser($event)"><i
                                         class="fas fa-user-minus"></i></button>
-                                <button class="btn btn-warning" title="Add tasks"
-                                    @click="change_component($event, 'tasks')"><i class="fas fa-plus"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -69,7 +67,7 @@
                     {
                         headers: {
                             Accept: 'application/json',
-                            Authorization: 'Bearer '+ this.$store.state.AdminPanel.token
+                            Authorization: 'Bearer '+ this.$store.state.user.token
                         },
                 })
                 .then(res => {console.log(res)})
@@ -81,13 +79,11 @@
             axios.get('api/articles',{
                 headers: {
                     Accept: 'application/json',
-                    Authorization: 'Bearer '+ this.$store.state.AdminPanel.token
+                    Authorization: 'Bearer '+ this.$store.state.user.token
                 },
             })
             .then(res => {
-                console.log(res)
-                let articles = res.data.data; 
-                
+                console.log(res.data);                
             }).catch(err => err.message);
         }
     }

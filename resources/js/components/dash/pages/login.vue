@@ -9,7 +9,7 @@
                 <p class="login-box-msg">Sign in</p>
 
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email" v-model.lazy="get_user_email">
+                    <input type="email" class="form-control" placeholder="Email" v-model.lazy="user.email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" v-model.lazy="get_user_password" placeholder="Password">
+                    <input type="password" class="form-control" v-model.lazy="user.password" placeholder="Password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -51,49 +51,53 @@
     import axios from 'axios';
     
     export default {
+        data() {
+            return {
+                user: {
+                    email: '',
+                    admin: '',
+                    password: '',
+                }
+            }
+        },
         computed: {
             // Get user
-            get_user_email: {
-                get() {
-                    return this.$store.state.user.email;
-                },
-                set(value) {
-                    this.$store.commit('get_user_email', value)
-                }
-            },
-            get_user_password: {
-                get() {
-                    return this.$store.state.user.password;
-                },
-                set(value) {
-                    this.$store.commit('get_user_password', value)
-                }
-            },
+
+            loged() {
+                return this.$store.state.user.loged
+            }
         },
         methods: {
             login() {
                 // Send the request
                 axios.post('/api/login', {
-                        email: this.$store.state.user.email,
-                        password: this.$store.state.user.password,
+                        email: this.user.email,
+                        password: this.user.password
                     })
                     .then(res => {
-                        // Get user
-                        this.$store.state.AdminPanel.token = res.data.data.token;
-                        this.$store.state.AdminPanel.loged = true;
 
-                        console.log(res.data)
-                    }).catch(err => {
-                        console.log(err);
-                        Swal.fire({
-                            title: 'email or password is un correct',
-                            text: 'Please make sure you are signed up',
-                            type: 'error',
-                            confirmButtonText: 'ok'
-                        });
-                    })
-            }
-        }
+                        this.$store.commit('user', res.data.data.user);
+
+                        if (res.data.data.user.admin == 1){
+                            this.user.admin = true;
+                            this.$store.state.user.admin = true
+                        }
+                        else
+                        {
+                            this.user.admin = false;
+                         this.$store.state.user.admin = false
+                        }
+
+                        console.log(this.$store.state.user);
+
+                        // Make it 
+                        this.$store.state.user.loged = true;
+                        this.$store.state.user.token = res.data.data.token ;
+                        this.user.name = this.$store.state.user.name;
+					}).catch(err => console.log(err.message))
+            },
     }
+    }
+    
 
 </script>

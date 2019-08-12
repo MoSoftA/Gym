@@ -59,7 +59,7 @@
                 users.forEach(user => {
                     for (let key in user) {
                         if (user[key] == id) {
-                            Object.assign(this.$store.state.AdminPanel.userEdit, user);
+                            Object.assign(this.$store.state.user, user);
                             console.log(user);
                         }
                     }
@@ -73,7 +73,7 @@
                     }, {
                         headers: {
                             Accept: 'application/json',
-                            Authorization: 'Bearer ' + this.$store.state.AdminPanel.token,
+                            Authorization: 'Bearer ' + this.$store.state.user.token,
                         },
 
                     })
@@ -88,7 +88,7 @@
             axios.get('api/users', {
                     headers: {
                         Accept: 'application/json',
-                        Authorization: 'Bearer ' + this.$store.state.AdminPanel.token
+                        Authorization: 'Bearer ' + this.$store.state.user.token
                     },
                 })
                 .then(res => {

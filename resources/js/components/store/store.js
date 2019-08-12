@@ -10,11 +10,12 @@ export const store = new Vuex.Store({
             name: '',
             email: '',
             admin: false,
-            password: '',
             subscription: {
                 start: 0 ,
                 end: 0,
             },
+            loged: false,
+            token: ''
         },
         sections:{
             navbar: {
@@ -30,13 +31,10 @@ export const store = new Vuex.Store({
                 }
             }
         },
-        inp: false,
-        loged: false,
+        
+        currentPage: 'dashboard',
         // Start Admin Panel
         AdminPanel: {
-            currentPage: 'NavEdit',
-            loged: false ,
-            token: '',
             userEdit: {
                 name: '',
                 email: '',
@@ -93,38 +91,15 @@ export const store = new Vuex.Store({
         loged: state => {
             state.loged = !state.loged;
         },
-        changeRegisterState: (state, payload) => {
-            state.inp = (payload=='l') ? false : true
-        },
-        // Get User
-        get_user_name: (state, value) => {
-            state.user.name = value;
-        },
-        get_user_email: (state, value) => {
-            state.user.email = value;
-        },
-        get_user_password: (state, value) => {
-            state.user.password = value;
+        user(state, payload){
+            Object.assign(state.user, payload)
         },
         change_current_page: (state, payload) => {
-            state.AdminPanel.currentPage = payload
+            state.currentPage = payload
          },
-        subscriptionDateStart: (state, payload) => {
-            state.user.subscription.start = payload
-        },
-        subscriptionDateEnd: (state, payload) => {
-            state.user.subscription.end = payload
-        },
         Edit_Navbar: (state, payload) => {
             Object.assign(state.sections.navbar, payload)
         }
-        // Edit_Navbar: (state, payload, value) => {
-        //     if( payload == 'text'){
-        //         state.sections.Navbar.logo.name == value
-        //     } else if (payload == 'bgcolor'){
-        //         state.sections.Navbar.colors.background == value
-        //     }
-        // }
     },
     getters: {
         article: (state) => (id) => {
