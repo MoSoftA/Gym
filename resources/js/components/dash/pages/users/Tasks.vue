@@ -108,18 +108,24 @@ export default {
         add(){
             Axios.post('api/addExerciese', {
                 tasks: {day: 0, lists: ['Some thing98','Some thing15','Some thing1']}
-            }).then(res => console.log(res)).catch(err => console.log(err))
+            },
+            {
+            headers:{
+                 Accept: 'application/json',
+                 Authorization: 'Bearer '+ this.$store.state.user.token,
+            }
+        }).then(res => console.log(res)).catch(err => console.log(err))
         },
     },
     mounted(){
         Axios.get(`api/exerciese/2`, {
             headers:{
                  Accept: 'application/json',
-                 Authorization: 'Bearer '+ this.$store.state.AdminPanel.token,
+                 Authorization: 'Bearer '+ this.$store.state.user.token,
             }
         })
         .then(res => console.log(res))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err)) 
 
     }
 }

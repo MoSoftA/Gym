@@ -3266,6 +3266,11 @@ __webpack_require__.r(__webpack_exports__);
           day: 0,
           lists: ['Some thing98', 'Some thing15', 'Some thing1']
         }
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
       }).then(function (res) {
         return console.log(res);
       })["catch"](function (err) {
@@ -3277,7 +3282,7 @@ __webpack_require__.r(__webpack_exports__);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/2", {
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.AdminPanel.token
+        Authorization: 'Bearer ' + this.$store.state.user.token
       }
     }).then(function (res) {
       return console.log(res);
