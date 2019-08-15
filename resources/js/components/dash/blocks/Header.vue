@@ -6,7 +6,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-none d-sm-inline-block" style="padding: 8px">
         <router-link to="/" exact>Home<span
 								class="sr-only">(current)</span></router-link>
       </li>
@@ -17,5 +17,10 @@
 </template>
 
 <style>
-
+li a{
+  font-size: 18px;
+  font-weight: bold;  
+  color: black;
+  padding: 7px; 
+}
 </style>

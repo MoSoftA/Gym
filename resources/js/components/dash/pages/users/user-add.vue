@@ -28,6 +28,17 @@
                             placeholder="Password">
                     </div>
 
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Admin</label>
+                    </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="1">yes</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="DateStart" class="font-wieght-bold control-label">Date Start</label>
                         <input type="date" class="form-control" id="DateStart" v-model="date_start"
@@ -114,7 +125,7 @@
 
 
 <style scoped>
-    .form-group {
+    .form-group , .input-group{
         max-width: 500px;
     }
 

@@ -6,10 +6,10 @@
                 <div class="row">
                     <div class="col-12">
                         
-                        <div class="img"><img :src="article[0].img" width="100%" height="200px" alt="" class="img-fliud"></div>
+                        <div class="img"><img :src="article[0].image" width="100%" height="200px" alt="" class="img-fliud"></div>
 
                         <h1>
-                            {{ article[0].longDescription }} 
+                            {{ article[0].title }} 
                         </h1>
 
                         <div class="article-body">
@@ -39,9 +39,9 @@ export default {
         }
     },
     mounted(){
-        console.log(this.article.body);
+        console.log(this.article);
 
-        $('.article-body').html(this.article[0].body)
+        $('.article-body').html(this.article[0].longDescription)
     },
     components:{
         Navabr3,

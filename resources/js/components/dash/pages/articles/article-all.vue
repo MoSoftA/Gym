@@ -83,7 +83,18 @@
                 },
             })
             .then(res => {
-                console.log(res.data);                
+                let articles = res.data.data;
+
+                articles.forEach(article => {
+                    // delete article.created_at;
+                    delete article.updated_at;
+                    delete article.longDescription;
+                    delete article.image;
+
+                    this.head = Object.keys(article);
+                    this.rows.push(Object.values(article));
+                })
+                console.log(res.data.data);
             }).catch(err => err.message);
         }
     }

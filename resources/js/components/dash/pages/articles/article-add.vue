@@ -1,40 +1,48 @@
 <template>
     <div class="row" @click="get_body">
-            <div class="card">
-                <div class="card-body">
+        <div class="card">
+            <div class="card-body">
 
-                    <label for="articleName">Article title</label>
-                    <div class="input-group">
-                        <input v-model="article.title" type="text" class="form-control" placeholder="Article title">
-                    </div>
+                <label for="articleName">Article title</label>
+                <div class="input-group">
+                    <input v-model="article.title" type="text" class="form-control" placeholder="Article title">
+                </div>
 
-                    <label for="articleimage">Article image</label>
-                    <div class="input-group">
-                        <input type="file" id="img" accept="image/*" @change="get_image($event)">
-                    </div>
+                <label for="articleimage">Article image</label>
+                <div class="input-group">
+                    <input type="file" id="img" accept="image/*" @change="get_image($event)">
+                </div>
 
-                    <label for="articleinfo">Article Info</label>
-                    <div class="form-group">
-                        <textarea v-model="article.info" class="form-control" placeholder="Article info" id="articleinfo"
-                            rows="2" style="resize: none"></textarea>
-                    </div>
+                <label for="articleinfo">Article Info</label>
+                <div class="form-group">
+                    <textarea v-model="article.info" class="form-control" placeholder="Article info" id="articleinfo"
+                        rows="2" style="resize: none"></textarea>
+                </div>
 
 
-                    <label for="some-textarea">Article Body</label>
-                    <textarea class="textarea" id='some-textarea' placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                <label for="some-textarea">Article Body</label>
+                <textarea class="textarea" id='some-textarea' placeholder="Place some text here"
+                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat" @click="sendArticle">Submit</button>
-                    </div>
+                <div class="col-4 mt-5">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat"
+                        @click="sendArticle">Submit</button>
                 </div>
             </div>
+        </div>
     </div>
 </template>
 
 <style lang="scss">
-    .card{
+    .card {
         min-width: 100%;
     }
+
+    textarea {
+        direction: rtl;
+        text-align: left
+    }
+
 </style>
 
 
@@ -65,18 +73,16 @@
                 fileReader.onload = (e) => {
                     this.article.img = e.target.result;
                 }
-                
+
             },
             sendArticle() {
-                Axios.post(`api/addArticle`,
-                    {
+                Axios.post(`api/addArticle`, {
                         article: this.article
-                    },
-                    {
-                    headers: {
-                        Accept: 'application/json',
-                        Authorization: 'Bearer ' + this.$store.state.user.token
-                    },
+                    }, {
+                        headers: {
+                            Accept: 'application/json',
+                            Authorization: 'Bearer ' + this.$store.state.user.token
+                        },
 
                     })
                     .then(res => {
@@ -87,7 +93,13 @@
         },
         mounted() {
             // Summernote
-            $('.textarea').summernote()
+            $('.textarea').summernote({
+                popover: {
+                    image: [],
+                    link: [],
+                    air: []
+                }
+            })
         }
     }
 

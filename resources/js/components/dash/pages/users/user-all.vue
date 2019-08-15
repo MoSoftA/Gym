@@ -92,7 +92,7 @@
                     },
                 })
                 .then(res => {
-                    let users = res.data.data
+                    let users = res.data.data;
                     users.forEach(user => {
                         delete user.admin;
 

@@ -8,7 +8,7 @@
         <Sidebar v-if="admin"></Sidebar>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" v-if="admin">
+        <div class="content-wrapper"  style="background: white" v-if="admin">
 
             <!-- Main content -->
             <section class="content">
@@ -31,14 +31,6 @@
         </aside>
         <!-- /.control-sidebar -->
 
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.0.0-beta.2
-            </div>
-        </footer>
     </div>
     <!-- ./wrapper -->
     </div>
