@@ -107,7 +107,7 @@ export default {
     methods:{
         add(){
             Axios.post('api/addExerciese', {
-                tasks: {day: 0, lists: ['Some thing98','Some thing15','Some thing1']}
+                tasks: {day: 'Saturday', lists: ['Some thing98','Some thing15','Some thing1']}
             },
             {
             headers:{

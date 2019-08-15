@@ -1,7 +1,7 @@
 <template>
     <div id="navbar">
         <nav class="navbar navbar-expand-lg navbar-dark" :style='{backgroundColor: Navbar.color.bg}'>
-            <div class="container"><a class="navbar-brand" href="#">{{ Navbar.logo.text }}</a>
+            <div class="container" style="margin: 0"><a class="navbar-brand" href="#">{{ Navbar.logo.text }}</a>
                 <button class="navbar-toggler" @click="show()"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse justify-content-end d-lg-flex">
                     <button type="button" @click="show()" class="close d-xl-none d-lg-none"

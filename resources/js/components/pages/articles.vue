@@ -4,22 +4,18 @@
             
             <div class="container">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12">
                         
-                        <div class="img"><img :src="article[0].img" alt="" class="img-fliud"></div>
+                        <div class="img"><img :src="article[0].img" width="100%" height="200px" alt="" class="img-fliud"></div>
 
                         <h1>
                             {{ article[0].title }} 
                         </h1>
-                        
+
                         <div class="article-body">
-                            
                         </div>
                     </div>
 
-                    <div class="col-4">
-                        
-                    </div>
                 </div>
             </div>
 
@@ -58,5 +54,13 @@ export default {
     #article{
         direction: rtl;
         text-align: right;
+    }
+
+    .container{
+        margin-top: 30px
+    }
+    .article-body{
+        margin-top: 30px;
+        line-height: 1.6;
     }
 </style>

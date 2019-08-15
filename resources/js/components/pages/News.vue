@@ -1,88 +1,99 @@
 <template>
     <div id="news">
         <Nav2></Nav2>
-        <div class="jumbotron mt-5 pb0">
+        <div class="jumbotron mt-5 p0">
             <div class="container">
                 <h1 class="display-6 text-right">المقالات</h1>
             </div>
         </div>
         <div class="container">
-            <div class="preview d-flex row mb-5" :key="article.id" v-for="article in get_articles">
 
-					<div class="article-info col-8">
-						<h1>{{ article.title }}</h1>
-						<p>{{ article.info }}</p>
-						<router-link :to="'/articles/'+article.id"  class="btn btn-success">اقرأ المزيد</router-link >
-					</div>
+            <ul class="paginationList row">
+                <!-- <div class="row"> -->
 
-					<div class="article-thumb col-4">
-						<img :src="article.img" class="img-fluid" alt="img">
-					</div>
-
-				</div>  
+                <li class="listItem col-sm-12 col-md-3" :key="article.id" v-for="article in get_articles">
+                    <div class="border-white ">
+                        <div class="card">
+                            <img class="card-img-top" :src="article.img" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.id }}</h5>
+                                <p class="card-text">{{ article.info }}</p>
+                                <router-link :to="'/articles/'+article.id" class="btn btn-success">اقرأ المزيد
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- </div> -->
+            </ul>
+            <div id="pagination-container">
+                <p class='paginacaoCursor' id="beforePagination">السابق</p>
+                <p class='paginacaoCursor' id="afterPagination"> التالي</p>
+            </div>
         </div>
-
         <Footer2></Footer2>
-    </div>    
+    </div>
 </template>
 
 <script>
-import Nav2 from "../blocks/Nav";
-import Footer2 from "../blocks/Footer";
+    import Nav2 from "../blocks/Nav";
+    import Footer2 from "../blocks/Footer";
 
-export default {
-    data(){
-        return {
-            link: ''
-        }
-    },
-    components:{
-        Nav2,
-        Footer2
-    },
-    computed:{
-        get_articles(){
-            return this.$store.state.articles
+    export default {
+        data() {
+            return {
+                link: '',
+
+                allArticles: null
+            }
+        },
+        methods: {
+
+        },
+        components: {
+            Nav2,
+            Footer2
+        },
+        computed: {
+            get_articles() {
+                return this.$store.state.articles
+            }
         }
     }
-}
+
 </script>
 
 <style lang="scss" scoped>
-#news{
-    text-align: right
-}
-.jumbotron{
-    background-color: rgb(242, 58, 46);
-    color: white;
-}
-
-.preview{
-	border-radius: 20px;
-	overflow: hidden;
-	background-color: #FFF;
-	max-height: 200px;
-	-webkit-box-shadow: 7px -2px 17px 0px rgba(0,0,0,0.41);
-	-moz-box-shadow: 7px -2px 17px 0px rgba(0,0,0,0.41);
-	box-shadow: 0px -2px 17px 0px rgba(0,0,0,0.41);
-
-    
-    &:hover .article-thumb{
-        transform: scale(1.1)
+    #news {
+        text-align: right
     }
 
-    .article-thumb {
-        transition: all 0.4s ease;
-        padding: 0;
-        margin: 0
+    .jumbotron {
+        background-color: rgb(242, 58, 46);
+        color: white;
     }
-    
-	.article-info  {
 
-		button{
-			float: right;
-		}
-	}
+    ul {
+        list-style: none;
+    }
 
-}
+    .paginacaoCursor {
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #007bff;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+
+    #pagination-container {
+        float: right;
+
+        * {
+            float: right;
+        }
+    }
+
 </style>

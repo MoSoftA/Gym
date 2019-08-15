@@ -29,7 +29,7 @@
 
 
     <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('Admin/css/summernote-bs4.css') }}">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <title>GYM</title>
     <style>
         #app {
@@ -91,11 +91,12 @@
 <script src="{{ asset('Admin/js/adminlte.min.js') }}"></script>
 
 
+<script src=" {{ asset('/js/HZpagination.js') }}"></script>
 <!-- DataTables -->
 <script src=" {{ asset('Admin/js/jquery.dataTables.min.js') }}"></script>
-<script src=" {{ asset('Admin/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src=" {{ asset('Admin/js/summernote-bs4.min.js') }}"></script>
 
+<script src=" {{ asset('Admin/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script><!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
 
