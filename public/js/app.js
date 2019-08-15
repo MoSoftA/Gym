@@ -3701,6 +3701,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../blocks/Nav */ "./resources/js/components/blocks/Nav.vue");
 /* harmony import */ var _blocks_Footer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../blocks/Footer */ "./resources/js/components/blocks/Footer.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -3736,18 +3738,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      link: '',
-      allArticles: null
+      articles: null
     };
   },
-  methods: {},
+  mounted: function mounted() {
+    $(document).ready(function () {
+      var HZperPage = 4,
+          //number of results per page
+      HZwrapper = 'paginationList',
+          //wrapper class
+      HZlines = 'listItem',
+          //items class
+      HZpaginationId = 'pagination-container',
+          //id of pagination container
+      HZpaginationArrowsClass = 'paginacaoCursor',
+          //set the class of pagi
+      HZpaginationColorDefault = 'white',
+          //default color for the pagination numbers
+      HZpaginationColorActive = 'black',
+          //color when page is clicked
+      HZpaginationCustomClass = 'page-link'; //custom class for styling the pagination (css)
+
+      /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+      function paginationShow() {
+        if ($("#" + HZpaginationId).children().length > 8) {
+          var a = $(".activePagination").attr("data-valor");
+
+          if (a >= 4) {
+            var i = parseInt(a) - 3,
+                o = parseInt(a) + 2;
+            $(".paginacaoValor").hide(), exibir2 = $(".paginacaoValor").slice(i, o).show();
+          } else $(".paginacaoValor").hide(), exibir2 = $(".paginacaoValor").slice(0, 5).show();
+        }
+      }
+
+      paginationShow(), $("#beforePagination").hide(), $("." + HZlines).hide();
+
+      for (var tamanhotabela = $("." + HZwrapper).children().length, porPagina = HZperPage, paginas = Math.ceil(tamanhotabela / porPagina), i = 1; i <= paginas;) {
+        $("#" + HZpaginationId).append("<p class='paginacaoValor " + HZpaginationCustomClass + "' data-valor=" + i + ">" + i + "</p>"), i++, $(".paginacaoValor").hide(), exibir2 = $(".paginacaoValor").slice(0, 5).show();
+      }
+
+      $(".paginacaoValor:eq(0)").css("background", "" + HZpaginationColorActive).addClass("activePagination");
+      var exibir = $("." + HZlines).slice(0, porPagina).show();
+      $(".paginacaoValor").on("click", function () {
+        $(".paginacaoValor").css("background", "" + HZpaginationColorDefault).removeClass("activePagination"), $(this).css("background", "" + HZpaginationColorActive).addClass("activePagination");
+        var a = $(this).attr("data-valor"),
+            i = a * porPagina,
+            o = i - porPagina;
+        $("." + HZlines).hide(), exibir = $("." + HZlines).slice(o, i).show(), "1" === a ? $("#beforePagination").hide() : $("#beforePagination").show(), a === "" + $(".paginacaoValor:last").attr("data-valor") ? $("#afterPagination").hide() : $("#afterPagination").show(), paginationShow();
+      }), $(".paginacaoValor").last().after($("#afterPagination")), $("#beforePagination").on("click", function () {
+        var a = $(".activePagination").attr("data-valor"),
+            i = parseInt(a) - 1;
+        $("[data-valor=" + i + "]").click(), paginationShow();
+      }), $("#afterPagination").on("click", function () {
+        var a = $(".activePagination").attr("data-valor"),
+            i = parseInt(a) + 1;
+        $("[data-valor=" + i + "]").click(), paginationShow();
+      }), $(".paginacaoValor").css("float", "left"), $("." + HZpaginationArrowsClass).css("float", "left");
+    });
+  },
   components: {
     Nav2: _blocks_Nav__WEBPACK_IMPORTED_MODULE_0__["default"],
     Footer2: _blocks_Footer__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -3756,6 +3812,24 @@ __webpack_require__.r(__webpack_exports__);
     get_articles: function get_articles() {
       return this.$store.state.articles;
     }
+  },
+  beforeCreate: function beforeCreate() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('api/articles', {
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + this.$store.state.user.token
+      }
+    }).then(function (res) {
+      _this.articles = res.data.data;
+
+      _this.$store.commit('got_articles', res.data.data);
+
+      console.log(res.data.data[0]);
+    })["catch"](function (err) {
+      return err.message;
+    });
   }
 });
 
@@ -4098,7 +4172,7 @@ exports.push([module.i, ".buttons[data-v-51c9d3ac] {\n  margin-bottom: 20px;\n}\
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#news[data-v-1b491be9] {\n  text-align: right;\n}\n.jumbotron[data-v-1b491be9] {\n  background-color: #f23a2e;\n  color: white;\n}\nul[data-v-1b491be9] {\n  list-style: none;\n}\n.paginacaoCursor[data-v-1b491be9] {\n  position: relative;\n  display: block;\n  padding: 0.5rem 0.75rem;\n  margin-left: -1px;\n  line-height: 1.25;\n  color: #007bff;\n  background-color: #fff;\n  border: 1px solid #dee2e6;\n}\n#pagination-container[data-v-1b491be9] {\n  float: right;\n}\n#pagination-container *[data-v-1b491be9] {\n  float: right;\n}", ""]);
+exports.push([module.i, "#news[data-v-1b491be9] {\n  text-align: right;\n}\n.jumbotron[data-v-1b491be9] {\n  background-color: #f23a2e;\n  color: white;\n}\nul[data-v-1b491be9] {\n  list-style: none;\n}\n.paginacaoCursor[data-v-1b491be9] {\n  position: relative;\n  display: block;\n  padding: 0.5rem 0.75rem;\n  margin-left: -1px;\n  line-height: 1.25;\n  color: #007bff;\n  background-color: #fff;\n  border: 1px solid #dee2e6;\n}\n#pagination-container[data-v-1b491be9] {\n  float: right;\n}\n#pagination-container *[data-v-1b491be9] {\n  float: right;\n}\nfooter[data-v-1b491be9] {\n  margin-top: 130px;\n}", ""]);
 
 
 /***/ }),
@@ -9626,7 +9700,7 @@ var render = function() {
         _c(
           "ul",
           { staticClass: "paginationList row" },
-          _vm._l(_vm.get_articles, function(article) {
+          _vm._l(_vm.articles, function(article) {
             return _c(
               "li",
               { key: article.id, staticClass: "listItem col-sm-12 col-md-3" },
@@ -9643,11 +9717,11 @@ var render = function() {
                       { staticClass: "card-body" },
                       [
                         _c("h5", { staticClass: "card-title" }, [
-                          _vm._v(_vm._s(article.id))
+                          _vm._v(_vm._s(article.title))
                         ]),
                         _vm._v(" "),
                         _c("p", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(article.info))
+                          _vm._v(_vm._s(article.shortDescription))
                         ]),
                         _vm._v(" "),
                         _c(
@@ -9682,7 +9756,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "jumbotron mt-5 p0" }, [
+    return _c("div", { staticClass: "jumbotron mt-5 py-0" }, [
       _c("div", { staticClass: "container" }, [
         _c("h1", { staticClass: "display-6 text-right" }, [_vm._v("المقالات")])
       ])
@@ -9788,7 +9862,7 @@ var render = function() {
             _c("h1", [
               _vm._v(
                 "\n                        " +
-                  _vm._s(_vm.article[0].title) +
+                  _vm._s(_vm.article[0].longDescription) +
                   " \n                    "
               )
             ]),
@@ -28163,72 +28237,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       title: ' نموذج لوريم ايبسوم عربي',
       body: '<p><p><b>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور</b></p><p><b>أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد</b></p><p><b>أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس</b></p><p><b><i>أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت</i></b></p><p><b>نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا</b></p><p><b>كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."</b></p><b></b><p><ul><li>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</li><li><p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد<br></li><li><p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</p><br><br></li></ul></p><br><br></p>',
       info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 2,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'نموذج لوريم ايبسوم عربي',
-      body: '<h1 style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.</h1><ol><li style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">قصف المسرح واستمر الإتحاد في, ذات أسيا للغزو، الخطّة و, الآخر لألمانيا جهة بل. في سحقت هيروشيما البريطاني يتم, غريمه باحتلال الأيديولوجية، في فصل, دحر وقرى لهيمنة الإيطالية ٣٠. استبدال استسلام القاذفات عل مما. ببعض مئات وبلجيكا، قد أما, قِبل الدنمارك حتى كل, العمليات اليابانية انه أن.</li></ol><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;"><u>حتى هاربر موسكو ثم, وتقهقر المنتصرة حدة عل, التي فهرست واشتدّت أن أسر. كانت المتاخمة التغييرات أم وفي. ان وانتهاءً باستحداث قهر. ان ضمنها للأراضي الأوروبية ذات.</u></p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;"><b>حشد الثقيل المنتصر ثم, أسر قررت تم. وغير تصفح الحزب واستمر, مشروط الساحلية هذا ان. أما معركة لبلجيكا، من, الألوف الثقيلة الإنجليزية أسر ٣٠. ٣٠ دار أمام أحدث, أما بحشد الهادي الدولارات ما, هو الحزب الصفحة محاولات قبل. وبحلول الخنادق الأوروبية، ان غير, وليرتفع برلين، انه, انتباه الوزراء البولندي تم تلك.</b></p><p dir="rtl" style="text-align: right; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">كما أن وقام وبدأت, لم أدوات للمجهود بلا. إذ لها الأول الستار, تحت وصغار مدينة عل. أي بحشد ليرتفع الساحلية أما, ليركز الهادي للأسطول ما هذا, أسابيع الروسية وتم عن. وفي مع شدّت فكان أدوات. سمّي تعداد ونستون هذا ما. به، بـ الخاصّة هيروشيما, وربع جندي الشهير الساحل.</p><p dir="rtl" style="text-align: right; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">يكن لعدم الثانية عل, جديداً الخاطفة منشوريا بها تم, إذ جهة الأمم الجنوب. أي أما الحربية المعارك, قد وعلى الحربي، الأولية جعل. بحث إعادة قُدُماً ان, بحث أطراف استولت شموليةً ما. الغزو قبضتهم للسيطرة عدد أم. دون أي بالقصف العالم، للأسطول.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">مدن ثم للسيطرة سنغافورة, أفاق الاعتداء أخر ٣٠, لمّ أسيا غرّة، مع. هو ودول وجهان فقد, في الوراء وبالتحديد، غير. وألمّ وجهان به،, ان ربع حصدت وحزبه, أم جعل بشكل سابق الكونجرس. وضم يقوم الأولية شموليةً أن, أي ربع طرفاً الأرضية.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">ذلك بالفشل ونستون ابتدعها قد. لها قد مساعدة الحلفاء, واشتدّت الهزائم إلى كل. تم البلطيق الحيلولة دار, عن به، تُصب البرية والحلفاء. مشارف واشتدّت شبح كل, بتخصيص بل مما. الحرة بقيادة تم وصل.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">لغزو احتار كل أسر, بـ هُزم النمسا الخاسر بعد, من مسرح ألمانيا البشريةً فعل. والجنوب ارتكبها وبالتحديد، فعل. الا مع قِبل أمدها جديداً. بوابة الضغوط أن ولم. قد لمّ مكثّفة دنكيرك. جهة وبعض شعار ان.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">بحق نهاية تكاليف بريطانيا، ما, إلى أن النزاع الألماني. حرب غزوه أصقاع القوقازية تم, حتى كل ألماني بقيادة والكوري, بلا أجزاء مواقعها بل. عدد عقبت بالسيطرة عل. دول معقل لهذه أسابيع. أن وقد وباءت المجتمع, هجوم وبغطاء ذلك هو. تعديل فهرست."</p>',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 3,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'This is headerd',
-      body: 'This is body This is body This is body This is body This is body',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 4,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'This is headerd',
-      body: 'This is body This is body This is body This is body This is body',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 5,
-      img: 'https://imgplaceholder.com/420x320',
-      title: ' نموذج لوريم ايبسوم عربي',
-      body: '<p><p><b>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور</b></p><p><b>أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد</b></p><p><b>أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس</b></p><p><b><i>أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت</i></b></p><p><b>نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا</b></p><p><b>كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."</b></p><b></b><p><ul><li>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</li><li><p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد<br></li><li><p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</p><br><br></li></ul></p><br><br></p>',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 6,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'نموذج لوريم ايبسوم عربي',
-      body: '<h1 style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.</h1><ol><li style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">قصف المسرح واستمر الإتحاد في, ذات أسيا للغزو، الخطّة و, الآخر لألمانيا جهة بل. في سحقت هيروشيما البريطاني يتم, غريمه باحتلال الأيديولوجية، في فصل, دحر وقرى لهيمنة الإيطالية ٣٠. استبدال استسلام القاذفات عل مما. ببعض مئات وبلجيكا، قد أما, قِبل الدنمارك حتى كل, العمليات اليابانية انه أن.</li></ol><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;"><u>حتى هاربر موسكو ثم, وتقهقر المنتصرة حدة عل, التي فهرست واشتدّت أن أسر. كانت المتاخمة التغييرات أم وفي. ان وانتهاءً باستحداث قهر. ان ضمنها للأراضي الأوروبية ذات.</u></p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;"><b>حشد الثقيل المنتصر ثم, أسر قررت تم. وغير تصفح الحزب واستمر, مشروط الساحلية هذا ان. أما معركة لبلجيكا، من, الألوف الثقيلة الإنجليزية أسر ٣٠. ٣٠ دار أمام أحدث, أما بحشد الهادي الدولارات ما, هو الحزب الصفحة محاولات قبل. وبحلول الخنادق الأوروبية، ان غير, وليرتفع برلين، انه, انتباه الوزراء البولندي تم تلك.</b></p><p dir="rtl" style="text-align: right; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">كما أن وقام وبدأت, لم أدوات للمجهود بلا. إذ لها الأول الستار, تحت وصغار مدينة عل. أي بحشد ليرتفع الساحلية أما, ليركز الهادي للأسطول ما هذا, أسابيع الروسية وتم عن. وفي مع شدّت فكان أدوات. سمّي تعداد ونستون هذا ما. به، بـ الخاصّة هيروشيما, وربع جندي الشهير الساحل.</p><p dir="rtl" style="text-align: right; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">يكن لعدم الثانية عل, جديداً الخاطفة منشوريا بها تم, إذ جهة الأمم الجنوب. أي أما الحربية المعارك, قد وعلى الحربي، الأولية جعل. بحث إعادة قُدُماً ان, بحث أطراف استولت شموليةً ما. الغزو قبضتهم للسيطرة عدد أم. دون أي بالقصف العالم، للأسطول.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">مدن ثم للسيطرة سنغافورة, أفاق الاعتداء أخر ٣٠, لمّ أسيا غرّة، مع. هو ودول وجهان فقد, في الوراء وبالتحديد، غير. وألمّ وجهان به،, ان ربع حصدت وحزبه, أم جعل بشكل سابق الكونجرس. وضم يقوم الأولية شموليةً أن, أي ربع طرفاً الأرضية.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">ذلك بالفشل ونستون ابتدعها قد. لها قد مساعدة الحلفاء, واشتدّت الهزائم إلى كل. تم البلطيق الحيلولة دار, عن به، تُصب البرية والحلفاء. مشارف واشتدّت شبح كل, بتخصيص بل مما. الحرة بقيادة تم وصل.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">لغزو احتار كل أسر, بـ هُزم النمسا الخاسر بعد, من مسرح ألمانيا البشريةً فعل. والجنوب ارتكبها وبالتحديد، فعل. الا مع قِبل أمدها جديداً. بوابة الضغوط أن ولم. قد لمّ مكثّفة دنكيرك. جهة وبعض شعار ان.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">بحق نهاية تكاليف بريطانيا، ما, إلى أن النزاع الألماني. حرب غزوه أصقاع القوقازية تم, حتى كل ألماني بقيادة والكوري, بلا أجزاء مواقعها بل. عدد عقبت بالسيطرة عل. دول معقل لهذه أسابيع. أن وقد وباءت المجتمع, هجوم وبغطاء ذلك هو. تعديل فهرست."</p>',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 7,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'This is headerd',
-      body: 'This is body This is body This is body This is body This is body',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 8,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'This is headerd',
-      body: 'This is body This is body This is body This is body This is body',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 9,
-      img: 'https://imgplaceholder.com/420x320',
-      title: ' نموذج لوريم ايبسوم عربي',
-      body: '<p><p><b>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور</b></p><p><b>أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد</b></p><p><b>أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس</b></p><p><b><i>أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت</i></b></p><p><b>نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا</b></p><p><b>كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."</b></p><b></b><p><ul><li>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</li><li><p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد<br></li><li><p>ايست,كيواي دولوريم ايبسيوم كيوا دولار سايت أميت, كونسيكتيتيور,أديبايسكاي فيلايت, سيد</p><br><br></li></ul></p><br><br></p>',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 10,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'نموذج لوريم ايبسوم عربي',
-      body: '<h1 style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.</h1><ol><li style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">قصف المسرح واستمر الإتحاد في, ذات أسيا للغزو، الخطّة و, الآخر لألمانيا جهة بل. في سحقت هيروشيما البريطاني يتم, غريمه باحتلال الأيديولوجية، في فصل, دحر وقرى لهيمنة الإيطالية ٣٠. استبدال استسلام القاذفات عل مما. ببعض مئات وبلجيكا، قد أما, قِبل الدنمارك حتى كل, العمليات اليابانية انه أن.</li></ol><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;"><u>حتى هاربر موسكو ثم, وتقهقر المنتصرة حدة عل, التي فهرست واشتدّت أن أسر. كانت المتاخمة التغييرات أم وفي. ان وانتهاءً باستحداث قهر. ان ضمنها للأراضي الأوروبية ذات.</u></p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;"><b>حشد الثقيل المنتصر ثم, أسر قررت تم. وغير تصفح الحزب واستمر, مشروط الساحلية هذا ان. أما معركة لبلجيكا، من, الألوف الثقيلة الإنجليزية أسر ٣٠. ٣٠ دار أمام أحدث, أما بحشد الهادي الدولارات ما, هو الحزب الصفحة محاولات قبل. وبحلول الخنادق الأوروبية، ان غير, وليرتفع برلين، انه, انتباه الوزراء البولندي تم تلك.</b></p><p dir="rtl" style="text-align: right; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">كما أن وقام وبدأت, لم أدوات للمجهود بلا. إذ لها الأول الستار, تحت وصغار مدينة عل. أي بحشد ليرتفع الساحلية أما, ليركز الهادي للأسطول ما هذا, أسابيع الروسية وتم عن. وفي مع شدّت فكان أدوات. سمّي تعداد ونستون هذا ما. به، بـ الخاصّة هيروشيما, وربع جندي الشهير الساحل.</p><p dir="rtl" style="text-align: right; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">يكن لعدم الثانية عل, جديداً الخاطفة منشوريا بها تم, إذ جهة الأمم الجنوب. أي أما الحربية المعارك, قد وعلى الحربي، الأولية جعل. بحث إعادة قُدُماً ان, بحث أطراف استولت شموليةً ما. الغزو قبضتهم للسيطرة عدد أم. دون أي بالقصف العالم، للأسطول.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">مدن ثم للسيطرة سنغافورة, أفاق الاعتداء أخر ٣٠, لمّ أسيا غرّة، مع. هو ودول وجهان فقد, في الوراء وبالتحديد، غير. وألمّ وجهان به،, ان ربع حصدت وحزبه, أم جعل بشكل سابق الكونجرس. وضم يقوم الأولية شموليةً أن, أي ربع طرفاً الأرضية.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">ذلك بالفشل ونستون ابتدعها قد. لها قد مساعدة الحلفاء, واشتدّت الهزائم إلى كل. تم البلطيق الحيلولة دار, عن به، تُصب البرية والحلفاء. مشارف واشتدّت شبح كل, بتخصيص بل مما. الحرة بقيادة تم وصل.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">لغزو احتار كل أسر, بـ هُزم النمسا الخاسر بعد, من مسرح ألمانيا البشريةً فعل. والجنوب ارتكبها وبالتحديد، فعل. الا مع قِبل أمدها جديداً. بوابة الضغوط أن ولم. قد لمّ مكثّفة دنكيرك. جهة وبعض شعار ان.</p><p dir="rtl" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(66, 66, 66); font-family: tahoma, sans-serif; font-size: 14px;">بحق نهاية تكاليف بريطانيا، ما, إلى أن النزاع الألماني. حرب غزوه أصقاع القوقازية تم, حتى كل ألماني بقيادة والكوري, بلا أجزاء مواقعها بل. عدد عقبت بالسيطرة عل. دول معقل لهذه أسابيع. أن وقد وباءت المجتمع, هجوم وبغطاء ذلك هو. تعديل فهرست."</p>',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 11,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'This is headerd',
-      body: 'This is body This is body This is body This is body This is body',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
-    }, {
-      id: 12,
-      img: 'https://imgplaceholder.com/420x320',
-      title: 'This is headerd',
-      body: 'This is body This is body This is body This is body This is body',
-      info: 'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...'
     }],
     // Start Tasks
     tasks: [{
@@ -28264,6 +28272,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     Edit_Navbar: function Edit_Navbar(state, payload) {
       Object.assign(state.sections.navbar, payload);
+    },
+    got_articles: function got_articles(state, payload) {
+      state.articles = payload;
     }
   },
   getters: {

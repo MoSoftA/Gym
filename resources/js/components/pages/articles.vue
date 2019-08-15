@@ -9,7 +9,7 @@
                         <div class="img"><img :src="article[0].img" width="100%" height="200px" alt="" class="img-fliud"></div>
 
                         <h1>
-                            {{ article[0].title }} 
+                            {{ article[0].longDescription }} 
                         </h1>
 
                         <div class="article-body">

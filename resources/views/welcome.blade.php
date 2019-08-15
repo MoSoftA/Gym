@@ -89,9 +89,10 @@
 
 <!-- AdminLTE App -->
 <script src="{{ asset('Admin/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('js/HZpagination.js') }}"></script>
 
 
-<script src=" {{ asset('/js/HZpagination.js') }}"></script>
+
 <!-- DataTables -->
 <script src=" {{ asset('Admin/js/jquery.dataTables.min.js') }}"></script>
 
