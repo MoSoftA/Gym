@@ -30,9 +30,11 @@ Route::group(["namespace"=>"Api"], function (){
 
 		//Route::post('subscriptions/update', "SubscriptionsController@update");
 		//Route::get('subscription', "SubscriptionsController@show");
-
+        // site 
+       
+    Route::name('storeNavbar')->post('storeNavbar', 'SiteController@storeNavbar');
+    Route::name('storeSliderr')->post('storeSlider', 'SiteController@storeSlider');
     // articles
-    
     Route::name('addArticle')->post('addArticle', 'ArticleController@store');
     Route::name('editArticle')->put('editArticle/{id}', 'ArticleController@update');
     Route::name('deleteArticle')->delete('deleteArticle/{id}', 'ArticleController@destroy');
@@ -44,6 +46,8 @@ Route::group(["namespace"=>"Api"], function (){
     Route::name('deleteExerciese')->delete('deleteExerciese/{id}', 'ExerciseController@destroy');
 	
     });
-
+    
+    Route::name('getNavbar')->get('getNavbar', 'SiteController@getNavbar');
+    Route::name('getSlider')->get('getSlider', 'SiteController@getSlider');
     Route::name('articles')->get('articles', 'ArticleController@index');
 });

@@ -27,7 +27,7 @@ class ApiExercieseRequest extends FormRequest
     public function rules()
     {
         return [
-           "day"  => "required",
+           "day"  => "required|unique:exercise",
            "lists"  => "required",
            'user_id' => "required"
         ];

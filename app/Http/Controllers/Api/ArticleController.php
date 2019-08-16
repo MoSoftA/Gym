@@ -36,7 +36,7 @@ class ArticleController extends Controller
       //return $request->article['img'];
     if($request->hasFile('img'))
         {
-         //return $request->'img';
+         //return $request->img;
           $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
           $url = $img->move(public_path('uploads/articles'), $imgName); 
