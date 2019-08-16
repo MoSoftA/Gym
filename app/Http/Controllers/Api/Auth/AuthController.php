@@ -29,8 +29,11 @@ class AuthController extends Controller
                 "name"=> $request->name,
                 "email"=> $request->email,
                 "password"=> $request->password,
+                'admin'=> $request->admin,
                 'start'=> $start,
-                'end'=> $end
+                'end'=> $end,
+                'created_at' => now()
+
                 
             ]);
         $token = $user->createToken('Token')->accessToken;

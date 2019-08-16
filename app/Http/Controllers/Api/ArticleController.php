@@ -32,10 +32,11 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ArticleRequest $request)
-    {
-   
-    if($request->hasFile('article.img'))
+    {   
+      //return $request->article['img'];
+    if($request->hasFile('img'))
         {
+         //return $request->'img';
           $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
           $url = $img->move(public_path('uploads/articles'), $imgName); 
@@ -47,10 +48,10 @@ class ArticleController extends Controller
             'shortDescription' => $request->info,
             'longDescription' => $request->body,
             'author' => auth()->user()->id,
-            'image'=>$image,
+            'image'=> $image,
        ]); 
 
-       return back();
+       return $this->ApiResponse(200,"success");
     }
 
     /**
@@ -71,14 +72,14 @@ class ArticleController extends Controller
             }else{$image = null;}
        
         Article::find($id)->update([
-           'title' =>  $request->title,
+            'title' =>  $request->title,
             'shortDescription' => $request->info,
             'longDescription' => $request->body,
             'author' => auth()->user()->id,
             'image'=> $image,
        ]); 
 
-       return back(); 
+     return $this->ApiResponse(200,"success");
     }
 
     /**
@@ -90,6 +91,6 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         Article::find($id)->delete();
-        return back();
+        return $this->ApiResponse(200,"success");
     }
 }

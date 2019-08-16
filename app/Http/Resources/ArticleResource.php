@@ -20,7 +20,7 @@ class ArticleResource extends JsonResource
             "shortDescription" => $this->shortDescription,
             "longDescription" => $this->longDescription ,
             'author' => $this->author,
-            'image'   => $this->author,
+            'image'   => $this->image,
             'created_at' => $this->created_at,
             'updated_at'=> $this->updated_at
         ];

@@ -26,12 +26,13 @@ Route::group(["namespace"=>"Api"], function (){
 		Route::get("users","UserController@all");
 		Route::get("user","UserController@get");
         Route::post("deleteUser", "UserController@destroy");
+        Route::put("editUser/{id}", "UserController@update");
 
 		//Route::post('subscriptions/update', "SubscriptionsController@update");
 		//Route::get('subscription', "SubscriptionsController@show");
 
     // articles
-    Route::name('articles')->get('articles', 'ArticleController@index');
+    
     Route::name('addArticle')->post('addArticle', 'ArticleController@store');
     Route::name('editArticle')->put('editArticle/{id}', 'ArticleController@update');
     Route::name('deleteArticle')->delete('deleteArticle/{id}', 'ArticleController@destroy');
@@ -43,5 +44,6 @@ Route::group(["namespace"=>"Api"], function (){
     Route::name('deleteExerciese')->delete('deleteExerciese/{id}', 'ExerciseController@destroy');
 	
     });
-    
+
+    Route::name('articles')->get('articles', 'ArticleController@index');
 });
