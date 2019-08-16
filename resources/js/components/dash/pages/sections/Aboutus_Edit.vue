@@ -1,42 +1,38 @@
 <template>
     <div class="container">
-
-    <div class="row">
-        <label for="image">Image</label>
-        <div class="input-group">
-            <input type="file" id="image" class="form-control" @change="get_image($event)">
-        </div>
-        <br>
-        <div class="col-md-12 box">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Article body</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body pad">
-                    <form>
-                        <textarea class="mohammed" placeholder="Place some text here"
-                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                    </form>
-                </div>
+ <div class="card">
+            <div class="card-body">
+        <div class="row">
+            <label for="image">Image</label>
+            <div class="input-group">
+                <input type="file" id="image" class="form-control" @change="get_image($event)">
             </div>
+            <br>
+            <div class="col-md-12 mt-5">
+                <label for="some-textarea">Article Body</label>
+                <textarea class="textarea" id='some-textarea' placeholder="Place some text here"
+                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+
+            <div class="col-4 my-4">
+                        <button class="btn btn-primary btn-block btn-flat" @click="assign">Done</button>
+                </div>
         </div>
-        <!-- /.col-->
-        <button class="btn btn-success" @click="get_body">Done</button>
     </div>
+ </div>
     </div>
 </template>
 
 <script>
     export default {
-        data(){
+        data() {
             return {
                 body: '',
                 image: ''
             }
         },
         methods: {
-            get_image(e){
+            get_image(e) {
 
                 let fileReader = new FileReader();
 
@@ -48,12 +44,19 @@
 
             },
             get_body() {
-                console.log($('.mohammed').val());
-                this.body = String($('.mohammed').val())
+                console.log($('#some-textarea').val());
+                this.body = String($('#some-textarea').val())
             }
         },
         mounted() {
-            $('.mohammed').wysihtml5();
+            // Summernote
+            $('.textarea').summernote({
+                popover: {
+                    image: [],
+                    link: [],
+                    air: []
+                }
+            })
         }
     }
 

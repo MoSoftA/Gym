@@ -27,9 +27,9 @@
                             </li>
                         </ul>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Type your exercise" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <input type="text" class="form-control" placeholder="Type your exercise" aria-label="Recipient's username" v-model="n_task" aria-describedby="button-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="add(index)">Button</button>
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="add(index, item)">Button</button>
                             </div>
                         </div>
                     </div>
@@ -43,8 +43,14 @@
 
 
 <style lang="scss" scoped>
-.buttons{
-    margin-bottom: 20px;
+button{
+    float: right;
+
+    &::after{
+        content: ' ';
+        display: block;
+        clear: both
+    }
 }
 
     .day{
@@ -98,6 +104,14 @@ export default {
                 {day: "Wednesday", lists: ['Some thing98','Some thing15','Some thing5']},
                 {day: "Thursday", lists: ['Some thing98','Some thing15','Some thing6']},
             ],
+            n_task: {
+                o: '',
+                t: '',
+                h: '',
+                f: '',
+                v: '',
+                x: '',
+            },
             one: true,
             two: false,
             three: false, 
@@ -110,11 +124,14 @@ export default {
 
     },
     methods:{
-        add(index){
-            console.log(index);
-            Axios.post('api/addExerciese', {
+        
+        add(index, i){
+             
+            i.lists.push(this.n_task);
+            console.log(index, i.lists, i.day);
+            Axios.put(`api/addExerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
                 day: 'Saturday',
-                id: 3,
+                id: this.$store.state.AdminPanel.userEdit[0],
                 lists: ['Some thing98','Some thing15','Some thing1']
             },
             {
@@ -126,7 +143,9 @@ export default {
         },
     },
     mounted(){
-        Axios.get(`api/exerciese/1`, {
+        console.log('targted user id',this.$store.state.AdminPanel.userEdit[0]);
+
+        Axios.get(`api/exerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
             headers:{
                  Accept: 'application/json',
                  Authorization: 'Bearer '+ this.$store.state.user.token,

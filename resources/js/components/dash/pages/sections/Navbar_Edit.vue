@@ -2,7 +2,6 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <realNav></realNav>
                 <p class="h1 mt-5">NAVBAR</p>
 
                 <div class="row">
@@ -64,7 +63,7 @@
 </template>
 
 <script>
-import realNav from '../../../blocks/Nav';
+// import realNav from '../../../blocks/Nav';
     export default {
         data() {
             return {
@@ -82,9 +81,6 @@ import realNav from '../../../blocks/Nav';
                 }
             }
         },
-        components:{
-            realNav
-        },
         methods: {
             get_image(e) {
 
@@ -95,14 +91,11 @@ import realNav from '../../../blocks/Nav';
                 fileReader.onload = (e) => {
                     this.logo.image = e.target.result;
                 }
-            },
-            assign() {
-                this.$store.commit('Edit_Navbar', this.navbar)
             }
         },
-        mounted(){
-            Object.assign(this.navbar, this.$store.state.sections.navbar)
-        }
+        // mounted(){
+        //     Object.assign(this.navbar, this.$store.state.sections.navbar)
+        // }
     }
 
 </script>

@@ -2,7 +2,7 @@
     <div class="row" @click="get_body">
         <div class="card">
             <div class="card-body">
-
+                
                 <label for="articleName">Article title</label>
                 <div class="input-group">
                     <input v-model="article.title" type="text" class="form-control" placeholder="Article title">
@@ -10,7 +10,11 @@
 
                 <label for="articleimage">Article image</label>
                 <div class="input-group">
+<<<<<<< HEAD
                     <input type="file" id="img" name='img' accept="image/*" @change="get_image($event)">
+=======
+                    <input type="file" id="img" accept="image/*" name="img" @change="get_image($event)">
+>>>>>>> 2f3d71d2150150b239f69bb96bd8cfdda662b7af
                 </div>
 
                 <label for="articleinfo">Article Info</label>
@@ -76,10 +80,15 @@
 
             },
             sendArticle() {
-                Axios.post(`api/addArticle`, {
-                        article: this.article
-                    }, {
+                let art = new FormData();
+                art.append('title', this.article.title);
+                art.append('body', this.article.body);
+                art.append('info', this.article.info);
+                art.append('img', this.article.img) 
+
+                Axios.post(`api/addArticle`, art , {
                         headers: {
+                            'Content-Type': 'multipart/form-data',
                             Accept: 'application/json',
                             Authorization: 'Bearer ' + this.$store.state.user.token
                         },

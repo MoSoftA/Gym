@@ -59,8 +59,8 @@
                 users.forEach(user => {
                     for (let key in user) {
                         if (user[key] == id) {
-                            Object.assign(this.$store.state.user, user);
-                            console.log(user);
+                            this.$store.commit('target_user', user);
+                            console.log(this.$store.state.AdminPanel.userEdit);
                         }
                     }
                 });

@@ -99,6 +99,8 @@
                     console.log(res);
                 }).catch(err => console.log(err))
             }
+        }, mounted(){
+            console.log(this.$store.state.AdminPanel.userEdit)
         }
     }
 
