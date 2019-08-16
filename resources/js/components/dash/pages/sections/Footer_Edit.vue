@@ -53,12 +53,6 @@
     margin-top: 0;
 }
 
-.inline{
-    div{
-        margin-right: 10px;
-        display: inline-block
-    }
-}
 </style>
 
 <script>

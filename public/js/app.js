@@ -2581,10 +2581,14 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     sendArticle: function sendArticle() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addArticle", {
-        article: this.article
-      }, {
+      var art = new FormData();
+      art.append('title', this.article.title);
+      art.append('body', this.article.body);
+      art.append('info', this.article.info);
+      art.append('img', this.article.img);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addArticle", art, {
         headers: {
+          'Content-Type': 'multipart/form-data',
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
@@ -2966,12 +2970,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3258,6 +3256,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3293,7 +3297,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     add: function add(index) {
       console.log(index);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/addExerciese', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put('api/addExerciese', {
         day: 'Saturday',
         id: 3,
         lists: ['Some thing98', 'Some thing15', 'Some thing1']
@@ -3310,7 +3314,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/1", {
+    console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
       headers: {
         Accept: 'application/json',
         Authorization: 'Bearer ' + this.$store.state.user.token
@@ -3523,8 +3528,9 @@ __webpack_require__.r(__webpack_exports__);
       users.forEach(function (user) {
         for (var key in user) {
           if (user[key] == id) {
-            Object.assign(_this.$store.state.user, user);
-            console.log(user);
+            _this.$store.commit('target_user', user);
+
+            console.log(_this.$store.state.AdminPanel.userEdit);
           }
         }
       });
@@ -4172,7 +4178,7 @@ exports.push([module.i, ".card {\n  min-width: 100%;\n}\ntextarea {\n  direction
 
 exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".input-group[data-v-16e01c4c] {\n  margin-top: 0;\n}\n.inline div[data-v-16e01c4c] {\n  margin-right: 10px;\n  display: inline-block;\n}", ""]);
+exports.push([module.i, ".input-group[data-v-16e01c4c] {\n  margin-top: 0;\n}", ""]);
 
 
 /***/ }),
@@ -4200,7 +4206,7 @@ exports.push([module.i, ".input-group[data-v-49c21c3b] {\n  margin-top: 0;\n}\n.
 
 exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".buttons[data-v-51c9d3ac] {\n  margin-bottom: 20px;\n}\n.day[data-v-51c9d3ac] {\n  background-color: #fff;\n  padding: 10px;\n  border-radius: 20px;\n  margin-right: 10px;\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);\n}\n.day ul[data-v-51c9d3ac] {\n  padding: 0;\n}\n.day ul li[data-v-51c9d3ac] {\n  padding: 10px;\n  transition: all 0.4s ease;\n}\n.day ul li[data-v-51c9d3ac]:hover {\n  background-color: tomato;\n}\n.day ul li .buttonss[data-v-51c9d3ac] {\n  float: right;\n}\n.day ul li .buttonss[data-v-51c9d3ac]::after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.inputs[data-v-51c9d3ac] {\n  margin-top: 20px;\n}", ""]);
+exports.push([module.i, "button[data-v-51c9d3ac] {\n  float: right;\n}\nbutton[data-v-51c9d3ac]::after {\n  content: \" \";\n  display: block;\n  clear: both;\n}\n.day[data-v-51c9d3ac] {\n  background-color: #fff;\n  padding: 10px;\n  border-radius: 20px;\n  margin-right: 10px;\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);\n}\n.day ul[data-v-51c9d3ac] {\n  padding: 0;\n}\n.day ul li[data-v-51c9d3ac] {\n  padding: 10px;\n  transition: all 0.4s ease;\n}\n.day ul li[data-v-51c9d3ac]:hover {\n  background-color: tomato;\n}\n.day ul li .buttonss[data-v-51c9d3ac] {\n  float: right;\n}\n.day ul li .buttonss[data-v-51c9d3ac]::after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.inputs[data-v-51c9d3ac] {\n  margin-top: 20px;\n}", ""]);
 
 
 /***/ }),
@@ -28296,7 +28302,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         }
       }
     },
-    currentPage: 'dashboard',
+    currentPage: 'tasks',
     // Start Admin Panel
     AdminPanel: {
       userEdit: {
@@ -28346,6 +28352,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     got_articles: function got_articles(state, payload) {
       state.articles = payload;
+    },
+    // Get The targeted user
+    target_user: function target_user(state, payload) {
+      Object.assign(state.AdminPanel.userEdit, payload);
     }
   },
   getters: {

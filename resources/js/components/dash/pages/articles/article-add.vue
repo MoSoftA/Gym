@@ -2,7 +2,7 @@
     <div class="row" @click="get_body">
         <div class="card">
             <div class="card-body">
-
+                
                 <label for="articleName">Article title</label>
                 <div class="input-group">
                     <input v-model="article.title" type="text" class="form-control" placeholder="Article title">
@@ -76,10 +76,15 @@
 
             },
             sendArticle() {
-                Axios.post(`api/addArticle`, {
-                        article: this.article
-                    }, {
+                let art = new FormData();
+                art.append('title', this.article.title);
+                art.append('body', this.article.body);
+                art.append('info', this.article.info);
+                art.append('img', this.article.img) 
+
+                Axios.post(`api/addArticle`, art , {
                         headers: {
+                            'Content-Type': 'multipart/form-data',
                             Accept: 'application/json',
                             Authorization: 'Bearer ' + this.$store.state.user.token
                         },

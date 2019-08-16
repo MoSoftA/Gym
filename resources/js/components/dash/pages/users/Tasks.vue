@@ -43,8 +43,14 @@
 
 
 <style lang="scss" scoped>
-.buttons{
-    margin-bottom: 20px;
+button{
+    float: right;
+
+    &::after{
+        content: ' ';
+        display: block;
+        clear: both
+    }
 }
 
     .day{
@@ -112,7 +118,7 @@ export default {
     methods:{
         add(index){
             console.log(index);
-            Axios.post('api/addExerciese', {
+            Axios.put('api/addExerciese', {
                 day: 'Saturday',
                 id: 3,
                 lists: ['Some thing98','Some thing15','Some thing1']
@@ -126,7 +132,9 @@ export default {
         },
     },
     mounted(){
-        Axios.get(`api/exerciese/1`, {
+        console.log('targted user id',this.$store.state.AdminPanel.userEdit[0]);
+
+        Axios.get(`api/exerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
             headers:{
                  Accept: 'application/json',
                  Authorization: 'Bearer '+ this.$store.state.user.token,

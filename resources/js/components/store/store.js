@@ -32,7 +32,7 @@ export const store = new Vuex.Store({
             }
         },
         
-        currentPage: 'dashboard',
+        currentPage: 'tasks',
         // Start Admin Panel
         AdminPanel: {
             userEdit: {
@@ -73,6 +73,10 @@ export const store = new Vuex.Store({
         },
         got_articles: (state, payload) => {
             state.articles = payload
+        },
+        // Get The targeted user
+        target_user(state, payload){
+            Object.assign(state.AdminPanel.userEdit, payload)
         }
     },
     getters: {
