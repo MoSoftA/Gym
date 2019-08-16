@@ -10,7 +10,7 @@
 
                 <label for="articleimage">Article image</label>
                 <div class="input-group">
-                    <input type="file" id="img" accept="image/*" @change="get_image($event)">
+                    <input type="file" id="img" accept="image/*" name="img" @change="get_image($event)">
                 </div>
 
                 <label for="articleinfo">Article Info</label>
