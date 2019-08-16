@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\ApiResponse;
 use App\Http\Requests\ApiLoginRequest;
+use App\Http\Requests\ApiUpdateUserRequest;
 use App\Http\Resources\UserResource;
+use Illuminate\Validation\Rule;
 
 
 class UserController extends Controller
@@ -18,7 +20,6 @@ class UserController extends Controller
     public function all(){
         return $this->ApiResponse(200,"success", UserResource::collection(User::all()));
     }
-
     public function get(Request $request){
         $user = User::find($request->id);
         if ($user) {
@@ -27,6 +28,34 @@ class UserController extends Controller
         return $this->ApiResponse(404,"not found");
     }
     
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ApiUpdateUserRequest $request, $id)
+    {
+
+        $this->validate($request, [
+            'email' => Rule::unique('users')->ignore($id),
+            
+        ], [], []);
+        User::find($id)->update([
+            "name"=> $request->name,
+            "email"=> $request->email,
+            "password"=> $request->password,
+            'start'=> $request->start,
+            'end'=> $request->end,
+           'admin' => $request->admin,
+            'updated_at'=> Now()
+            
+        ]);
+         return $this->ApiResponse(200,"success");
+      
+     
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -35,8 +64,8 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        User::find($request-> id)->delete();
-        return back();
+        User::find($request->id)->delete();
+       return $this->ApiResponse(200,"success");
     }
 
 }

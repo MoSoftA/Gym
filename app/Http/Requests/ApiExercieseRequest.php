@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ArticleRequest extends FormRequest
+class ApiExercieseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,22 +27,19 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => "required",
-            'info' => 'required',
-            'img' => 'image',
-            'body' => 'required'
+           "day"  => "required",
+           "lists"  => "required",
+           'user_id' => "required"
         ];
     }
 
-       public function messages(){
+    public function messages(){
         return [
-            "title.required" => "عنوان المقال مطلوب"  ,
-            "img.image" => "مخصص للصور فقط",
-            "info.required"  => "من فضلك ضع نبذة مختصرة عن المقال",
-            "body.required"  => "برجاء وضع محتوي المقال "
+           "day.required"  => "حقل اليوم مطلوب",
+           "lists.required"  => "من فضلك ضع التمارين ",
+           'user_id.required' => "يجب تحديد المستخدم"
         ];
     }
-
 
     public function failedValidation(Validator $validator)
     {

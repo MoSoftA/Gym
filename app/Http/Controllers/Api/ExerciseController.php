@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponse;
 use App\Http\Resources\ArticleResource;
+use App\Http\Requests\ApiExercieseRequest;
 use App\Exercise;
 	  
 class ExerciseController extends Controller
@@ -18,7 +19,8 @@ class ExerciseController extends Controller
      */
     public function index($id)
     {
-        $exercises = Exercise::where('user_id', $id)->first();
+
+        $exercises = Exercise::where('user_id', $id)->get();
         return $this->ApiResponse(200, 'success',  $exercises);
     }
 
@@ -29,15 +31,14 @@ class ExerciseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApiExercieseRequest $request)
     {
        Exercise::create([
             'day' =>  $request->day,
-            'exercise' => $request->lists,
-            'user_id' => $request->id,
+            'exercise' => json_encode($request->lists),
+            'user_id' => $request->user_id,
        ]); 
-
-       return back();
+       return $this->ApiResponse(200,"success");
     }
 
     /**
@@ -47,16 +48,14 @@ class ExerciseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApiExercieseRequest $request, $id)
     {
-    
         Exercise::find($id)->update([
           	'day' =>  $request->day,
-            'exercise' => $request->lists,
+            'exercise' => json_encode($request->lists),
             'user_id' => $request->id,
        ]); 
-
-       return back(); 
+     return $this->ApiResponse(200,"success");
     }
 
     /**
@@ -68,7 +67,7 @@ class ExerciseController extends Controller
     public function destroy($id)
     {
         Exercise::where('user_id', $id)->delete();
-        return back();
+        return $this->ApiResponse(200,"success");
     }
 }
  
