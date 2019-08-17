@@ -27,7 +27,7 @@ class ExerciseRequest extends FormRequest
     public function rules()
     {
         return [
-           "day"  => "required|unique:exercises",
+           "day"  => "required",
            "lists"  => "required",
            'user_id' => "required"
         ];

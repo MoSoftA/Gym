@@ -19,7 +19,7 @@
                     <div class="day mb-2 col-sm-12 col-md-4 col-lg-3" :key="index" v-for="(item, index) in listsa">
                         <h1>{{ item.day }}</h1>
                         <ul class="list-unstyled">
-                            <li :key="itemd" v-for="(itemd) in item.exercise">
+                            <li :key="index" v-for="(itemd,index) in item.exercise">
                                 {{ itemd }}
                                 <button class="btn btn-danger btn-flat ml-4" @click="add(index)">
                                     add
@@ -116,7 +116,7 @@
                 console.log(source)
 
 
-                Axios.post(`api/addExerciese`, source, {
+                Axios.put(`api/editExerciese/${this.$store.state.AdminPanel.userEdit[0]}`, source, {
                     headers: {
                         Accept: 'application/json',
                         Authorization: 'Bearer ' + this.$store.state.user.token,
@@ -137,7 +137,13 @@
                     this.listsa = [];
                     let exercieses = res.data.data;
                     exercieses.forEach(exercisea => {
-                         exercisea.exercise = Array(exercisea.exercise);
+                        if(typeof(exercisea.exercise == 'string')){
+                            exercisea.exercise = Array(exercisea.exercise);
+                        }
+                        else {
+                            this.listsa = [];
+                            this.listsa =  this.listsa
+                        }
                         this.listsa.push(exercisea)
                     });
                     console.log(this.listsa);

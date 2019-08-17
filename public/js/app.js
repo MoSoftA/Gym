@@ -3454,6 +3454,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -3563,7 +3565,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       source.lists.push(this.task);
       console.log(source);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", source, {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
@@ -3588,7 +3590,12 @@ __webpack_require__.r(__webpack_exports__);
       _this.listsa = [];
       var exercieses = res.data.data;
       exercieses.forEach(function (exercisea) {
-        exercisea.exercise = Array(exercisea.exercise);
+        if (_typeof(exercisea.exercise == 'string')) {
+          exercisea.exercise = Array(exercisea.exercise);
+        } else {
+          _this.listsa = [];
+          _this.listsa = _this.listsa;
+        }
 
         _this.listsa.push(exercisea);
       });
@@ -9664,8 +9671,8 @@ var render = function() {
                 _c(
                   "ul",
                   { staticClass: "list-unstyled" },
-                  _vm._l(item.exercise, function(itemd) {
-                    return _c("li", { key: itemd }, [
+                  _vm._l(item.exercise, function(itemd, index) {
+                    return _c("li", { key: index }, [
                       _vm._v(
                         "\n                            " +
                           _vm._s(itemd) +
