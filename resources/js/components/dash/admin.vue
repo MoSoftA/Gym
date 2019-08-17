@@ -63,6 +63,7 @@
 
     import articleAll from './pages/articles/article-all';
     import articleAdd from './pages/articles/article-add';
+    import articleEdit from './pages/articles/article-edit';
 
     import NavEdit from './pages/sections/Navbar_Edit';
     import FooterEdit from './pages/sections/Footer_Edit';
@@ -82,6 +83,7 @@
             tasks,
             articleAdd,
             articleAll,
+            articleEdit,
             NavEdit,
             FooterEdit,
             SlidersEdit,

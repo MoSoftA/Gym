@@ -1,67 +1,64 @@
 <template>
     <div class="box box-info">
         <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Add users</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="form-group col-4">
+                            <label class="font-wieght-bold">User name</label>
+                            <input type="text" class="form-control" v-model.lazy="name" placeholder="User Name">
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label for="inputEmail3" class="font-wieght-bold control-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail3" v-model.lazy="email"
+                                placeholder="Email">
+                        </div>
+
+                        <div class="col-4">
+                            <label for="inputPassword3" class="font-wieght-bold control-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword3" v-model.lazy="password"
+                                placeholder="Password">
+                        </div>
 
 
-            <div class="box-header with-border">
-                <h3 class="box-title">Add User</h3>
+                        <div class="form-group col-4">
+                            <label for="DateStart" class="font-wieght-bold control-label">Date Start</label>
+                            <input type="date" class="form-control" id="DateStart" v-model="date_start"
+                                placeholder="DD/MM/YYY">
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label for="DateEnd" class="font-wieght-bold control-label">Date End</label>
+                            <input type="date" class="form-control" id="DateEnd" v-model="date_end"
+                                placeholder="DD/MM/YYY">
+                        </div>
+                    </div>
+                    
+                        <div class="form-group col-4 mb-3">
+                            <label class="font-wieght-bold control-label" for="inputGroupSelect01">Admin</label>
+                            <br>
+                            <input type="radio" id="one" value="0" v-model="admin">
+                            <label for="one">Yes</label>
+                            <input type="radio" id="two" value="1" v-model="admin">
+                            <label for="two">No</label>
+                        </div>
+
+                    <div class="col-4 my-4">
+                        <button class="btn btn-primary btn-block btn-flat" type="button" @click="register">ADD
+                            USER</button>
+                    </div>
+
+                </div>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal">
-                <div class="box-body">
-
-                    <div class="form-group">
-                        <label class="font-wieght-bold">User name</label>
-                        <input type="text" class="form-control" v-model.lazy="name" placeholder="User Name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputEmail3" class="font-wieght-bold control-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail3" v-model.lazy="email"
-                            placeholder="Email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputPassword3" class="font-wieght-bold control-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword3" v-model.lazy="password"
-                            placeholder="Password">
-                    </div>
-
-                    <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Admin</label>
-                    </div>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose...</option>
-                            <option value="1">yes</option>
-                            <option value="2">No</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="DateStart" class="font-wieght-bold control-label">Date Start</label>
-                        <input type="date" class="form-control" id="DateStart" v-model="date_start"
-                            placeholder="DD/MM/YYY">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="DateEnd" class="font-wieght-bold control-label">Date End</label>
-                        <input type="date" class="form-control" id="DateEnd" v-model="date_end" placeholder="DD/MM/YYY">
-                    </div>
-
-
-
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <button class="btn btn-success" type="button" @click="register">ADD USER</button>
-                </div>
-                <!-- /.box-footer -->
-            </form>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -81,7 +78,8 @@
                 email: '',
                 password: '',
                 date_start: '',
-                date_end: ''
+                date_end: '',
+                admin: 'No'
             }
         },
 
@@ -94,13 +92,14 @@
                         password: this.password,
                         date_start: this.date_start,
                         date_end: this.date_end,
+                        admin: 0
                     })
                     .then(res => {
                         // Todo
-                        if (res.data.code == 200) {
+                        if (res.status == 200) {
                             Swal.fire({
                                 title: 'you add user',
-                                text: null,
+                                text: res.data,
                                 type: 'success',
                                 confirmButtonText: 'Cool!'
                             });
@@ -122,16 +121,3 @@
     }
 
 </script>
-
-
-<style scoped>
-    .form-group , .input-group{
-        max-width: 500px;
-    }
-
-    .box-footer {
-        display: flex;
-        align-items: center
-    }
-
-</style>

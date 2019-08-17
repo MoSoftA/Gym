@@ -7,29 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.4.3.1.css') }}">
+    <link type="text/css" href="{{ asset('css/bootstrap.4.3.1.css') }}">
 
-    <link href="{{ asset('css/googleFont.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/googleFont.css') }}" type="text/css" rel="stylesheet">
 
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet" type="text/css">
 
-    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome.css') }}" type="text/css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/owlCarousel.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/owlCarousel.css') }}" />
 
-    <link rel="stylesheet" href='{{ asset("css/owlCarouselTheme.css") }}'>
+    <link rel="stylesheet" type="text/css" href='{{ asset("css/owlCarouselTheme.css") }}'>
 
     <!-- For Admin panel -->
 
     <!-- IonIcons -->
-    <link rel="stylesheet" href="{{ asset('css/ionicons.css') }}">
+    <link type="text/css" href="{{ asset('css/ionicons.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('Admin/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href=" {{ asset('Admin/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Admin/css/adminlte.min.css') }}">
+    <link rel="stylesheet" type="text/css" href=" {{ asset('Admin/css/dataTables.bootstrap4.min.css') }}">
 
 
     <!-- summernote -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" type="text/css" rel="stylesheet">
     <title>GYM</title>
     <style>
         #app {

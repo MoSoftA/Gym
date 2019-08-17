@@ -101,7 +101,6 @@
                     })
                 })
                 .catch(err => err.message);
-
         }
     }
 

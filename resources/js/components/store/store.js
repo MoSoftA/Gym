@@ -32,7 +32,7 @@ export const store = new Vuex.Store({
             }
         },
         
-        currentPage: 'tasks',
+        currentPage: 'articleAll',
         // Start Admin Panel
         AdminPanel: {
             userEdit: {
@@ -41,6 +41,9 @@ export const store = new Vuex.Store({
                 password: '',
                 date_start: '',
                 date_end: '',
+            },
+            articleEdit: {
+                
             }
         },
         // Start Articles

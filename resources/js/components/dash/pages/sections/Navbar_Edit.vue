@@ -53,16 +53,17 @@
                 </div>
 
                 <div class="col-4 my-4">
-                        <button class="btn btn-primary btn-block btn-flat" @click="assign">Done</button>
+                        <button class="btn btn-primary btn-block btn-flat" >Done</button>
                 </div>
             </div>
         </div>
     </div>
-
+<!-- @click="assign" -->
 
 </template>
 
 <script>
+import Axios from 'axios';
 // import realNav from '../../../blocks/Nav';
     export default {
         data() {
@@ -93,9 +94,29 @@
                 }
             }
         },
-        // mounted(){
-        //     Object.assign(this.navbar, this.$store.state.sections.navbar)
-        // }
+        mounted(){
+            // Axios.get('api/storeNavbar', {
+            //         headers: {
+            //             Accept: 'application/json',
+            //             Authorization: 'Bearer ' + this.$store.state.user.token
+            //         },
+            //     }).then(res => console.log(res)).catch(err => console.log(err));
+
+                Axios.get('api/storeNavbar', {
+                    name: 'لوجو',
+                    background_color: 'blue',
+                    font_color: 'black',
+                    button_background: 'red',
+                    button_font_color: 'white'
+                },{
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token
+                    },
+                 }).then(res => console.log(res)).catch(err => console.log(err))
+
+            // Object.assign(this.navbar, this.$store.state.sections.navbar)
+        }
     }
 
 </script>

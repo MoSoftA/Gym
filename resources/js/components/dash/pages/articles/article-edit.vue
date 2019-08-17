@@ -26,7 +26,7 @@
 
                 <div class="col-4 mt-5">
                     <button type="submit" class="btn btn-primary btn-block btn-flat"
-                        @click="sendArticle">Submit</button>
+                        @click="update">Submit</button>
                 </div>
             </div>
         </div>
@@ -52,10 +52,11 @@
         data() {
             return {
                 article: {
+                    id: this.$store.state.AdminPanel.articleEdit[0],
                     img: '',
-                    title: '',
-                    body: '',
-                    info: '',
+                    title: this.$store.state.AdminPanel.articleEdit[1],
+                    body: this.$store.state.AdminPanel.articleEdit[3],
+                    info: this.$store.state.AdminPanel.articleEdit[2],
                 }
             }
         },
@@ -75,47 +76,37 @@
                 }
 
             },
-            sendArticle() {
-                let art = new FormData();
-                art.append('title', this.article.title);
-                art.append('body', this.article.body);
-                art.append('info', this.article.info);
-                art.append('img', this.article.img) 
+            update() {
 
-                Axios.post(`api/addArticle`, art , {
+
+                Axios.put(`api/editArticle/${this.id}`, this.article , {
                         headers: {
-                            'Content-Type': 'multipart/form-data',
                             Accept: 'application/json',
                             Authorization: 'Bearer ' + this.$store.state.user.token
                         },
 
                     })
-                    .then(res => {
-                        Swal.fire({
-                                title: 'You add article',
-                                text: res.data.data,
+                    .then(res => Swal.fire({
+                                title: 'you add user',
+                                text: res.data,
                                 type: 'success',
                                 confirmButtonText: 'Cool!'
-                            });
-                    }).catch(err => 
-                                Swal.fire({
-                                title: 'Faild',
-                                text: err.message,
-                                type: 'error',
-                                confirmButtonText: 'Cool!'
-                            }))
+                            })
+                            ).catch(err => err.message);
             },
 
         },
         mounted() {
-            // Summernote
-            $('.textarea').summernote({
+            console.log('ok', this.$store.state.AdminPanel.articleEdit);
+
+            $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
                 popover: {
                     image: [],
                     link: [],
                     air: []
                 }
-            })
+            });
+
         }
     }
 
