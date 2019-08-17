@@ -33,7 +33,7 @@ Route::group(["namespace"=>"Api"], function (){
         // site 
        
     Route::name('storeNavbar')->post('storeNavbar', 'SiteController@storeNavbar');
-    Route::name('storeSliderr')->post('storeSlider', 'SiteController@storeSlider');
+    Route::name('storeSlider')->post('storeSlider', 'SiteController@storeSlider');
     // articles
     Route::name('addArticle')->post('addArticle', 'ArticleController@store');
     Route::name('editArticle')->put('editArticle/{id}', 'ArticleController@update');

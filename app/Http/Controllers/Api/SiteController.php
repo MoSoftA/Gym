@@ -60,20 +60,105 @@ class SiteController extends Controller
 
    public function storeSlider(Request  $request)
    {
-	   	if($request->hasFile('image'))
+	   	if($request->hasFile('img'))
         {
-         $this->validate($request,['image'=>'image'],[],[]);
-          $img = $request->file('image');
+         $this->validate($request,['img'=>'image'],[],[]);
+          $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
           $url = $img->move(public_path('uploads/slider'), $imgName); 
         
-        }else{$imgName = NULL;}
+        }else{$url = null;}
 		  	DB::table('sliders')->Insert([
-	   		'image' =>'uploads/slider/'.$imgName,
+	   		'image' => $url,
 	   		'text' => $request->text
 		]);
    	 return $this->ApiResponse(200,"success");
    }
+
+   public function getFooter()
+   {
+   		$footer = DB::table('footer')->get();
+
+	   	if($footer){
+	   	 return $this->ApiResponse(200,"success", $footer);
+	   }	
+   }
+
+
+    public function storeFooter(Request  $request)
+   {
+	   	$footer = DB::table('footer')->first();
+	   	if(!$footer){
+		   	DB::table('footer')->Insert([
+		   		'we' => $request->we,
+		   		'info' => $request->info,
+		   		'address' => $request->address,
+		   		'Phone' => $request->Phone,
+		   		'fax' => $request->fax
+		   		'facebook' => $request->facebook
+		   		'google' => $request->google
+		   		'linkedIn' => $request->linkedIn
+		   		'twitter' => $request->twitter
+			]);
+
+		}else{
+		   	DB::table('navbar')->update([
+	   			'we' => $request->we,
+		   		'info' => $request->info,
+		   		'address' => $request->address,
+		   		'Phone' => $request->Phone,
+		   		'fax' => $request->fax
+		   		'facebook' => $request->facebook
+		   		'google' => $request->google
+		   		'linkedIn' => $request->linkedIn
+		   		'twitter' => $request->twitter
+
+	   		]);
+		}
+   	 return $this->ApiResponse(200,"success");
+   }
+
+
+
+   public function getFooter()
+   {
+   		$footer = DB::table('footer')->get();
+
+	   	if($footer){
+	   	 return $this->ApiResponse(200,"success", $footer);
+	   }	
+   }
+
+
+    public function storerAboutUs(Request  $request)
+   {
+   	 	if($request->hasFile('img'))
+        {
+         $this->validate($request,['img'=>'image'],[],[]);
+          $img = $request->file('img');
+          $imgName = Str::random(50).'.'. $img->extension();
+          $url = $img->move(public_path('uploads/aboutUs'), $imgName); 
+        
+        }else{$url = null;}
+
+	   	$about_us = DB::table('about_us')->first();
+	   	if(!$about_us){
+		   	DB::table('$about_us')->Insert([
+		   		'body' => $request->body,
+		   		'image' => $url,
+		   	
+			]);
+
+		}else{
+		   	DB::table('$about_us')->update([
+	   			'body' => $request->body,
+		   		'image' => $url,
+
+	   		]);
+		}
+   	 return $this->ApiResponse(200,"success");
+   }
+
 }
 
 

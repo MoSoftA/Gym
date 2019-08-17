@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ApiExercieseRequest extends FormRequest
+class ExerciseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class ApiExercieseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+       return true;
     }
 
     /**
@@ -27,12 +27,11 @@ class ApiExercieseRequest extends FormRequest
     public function rules()
     {
         return [
-           "day"  => "required|unique:exercise",
+           "day"  => "required|unique:exercises",
            "lists"  => "required",
            'user_id' => "required"
         ];
     }
-
     public function messages(){
         return [
            "day.required"  => "حقل اليوم مطلوب",

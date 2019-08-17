@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponse;
-use App\Http\Resources\ArticleResource;
-use App\Http\Requests\ApiExercieseRequest;
+use App\Http\Requests\ExerciseRequest;
 use App\Exercise;
 	  
 class ExerciseController extends Controller
@@ -31,7 +30,7 @@ class ExerciseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApiExercieseRequest $request)
+    public function store(ExerciseRequest $request)
     {
        Exercise::create([
             'day' =>  $request->day,
@@ -48,7 +47,7 @@ class ExerciseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApiExercieseRequest $request, $id)
+    public function update(ExerciseRequest $request, $id)
     {
         Exercise::find($id)->update([
           	'day' =>  $request->day,
