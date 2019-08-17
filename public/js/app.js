@@ -3726,11 +3726,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
         date_end: this.date_end,
         admin: 0
       }).then(function (res) {
-        // Todo
+        console.log(res); // Todo
+
         if (res.status == 200) {
           Swal.fire({
             title: 'you add user',
-            text: res.data,
+            text: res.data.message,
             type: 'success',
             confirmButtonText: 'Cool!'
           });
@@ -3907,7 +3908,12 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (res) {
       var users = res.data.data;
       users.forEach(function (user) {
-        delete user.admin;
+        if (user.admin == 0) {
+          user.admin = "No";
+        } else {
+          user.admin = "Yes";
+        }
+
         _this3.head = Object.keys(user);
 
         _this3.rows.push(Object.values(user));
@@ -3989,6 +3995,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4000,8 +4013,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
       email: this.$store.state.AdminPanel.userEdit[2],
       password: '',
       id: this.$store.state.AdminPanel.userEdit[0],
-      date_start: this.$store.state.AdminPanel.userEdit[3],
-      date_end: this.$store.state.AdminPanel.userEdit[4]
+      admin: this.$store.state.AdminPanel.userEdit[3],
+      date_start: this.$store.state.AdminPanel.userEdit[4],
+      date_end: this.$store.state.AdminPanel.userEdit[5]
     };
   },
   methods: {
@@ -4011,8 +4025,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
         name: this.name,
         email: this.email,
         password: this.password,
-        date_start: this.date_start,
-        date_end: this.date_end
+        start: this.date_start,
+        end: this.date_end,
+        admin: this.admin
       }, {
         headers: {
           Accept: 'application/json',
@@ -4020,7 +4035,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
         }
       }).then(function (res) {
         // Todo
-        if (res.status == 200) {
+        if (res.data == 'success') {
           Swal.fire({
             title: 'تم تعديل العميل',
             text: res.data,
@@ -9964,24 +9979,6 @@ var render = function() {
             _vm._v(" "),
             _c("br"),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.admin,
-                  expression: "admin"
-                }
-              ],
-              attrs: { type: "radio", id: "one", value: "0" },
-              domProps: { checked: _vm._q(_vm.admin, "0") },
-              on: {
-                change: function($event) {
-                  _vm.admin = "0"
-                }
-              }
-            }),
-            _vm._v(" "),
             _c("label", { attrs: { for: "one" } }, [_vm._v("Yes")]),
             _vm._v(" "),
             _c("input", {
@@ -10002,7 +9999,25 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _c("label", { attrs: { for: "two" } }, [_vm._v("No")])
+            _c("label", { attrs: { for: "two" } }, [_vm._v("No")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.admin,
+                  expression: "admin"
+                }
+              ],
+              attrs: { type: "radio", id: "one", value: "0" },
+              domProps: { checked: _vm._q(_vm.admin, "0") },
+              on: {
+                change: function($event) {
+                  _vm.admin = "0"
+                }
+              }
+            })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-4 my-4" }, [
@@ -10336,7 +10351,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-6" }, [
+            _c("div", { staticClass: "form-group col-4" }, [
               _c(
                 "label",
                 {
@@ -10373,7 +10388,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-6" }, [
+            _c("div", { staticClass: "form-group col-4" }, [
               _c(
                 "label",
                 {
@@ -10408,6 +10423,59 @@ var render = function() {
                   }
                 }
               })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-4 mb-3" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "font-wieght-bold control-label",
+                  attrs: { for: "inputGroupSelect01" }
+                },
+                [_vm._v("Admin")]
+              ),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.admin,
+                    expression: "admin"
+                  }
+                ],
+                attrs: { type: "radio", id: "one", value: "0" },
+                domProps: { checked: _vm._q(_vm.admin, "0") },
+                on: {
+                  change: function($event) {
+                    _vm.admin = "0"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "one" } }, [_vm._v("Yes")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.admin,
+                    expression: "admin"
+                  }
+                ],
+                attrs: { type: "radio", id: "two", value: "1" },
+                domProps: { checked: _vm._q(_vm.admin, "1") },
+                on: {
+                  change: function($event) {
+                    _vm.admin = "1"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "two" } }, [_vm._v("No")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-4 my-4" }, [

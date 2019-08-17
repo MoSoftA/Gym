@@ -44,10 +44,10 @@
                         <div class="form-group col-4 mb-3">
                             <label class="font-wieght-bold control-label" for="inputGroupSelect01">Admin</label>
                             <br>
-                            <input type="radio" id="one" value="0" v-model="admin">
                             <label for="one">Yes</label>
                             <input type="radio" id="two" value="1" v-model="admin">
                             <label for="two">No</label>
+                            <input type="radio" id="one" value="0" v-model="admin">
                         </div>
 
                     <div class="col-4 my-4">
@@ -95,11 +95,12 @@
                         admin: 0
                     })
                     .then(res => {
+                        console.log(res);
                         // Todo
                         if (res.status == 200) {
                             Swal.fire({
                                 title: 'you add user',
-                                text: res.data,
+                                text: res.data.message,
                                 type: 'success',
                                 confirmButtonText: 'Cool!'
                             });

@@ -148,7 +148,11 @@
                 .then(res => {
                     let users = res.data.data;
                     users.forEach(user => {
-                        delete user.admin;
+                        if(user.admin == 0){
+                            user.admin = "No"
+                        }else {
+                            user.admin = "Yes"
+                        }
 
                         this.head = Object.keys(user);
                         this.rows.push(Object.values(user));
