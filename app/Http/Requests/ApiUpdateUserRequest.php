@@ -29,7 +29,6 @@ class ApiUpdateUserRequest extends FormRequest
         return [
            
             "email"     => "email|required",
-            "password"  => "required|min:6",
             "name"      => "required|min:2",
         ];
     }

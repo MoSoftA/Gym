@@ -33,22 +33,20 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {   
-      //return $request->article['img'];
+
     if($request->hasFile('img'))
         {
-         //return $request->img;
+         
           $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
           $url = $img->move(public_path('uploads/articles'), $imgName); 
-           $image = 'uploads/articles/'.$imgName ;
-        }else{ $image = null;}
-
+        }else{ $url = null; }
        Article::create([
             'title' =>  $request->title,
             'shortDescription' => $request->info,
             'longDescription' => $request->body,
             'author' => auth()->user()->id,
-            'image'=> $image,
+            'image'=> $url
        ]); 
 
        return $this->ApiResponse(200,"success");
@@ -68,15 +66,14 @@ class ArticleController extends Controller
             $img = $request->file('img');
             $imgName = Str::random(50).'.'. $img->extension();
             $url = $img->move(public_path('uploads/articles'), $imgName); 
-            $image = 'uploads/articles/'.$imgName ;
-            }else{$image = null;}
+            }else{$url = null;}
        
         Article::find($id)->update([
             'title' =>  $request->title,
             'shortDescription' => $request->info,
             'longDescription' => $request->body,
             'author' => auth()->user()->id,
-            'image'=> $image,
+            'image'=> $url
        ]); 
 
      return $this->ApiResponse(200,"success");

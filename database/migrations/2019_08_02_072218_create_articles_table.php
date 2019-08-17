@@ -16,11 +16,11 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('shortDescription');
-            $table->string('longDescription');
+            $table->string('shortDescription', 255);
+            $table->text('longDescription');
             $table->bigInteger('author')->unsigned();
             $table->foreign('author')->references('id')->on('users');
-            $table->char('image', 100);
+            $table->string('image')->default(null);
             $table->timestamps();
         });
     }

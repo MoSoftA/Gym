@@ -42,13 +42,17 @@ class UserController extends Controller
             'email' => Rule::unique('users')->ignore($id),
             
         ], [], []);
+        if($request->password){
+            $password = $request->password;
+        }else{
+            $password = User::find($id)->first()->passowrd;
+        }
         User::find($id)->update([
             "name"=> $request->name,
             "email"=> $request->email,
-            "password"=> $request->password,
             'start'=> $request->start,
             'end'=> $request->end,
-           'admin' => $request->admin,
+            'admin' => 1,
             'updated_at'=> Now()
             
         ]);

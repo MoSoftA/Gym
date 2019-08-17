@@ -31,7 +31,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-    
+   
     if($request->hasFile('article.img'))
         {
           $img = $request->file('img');
