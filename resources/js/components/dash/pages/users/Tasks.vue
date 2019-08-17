@@ -16,10 +16,10 @@
                 </div> -->
 
                 <div class="row">
-                    <div class="day mb-2 col-sm-12 col-md-4 col-lg-3" :key="index" v-for="(item, index) in listsa" >
+                    <div class="day mb-2 col-sm-12 col-md-4 col-lg-3" :key="index" v-for="(item, index) in listsa">
                         <h1>{{ item.day }}</h1>
                         <ul class="list-unstyled">
-                            <li :key="itemd" v-for="(itemd) in item.lists">
+                            <li :key="itemd" v-for="(itemd) in item.exercise">
                                 {{ itemd }}
                                 <button class="btn btn-danger btn-flat ml-4" @click="add(index)">
                                     add
@@ -27,133 +27,123 @@
                             </li>
                         </ul>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Type your exercise" aria-label="Recipient's username" v-model="n_task" aria-describedby="button-addon2">
+                            <input type="text" class="form-control" placeholder="Type your exercise"
+                                aria-label="Recipient's username" v-model="task" aria-describedby="button-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="add(index, item)">Button</button>
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                                    @click="add(index, item)">Button</button>
                             </div>
                         </div>
                     </div>
-                   
-                </div>
+                    <!-- v-model="n_task"  -->
                 </div>
             </div>
         </div>
+    </div>
 
 </template>
 
 
 <style lang="scss" scoped>
-button{
-    float: right;
 
-    &::after{
-        content: ' ';
-        display: block;
-        clear: both
-    }
-}
 
-    .day{
+    .day {
         background-color: #fff;
         padding: 10px;
         border-radius: 20px;
         margin-right: 10px;
 
-        box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
-        ul{
+        box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+
+        ul {
             padding: 0;
 
-            li{
+            li {
                 padding: 10px;
                 transition: all 0.4s ease;
 
-                &:hover{
+                &:hover {
                     background-color: tomato;
-                }
-
-                .buttonss{
-                    float: right;
-                    
-                    &::after{
-                        content: '';
-                        display: block;
-                        clear: both;
-                    }
                 }
             }
         }
     }
 
-.inputs{
-    margin-top: 20px;
-}
+    .inputs {
+        margin-top: 20px;
+    }
+
 </style>
 
 
 <script>
-import Axios from 'axios';
-export default {
-    
-    data(){
-        return {
-            listsa:[ 
-                {day: "Saturday", lists: ['Some thing98','Some thing15','Some thing1']},
-                {day: "Sunday", lists: ['Some thing98','Some thing15','Some thing2']},
-                {day: "Monday", lists: ['Some thing98','Some thing15','Some thing3']},
-                {day: "Tuesday", lists: ['Some thing98','Some thing15','Some thing4']},
-                {day: "Wednesday", lists: ['Some thing98','Some thing15','Some thing5']},
-                {day: "Thursday", lists: ['Some thing98','Some thing15','Some thing6']},
-            ],
-            n_task: {
-                o: '',
-                t: '',
-                h: '',
-                f: '',
-                v: '',
-                x: '',
-            },
-            one: true,
-            two: false,
-            three: false, 
-            four: false,
-            five: false,
-            six: false,
-        }
-    },
-    computed:{
+    import Axios from 'axios';
+    export default {
 
-    },
-    methods:{
-        
-        add(index, i){
-             
-            i.lists.push(this.n_task);
-            console.log(index, i.lists, i.day);
-            Axios.put(`api/addExerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
-                day: 'Saturday',
-                id: this.$store.state.AdminPanel.userEdit[0],
-                lists: ['Some thing98','Some thing15','Some thing1']
-            },
-            {
-            headers:{
-                 Accept: 'application/json',
-                 Authorization: 'Bearer '+ this.$store.state.user.token,
+        data() {
+            return {
+                listsa: [
+
+                ],
+                addList: {
+                    day: '',
+                    exercieses: [],
+                    user_id: null
+                },
+                task: '',
+                // one: true,
+                // two: false,
+                // three: false, 
+                // four: false,
+                // five: false,
+                // six: false,
             }
-        }).then(res => console.log(res)).catch(err => console.log(err))
         },
-    },
-    mounted(){
-        console.log('targted user id',this.$store.state.AdminPanel.userEdit[0]);
+        computed: {
 
-        Axios.get(`api/exerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
-            headers:{
-                 Accept: 'application/json',
-                 Authorization: 'Bearer '+ this.$store.state.user.token,
-            }
-        })
-        .then(res => console.log(res.data.data))
-        .catch(err => console.log(err)) 
+        },
+        methods: {
 
+            add(index, i) {
+
+                let source = {
+                    day: i.day,
+                    lists: this.listsa.filter(w => w.day == i.day)[0].exercise,
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                };
+
+                source.lists.push(this.task);
+                console.log(source)
+
+
+                Axios.post(`api/addExerciese`, source, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => console.log(res)).catch(err => console.log(err))
+            },
+        },
+        mounted() {
+            console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
+
+            Axios.get(`api/exerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                })
+                .then(res => {
+                    this.listsa = [];
+                    let exercieses = res.data.data;
+                    exercieses.forEach(exercisea => {
+                         exercisea.exercise = Array(exercisea.exercise);
+                        this.listsa.push(exercisea)
+                    });
+                    console.log(this.listsa);
+                })
+                .catch(err => console.log(err))
+        }
     }
-}
+
 </script>

@@ -3532,69 +3532,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      listsa: [{
-        day: "Saturday",
-        lists: ['Some thing98', 'Some thing15', 'Some thing1']
-      }, {
-        day: "Sunday",
-        lists: ['Some thing98', 'Some thing15', 'Some thing2']
-      }, {
-        day: "Monday",
-        lists: ['Some thing98', 'Some thing15', 'Some thing3']
-      }, {
-        day: "Tuesday",
-        lists: ['Some thing98', 'Some thing15', 'Some thing4']
-      }, {
-        day: "Wednesday",
-        lists: ['Some thing98', 'Some thing15', 'Some thing5']
-      }, {
-        day: "Thursday",
-        lists: ['Some thing98', 'Some thing15', 'Some thing6']
-      }],
-      n_task: {
-        o: '',
-        t: '',
-        h: '',
-        f: '',
-        v: '',
-        x: ''
+      listsa: [],
+      addList: {
+        day: '',
+        exercieses: [],
+        user_id: null
       },
-      one: true,
-      two: false,
-      three: false,
-      four: false,
-      five: false,
-      six: false
+      task: '' // one: true,
+      // two: false,
+      // three: false, 
+      // four: false,
+      // five: false,
+      // six: false,
+
     };
   },
   computed: {},
   methods: {
     add: function add(index, i) {
-      i.lists.push(this.n_task);
-      console.log(index, i.lists, i.day);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/addExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
-        day: 'Saturday',
-        id: this.$store.state.AdminPanel.userEdit[0],
-        lists: ['Some thing98', 'Some thing15', 'Some thing1']
-      }, {
+      var source = {
+        day: i.day,
+        lists: this.listsa.filter(function (w) {
+          return w.day == i.day;
+        })[0].exercise,
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      };
+      source.lists.push(this.task);
+      console.log(source);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", source, {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
@@ -3607,6 +3576,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this = this;
+
     console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
       headers: {
@@ -3614,7 +3585,14 @@ __webpack_require__.r(__webpack_exports__);
         Authorization: 'Bearer ' + this.$store.state.user.token
       }
     }).then(function (res) {
-      return console.log(res.data.data);
+      _this.listsa = [];
+      var exercieses = res.data.data;
+      exercieses.forEach(function (exercisea) {
+        exercisea.exercise = Array(exercisea.exercise);
+
+        _this.listsa.push(exercisea);
+      });
+      console.log(_this.listsa);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -4566,7 +4544,7 @@ exports.push([module.i, ".card {\n  min-width: 100%;\n}\ntextarea {\n  direction
 
 exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "button[data-v-51c9d3ac] {\n  float: right;\n}\nbutton[data-v-51c9d3ac]::after {\n  content: \" \";\n  display: block;\n  clear: both;\n}\n.day[data-v-51c9d3ac] {\n  background-color: #fff;\n  padding: 10px;\n  border-radius: 20px;\n  margin-right: 10px;\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);\n}\n.day ul[data-v-51c9d3ac] {\n  padding: 0;\n}\n.day ul li[data-v-51c9d3ac] {\n  padding: 10px;\n  transition: all 0.4s ease;\n}\n.day ul li[data-v-51c9d3ac]:hover {\n  background-color: tomato;\n}\n.day ul li .buttonss[data-v-51c9d3ac] {\n  float: right;\n}\n.day ul li .buttonss[data-v-51c9d3ac]::after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.inputs[data-v-51c9d3ac] {\n  margin-top: 20px;\n}", ""]);
+exports.push([module.i, ".day[data-v-51c9d3ac] {\n  background-color: #fff;\n  padding: 10px;\n  border-radius: 20px;\n  margin-right: 10px;\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);\n}\n.day ul[data-v-51c9d3ac] {\n  padding: 0;\n}\n.day ul li[data-v-51c9d3ac] {\n  padding: 10px;\n  transition: all 0.4s ease;\n}\n.day ul li[data-v-51c9d3ac]:hover {\n  background-color: tomato;\n}\n.inputs[data-v-51c9d3ac] {\n  margin-top: 20px;\n}", ""]);
 
 
 /***/ }),
@@ -9686,7 +9664,7 @@ var render = function() {
                 _c(
                   "ul",
                   { staticClass: "list-unstyled" },
-                  _vm._l(item.lists, function(itemd) {
+                  _vm._l(item.exercise, function(itemd) {
                     return _c("li", { key: itemd }, [
                       _vm._v(
                         "\n                            " +
@@ -9720,8 +9698,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.n_task,
-                        expression: "n_task"
+                        value: _vm.task,
+                        expression: "task"
                       }
                     ],
                     staticClass: "form-control",
@@ -9731,13 +9709,13 @@ var render = function() {
                       "aria-label": "Recipient's username",
                       "aria-describedby": "button-addon2"
                     },
-                    domProps: { value: _vm.n_task },
+                    domProps: { value: _vm.task },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.n_task = $event.target.value
+                        _vm.task = $event.target.value
                       }
                     }
                   }),
