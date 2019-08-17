@@ -44,6 +44,7 @@ Route::group(["namespace"=>"Api"], function (){
     Route::name('addExerciese')->post('addExerciese', 'ExerciseController@store');
     Route::name('editExerciese')->put('editExerciese/{id}', 'ExerciseController@update');
     Route::name('deleteExerciese')->delete('deleteExerciese/{id}', 'ExerciseController@destroy');
+    Route::name('destroryDay')->delete('destroryDay/{id}', 'ExerciseController@destroryDay');
 	
     });
     

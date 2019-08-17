@@ -49,7 +49,10 @@ class ExerciseController extends Controller
      */
     public function update(ExerciseRequest $request, $id)
     {
-        Exercise::find($id)->update([
+        Exercise::where([
+            'user_id' => $id, 
+            'day' => $request->day
+            ])->update([
           	'day' =>  $request->day,
             'exercise' => json_encode($request->lists),
             'user_id' => $request->id,
@@ -57,6 +60,14 @@ class ExerciseController extends Controller
      return $this->ApiResponse(200,"success");
     }
 
+    public function destroryDay($id)
+    {
+         Exercise::where([
+            'user_id' => $id, 
+            'day' => $request->day
+            ])->delete();
+        return $this->ApiResponse(200,"success");
+    }
     /**
      * Remove the specified resource from storage.
      *
