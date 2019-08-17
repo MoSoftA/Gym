@@ -2556,6 +2556,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2571,31 +2572,31 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     get_body: function get_body() {
       console.log($('#some-textarea').val());
-      this.article.body = String($('#some-textarea').val());
+      this.article.body = String($('#some-textarea').summernote('code'));
     },
     get_image: function get_image(e) {
-      var _this = this;
-
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = function (e) {
-        _this.article.img = e.target.result;
-      };
+      // let fileReader = new FileReader();
+      // fileReader.readAsDataURL(e.target.files[0]);
+      // fileReader.onload = (e) => {
+      //     this.article.img = e.target.result;
+      // }
+      this.article.img = e.target.files[0];
     },
     sendArticle: function sendArticle() {
+      console.log(this.article.img);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      };
       var art = new FormData();
       art.append('title', this.article.title);
       art.append('body', this.article.body);
       art.append('info', this.article.info);
       art.append('img', this.article.img);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addArticle", art, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addArticle", art, config).then(function (res) {
         Swal.fire({
           title: 'You add article',
           text: res.data.data,
@@ -2690,6 +2691,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2719,17 +2725,36 @@ __webpack_require__.r(__webpack_exports__);
       this.id = $(e.target).parents('tr').first().children()[0].innerText;
     },
     deleteArticle: function deleteArticle(e) {
+      var _this2 = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("api/deleteArticle/".concat(this.id), {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       }).then(function (res) {
-        return Swal.fire({
+        Swal.fire({
           title: 'Deleted successfully',
           text: null,
           type: 'success',
           confirmButtonText: 'good'
+        });
+        _this2.rows = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/articles', {
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + _this2.$store.state.user.token
+          }
+        }).then(function (res) {
+          var articles = res.data.data;
+          articles.forEach(function (article) {
+            delete article.updated_at;
+            delete article.image;
+
+            _this2.rows.push(Object.values(article));
+          });
+        })["catch"](function (err) {
+          return err.message;
         });
       })["catch"](function (err) {
         return Swal.fire({
@@ -2742,7 +2767,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/articles', {
       headers: {
@@ -2756,9 +2781,9 @@ __webpack_require__.r(__webpack_exports__);
         delete article.updated_at; // delete article.longDescription;
 
         delete article.image;
-        _this2.head = Object.keys(article);
+        _this3.head = Object.keys(article);
 
-        _this2.rows.push(Object.values(article));
+        _this3.rows.push(Object.values(article));
       });
       console.log(res.data.data);
     })["catch"](function (err) {
@@ -2780,7 +2805,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
 //
 //
 //
@@ -2857,25 +2881,36 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     update: function update() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editArticle/".concat(this.id), this.article, {
+      this.$store.commit('target_article', this.article);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editArticle/".concat(this.article.id), this.article, {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       }).then(function (res) {
-        return Swal.fire({
-          title: 'you add user',
-          text: res.data,
-          type: 'success',
-          confirmButtonText: 'Cool!'
-        });
+        if (res.data.message == 'success') {
+          Swal.fire({
+            title: 'you Edited the Article',
+            text: res.data.message,
+            type: 'success',
+            confirmButtonText: 'Cool!'
+          });
+        }
+
+        console.log(res);
       })["catch"](function (err) {
-        return err.message;
+        return Swal.fire({
+          title: 'Failed ',
+          text: err.message,
+          type: 'error',
+          confirmButtonText: 'OK'
+        });
       });
     }
   },
   mounted: function mounted() {
-    console.log('ok', this.$store.state.AdminPanel.articleEdit);
+    console.log('ok', this.$store.state.AdminPanel.articleEdit); // Object.assign(this.article, this.$store.state.AdminPanel.articleEdit)
+
     $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
       popover: {
         image: [],
@@ -3263,7 +3298,7 @@ __webpack_require__.r(__webpack_exports__);
     //             Authorization: 'Bearer ' + this.$store.state.user.token
     //         },
     //     }).then(res => console.log(res)).catch(err => console.log(err));
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/storeNavbar', {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeNav', {
       name: 'لوجو',
       background_color: 'blue',
       font_color: 'black',
@@ -3768,10 +3803,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      id: null,
       head: null,
       rows: []
     };
@@ -3793,23 +3848,56 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.$store.commit('change_current_page', payload);
     },
+    get_id: function get_id(e) {
+      this.id = $(e.target).parents('tr').first().children()[0].innerText;
+    },
     deleteUser: function deleteUser(e) {
+      var _this2 = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/deleteUser", {
-        id: $(e.target).parents('tr').first().children()[0].innerText
+        id: this.id
       }, {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       }).then(function (res) {
+        Swal.fire({
+          title: 'Deleted successfully',
+          text: null,
+          type: 'success',
+          confirmButtonText: 'good'
+        });
+        _this2.rows = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/users', {
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + _this2.$store.state.user.token
+          }
+        }).then(function (res) {
+          var users = res.data.data;
+          users.forEach(function (user) {
+            delete user.admin;
+            _this2.head = Object.keys(user);
+
+            _this2.rows.push(Object.values(user));
+          });
+        })["catch"](function (err) {
+          return err.message;
+        });
         console.log(res);
       })["catch"](function (err) {
-        return err.message;
+        return Swal.fire({
+          title: 'Faild',
+          text: err.message,
+          type: 'error',
+          confirmButtonText: 'good'
+        });
       });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/users', {
       headers: {
@@ -3820,9 +3908,9 @@ __webpack_require__.r(__webpack_exports__);
       var users = res.data.data;
       users.forEach(function (user) {
         delete user.admin;
-        _this2.head = Object.keys(user);
+        _this3.head = Object.keys(user);
 
-        _this2.rows.push(Object.values(user));
+        _this3.rows.push(Object.values(user));
       });
     })["catch"](function (err) {
       return err.message;
@@ -3911,6 +3999,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
       name: this.$store.state.AdminPanel.userEdit[1],
       email: this.$store.state.AdminPanel.userEdit[2],
       password: '',
+      id: this.$store.state.AdminPanel.userEdit[0],
       date_start: this.$store.state.AdminPanel.userEdit[3],
       date_end: this.$store.state.AdminPanel.userEdit[4]
     };
@@ -3918,12 +4007,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
   methods: {
     update_user: function update_user() {
       // Send the request
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/register', {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/editUser/".concat(this.id), {
         name: this.name,
         email: this.email,
         password: this.password,
         date_start: this.date_start,
         date_end: this.date_end
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
       }).then(function (res) {
         // Todo
         if (res.status == 200) {
@@ -3947,7 +4041,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
     }
   },
   mounted: function mounted() {
-    console.log('lol', this.$store.state.AdminPanel.userEdit[1]);
+    console.log('lol', this.$store.state.AdminPanel.userEdit[0]);
   }
 });
 
@@ -10008,10 +10102,14 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-danger",
-                        attrs: { title: "Delete user" },
+                        attrs: {
+                          title: "Delete user",
+                          "data-toggle": "modal",
+                          "data-target": "#exampleModalCenter"
+                        },
                         on: {
                           click: function($event) {
-                            return _vm.deleteUser($event)
+                            return _vm.get_id($event)
                           }
                         }
                       },
@@ -10040,7 +10138,68 @@ var render = function() {
           )
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModalCenter",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("p", { staticClass: "h2" }, [
+                  _vm._v("Are you sure you wanna delete this user?")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-warning btn-flat my-4 mx-auto",
+                    attrs: {
+                      "data-dismiss": "modal",
+                      type: "button",
+                      id: "button-addon2"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteUser($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Just Do It")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-flat my-4 mx-auto",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("cancel")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" })
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -28967,7 +29126,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         }
       }
     },
-    currentPage: 'articleAll',
+    currentPage: 'userAll',
     // Start Admin Panel
     AdminPanel: {
       userEdit: {
@@ -29022,6 +29181,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     // Get The targeted user
     target_user: function target_user(state, payload) {
       Object.assign(state.AdminPanel.userEdit, payload);
+    },
+    // Get The targeted article
+    target_article: function target_article(state, payload) {
+      Object.assign(state.AdminPanel.articleEdit, payload);
     }
   },
   getters: {

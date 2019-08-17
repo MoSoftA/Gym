@@ -69,6 +69,7 @@
                 name: this.$store.state.AdminPanel.userEdit[1],
                 email: this.$store.state.AdminPanel.userEdit[2],
                 password: '',
+                id: this.$store.state.AdminPanel.userEdit[0],
                 date_start: this.$store.state.AdminPanel.userEdit[3],
                 date_end: this.$store.state.AdminPanel.userEdit[4]
             }
@@ -78,12 +79,18 @@
             update_user() {
 
                 // Send the request
-                axios.post('/api/register', {
+                axios.put(`api/editUser/${this.id}`, {
                         name: this.name,
                         email: this.email,
                         password: this.password,
                         date_start: this.date_start,
                         date_end: this.date_end,
+                    },  {
+                        headers: {
+                            Accept: 'application/json',
+                            Authorization: 'Bearer ' + this.$store.state.user.token
+                        },
+
                     })
                     .then(res => {
                         // Todo
@@ -109,7 +116,7 @@
             }
         },
         mounted() {
-            console.log('lol', this.$store.state.AdminPanel.userEdit[1])
+            console.log('lol', this.$store.state.AdminPanel.userEdit[0])
         }
     }
 

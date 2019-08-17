@@ -2,7 +2,7 @@
     <div class="row" @click="get_body">
         <div class="card">
             <div class="card-body">
-                
+
                 <label for="articleName">Article title</label>
                 <div class="input-group">
                     <input v-model="article.title" type="text" class="form-control" placeholder="Article title">
@@ -25,8 +25,7 @@
                     style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
                 <div class="col-4 mt-5">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat"
-                        @click="update">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" @click="update">Submit</button>
                 </div>
             </div>
         </div>
@@ -78,26 +77,38 @@
             },
             update() {
 
+                this.$store.commit('target_article', this.article);
 
-                Axios.put(`api/editArticle/${this.id}`, this.article , {
+                Axios.put(`api/editArticle/${this.article.id}`, this.article, {
                         headers: {
                             Accept: 'application/json',
                             Authorization: 'Bearer ' + this.$store.state.user.token
                         },
 
                     })
-                    .then(res => Swal.fire({
-                                title: 'you add user',
-                                text: res.data,
+                    .then(res => {
+
+                        if (res.data.message == 'success') {
+                            Swal.fire({
+                                title: 'you Edited the Article',
+                                text: res.data.message,
                                 type: 'success',
                                 confirmButtonText: 'Cool!'
                             })
-                            ).catch(err => err.message);
+                        }
+                        console.log(res)
+                    }).catch(err => Swal.fire({
+                        title: 'Failed ',
+                        text: err.message,
+                        type: 'error',
+                        confirmButtonText: 'OK'
+                    }));
             },
 
         },
         mounted() {
             console.log('ok', this.$store.state.AdminPanel.articleEdit);
+            // Object.assign(this.article, this.$store.state.AdminPanel.articleEdit)
 
             $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
                 popover: {

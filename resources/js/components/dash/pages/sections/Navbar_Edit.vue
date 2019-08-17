@@ -102,7 +102,7 @@ import Axios from 'axios';
             //         },
             //     }).then(res => console.log(res)).catch(err => console.log(err));
 
-                Axios.get('api/storeNavbar', {
+                Axios.post('api/storeNav', {
                     name: 'لوجو',
                     background_color: 'blue',
                     font_color: 'black',
