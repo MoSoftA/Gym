@@ -84,38 +84,15 @@ import Axios from 'axios';
         },
         methods: {
             get_image(e) {
-
-                let fileReader = new FileReader();
-
-                fileReader.readAsDataURL(e.target.files[0]);
-
-                fileReader.onload = (e) => {
-                    this.logo.image = e.target.result;
-                }
+                this.navbar.logo.img = e.target.files[0];
             }
         },
         mounted(){
-            // Axios.get('api/storeNavbar', {
-            //         headers: {
-            //             Accept: 'application/json',
-            //             Authorization: 'Bearer ' + this.$store.state.user.token
-            //         },
-            //     }).then(res => console.log(res)).catch(err => console.log(err));
-
-                Axios.post('api/storeNav', {
-                    name: 'لوجو',
-                    background_color: 'blue',
-                    font_color: 'black',
-                    button_background: 'red',
-                    button_font_color: 'white'
-                },{
-                    headers: {
-                        Accept: 'application/json',
-                        Authorization: 'Bearer ' + this.$store.state.user.token
-                    },
-                 }).then(res => console.log(res)).catch(err => console.log(err))
-
-            // Object.assign(this.navbar, this.$store.state.sections.navbar)
+            const config = {
+                    headers: { 'content-type': 'multipart/form-data', Accept: 'application/json',
+                            Authorization: 'Bearer ' + this.$store.state.user.token }
+                }
+            Axios.get('api/getNavbar', config).then(res => console.log(res)).catch(err => console.log(err))
         }
     }
 

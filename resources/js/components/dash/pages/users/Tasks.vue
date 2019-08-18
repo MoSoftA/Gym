@@ -105,7 +105,6 @@
                 };
 
                 source.lists.push(this.D[index]);
-                console.log(source)
 
 
                 Axios.put(`api/editExerciese/${this.$store.state.AdminPanel.userEdit[0]}`, source, {
@@ -151,13 +150,11 @@
                                     "");
                                 exercisea.exercise = exercisea.exercise.split(',');
 
-                                console.log(exercisea.exercise)
                             } else {
                                 this.listsa.push(exercisea.exercise)
                             }
                             this.listsa.push(exercisea)
                         });
-                        console.log(this.listsa);
                     })
                     .catch(err => console.log(err))
 
@@ -167,7 +164,6 @@
             }
         },
         mounted() {
-            // console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
 
             Axios.get(`api/exerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
                     headers: {
@@ -185,13 +181,11 @@
                             exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
                             exercisea.exercise = exercisea.exercise.split(',');
 
-                            console.log(exercisea.exercise)
                         } else {
                             this.listsa.push(exercisea.exercise)
                         }
                         this.listsa.push(exercisea)
                     });
-                    console.log(this.listsa);
                 })
                 .catch(err => console.log(err))
         }

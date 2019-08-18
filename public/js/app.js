@@ -2575,11 +2575,6 @@ __webpack_require__.r(__webpack_exports__);
       this.article.body = String($('#some-textarea').summernote('code'));
     },
     get_image: function get_image(e) {
-      // let fileReader = new FileReader();
-      // fileReader.readAsDataURL(e.target.files[0]);
-      // fileReader.onload = (e) => {
-      //     this.article.img = e.target.result;
-      // }
       this.article.img = e.target.files[0];
     },
     sendArticle: function sendArticle() {
@@ -3281,39 +3276,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     get_image: function get_image(e) {
-      var _this = this;
-
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = function (e) {
-        _this.logo.image = e.target.result;
-      };
+      this.navbar.logo.img = e.target.files[0];
     }
   },
   mounted: function mounted() {
-    // Axios.get('api/storeNavbar', {
-    //         headers: {
-    //             Accept: 'application/json',
-    //             Authorization: 'Bearer ' + this.$store.state.user.token
-    //         },
-    //     }).then(res => console.log(res)).catch(err => console.log(err));
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeNav', {
-      name: 'لوجو',
-      background_color: 'blue',
-      font_color: 'black',
-      button_background: 'red',
-      button_font_color: 'white'
-    }, {
+    var config = {
       headers: {
+        'content-type': 'multipart/form-data',
         Accept: 'application/json',
         Authorization: 'Bearer ' + this.$store.state.user.token
       }
-    }).then(function (res) {
+    };
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getNavbar', config).then(function (res) {
       return console.log(res);
     })["catch"](function (err) {
       return console.log(err);
-    }); // Object.assign(this.navbar, this.$store.state.sections.navbar)
+    });
   }
 });
 
@@ -3557,7 +3535,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         user_id: this.$store.state.AdminPanel.userEdit[0]
       };
       source.lists.push(this.D[index]);
-      console.log(source);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
         headers: {
           Accept: 'application/json',
@@ -3600,14 +3577,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           if (_typeof(exercisea.exercise == 'string')) {
             exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
             exercisea.exercise = exercisea.exercise.split(',');
-            console.log(exercisea.exercise);
           } else {
             _this.listsa.push(exercisea.exercise);
           }
 
           _this.listsa.push(exercisea);
         });
-        console.log(_this.listsa);
       })["catch"](function (err) {
         return console.log(err);
       }))["catch"](function (err) {
@@ -3618,7 +3593,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   mounted: function mounted() {
     var _this2 = this;
 
-    // console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
       headers: {
         Accept: 'application/json',
@@ -3632,14 +3606,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if (_typeof(exercisea.exercise == 'string')) {
           exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
           exercisea.exercise = exercisea.exercise.split(',');
-          console.log(exercisea.exercise);
         } else {
           _this2.listsa.push(exercisea.exercise);
         }
 
         _this2.listsa.push(exercisea);
       });
-      console.log(_this2.listsa);
     })["catch"](function (err) {
       return console.log(err);
     });

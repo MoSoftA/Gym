@@ -67,14 +67,6 @@
             },
             get_image(e) {
 
-                // let fileReader = new FileReader();
-
-                // fileReader.readAsDataURL(e.target.files[0]);
-
-                // fileReader.onload = (e) => {
-                //     this.article.img = e.target.result;
-                // }
-
                 this.article.img = e.target.files[0]
 
             },
