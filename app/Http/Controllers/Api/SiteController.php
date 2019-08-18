@@ -120,12 +120,12 @@ class SiteController extends Controller
 
 
 
-   public function getFooter()
+   public function getAboutUs()
    {
-   		$footer = DB::table('footer')->get();
+   		$about_us = DB::table('about_us')->get();
 
-	   	if($footer){
-	   	 return $this->ApiResponse(200,"success", $footer);
+	   	if($about_us){
+	   	 return $this->ApiResponse(200,"success",$about_us);
 	   }	
    }
 

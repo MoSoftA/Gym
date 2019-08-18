@@ -34,6 +34,8 @@ Route::group(["namespace"=>"Api"], function (){
        
     Route::name('storeNavbar')->post('storeNavbar', 'SiteController@storeNavbar');
     Route::name('storeSlider')->post('storeSlider', 'SiteController@storeSlider');
+    Route::name('storeFooter')->post('storeFooter', 'SiteController@storeFooter');
+    Route::name('storerAboutUs')->post('storerAboutUs', 'SiteController@storerAboutUs');
     // articles
     Route::name('addArticle')->post('addArticle', 'ArticleController@store');
     Route::name('editArticle')->put('editArticle/{id}', 'ArticleController@update');
@@ -48,6 +50,8 @@ Route::group(["namespace"=>"Api"], function (){
 	
     });
     
+    Route::name('getFooter')->get('getFooter', 'SiteController@getFooter');
+    Route::name('getAboutUsr')->get('getAboutUsr', 'SiteController@getAboutUs');
     Route::name('getNavbar')->get('getNavbar', 'SiteController@getNavbar');
     Route::name('getSlider')->get('getSlider', 'SiteController@getSlider');
     Route::name('articles')->get('articles', 'ArticleController@index');
