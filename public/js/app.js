@@ -3532,8 +3532,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3570,10 +3568,55 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       })["catch"](function (err) {
         return console.log(err);
       });
+      this.D[index] = null;
+    },
+    remove: function remove(index, i) {
+      var _this = this;
+
+      var source = {
+        day: i.day,
+        lists: this.listsa.filter(function (w) {
+          return w.day == i.day;
+        })[0].exercise,
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      };
+      i.exercise.splice(index, 1);
+      source.lists = i.exercise;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        _this.listsa = [];
+        var exercieses = res.data.data; // Convert response to array
+
+        exercieses.forEach(function (exercisea) {
+          if (_typeof(exercisea.exercise == 'string')) {
+            exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+            exercisea.exercise = exercisea.exercise.split(',');
+            console.log(exercisea.exercise);
+          } else {
+            _this.listsa.push(exercisea.exercise);
+          }
+
+          _this.listsa.push(exercisea);
+        });
+        console.log(_this.listsa);
+      })["catch"](function (err) {
+        return console.log(err);
+      }))["catch"](function (err) {
+        return console.log(err);
+      });
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     // console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
@@ -3582,7 +3625,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         Authorization: 'Bearer ' + this.$store.state.user.token
       }
     }).then(function (res) {
-      _this.listsa = [];
+      _this2.listsa = [];
       var exercieses = res.data.data; // Convert response to array
 
       exercieses.forEach(function (exercisea) {
@@ -3591,12 +3634,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           exercisea.exercise = exercisea.exercise.split(',');
           console.log(exercisea.exercise);
         } else {
-          _this.listsa.push(exercisea.exercise);
+          _this2.listsa.push(exercisea.exercise);
         }
 
-        _this.listsa.push(exercisea);
+        _this2.listsa.push(exercisea);
       });
-      console.log(_this.listsa);
+      console.log(_this2.listsa);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -9679,7 +9722,7 @@ var render = function() {
                           staticClass: "btn btn-danger btn-flat ml-4",
                           on: {
                             click: function($event) {
-                              return _vm.add(index)
+                              return _vm.remove(index, item)
                             }
                           }
                         },
@@ -9713,6 +9756,21 @@ var render = function() {
                     },
                     domProps: { value: _vm.D[index] },
                     on: {
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.add(index, item)
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
