@@ -94,10 +94,10 @@ class SiteController extends Controller
 		   		'info' => $request->info,
 		   		'address' => $request->address,
 		   		'Phone' => $request->Phone,
-		   		'fax' => $request->fax
-		   		'facebook' => $request->facebook
-		   		'google' => $request->google
-		   		'linkedIn' => $request->linkedIn
+		   		'fax' => $request->fax,
+		   		'facebook' => $request->facebook,
+		   		'google' => $request->google,
+		   		'linkedIn' => $request->linkedIn,
 		   		'twitter' => $request->twitter
 			]);
 
@@ -107,10 +107,10 @@ class SiteController extends Controller
 		   		'info' => $request->info,
 		   		'address' => $request->address,
 		   		'Phone' => $request->Phone,
-		   		'fax' => $request->fax
-		   		'facebook' => $request->facebook
-		   		'google' => $request->google
-		   		'linkedIn' => $request->linkedIn
+		   		'fax' => $request->fax,
+		   		'facebook' => $request->facebook,
+		   		'google' => $request->google,
+		   		'linkedIn' => $request->linkedIn,
 		   		'twitter' => $request->twitter
 
 	   		]);
@@ -120,12 +120,12 @@ class SiteController extends Controller
 
 
 
-   public function getFooter()
+   public function getAboutUs()
    {
-   		$footer = DB::table('footer')->get();
+   		$about_us = DB::table('about_us')->get();
 
-	   	if($footer){
-	   	 return $this->ApiResponse(200,"success", $footer);
+	   	if($about_us){
+	   	 return $this->ApiResponse(200,"success",$about_us);
 	   }	
    }
 
