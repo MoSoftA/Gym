@@ -22,16 +22,16 @@
                             <li :key="index" v-for="(itemd,index) in item.exercise">
                                 {{ itemd }}
                                 <button class="btn btn-danger btn-flat ml-4" @click="add(index)">
-                                    add
+                                    Remove
                                 </button>
                             </li>
                         </ul>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Type your exercise"
-                                aria-label="Recipient's username" v-model="task" aria-describedby="button-addon2">
+                                aria-label="Recipient's username" v-model='D[index]' aria-describedby="button-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                                    @click="add(index, item)">Button</button>
+                                <button class="btn btn-primary btn-flat" type="button" id="button-addon2"
+                                    @click="add(index, item)">Add</button>
                             </div>
                         </div>
                     </div>
@@ -91,12 +91,7 @@
                     user_id: null
                 },
                 task: '',
-                // one: true,
-                // two: false,
-                // three: false, 
-                // four: false,
-                // five: false,
-                // six: false,
+                D:[null,null,null,null,null,null]
             }
         },
         computed: {
@@ -105,14 +100,13 @@
         methods: {
 
             add(index, i) {
-
                 let source = {
                     day: i.day,
                     lists: this.listsa.filter(w => w.day == i.day)[0].exercise,
                     user_id: this.$store.state.AdminPanel.userEdit[0]
                 };
 
-                source.lists.push(this.task);
+                source.lists.push(this.D[index]);
                 console.log(source)
 
 
@@ -125,7 +119,7 @@
             },
         },
         mounted() {
-            console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
+            // console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
 
             Axios.get(`api/exerciese/${this.$store.state.AdminPanel.userEdit[0]}`, {
                     headers: {
@@ -136,17 +130,21 @@
                 .then(res => {
                     this.listsa = [];
                     let exercieses = res.data.data;
+                    // Convert response to array
                     exercieses.forEach(exercisea => {
                         if(typeof(exercisea.exercise == 'string')){
-                            exercisea.exercise = Array(exercisea.exercise);
+
+                            exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                            exercisea.exercise = exercisea.exercise.split(',');
+
+                            console.log(exercisea.exercise )
                         }
                         else {
-                            this.listsa = [];
-                            this.listsa =  this.listsa
+                            this.listsa.push(exercisea.exercise)
                         }
                         this.listsa.push(exercisea)
                     });
-                    console.log(this.listsa);
+                     console.log(this.listsa);
                 })
                 .catch(err => console.log(err))
         }

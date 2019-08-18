@@ -46,8 +46,6 @@
                             id="button-addon2" @click="deleteUser($event)">Just Do It</button>
                         <button type="button" class="btn btn-primary btn-flat my-4 mx-auto" data-dismiss="modal">cancel</button>
                     </div>
-                    <div class="modal-footer">
-                    </div>
                 </div>
             </div>
         </div>

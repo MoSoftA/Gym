@@ -3544,13 +3544,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         exercieses: [],
         user_id: null
       },
-      task: '' // one: true,
-      // two: false,
-      // three: false, 
-      // four: false,
-      // five: false,
-      // six: false,
-
+      task: '',
+      D: [null, null, null, null, null, null]
     };
   },
   computed: {},
@@ -3563,7 +3558,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         })[0].exercise,
         user_id: this.$store.state.AdminPanel.userEdit[0]
       };
-      source.lists.push(this.task);
+      source.lists.push(this.D[index]);
       console.log(source);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
         headers: {
@@ -3580,7 +3575,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   mounted: function mounted() {
     var _this = this;
 
-    console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
+    // console.log('targted user id', this.$store.state.AdminPanel.userEdit[0]);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
       headers: {
         Accept: 'application/json',
@@ -3588,13 +3583,15 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
     }).then(function (res) {
       _this.listsa = [];
-      var exercieses = res.data.data;
+      var exercieses = res.data.data; // Convert response to array
+
       exercieses.forEach(function (exercisea) {
         if (_typeof(exercisea.exercise == 'string')) {
-          exercisea.exercise = Array(exercisea.exercise);
+          exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+          exercisea.exercise = exercisea.exercise.split(',');
+          console.log(exercisea.exercise);
         } else {
-          _this.listsa = [];
-          _this.listsa = _this.listsa;
+          _this.listsa.push(exercisea.exercise);
         }
 
         _this.listsa.push(exercisea);
@@ -3747,8 +3744,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
 //
 //
 //
@@ -9690,7 +9685,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                add\n                            "
+                            "\n                                Remove\n                            "
                           )
                         ]
                       )
@@ -9705,8 +9700,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.task,
-                        expression: "task"
+                        value: _vm.D[index],
+                        expression: "D[index]"
                       }
                     ],
                     staticClass: "form-control",
@@ -9716,13 +9711,13 @@ var render = function() {
                       "aria-label": "Recipient's username",
                       "aria-describedby": "button-addon2"
                     },
-                    domProps: { value: _vm.task },
+                    domProps: { value: _vm.D[index] },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.task = $event.target.value
+                        _vm.$set(_vm.D, index, $event.target.value)
                       }
                     }
                   }),
@@ -9731,7 +9726,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-outline-secondary",
+                        staticClass: "btn btn-primary btn-flat",
                         attrs: { type: "button", id: "button-addon2" },
                         on: {
                           click: function($event) {
@@ -9739,7 +9734,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Button")]
+                      [_vm._v("Add")]
                     )
                   ])
                 ])
@@ -10192,9 +10187,7 @@ var render = function() {
                   },
                   [_vm._v("cancel")]
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" })
+              ])
             ])
           ]
         )

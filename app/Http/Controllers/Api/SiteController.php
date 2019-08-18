@@ -94,10 +94,10 @@ class SiteController extends Controller
 		   		'info' => $request->info,
 		   		'address' => $request->address,
 		   		'Phone' => $request->Phone,
-		   		'fax' => $request->fax
-		   		'facebook' => $request->facebook
-		   		'google' => $request->google
-		   		'linkedIn' => $request->linkedIn
+		   		'fax' => $request->fax,
+		   		'facebook' => $request->facebook,
+		   		'google' => $request->google,
+		   		'linkedIn' => $request->linkedIn,
 		   		'twitter' => $request->twitter
 			]);
 
@@ -107,10 +107,10 @@ class SiteController extends Controller
 		   		'info' => $request->info,
 		   		'address' => $request->address,
 		   		'Phone' => $request->Phone,
-		   		'fax' => $request->fax
-		   		'facebook' => $request->facebook
-		   		'google' => $request->google
-		   		'linkedIn' => $request->linkedIn
+		   		'fax' => $request->fax,
+		   		'facebook' => $request->facebook,
+		   		'google' => $request->google,
+		   		'linkedIn' => $request->linkedIn,
 		   		'twitter' => $request->twitter
 
 	   		]);
