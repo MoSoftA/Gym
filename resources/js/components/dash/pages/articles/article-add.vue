@@ -71,7 +71,6 @@
 
             },
             sendArticle() {
-                console.log(this.article.img)
                 const config = {
                     headers: { 'content-type': 'multipart/form-data', Accept: 'application/json',
                             Authorization: 'Bearer ' + this.$store.state.user.token }

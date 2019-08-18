@@ -41,11 +41,31 @@
                         <div class="input-group">
                             <input type="text" id="fax" class="form-control" v-model="fax" placeholder="Fax">
                         </div>
+
+                        <label for="facebook" class="my-2">Facebook</label>
+                        <div class="input-group">
+                            <input type="text" id="facebook" class="form-control" v-model="facebook" placeholder="Facebook">
+                        </div>
+
+                        <label for="google" class="my-2">Google</label>
+                        <div class="input-group">
+                            <input type="text" id="google" class="form-control" v-model="google" placeholder="Google">
+                        </div>
+
+                        <label for="linkedIn" class="my-2">LinkedIn</label>
+                        <div class="input-group">
+                            <input type="text" id="linkedIn" class="form-control" v-model="linkedIn" placeholder="LinkedIn">
+                        </div>
+
+                        <label for="twitter" class="my-2">Twitter</label>
+                        <div class="input-group">
+                            <input type="text" id="twitter" class="form-control" v-model="twitter" placeholder="Twitter">
+                        </div>
                     </div>
                 </div>
 
                     <div class="col-4 my-4">
-                        <button class="btn btn-primary btn-block btn-flat" @click="assign">Done</button>
+                        <button class="btn btn-primary btn-block btn-flat" @click="send" role="button">Done</button>
                     </div>
             </div>
         </div>
@@ -53,6 +73,7 @@
 </template>
 
 <script>
+import Axios from 'axios';
     export default {
         data() {
             return {
@@ -61,12 +82,36 @@
                 adress: '',
                 email: '',
                 number: '',
-                fax: ''
+                fax: '',
+                facebook: '',
+                google: '',
+                linkedIn: '',
+                twitter: '',
             }
         },
         methods:{
-            assign(){
-                
+            send() {
+                let foot = new FormData();
+                foot.append('we', this.about);
+                foot.append('info', this.info);
+                foot.append('address', this.adress);
+                foot.append('Phone', this.number);
+                foot.append('fax', this.fax);
+                foot.append('info', this.info);
+                foot.append('facebook', this.facebook);
+                foot.append('google', this.google);
+                foot.append('linkedIn', this.linkedIn);
+                foot.append('twitter', this.twitter);
+
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data',
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token
+                    }
+                }
+                Axios.post('api/storeFooter', foot, config).then(res => console.log(res)).catch(err => console.log(
+                    err))
             }
         }
     }

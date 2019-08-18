@@ -2578,7 +2578,6 @@ __webpack_require__.r(__webpack_exports__);
       this.article.img = e.target.files[0];
     },
     sendArticle: function sendArticle() {
-      console.log(this.article.img);
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
@@ -3037,6 +3036,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3062,6 +3063,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3071,18 +3073,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     get_image: function get_image(e) {
-      var _this = this;
-
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = function (e) {
-        _this.image = e.target.result;
-      };
+      this.image = e.target.files[0];
     },
-    get_body: function get_body() {
-      console.log($('#some-textarea').val());
-      this.body = String($('#some-textarea').val());
+    send: function send() {
+      var about = new FormData();
+      about.append('body', String($('#some-textarea').val()));
+      about.append('image', this.image);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storerAboutUs', about, config).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
   },
   mounted: function mounted() {
@@ -3108,6 +3116,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3162,6 +3172,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3170,11 +3201,39 @@ __webpack_require__.r(__webpack_exports__);
       adress: '',
       email: '',
       number: '',
-      fax: ''
+      fax: '',
+      facebook: '',
+      google: '',
+      linkedIn: '',
+      twitter: ''
     };
   },
   methods: {
-    assign: function assign() {}
+    send: function send() {
+      var foot = new FormData();
+      foot.append('we', this.about);
+      foot.append('info', this.info);
+      foot.append('address', this.adress);
+      foot.append('Phone', this.number);
+      foot.append('fax', this.fax);
+      foot.append('info', this.info);
+      foot.append('facebook', this.facebook);
+      foot.append('google', this.google);
+      foot.append('linkedIn', this.linkedIn);
+      foot.append('twitter', this.twitter);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeFooter', foot, config).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
   }
 });
 
@@ -3277,6 +3336,27 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     get_image: function get_image(e) {
       this.navbar.logo.img = e.target.files[0];
+    },
+    send: function send() {
+      var Nav = new FormData();
+      Nav.append('name', this.navbar.logo.text);
+      Nav.append('background_color', this.navbar.color.bg);
+      Nav.append('font_color', this.navbar.color.font);
+      Nav.append('button_background', this.navbar.color.bgc);
+      Nav.append('button_font_color', this.navbar.color.bf);
+      Nav.append('img', this.navbar.logo.img);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeNavbar', Nav, config).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
   },
   mounted: function mounted() {
@@ -3306,6 +3386,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3336,6 +3418,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3345,15 +3428,39 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     get_image: function get_image(e) {
-      var _this = this;
-
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = function (e) {
-        _this.image = e.target.result;
+      this.image = e.target.files[0];
+    },
+    send: function send() {
+      var slider = new FormData();
+      slider.append('text', this.text);
+      slider.append('image', this.image);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
       };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeSlider', slider, config).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
+  },
+  mounted: function mounted() {
+    var config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + this.$store.state.user.token
+      }
+    };
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getSlider', config).then(function (res) {
+      return console.log(res);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
   }
 });
 
@@ -3368,6 +3475,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3394,27 +3503,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      image: '',
-      text: ''
+      body: '',
+      image: ''
     };
   },
   methods: {
     get_image: function get_image(e) {
-      var _this = this;
-
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = function (e) {
-        _this.image = e.target.result;
+      this.image = e.target.files[0];
+    },
+    send: function send() {
+      var about = new FormData();
+      about.append('body', String($('#some-textarea').val()));
+      about.append('image', this.image);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
       };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeTrainer', about, config).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
   }
 });
@@ -8973,7 +9089,8 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-primary btn-block btn-flat",
-                on: { click: _vm.assign }
+                attrs: { role: "button" },
+                on: { click: _vm.send }
               },
               [_vm._v("Done")]
             )
@@ -9213,6 +9330,126 @@ var render = function() {
                   }
                 }
               })
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "my-2", attrs: { for: "facebook" } }, [
+              _vm._v("Facebook")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.facebook,
+                    expression: "facebook"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "facebook",
+                  placeholder: "Facebook"
+                },
+                domProps: { value: _vm.facebook },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.facebook = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "my-2", attrs: { for: "google" } }, [
+              _vm._v("Google")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.google,
+                    expression: "google"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "google", placeholder: "Google" },
+                domProps: { value: _vm.google },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.google = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "my-2", attrs: { for: "linkedIn" } }, [
+              _vm._v("LinkedIn")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.linkedIn,
+                    expression: "linkedIn"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "linkedIn",
+                  placeholder: "LinkedIn"
+                },
+                domProps: { value: _vm.linkedIn },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.linkedIn = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "my-2", attrs: { for: "twitter" } }, [
+              _vm._v("Twitter")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.twitter,
+                    expression: "twitter"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "twitter", placeholder: "Twitter" },
+                domProps: { value: _vm.twitter },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.twitter = $event.target.value
+                  }
+                }
+              })
             ])
           ])
         ]),
@@ -9222,7 +9459,8 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-primary btn-block btn-flat",
-              on: { click: _vm.assign }
+              attrs: { role: "button" },
+              on: { click: _vm.send }
             },
             [_vm._v("Done")]
           )
@@ -9458,23 +9696,22 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "col-4 my-4" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-block btn-flat",
+              attrs: { role: "button" },
+              on: { click: _vm.send }
+            },
+            [_vm._v("Done")]
+          )
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 my-4" }, [
-      _c("button", { staticClass: "btn btn-primary btn-block btn-flat" }, [
-        _vm._v("Done")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -9517,14 +9754,48 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass:
+              "input col-md-4 col-sm-10 mx-sm-auto mx-md-0 col-lg-12 mt-3"
+          },
+          [
+            _c("label", { attrs: { for: "bgc" } }, [_vm._v("Image title")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.text,
+                    expression: "text"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "text", placeholder: "Image title" },
+                domProps: { value: _vm.text },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.text = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "col-4 d-block mx-2 my-4" }, [
           _c(
             "button",
             {
               staticClass: "btn btn-primary btn-block btn-flat",
-              on: { click: _vm.assign }
+              attrs: { role: "button" },
+              on: { click: _vm.send }
             },
             [_vm._v("Done")]
           )
@@ -9533,30 +9804,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "input col-md-4 col-sm-10 mx-sm-auto mx-md-0 col-lg-12 mt-3"
-      },
-      [
-        _c("label", { attrs: { for: "bgc" } }, [_vm._v("Image title")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", id: "text", placeholder: "Image title" }
-          })
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -9580,11 +9828,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body row" }, [
-        _c("p", { staticClass: "h1 mt-5" }, [_vm._v("Trainers Edit")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input col-2 col-sm-12" }, [
-          _c("label", { attrs: { for: "image" } }, [_vm._v("image")]),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("label", { attrs: { for: "image" } }, [_vm._v("Image")]),
           _vm._v(" "),
           _c("div", { staticClass: "input-group" }, [
             _c("input", {
@@ -9596,20 +9842,23 @@ var render = function() {
                 }
               }
             })
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4 my-4" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-block btn-flat",
+                attrs: { role: "button" },
+                on: { click: _vm.send }
+              },
+              [_vm._v("Done")]
+            )
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4 d-block mx-2 my-4" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-block btn-flat",
-              on: { click: _vm.assign }
-            },
-            [_vm._v("Done")]
-          )
         ])
       ])
     ])

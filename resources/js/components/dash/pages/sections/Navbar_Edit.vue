@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="col-4 my-4">
-                        <button class="btn btn-primary btn-block btn-flat" >Done</button>
+                        <button class="btn btn-primary btn-block btn-flat" @click="send" role="button">Done</button>
                 </div>
             </div>
         </div>
@@ -85,6 +85,25 @@ import Axios from 'axios';
         methods: {
             get_image(e) {
                 this.navbar.logo.img = e.target.files[0];
+                
+            },
+            send(){
+                let Nav = new FormData();
+                 Nav.append('name', this.navbar.logo.text);
+                 Nav.append('background_color', this.navbar.color.bg);
+                 Nav.append('font_color', this.navbar.color.font);
+                 Nav.append('button_background', this.navbar.color.bgc);
+                 Nav.append('button_font_color', this.navbar.color.bf);
+                 Nav.append('img', this.navbar.logo.img);
+
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data', 
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token 
+                    }
+                }
+                Axios.post('api/storeNavbar', Nav,config).then(res => console.log(res)).catch(err => console.log(err))
             }
         },
         mounted(){
