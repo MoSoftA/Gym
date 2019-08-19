@@ -34,6 +34,7 @@ Route::group(["namespace"=>"Api"], function (){
        
     Route::name('storeNavbar')->post('storeNavbar', 'SiteController@storeNavbar');
     Route::name('storeSlider')->post('storeSlider', 'SiteController@storeSlider');
+    Route::name('deleteSlider')->delete('deleteSlider/{id}', 'SiteController@deleteSlider');
     Route::name('storeFooter')->post('storeFooter', 'SiteController@storeFooter');
     Route::name('storerAboutUs')->post('storerAboutUs', 'SiteController@storerAboutUs');
     // articles
@@ -42,14 +43,21 @@ Route::group(["namespace"=>"Api"], function (){
     Route::name('deleteArticle')->delete('deleteArticle/{id}', 'ArticleController@destroy');
 
     // exerciese
-    Route::name('exerciese')->get('exerciese/{id}', 'ExerciseController@index');
+    
     Route::name('addExerciese')->post('addExerciese', 'ExerciseController@store');
     Route::name('editExerciese')->put('editExerciese/{id}', 'ExerciseController@update');
     Route::name('deleteExerciese')->delete('deleteExerciese/{id}', 'ExerciseController@destroy');
     Route::name('destroryDay')->delete('destroryDay/{id}', 'ExerciseController@destroryDay');
+
+    // trainers
+     Route::name('storeTrainer')->post('storeTrainer', 'TrainerController@store');
+     Route::name('updateTrainer')->put('updateTrainer', 'TrainerController@update');
+     Route::name('deleteTrainer')->delete('deleteTrainer', 'TrainerController@destroy');
 	
     });
     
+    Route::name('getTrainers')->get('getTainers', 'TrainerController@getTainers');
+    Route::name('exerciese')->get('exerciese/{id}', 'ExerciseController@index');
     Route::name('getFooter')->get('getFooter', 'SiteController@getFooter');
     Route::name('getAboutUsr')->get('getAboutUsr', 'SiteController@getAboutUs');
     Route::name('getNavbar')->get('getNavbar', 'SiteController@getNavbar');

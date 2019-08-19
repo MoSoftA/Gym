@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->text('longDescription');
             $table->bigInteger('author')->unsigned();
             $table->foreign('author')->references('id')->on('users');
-            $table->string('image')->default(null);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

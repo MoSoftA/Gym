@@ -15,15 +15,15 @@ class CreateFooterTable extends Migration
     {
         Schema::create('footer', function (Blueprint $table) {
             $table->bigIncrements('id');
-             $table->string('we')->default(null);
-             $table->string('info')->default(null);
-             $table->string('address')->default(null);
-             $table->string('Phone')->default(null);
-             $table->string('fax')->default(null);
-             $table->string('facebook')->default(null);
-             $table->string('google')->default(null);
-             $table->string('linkedIn')->default(null);
-             $table->string('twitter')->default(null);
+             $table->string('we')->nullable();
+             $table->string('info')->nullable();
+             $table->string('address')->nullable();
+             $table->string('Phone', 20)->nullable();
+             $table->string('fax', 20)->nullable();
+             $table->string('facebook')->nullable();
+             $table->string('google')->nullable();
+             $table->string('linkedIn')->nullable();
+             $table->string('twitter')->nullable();
             $table->timestamps();
         });
     }

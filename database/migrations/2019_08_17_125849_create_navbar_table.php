@@ -14,12 +14,12 @@ class CreateNavbarTable extends Migration
     public function up()
     {
         Schema::create('navbar', function (Blueprint $table) {
-             $table->string('name')->default(null);
-             $table->string('logo')->default(null);
-             $table->string('background_color')->default(null);
-             $table->string('font_color')->default(null);
-             $table->string('button_background')->default(null);
-             $table->string('button_font_color')->default(null);
+             $table->string('name')->nullable();
+             $table->string('logo')->nullable();
+             $table->string('background_color')->nullable();
+             $table->string('font_color')->nullable();
+             $table->string('button_background')->nullable();
+             $table->string('button_font_color')->nullable();
             $table->timestamps();
         });
     }
