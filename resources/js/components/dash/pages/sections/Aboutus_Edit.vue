@@ -53,6 +53,7 @@
             }
         },
         mounted() {
+            Axios.get('api/getAboutUs').then(res => console.log(res)).catch(err => console.log(err))
             // Summernote
             $('.textarea').summernote({
                 popover: {

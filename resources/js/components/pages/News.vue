@@ -69,7 +69,7 @@ import Axios from 'axios';
                 return this.$store.state.articles
             }
         },
-        beforeCreate(){
+        mounted(){
             Axios.get('api/articles',{
                 headers: {
                     Accept: 'application/json',
@@ -80,6 +80,7 @@ import Axios from 'axios';
                 this.articles = res.data.data;
                 this.$store.commit('got_articles', res.data.data);
 
+                console.log(res)
                 console.log(res.data.data[0]);                
             }).catch(err => err.message);
         }

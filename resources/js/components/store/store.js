@@ -19,16 +19,12 @@ export const store = new Vuex.Store({
         },
         sections:{
             navbar: {
-                logo: {
-                    text: '',
-                    img: ''
-                },
-                color: {
-                    bg: '',
-                    bf: '',
-                    font: '',
-                    active: ''
-                }
+                background_color: null,
+                button_background: null,
+                button_font_color: null,
+                font_color: null,
+                name: null,
+                logo: null,
             }
         },
         

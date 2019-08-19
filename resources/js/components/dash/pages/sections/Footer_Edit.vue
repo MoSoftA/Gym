@@ -25,11 +25,6 @@
                             <input type="text" id="adress" class="form-control" v-model="adress" placeholder="Adress">
                         </div>
 
-                        <label for="email" class="my-2">email</label>
-                        <div class="input-group">
-                            <input type="email" id="email" autocomplete="off" class="form-control" v-model="email"
-                                placeholder="email">
-                        </div>
 
                         <label for="number" class="my-2">Phone number</label>
                         <div class="input-group">
@@ -80,7 +75,6 @@ import Axios from 'axios';
                 about: '',
                 info: '',
                 adress: '',
-                email: '',
                 number: '',
                 fax: '',
                 facebook: '',
@@ -113,6 +107,9 @@ import Axios from 'axios';
                 Axios.post('api/storeFooter', foot, config).then(res => console.log(res)).catch(err => console.log(
                     err))
             }
+        },
+        mounted(){
+            Axios.get('api/getFooter').then(res => console.log(res)).catch(err => console.log(err))
         }
     }
 

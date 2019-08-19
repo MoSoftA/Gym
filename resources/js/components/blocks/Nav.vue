@@ -1,7 +1,7 @@
 <template>
     <div id="navbar">
-        <nav class="navbar navbar-expand-lg navbar-dark" :style='{backgroundColor: Navbar.color.bg}'>
-            <div class="container" style="margin: 0"><a class="navbar-brand" href="#">{{ Navbar.logo.text }}</a>
+        <nav class="navbar navbar-expand-lg navbar-dark" :style='{backgroundColor: Navbar.background_color}'>
+            <div class="container" style="margin-top: 0"><a class="navbar-brand" href="#">{{ Navbar.name }}</a>
                 <button class="navbar-toggler" @click="show()"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse justify-content-end d-lg-flex">
                     <button type="button" @click="show()" class="close d-xl-none d-lg-none"
@@ -9,27 +9,27 @@
                     <ul class="navbar-nav">
                         <li class="nav-item ml-3">
                             <router-link to="/" active-class="active" class="nav-link"
-                                :style='{color: Navbar.color.font}' exact>الرئيسية<span class="sr-only">(current)</span>
+                                :style='{color: Navbar.font_color}' exact>الرئيسية<span class="sr-only">(current)</span>
                             </router-link>
                         <li class="nav-item ml-3" v-if="users.loged">
                             <router-link to="/profile" active-class="active" class="nav-link"
-                                :style='{color: Navbar.color.font}' exact>حسابك<span class="sr-only">(current)</span>
+                                :style='{color: Navbar.font_color}' exact>حسابك<span class="sr-only">(current)</span>
                             </router-link>
                         </li>
                         <li class="nav-item ml-3">
-                            <router-link to="/news" class="nav-link" :style='{color: Navbar.color.font}' exact>آخر
+                            <router-link to="/news" class="nav-link" :style='{color: Navbar.font_color}' exact>آخر
                                 الأخبار<span class="sr-only">(current)</span></router-link>
                         </li>
                         <li class="nav-item ml-3" v-if="users.loged && users.admin">
                             <router-link to="/adminpanel" active-class="active" class="nav-link"
-                                :style='{color: Navbar.color.font}' exact>لوحة التحكم<span
+                                :style='{color: Navbar.font_color}' exact>لوحة التحكم<span
                                     class="sr-only">(current)</span></router-link>
                         </li>
                         <li class="nav-item ml-3" v-if="!users.loged">
                             <form class="form-inline my-2 my-lg-0">
                                 <button class="btn btn-secondary rounded-pill border-0 ml-3"
                                     @click="show()"
-                                    :style='{color: Navbar.color.bf, backgroundColor: Navbar.color.bgc}'
+                                    :style='{color: Navbar.button_font_color, backgroundColor: Navbar.button_background}'
                                     data-toggle="modal" data-target="#myModal" type="button">سجل دخول</button>
                             </form>
                         </li>
@@ -147,6 +147,19 @@
                     loged: false,
                 })
             }
+        },
+        mounted(){
+            const config = {
+                    headers: { 'content-type': 'multipart/form-data', Accept: 'application/json',
+                            Authorization: 'Bearer ' + this.$store.state.user.token }
+                }
+            axios.get('api/getNavbar').then(res =>{
+
+                this.$store.commit('Edit_Navbar', res.data.data);
+                console.log(this.$store.state.sections.navbar);
+            }).catch(
+                err => console.log(err)
+            )
         }
     }
 
