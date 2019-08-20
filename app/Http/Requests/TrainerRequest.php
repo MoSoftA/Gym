@@ -31,7 +31,7 @@ class TrainerRequest extends FormRequest
         return [
            'name'=> 'required', 
            'email'=>'email|required|unique:trainers'. $this->route('id'),
-            'image' =>'image|required', 
+            'img' =>'image|required', 
             'info' =>'required',
             'phone' =>'required',
         ];

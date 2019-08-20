@@ -25,6 +25,19 @@ export const store = new Vuex.Store({
                 font_color: null,
                 name: null,
                 logo: null,
+            },
+            footer: {
+                Phone: null,
+                address: null,
+                created_at: null,
+                facebook:null,
+                fax: null,
+                google: null,
+                id: null,
+                info: null,
+                linkedIn: null,
+                twitter:null,
+                we: null,
             }
         },
         
@@ -69,6 +82,9 @@ export const store = new Vuex.Store({
          },
         Edit_Navbar: (state, payload) => {
             Object.assign(state.sections.navbar, payload)
+        },
+        Edit_Footer: (state, payload) => {
+            Object.assign(state.sections.footer, payload)
         },
         got_articles: (state, payload) => {
             state.articles = payload

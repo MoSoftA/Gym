@@ -1934,6 +1934,83 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/blocks/Footer.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/blocks/Footer.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    footer: function footer() {
+      return this.$store.state.sections.footer;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getFooter').then(function (res) {
+      _this.$store.commit('Edit_Footer', res.data.data[0]);
+
+      console.log(_this.footer);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/blocks/Jumbotron.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/blocks/Jumbotron.vue?vue&type=script&lang=js& ***!
@@ -3141,6 +3218,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _blocks_Footer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../blocks/Footer */ "./resources/js/components/blocks/Footer.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3211,33 +3295,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      about: '',
-      info: '',
-      adress: '',
-      number: '',
-      fax: '',
-      facebook: '',
-      google: '',
-      linkedIn: '',
-      twitter: ''
+      footer: {
+        Phone: null,
+        address: null,
+        created_at: null,
+        facebook: null,
+        fax: null,
+        google: null,
+        id: null,
+        info: null,
+        linkedIn: null,
+        twitter: null,
+        we: null
+      }
     };
+  },
+  components: {
+    realFooter: _blocks_Footer__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     send: function send() {
+      var _this = this;
+
       var foot = new FormData();
-      foot.append('we', this.about);
-      foot.append('info', this.info);
-      foot.append('address', this.adress);
-      foot.append('Phone', this.number);
-      foot.append('fax', this.fax);
-      foot.append('info', this.info);
-      foot.append('facebook', this.facebook);
-      foot.append('google', this.google);
-      foot.append('linkedIn', this.linkedIn);
-      foot.append('twitter', this.twitter);
+      foot.append('we', this.footer.we);
+      foot.append('info', this.footer.info);
+      foot.append('address', this.footer.address);
+      foot.append('Phone', this.footer.Phone);
+      foot.append('fax', this.footer.fax);
+      foot.append('info', this.footer.info);
+      foot.append('facebook', this.footer.facebook);
+      foot.append('google', this.footer.google);
+      foot.append('linkedIn', this.footer.linkedIn);
+      foot.append('twitter', this.footer.twitter);
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
@@ -3245,16 +3339,29 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeFooter', foot, config).then(function (res) {
-        return console.log(res);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeFooter', foot, config).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getFooter').then(function (res) {
+        _this.$store.commit('Edit_Footer', res.data.data[0]);
+
+        Object.assign(_this.footer, _this.$store.state.sections.footer);
       })["catch"](function (err) {
+        return console.log(err);
+      }))["catch"](function (err) {
         return console.log(err);
       });
     }
   },
   mounted: function mounted() {
+    var _this2 = this;
+
+    var config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + this.$store.state.user.token
+      }
+    };
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getFooter').then(function (res) {
-      return console.log(res);
+      return Object.assign(_this2.footer, res.data.data[0]);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -6946,124 +7053,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("footer", { staticClass: "page-footer" }, [
+    _c("div", { staticClass: "container text-center text-md-right mt-5" }, [
+      _c("div", { staticClass: "row mt-3" }, [
+        _c("div", { staticClass: "col-md-6 col-lg-4 col-xl-3 mx-auto mb-4" }, [
+          _c("h6", { staticClass: "font-weight-bold mb-4" }, [
+            _vm._v("من نحن")
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(" " + _vm._s(_vm.footer.we) + " ")])
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6 col-lg-2 col-xl-2 mx-auto mb-4" }, [
+          _c("h6", { staticClass: "font-weight-bold mb-4" }, [
+            _vm._v("معلومات التواصل")
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(" " + _vm._s(_vm.footer.address) + " ")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "social mx-auto" }, [
+            _c("h6", { staticClass: "font-weight-bold mb-4" }, [
+              _vm._v("مواقع التواصل")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "fb-ic", attrs: { href: _vm.footer.facebook } },
+              [_c("i", { staticClass: "fab fa-facebook-f ml-4 ml-lg-3" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "tw-ic", attrs: { href: _vm.footer.twitter } },
+              [_c("i", { staticClass: "fab fa-twitter ml-4 ml-lg-3" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "gplus-ic", attrs: { href: _vm.footer.google } },
+              [_c("i", { staticClass: "fab fa-google-plus-g ml-4 ml-lg-3" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "li-ic", attrs: { href: _vm.footer.linkedIn } },
+              [_c("i", { staticClass: "fab fa-linkedin-in" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-md-6 pr-md-5 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4"
+          },
+          [
+            _c("h6", { staticClass: "font-weight-bold mb-4" }, [
+              _vm._v("تواصل معنا")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "fas fa-home mr-3" }),
+              _vm._v(" " + _vm._s(_vm.footer.address))
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "fas fa-envelope mr-3" }),
+              _vm._v(" " + _vm._s(_vm.footer.google))
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "fas fa-phone mr-3" }),
+              _vm._v(" " + _vm._s(_vm.footer.Phone))
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "fas fa-print mr-3" }),
+              _vm._v(" " + _vm._s(_vm.footer.fax))
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "page-footer" }, [
-      _c("div", { staticClass: "container text-center text-md-right mt-5" }, [
-        _c("div", { staticClass: "row mt-3" }, [
-          _c(
-            "div",
-            { staticClass: "col-md-6 col-lg-4 col-xl-3 mx-auto mb-4" },
-            [
-              _c("h6", { staticClass: "font-weight-bold mb-4" }, [
-                _vm._v("من نحن")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  " دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد ميني ماجن  يكيوا تيمبور أنكايديديونتي "
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "col-md-6 pr-md-5 col-lg-3 col-xl-2 mx-auto mb-4 font-weight-bold"
-            },
-            [
-              _c("h6", { staticClass: "mb-4 font-weight-bold" }, [
-                _vm._v("أقسام الموقع")
-              ]),
-              _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-                _vm._v("مميزاتنا")
-              ]),
-              _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-                _vm._v("معلومات عن مركزنا")
-              ]),
-              _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-                _vm._v("خدماتنا المستقبلية")
-              ]),
-              _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-                _vm._v("مدربينا الخبراء")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-md-6 col-lg-2 col-xl-2 mx-auto mb-4" },
-            [
-              _c("h6", { staticClass: "font-weight-bold mb-4" }, [
-                _vm._v("معلومات التواصل")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(" 18  شارع المهندسين منية القمح - الزقازيق - مصر")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "social mx-auto" }, [
-                _c("h6", { staticClass: "font-weight-bold mb-4" }, [
-                  _vm._v("مواقع التواصل")
-                ]),
-                _c("a", { staticClass: "fb-ic" }, [
-                  _c("i", { staticClass: "fab fa-facebook-f ml-4 ml-lg-3" })
-                ]),
-                _c("a", { staticClass: "tw-ic" }, [
-                  _c("i", { staticClass: "fab fa-twitter ml-4 ml-lg-3" })
-                ]),
-                _c("a", { staticClass: "gplus-ic" }, [
-                  _c("i", { staticClass: "fab fa-google-plus-g ml-4 ml-lg-3" })
-                ]),
-                _c("a", { staticClass: "li-ic" }, [
-                  _c("i", { staticClass: "fab fa-linkedin-in" })
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "col-md-6 pr-md-5 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4"
-            },
-            [
-              _c("h6", { staticClass: "font-weight-bold mb-4" }, [
-                _vm._v("تواصل معنا")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("i", { staticClass: "fas fa-home mr-3" }),
-                _vm._v(" منية القمح - الزقازيق - مصر")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("i", { staticClass: "fas fa-envelope mr-3" }),
-                _vm._v(" info@example.com")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("i", { staticClass: "fas fa-phone mr-3" }),
-                _vm._v(" +20 115 3297 653")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("i", { staticClass: "fas fa-print mr-3" }),
-                _vm._v(" + 01 234 567 89")
-              ])
-            ]
-          )
+    return _c(
+      "div",
+      {
+        staticClass:
+          "col-md-6 pr-md-5 col-lg-3 col-xl-2 mx-auto mb-4 font-weight-bold"
+      },
+      [
+        _c("h6", { staticClass: "mb-4 font-weight-bold" }, [
+          _vm._v("أقسام الموقع")
+        ]),
+        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+          _vm._v("مميزاتنا")
+        ]),
+        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+          _vm._v("معلومات عن مركزنا")
+        ]),
+        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+          _vm._v("خدماتنا\n                    المستقبلية")
+        ]),
+        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+          _vm._v("مدربينا الخبراء")
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -9225,291 +9330,306 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-            _c("p", { staticClass: "h1" }, [_vm._v("Footer")]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "text" } }, [
-              _vm._v("Who are we")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.about,
-                    expression: "about"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "text", placeholder: "Who are we" },
-                domProps: { value: _vm.about },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("realFooter"),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 col-sm-12" }, [
+              _c("p", { staticClass: "h1" }, [_vm._v("Footer")]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "text" } }, [
+                _vm._v("Who are we")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.we,
+                      expression: "footer.we"
                     }
-                    _vm.about = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "info" } }, [
-              _vm._v("Info")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.info,
-                    expression: "info"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "info", placeholder: "Info" },
-                domProps: { value: _vm.info },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "text",
+                    placeholder: "Who are we"
+                  },
+                  domProps: { value: _vm.footer.we },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "we", $event.target.value)
                     }
-                    _vm.info = $event.target.value
                   }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "h3 mt-3" }, [_vm._v("Contact us")]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "adress" } }, [
-              _vm._v("Adress")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.adress,
-                    expression: "adress"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "adress", placeholder: "Adress" },
-                domProps: { value: _vm.adress },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "info" } }, [
+                _vm._v("Info")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.info,
+                      expression: "footer.info"
                     }
-                    _vm.adress = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "number" } }, [
-              _vm._v("Phone number")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.number,
-                    expression: "number"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "tel",
-                  id: "number",
-                  placeholder: "Phone number"
-                },
-                domProps: { value: _vm.number },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "info", placeholder: "Info" },
+                  domProps: { value: _vm.footer.info },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "info", $event.target.value)
                     }
-                    _vm.number = $event.target.value
                   }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "fax" } }, [
-              _vm._v("Fax")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.fax,
-                    expression: "fax"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "fax", placeholder: "Fax" },
-                domProps: { value: _vm.fax },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                })
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "h3 mt-3" }, [_vm._v("Contact us")]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "adress" } }, [
+                _vm._v("Adress")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.address,
+                      expression: "footer.address"
                     }
-                    _vm.fax = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "facebook" } }, [
-              _vm._v("Facebook")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.facebook,
-                    expression: "facebook"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "facebook",
-                  placeholder: "Facebook"
-                },
-                domProps: { value: _vm.facebook },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "adress", placeholder: "Adress" },
+                  domProps: { value: _vm.footer.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "address", $event.target.value)
                     }
-                    _vm.facebook = $event.target.value
                   }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "google" } }, [
-              _vm._v("Google")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.google,
-                    expression: "google"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "google", placeholder: "Google" },
-                domProps: { value: _vm.google },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "number" } }, [
+                _vm._v("Phone number")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.Phone,
+                      expression: "footer.Phone"
                     }
-                    _vm.google = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "linkedIn" } }, [
-              _vm._v("LinkedIn")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.linkedIn,
-                    expression: "linkedIn"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "linkedIn",
-                  placeholder: "LinkedIn"
-                },
-                domProps: { value: _vm.linkedIn },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "tel",
+                    id: "number",
+                    placeholder: "Phone number"
+                  },
+                  domProps: { value: _vm.footer.Phone },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "Phone", $event.target.value)
                     }
-                    _vm.linkedIn = $event.target.value
                   }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { staticClass: "my-2", attrs: { for: "twitter" } }, [
-              _vm._v("Twitter")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.twitter,
-                    expression: "twitter"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "twitter", placeholder: "Twitter" },
-                domProps: { value: _vm.twitter },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "fax" } }, [
+                _vm._v("Fax")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.fax,
+                      expression: "footer.fax"
                     }
-                    _vm.twitter = $event.target.value
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "fax", placeholder: "Fax" },
+                  domProps: { value: _vm.footer.fax },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "fax", $event.target.value)
+                    }
                   }
-                }
-              })
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "facebook" } }, [
+                _vm._v("Facebook")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.facebook,
+                      expression: "footer.facebook"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "facebook",
+                    placeholder: "Facebook"
+                  },
+                  domProps: { value: _vm.footer.facebook },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "facebook", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "google" } }, [
+                _vm._v("Google")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.google,
+                      expression: "footer.google"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "google", placeholder: "Google" },
+                  domProps: { value: _vm.footer.google },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "google", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "linkedIn" } }, [
+                _vm._v("LinkedIn")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.linkedIn,
+                      expression: "footer.linkedIn"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "linkedIn",
+                    placeholder: "LinkedIn"
+                  },
+                  domProps: { value: _vm.footer.linkedIn },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "linkedIn", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-2", attrs: { for: "twitter" } }, [
+                _vm._v("Twitter")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.twitter,
+                      expression: "footer.twitter"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "twitter",
+                    placeholder: "Twitter"
+                  },
+                  domProps: { value: _vm.footer.twitter },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer, "twitter", $event.target.value)
+                    }
+                  }
+                })
+              ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4 my-4" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-block btn-flat",
+                attrs: { role: "button" },
+                on: { click: _vm.send }
+              },
+              [_vm._v("Done")]
+            )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4 my-4" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-block btn-flat",
-              attrs: { role: "button" },
-              on: { click: _vm.send }
-            },
-            [_vm._v("Done")]
-          )
-        ])
-      ])
+        ],
+        1
+      )
     ])
   ])
 }
@@ -27614,17 +27734,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Footer_vue_vue_type_template_id_b32ac7ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Footer.vue?vue&type=template&id=b32ac7ae&scoped=true& */ "./resources/js/components/blocks/Footer.vue?vue&type=template&id=b32ac7ae&scoped=true&");
-/* harmony import */ var _Footer_vue_vue_type_style_index_0_id_b32ac7ae_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Footer.vue?vue&type=style&index=0&id=b32ac7ae&lang=scss&scoped=true& */ "./resources/js/components/blocks/Footer.vue?vue&type=style&index=0&id=b32ac7ae&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Footer.vue?vue&type=script&lang=js& */ "./resources/js/components/blocks/Footer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Footer_vue_vue_type_style_index_0_id_b32ac7ae_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Footer.vue?vue&type=style&index=0&id=b32ac7ae&lang=scss&scoped=true& */ "./resources/js/components/blocks/Footer.vue?vue&type=style&index=0&id=b32ac7ae&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Footer_vue_vue_type_template_id_b32ac7ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Footer_vue_vue_type_template_id_b32ac7ae_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -27638,6 +27760,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/blocks/Footer.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/blocks/Footer.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/blocks/Footer.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Footer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/blocks/Footer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -29624,6 +29760,19 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         font_color: null,
         name: null,
         logo: null
+      },
+      footer: {
+        Phone: null,
+        address: null,
+        created_at: null,
+        facebook: null,
+        fax: null,
+        google: null,
+        id: null,
+        info: null,
+        linkedIn: null,
+        twitter: null,
+        we: null
       }
     },
     currentPage: 'userAll',
@@ -29674,6 +29823,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     Edit_Navbar: function Edit_Navbar(state, payload) {
       Object.assign(state.sections.navbar, payload);
+    },
+    Edit_Footer: function Edit_Footer(state, payload) {
+      Object.assign(state.sections.footer, payload);
     },
     got_articles: function got_articles(state, payload) {
       state.articles = payload;
