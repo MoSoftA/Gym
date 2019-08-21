@@ -32,9 +32,10 @@ class ExerciseController extends Controller
      */
     public function store(ExerciseRequest $request)
     {
+        return $request->lists;
        Exercise::create([
             'day' =>  $request->day,
-            'exercise' => json_encode($request->lists),
+            'exercise' => $request->lists,
             'user_id' => $request->user_id,
        ]); 
        return $this->ApiResponse(200,"success");
@@ -49,6 +50,7 @@ class ExerciseController extends Controller
      */
     public function update(ExerciseRequest $request, $id)
     {
+    
         Exercise::where([
             'user_id' => $id, 
             'day' => $request->day

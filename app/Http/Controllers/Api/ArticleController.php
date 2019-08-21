@@ -39,7 +39,8 @@ class ArticleController extends Controller
          
           $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
-          $url = $img->move(public_path('uploads/articles'), $imgName); 
+          $img->move(public_path('uploads/articles'), $imgName); 
+          $url = url('uploads/articles/'. $imgName);
         }else{ $url = null; }
        Article::create([
             'title' =>  $request->title,
@@ -65,7 +66,8 @@ class ArticleController extends Controller
         {
             $img = $request->file('img');
             $imgName = Str::random(50).'.'. $img->extension();
-            $url = $img->move(public_path('uploads/articles'), $imgName); 
+             $img->move(public_path('uploads/articles'), $imgName); 
+             $url = url('uploads/articles/'. $imgName);
             }else{$url = null;}
        
         Article::find($id)->update([

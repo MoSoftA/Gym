@@ -32,8 +32,8 @@ class SiteController extends Controller
          $this->validate($request,['img'=>'image'],[],[]);
           $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
-          $url = $img->move(public_path('uploads/navbar'), $imgName); 
-        
+          $img->move(public_path('uploads/navbar'), $imgName); 
+          $url = url('uploads/navbar/'. $imgName);
         }else{$url = null;}
 
 	   	$nav = DB::table('navbar')->first();
@@ -83,7 +83,8 @@ class SiteController extends Controller
          $this->validate($request,['image'=>'image'],[],[]);
           $img = $request->file('image');
           $imgName = Str::random(50).'.'. $img->extension();
-          $url = $img->move(public_path('uploads/slider'), $imgName); 
+          $img->move(public_path('uploads/slider'), $imgName); 
+       	  $url = url('uploads/slider/'. $imgName);
         
         }else{$url = null;}
 		  	DB::table('sliders')->Insert([
@@ -180,8 +181,8 @@ class SiteController extends Controller
          $this->validate($request,['image'=>'image'],[],[]);
           $img = $request->file('image');
           $imgName = Str::random(50).'.'. $img->extension();
-          $url = $img->move(public_path('uploads/aboutUs'), $imgName); 
-        
+          $img->move(public_path('uploads/aboutUs'), $imgName); 
+          $url = url('uploads/aboutus/'. $imgName);
         }else{$url = null;}
 
 	   	$about_us = DB::table('about_us')->first();
