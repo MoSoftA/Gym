@@ -3,24 +3,40 @@
         <div class="carousel slide" id="carouselExampleCaptions" data-ride="carousel">
             <div class="carousel-inner">
                 
-                <div class="carousel-item active" :style="{backgroundImage: 'url('+list[0].image+')' }" >
-                    <div class="carousel-caption d-md-block">
-                        <p class="h1" style="color: black">{{list[0].text}}</p>
-                    </div>
-                </div>
-                <div class="carousel-item" :key="index" v-for="(item, index) in list" :style="{backgroundImage: 'url('+item.image +')' }" >
-                    <div class="carousel-caption d-md-block">
-                        <p class="h1" style="color: black">{{item.text}}</p>
+                 <div class="bd-example">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" :data-slide-to="index" :key="index"
+                                v-for='(slider, index) in list'></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" :style="{backgroundImage: 'url('+list[0].image+')', backgroundPosition: 'center center', } ">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{list[0].text}}</h5>
+                                </div>
+                            </div>
+                            <div class="carousel-item" :key="index" v-for="(item, index) in list.slice(1)" :style="{backgroundImage: 'url('+item.image +')', backgroundPosition: 'center center', }">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{item.text}}</h5>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
                 </div>
 
+
             </div>
-            <div class="container"><a class="carousel-control-prev mx-2 rounded" href="#carouselExampleCaptions"
-                    role="button" data-slide="prev"><span class="carousel-control-prev-icon"
-                        aria-hidden="true"></span><span class="sr-only">Previous</span></a><a
-                    class="carousel-control-next mx-2 rounded" href="#carouselExampleCaptions" role="button"
-                    data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span
-                        class="sr-only">Next</span></a></div>
         </div>
     </div>
 </template>
@@ -54,17 +70,7 @@ import Axios from 'axios';
                 background-position: top center;
                 background-size: cover;
                 background-attachment: fixed;
-
-               img{
-                   position: fixed;
-               }    
-
-                // &:first-child {
-                //     background-image: url('F:\\Gym-Manager\\public\\uploads\\slider\\TXyEw6JtptdSw5Sl3hsoEBulfLCNEboPKA0ufVNb0nyDsoHCdZ.png');
-                // }
-                // &:last-child {
-                //     background-image: url('../../assets/hero_bg_2.jpg');
-                // }
+                
 
                 .carousel-caption {
                     padding: 0;

@@ -97,7 +97,7 @@ class SiteController extends Controller
 
    public function deleteSlider($id)
    {
-   		DB::table('sliders')::find($id)->delete();
+		DB::table('sliders')->where('id', $id)->delete(); 
    		return $this->ApiResponse(200,"success");
    }
 
