@@ -11238,7 +11238,7 @@ var render = function() {
                   _c("div", { staticClass: "card" }, [
                     _c("img", {
                       staticClass: "card-img-top",
-                      attrs: { src: article.img, alt: "Card image cap" }
+                      attrs: { src: article.image, alt: "Card image cap" }
                     }),
                     _vm._v(" "),
                     _c(

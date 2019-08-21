@@ -56,8 +56,9 @@
                 phone: '',
 
             }
-        },
-        methods: {
+            },
+
+            methods: {
             get_image(e) {
                 this.image = e.target.files[0];
             },

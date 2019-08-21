@@ -13,7 +13,7 @@
                 <li class="listItem col-sm-12 col-md-3" :key="article.id" v-for="article in articles">
                     <div class="border-white ">
                         <div class="card">
-                            <img class="card-img-top" :src="article.img" alt="Card image cap">
+                            <img class="card-img-top" :src="article.image" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">{{ article.title }}</h5>
                                 <p class="card-text">{{ article.shortDescription }}</p>
