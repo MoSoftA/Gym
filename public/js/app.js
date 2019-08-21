@@ -1838,6 +1838,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1865,7 +1867,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      list: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    var config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + this.$store.state.user.token
+      }
+    };
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getSlider', config).then(function (res) {
+      _this.list = res.data.data;
+      console.log(res.data.data);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  }
+});
 
 /***/ }),
 
@@ -2001,8 +2027,6 @@ __webpack_require__.r(__webpack_exports__);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getFooter').then(function (res) {
       _this.$store.commit('Edit_Footer', res.data.data[0]);
-
-      console.log(_this.footer);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -2211,8 +2235,6 @@ __webpack_require__.r(__webpack_exports__);
     };
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getNavbar').then(function (res) {
       _this2.$store.commit('Edit_Navbar', res.data.data);
-
-      console.log(_this2.$store.state.sections.navbar);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -2230,6 +2252,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -2292,6 +2318,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     User_tasks_1: function User_tasks_1() {
@@ -2313,7 +2340,39 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.tasks[5];
     }
   },
-  mounted: function mounted() {// Git the links
+  data: function data() {
+    return {
+      listsa: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // Git the links
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.user.id), {
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + this.$store.state.user.token
+      }
+    }).then(function (res) {
+      console.log(res);
+      _this.listsa = [];
+      var exercieses = res.data.data; // Convert response to array
+
+      exercieses.forEach(function (exercisea) {
+        if (_typeof(exercisea.exercise == 'string')) {
+          exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+          exercisea.exercise = exercisea.exercise.split(',');
+        } else {
+          _this.listsa.push(exercisea.exercise);
+        }
+
+        _this.listsa.push(exercisea);
+      });
+      console.log();
+    })["catch"](function (err) {
+      return console.log(err);
+    });
   }
 });
 
@@ -4670,11 +4729,8 @@ exports.push([module.i, ".row[data-v-2655c76f] {\n  text-align: right;\n}\nul[da
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
-// Imports
-var getUrl = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
-var ___CSS_LOADER_URL___0___ = getUrl(__webpack_require__(/*! ../../assets/hero_bg_2.jpg */ "./resources/js/assets/hero_bg_2.jpg"));
 // Module
-exports.push([module.i, ".bd-example .carousel-inner .carousel-item[data-v-fb6b5024] {\n  height: 90vh !important;\n  background-position: top center;\n  background-size: cover;\n  background-attachment: fixed;\n}\n.bd-example .carousel-inner .carousel-item img[data-v-fb6b5024] {\n  position: fixed;\n}\n.bd-example .carousel-inner .carousel-item[data-v-fb6b5024]:first-child {\n  background-image: url(" + ___CSS_LOADER_URL___0___ + ");\n}\n.bd-example .carousel-inner .carousel-item[data-v-fb6b5024]:last-child {\n  background-image: url(" + ___CSS_LOADER_URL___0___ + ");\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption[data-v-fb6b5024] {\n  padding: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  text-align: center !important;\n  transform: translate(-50%, -50%);\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption p[data-v-fb6b5024] {\n  font-weight: bolder;\n  font-size: 80px;\n}\n.bd-example .carousel-control-next[data-v-fb6b5024],\n.bd-example .carousel-control-prev[data-v-fb6b5024] {\n  width: 50px;\n  height: 50px;\n  position: absolute;\n  top: 50%;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.bd-example .carousel-control-next[data-v-fb6b5024]:hover,\n.bd-example .carousel-control-prev[data-v-fb6b5024]:hover {\n  background-color: #000;\n}\n@media (max-width: 576px) {\n.bd-example .carousel-inner .carousel-item .carousel-caption p.h1[data-v-fb6b5024] {\n    font-weight: bolder;\n    font-size: 60px !important;\n}\n}", ""]);
+exports.push([module.i, ".bd-example .carousel-inner .carousel-item[data-v-fb6b5024] {\n  height: 90vh !important;\n  background-position: top center;\n  background-size: cover;\n  background-attachment: fixed;\n}\n.bd-example .carousel-inner .carousel-item img[data-v-fb6b5024] {\n  position: fixed;\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption[data-v-fb6b5024] {\n  padding: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  text-align: center !important;\n  transform: translate(-50%, -50%);\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption p[data-v-fb6b5024] {\n  font-weight: bolder;\n  font-size: 80px;\n}\n.bd-example .carousel-control-next[data-v-fb6b5024],\n.bd-example .carousel-control-prev[data-v-fb6b5024] {\n  width: 50px;\n  height: 50px;\n  position: absolute;\n  top: 50%;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.bd-example .carousel-control-next[data-v-fb6b5024]:hover,\n.bd-example .carousel-control-prev[data-v-fb6b5024]:hover {\n  background-color: #000;\n}\n@media (max-width: 576px) {\n.bd-example .carousel-inner .carousel-item .carousel-caption p.h1[data-v-fb6b5024] {\n    font-weight: bolder;\n    font-size: 60px !important;\n}\n}", ""]);
 
 
 /***/ }),
@@ -6771,73 +6827,103 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "bd-example" }, [
+    _c(
+      "div",
+      {
+        staticClass: "carousel slide",
+        attrs: { id: "carouselExampleCaptions", "data-ride": "carousel" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "carousel-inner" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "carousel-item active",
+                style: { backgroundImage: "url(" + _vm.list[0].image + ")" }
+              },
+              [
+                _c("div", { staticClass: "carousel-caption d-md-block" }, [
+                  _c(
+                    "p",
+                    { staticClass: "h1", staticStyle: { color: "black" } },
+                    [_vm._v(_vm._s(_vm.list[0].text))]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.list, function(item, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass: "carousel-item",
+                  style: { backgroundImage: "url(" + item.image + ")" }
+                },
+                [
+                  _c("div", { staticClass: "carousel-caption d-md-block" }, [
+                    _c(
+                      "p",
+                      { staticClass: "h1", staticStyle: { color: "black" } },
+                      [_vm._v(_vm._s(item.text))]
+                    )
+                  ])
+                ]
+              )
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bd-example" }, [
+    return _c("div", { staticClass: "container" }, [
       _c(
-        "div",
+        "a",
         {
-          staticClass: "carousel slide",
-          attrs: { id: "carouselExampleCaptions", "data-ride": "carousel" }
+          staticClass: "carousel-control-prev mx-2 rounded",
+          attrs: {
+            href: "#carouselExampleCaptions",
+            role: "button",
+            "data-slide": "prev"
+          }
         },
         [
-          _c("div", { staticClass: "carousel-inner" }, [
-            _c("div", { staticClass: "carousel-item active" }, [
-              _c("div", { staticClass: "carousel-caption d-md-block" }, [
-                _c("p", { staticClass: "h1" }, [_vm._v("ابن جسم قوي")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "carousel-item" }, [
-              _c("div", { staticClass: "carousel-caption d-md-block" }, [
-                _c("p", { staticClass: "h1" }, [_vm._v("احصل على جسم لائق")])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "container" }, [
-            _c(
-              "a",
-              {
-                staticClass: "carousel-control-prev mx-2 rounded",
-                attrs: {
-                  href: "#carouselExampleCaptions",
-                  role: "button",
-                  "data-slide": "prev"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "carousel-control-prev-icon",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-              ]
-            ),
-            _c(
-              "a",
-              {
-                staticClass: "carousel-control-next mx-2 rounded",
-                attrs: {
-                  href: "#carouselExampleCaptions",
-                  role: "button",
-                  "data-slide": "next"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "carousel-control-next-icon",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-              ]
-            )
-          ])
+          _c("span", {
+            staticClass: "carousel-control-prev-icon",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+        ]
+      ),
+      _c(
+        "a",
+        {
+          staticClass: "carousel-control-next mx-2 rounded",
+          attrs: {
+            href: "#carouselExampleCaptions",
+            role: "button",
+            "data-slide": "next"
+          }
+        },
+        [
+          _c("span", {
+            staticClass: "carousel-control-next-icon",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
         ]
       )
     ])
@@ -27279,17 +27365,6 @@ module.exports = "/images/about.jpg?96dacecc3de545aac9a414c5e8e9cac3";
 /***/ (function(module, exports) {
 
 module.exports = "/images/hero_bg_1.jpg?fb219c746724e6a087d0fee528cc3598";
-
-/***/ }),
-
-/***/ "./resources/js/assets/hero_bg_2.jpg":
-/*!*******************************************!*\
-  !*** ./resources/js/assets/hero_bg_2.jpg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/hero_bg_2.jpg?ebf6ba93ef1aea8adf100f445967f174";
 
 /***/ }),
 

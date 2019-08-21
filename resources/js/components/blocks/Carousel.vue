@@ -3,17 +3,17 @@
         <div class="carousel slide" id="carouselExampleCaptions" data-ride="carousel">
             <div class="carousel-inner">
                 
-                <div class="carousel-item active">
+                <div class="carousel-item active" :style="{backgroundImage: 'url('+list[0].image+')' }" >
                     <div class="carousel-caption d-md-block">
-                        <p class="h1">ابن جسم قوي</p>
+                        <p class="h1" style="color: black">{{list[0].text}}</p>
                     </div>
                 </div>
-                
-                <div class="carousel-item">
+                <div class="carousel-item" :key="index" v-for="(item, index) in list" :style="{backgroundImage: 'url('+item.image +')' }" >
                     <div class="carousel-caption d-md-block">
-                        <p class="h1">احصل على جسم لائق</p>
+                        <p class="h1" style="color: black">{{item.text}}</p>
                     </div>
                 </div>
+
             </div>
             <div class="container"><a class="carousel-control-prev mx-2 rounded" href="#carouselExampleCaptions"
                     role="button" data-slide="prev"><span class="carousel-control-prev-icon"
@@ -26,8 +26,23 @@
 </template>
 
 <script>
+import Axios from 'axios';
     export default {
-
+        data(){
+            return{
+                list:[]
+            }
+        },
+        mounted(){
+            const config = {
+                    headers: { 'content-type': 'multipart/form-data', Accept: 'application/json',
+                            Authorization: 'Bearer ' + this.$store.state.user.token }
+                }
+            Axios.get('api/getSlider', config).then(res => {
+                this.list = res.data.data;
+                console.log(res.data.data)
+            }).catch(err => console.log(err))
+        }
     }
 
 </script>
@@ -44,12 +59,12 @@
                    position: fixed;
                }    
 
-                &:first-child {
-                    background-image: url('../../assets/hero_bg_2.jpg');
-                }
-                &:last-child {
-                    background-image: url('../../assets/hero_bg_2.jpg');
-                }
+                // &:first-child {
+                //     background-image: url('F:\\Gym-Manager\\public\\uploads\\slider\\TXyEw6JtptdSw5Sl3hsoEBulfLCNEboPKA0ufVNb0nyDsoHCdZ.png');
+                // }
+                // &:last-child {
+                //     background-image: url('../../assets/hero_bg_2.jpg');
+                // }
 
                 .carousel-caption {
                     padding: 0;

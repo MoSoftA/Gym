@@ -156,7 +156,6 @@
             axios.get('api/getNavbar').then(res =>{
 
                 this.$store.commit('Edit_Navbar', res.data.data);
-                console.log(this.$store.state.sections.navbar);
             }).catch(
                 err => console.log(err)
             )

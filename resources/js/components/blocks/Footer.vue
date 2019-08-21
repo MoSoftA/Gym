@@ -55,7 +55,6 @@
                 res => {
 
                     this.$store.commit('Edit_Footer', res.data.data[0])
-                    console.log(this.footer)
                 }
             ).catch(err => console.log(err))
         }

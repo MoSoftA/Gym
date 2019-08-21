@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import Axios from 'axios';
 export default {
     computed:{
         User_tasks_1(){
@@ -82,8 +83,38 @@ export default {
             return this.$store.state.tasks[5]   
         },
     },
+    data(){
+        return{
+            listsa: []
+        }
+    },
     mounted(){
         // Git the links
+         Axios.get(`api/exerciese/${this.$store.state.user.id}`, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                })
+                .then(res => {
+                    console.log(res)
+                    this.listsa = [];
+                    let exercieses = res.data.data;
+                    // Convert response to array
+                    exercieses.forEach(exercisea => {
+                        if (typeof (exercisea.exercise == 'string')) {
+
+                            exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                            exercisea.exercise = exercisea.exercise.split(',');
+
+                        } else {
+                            this.listsa.push(exercisea.exercise)
+                        }
+                        this.listsa.push(exercisea)
+                    });
+                    console.log()
+                })
+                .catch(err => console.log(err))
     }
 }
 </script>
