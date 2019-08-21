@@ -22,7 +22,8 @@ class TrainerController extends Controller
         {
           $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
-          $url = $img->move(public_path('uploads/trainers'), $imgName); 
+          $img->move(public_path('uploads/trainers'), $imgName); 
+             $url = url('uploads/trainers/'. $imgName);
         }
 
         Trainer::create([
@@ -43,7 +44,8 @@ class TrainerController extends Controller
         {
           $img = $request->file('img');
           $imgName = Str::random(50).'.'. $img->extension();
-          $url = $img->move(public_path('uploads/trainers'), $imgName); 
+           $img->move(public_path('uploads/trainers'), $imgName); 
+          $url = url('uploads/trainers/'. $imgName);
         }
 
         Trainer::update([
