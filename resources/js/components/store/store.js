@@ -38,10 +38,11 @@ export const store = new Vuex.Store({
                 linkedIn: null,
                 twitter:null,
                 we: null,
+            
             }
         },
         
-        currentPage: 'userAll',
+        currentPage: 'dashboard',
         // Start Admin Panel
         AdminPanel: {
             userEdit: {
@@ -82,6 +83,9 @@ export const store = new Vuex.Store({
          },
         Edit_Navbar: (state, payload) => {
             Object.assign(state.sections.navbar, payload)
+        },
+        Edit_Slider: (state, payload) => {
+            Object.assign(state.sections.slider, payload)
         },
         Edit_Footer: (state, payload) => {
             Object.assign(state.sections.footer, payload)

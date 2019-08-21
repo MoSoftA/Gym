@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <realNav></realNav>
+                <realNav v-if="preview"></realNav>
                 <p class="h1 mt-5">NAVBAR</p>
 
                 <div class="row">
@@ -51,10 +51,13 @@
                             <input type="color" id="bf" class="form-control" v-model="navbar.button_font_color">
                         </div>
                     </div>
-                </div>
 
-                <div class="col-4 my-4">
+                <div class="col-4 mx-2 my-4">
+                    <button class="btn btn-primary btn-block btn-flat" @click=" preview = !preview" role="button">preview</button>
+                </div>
+                <div class="col-4 mx-2 my-4">
                     <button class="btn btn-primary btn-block btn-flat" @click="send" role="button">Done</button>
+                </div>
                 </div>
             </div>
         </div>
@@ -68,6 +71,7 @@
     export default {
         data() {
             return {
+                preview: false,
                 navbar: {
                     background_color: null,
                     button_background: null,
@@ -106,12 +110,9 @@
                 }
                 Axios.post('api/storeNavbar', Nav, config).then(
                     
-                    Axios.get('api/getNavbar').then(res => {
-                    this.$store.commit('Edit_Navbar', res.data.data);
-                    Object.assign(vm.navbar, vm.$store.state.sections.navbar)    
-                }).catch(
-                    err => console.log(err)
-                )).catch(err => console.log(err))
+                    this.$store.commit('Edit_Navbar', this.navbar)
+                
+                ).catch(err => console.log(err))
             }
         },
         mounted() {

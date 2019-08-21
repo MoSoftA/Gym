@@ -3521,11 +3521,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      preview: false,
       navbar: {
         background_color: null,
         button_background: null,
@@ -3544,8 +3548,6 @@ __webpack_require__.r(__webpack_exports__);
       this.navbar.logo = e.target.files[0];
     },
     send: function send() {
-      var _this = this;
-
       var vm = this;
       var Nav = new FormData();
       Nav.append('name', this.navbar.name);
@@ -3561,19 +3563,13 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeNavbar', Nav, config).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getNavbar').then(function (res) {
-        _this.$store.commit('Edit_Navbar', res.data.data);
-
-        Object.assign(vm.navbar, vm.$store.state.sections.navbar);
-      })["catch"](function (err) {
-        return console.log(err);
-      }))["catch"](function (err) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeNavbar', Nav, config).then(this.$store.commit('Edit_Navbar', this.navbar))["catch"](function (err) {
         return console.log(err);
       });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     var config = {
       headers: {
@@ -3583,7 +3579,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getNavbar').then(function (res) {
-      return Object.assign(_this2.navbar, res.data.data);
+      return Object.assign(_this.navbar, res.data.data);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -3604,8 +3600,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _blocks_Carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../blocks/Carousel */ "./resources/js/components/blocks/Carousel.vue");
-/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
-/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -3682,13 +3676,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       sliders: [],
+      preview: false,
       img: '',
       text: '',
       id: null
@@ -3723,18 +3719,16 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeSlider', slider, config).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getSlider', config).then(function (res) {
-        _this.sliders = res.data.data;
-        console.log(_this.sliders);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeSlider', slider, config).then(function (res) {
+        _this.$store.commit('Edit_Navbar', res.data.data);
       })["catch"](function (err) {
-        return console.log(err);
-      }))["catch"](function (err) {
         return console.log(err);
       });
     },
-    delsete: function delsete() {
+    delsete: function delsete(id) {
       var _this2 = this;
 
+      this.id = id;
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
@@ -4840,7 +4834,7 @@ exports.push([module.i, ".row[data-v-2655c76f] {\n  text-align: right;\n}\nul[da
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".bd-example .carousel-inner .carousel-item[data-v-fb6b5024] {\n  height: 90vh !important;\n  background-position: top center;\n  background-size: cover;\n  background-attachment: fixed;\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption[data-v-fb6b5024] {\n  padding: 0;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  text-align: center !important;\n  transform: translate(-50%, -50%);\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption p[data-v-fb6b5024] {\n  font-weight: bolder;\n  font-size: 80px;\n}\n.bd-example .carousel-control-next[data-v-fb6b5024],\n.bd-example .carousel-control-prev[data-v-fb6b5024] {\n  width: 50px;\n  height: 50px;\n  position: absolute;\n  top: 50%;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.bd-example .carousel-control-next[data-v-fb6b5024]:hover,\n.bd-example .carousel-control-prev[data-v-fb6b5024]:hover {\n  background-color: #000;\n}\n@media (max-width: 576px) {\n.bd-example .carousel-inner .carousel-item .carousel-caption p.h1[data-v-fb6b5024] {\n    font-weight: bolder;\n    font-size: 60px !important;\n}\n}", ""]);
+exports.push([module.i, ".bd-example .carousel-inner .carousel-item[data-v-fb6b5024] {\n  height: 90vh !important;\n  background-position: center center;\n  background-size: cover;\n  background-attachment: fixed;\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption[data-v-fb6b5024] {\n  padding: 0;\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  text-align: center !important;\n  font-size: 30px;\n  transform: translate(-50%, -50%);\n}\n.bd-example .carousel-inner .carousel-item .carousel-caption h5[data-v-fb6b5024] {\n  font-weight: bolder;\n  font-size: 50px;\n}\n.bd-example .carousel-control-next[data-v-fb6b5024],\n.bd-example .carousel-control-prev[data-v-fb6b5024] {\n  width: 50px;\n  height: 50px;\n  position: absolute;\n  top: 50%;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.bd-example .carousel-control-next[data-v-fb6b5024]:hover,\n.bd-example .carousel-control-prev[data-v-fb6b5024]:hover {\n  background-color: #000;\n}\n@media (max-width: 576px) {\n.bd-example .carousel-inner .carousel-item .carousel-caption p.h1[data-v-fb6b5024] {\n    font-weight: bolder;\n    font-size: 60px !important;\n}\n}", ""]);
 
 
 /***/ }),
@@ -9943,7 +9937,7 @@ var render = function() {
         "div",
         { staticClass: "card-body" },
         [
-          _c("realNav"),
+          _vm.preview ? _c("realNav") : _vm._e(),
           _vm._v(" "),
           _c("p", { staticClass: "h1 mt-5" }, [_vm._v("NAVBAR")]),
           _vm._v(" "),
@@ -10158,19 +10152,35 @@ var render = function() {
                   })
                 ])
               ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4 my-4" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block btn-flat",
-                attrs: { role: "button" },
-                on: { click: _vm.send }
-              },
-              [_vm._v("Done")]
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block btn-flat",
+                  attrs: { role: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.preview = !_vm.preview
+                    }
+                  }
+                },
+                [_vm._v("preview")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block btn-flat",
+                  attrs: { role: "button" },
+                  on: { click: _vm.send }
+                },
+                [_vm._v("Done")]
+              )
+            ])
           ])
         ],
         1
@@ -10208,101 +10218,141 @@ var render = function() {
         [
           _c("p", { staticClass: "h1 mt-5" }, [_vm._v("SLider Edit")]),
           _vm._v(" "),
-          _c("div", { staticClass: "bd-example col-12" }, [
-            _c(
-              "div",
-              {
-                staticClass: "carousel slide",
-                attrs: {
-                  id: "carouselExampleCaptions",
-                  "data-ride": "carousel"
-                }
-              },
-              [
-                _c(
-                  "ol",
-                  { staticClass: "carousel-indicators" },
-                  _vm._l(_vm.sliders, function(slider, index) {
-                    return _c("li", {
-                      key: index,
-                      attrs: {
-                        "data-target": "#carouselExampleCaptions",
-                        "data-slide-to": index
-                      }
-                    })
-                  }),
-                  0
-                ),
-                _vm._v(" "),
+          _vm.preview
+            ? _c("div", { staticClass: "bd-example col-12" }, [
                 _c(
                   "div",
-                  { staticClass: "carousel-inner" },
+                  {
+                    staticClass: "carousel slide",
+                    attrs: {
+                      id: "carouselExampleCaptions",
+                      "data-ride": "carousel"
+                    }
+                  },
                   [
                     _c(
-                      "div",
-                      {
-                        staticClass: "carousel-item active",
-                        on: {
-                          click: function($event) {
-                            return _vm.get_slider(_vm.sliders[0].id)
-                          }
-                        }
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "d-block w-100",
+                      "ol",
+                      { staticClass: "carousel-indicators" },
+                      _vm._l(_vm.sliders, function(slider, index) {
+                        return _c("li", {
+                          key: index,
                           attrs: {
-                            src: _vm.sliders[0].image,
-                            alt: _vm.sliders[0].text
+                            "data-target": "#carouselExampleCaptions",
+                            "data-slide-to": index
                           }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "carousel-caption d-none d-md-block" },
-                          [_c("h5", [_vm._v(_vm._s(_vm.sliders[0].text))])]
-                        )
-                      ]
+                        })
+                      }),
+                      0
                     ),
                     _vm._v(" "),
-                    _vm._l(_vm.sliders.slice(1), function(slider, index) {
-                      return _c(
-                        "div",
-                        {
-                          key: index,
-                          staticClass: "carousel-item",
-                          on: {
-                            click: function($event) {
-                              return _vm.get_slider(slider.id)
+                    _c(
+                      "div",
+                      { staticClass: "carousel-inner" },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "carousel-item active",
+                            on: {
+                              click: function($event) {
+                                return _vm.get_slider(_vm.sliders[0].id)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "d-block w-100",
-                            attrs: { src: slider.image, alt: slider.text }
-                          }),
-                          _vm._v(" "),
-                          _c(
+                          },
+                          [
+                            _c("img", {
+                              staticClass: "d-block w-100",
+                              attrs: {
+                                src: _vm.sliders[0].image,
+                                alt: _vm.sliders[0].text
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "carousel-caption d-none d-md-block"
+                              },
+                              [
+                                _c("h5", [_vm._v(_vm._s(_vm.sliders[0].text))]),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-danger btn-block btn-flat",
+                                    attrs: { role: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.delsete(_vm.sliders[0].id)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Delete this slider")]
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.sliders.slice(1), function(slider, index) {
+                          return _c(
                             "div",
                             {
-                              staticClass: "carousel-caption d-none d-md-block"
+                              key: index,
+                              staticClass: "carousel-item",
+                              on: {
+                                click: function($event) {
+                                  return _vm.get_slider(slider.id)
+                                }
+                              }
                             },
-                            [_c("h5", [_vm._v(_vm._s(slider.text))])]
+                            [
+                              _c("img", {
+                                staticClass: "d-block w-100",
+                                attrs: { src: slider.image, alt: slider.text }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "carousel-caption d-none d-md-block"
+                                },
+                                [
+                                  _c("h5", [_vm._v(_vm._s(slider.text))]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-danger btn-block btn-flat",
+                                      attrs: { role: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.delsete(_vm.sliders[0].id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete this slider")]
+                                  )
+                                ]
+                              )
+                            ]
                           )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._m(1)
-              ]
-            )
-          ]),
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]
+                )
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm.id
             ? _c("center", { staticClass: "my-4" }, [
@@ -10316,7 +10366,7 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "input col-sm-12 " }, [
+          _c("div", { staticClass: "input col-sm-12 mt-4" }, [
             _c("label", { attrs: { for: "image" } }, [_vm._v("image")]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group" }, [
@@ -10355,7 +10405,8 @@ var render = function() {
                   attrs: {
                     type: "text",
                     id: "text",
-                    placeholder: "Image title"
+                    placeholder: "Image title",
+                    autocomplete: "off"
                   },
                   domProps: { value: _vm.text },
                   on: {
@@ -10377,21 +10428,25 @@ var render = function() {
               {
                 staticClass: "btn btn-primary btn-block btn-flat",
                 attrs: { role: "button" },
-                on: { click: _vm.send }
+                on: {
+                  click: function($event) {
+                    _vm.preview = !_vm.preview
+                  }
+                }
               },
-              [_vm._v("Done")]
+              [_vm._v("preview")]
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-8 mx-2 my-4" }, [
+          _c("div", { staticClass: "col-4 mx-2 my-4" }, [
             _c(
               "button",
               {
-                staticClass: "btn btn-danger btn-block btn-flat",
+                staticClass: "btn btn-primary btn-block btn-flat",
                 attrs: { role: "button" },
-                on: { click: _vm.delsete }
+                on: { click: _vm.send }
               },
-              [_vm._v("Delete this slider")]
+              [_vm._v("Done")]
             )
           ])
         ],
@@ -30242,7 +30297,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         we: null
       }
     },
-    currentPage: 'userAll',
+    currentPage: 'dashboard',
     // Start Admin Panel
     AdminPanel: {
       userEdit: {
@@ -30290,6 +30345,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     Edit_Navbar: function Edit_Navbar(state, payload) {
       Object.assign(state.sections.navbar, payload);
+    },
+    Edit_Slider: function Edit_Slider(state, payload) {
+      Object.assign(state.sections.slider, payload);
     },
     Edit_Footer: function Edit_Footer(state, payload) {
       Object.assign(state.sections.footer, payload);

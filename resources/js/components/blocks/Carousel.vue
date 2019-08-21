@@ -67,22 +67,23 @@ import Axios from 'axios';
         .carousel-inner {
             .carousel-item {
                 height: 90vh !important;
-                background-position: top center;
+                background-position: center center;
                 background-size: cover;
                 background-attachment: fixed;
-                
+
 
                 .carousel-caption {
                     padding: 0;
                     position: absolute;
-                    top: 50%;
+                    top: 40%;
                     left: 50%;
                     text-align: center !important;
+                    font-size: 30px;
                     transform: translate(-50%, -50%);
 
-                    p {
+                    h5 {
                         font-weight: bolder;
-                        font-size: 80px;
+                        font-size: 50px;
                     }
                 }
             }

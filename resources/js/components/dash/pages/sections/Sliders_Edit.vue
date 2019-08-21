@@ -5,7 +5,7 @@
 
                 <p class="h1 mt-5">SLider Edit</p>
 
-                <div class="bd-example col-12">
+                <div v-if="preview" class="bd-example col-12">
                     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleCaptions" :data-slide-to="index" :key="index"
@@ -16,6 +16,7 @@
                                 <img :src="sliders[0].image" class="d-block w-100" :alt="sliders[0].text">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{ sliders[0].text }}</h5>
+                                    <button class="btn btn-danger btn-block btn-flat" @click="delsete(sliders[0].id)" role="button">Delete this slider</button>
                                 </div>
                             </div>
                             <div class="carousel-item" @click="get_slider(slider.id)" :key="index"
@@ -23,6 +24,7 @@
                                 <img :src="slider.image" class="d-block w-100" :alt="slider.text">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{ slider.text }}</h5>
+                                    <button class="btn btn-danger btn-block btn-flat" @click="delsete(sliders[0].id)" role="button">Delete this slider</button>
                                 </div>
                             </div>
 
@@ -42,7 +44,7 @@
 
                 <center v-if="id" class="my-4"><p><mark>you selected the slider with title {{ text }}</mark></p></center>
 
-                <div class="input col-sm-12 ">
+                <div class="input col-sm-12 mt-4">
                     <label for="image">image</label>
                     <div class="input-group">
                         <input type="file" id="image" class="form-control" @change="get_image($event)">
@@ -52,17 +54,17 @@
                 <div class="input col-md-4 col-sm-10 mx-sm-auto mx-md-0 col-lg-12 mt-3">
                     <label for="bgc">Image title</label>
                     <div class="input-group">
-                        <input type="text" id="text" class="form-control" placeholder="Image title" v-model="text">
+                        <input type="text" id="text" class="form-control" placeholder="Image title" autocomplete="off" v-model="text">
                     </div>
                 </div>
 
                 <div class="col-4 mx-2 my-4">
+                    <button class="btn btn-primary btn-block btn-flat" @click="preview = !preview" role="button">preview</button>
+                </div>
+                <div class="col-4 mx-2 my-4">
                     <button class="btn btn-primary btn-block btn-flat" @click="send" role="button">Done</button>
                 </div>
 
-                <div class="col-8 mx-2 my-4">
-                    <button class="btn btn-danger btn-block btn-flat" @click="delsete" role="button">Delete this slider</button>
-                </div>
             </div>
         </div>
     </div>
@@ -77,14 +79,13 @@
 <script>
     import Axios from 'axios';
     import realCarousel from '../../../blocks/Carousel';
-    import {
-        setTimeout
-    } from 'timers';
+
 
     export default {
         data() {
             return {
                 sliders: [],
+                preview: false,
                 img: '',
                 text: '',
                 id: null
@@ -117,19 +118,15 @@
                         Authorization: 'Bearer ' + this.$store.state.user.token
                     }
                 }
-                Axios.post('api/storeSlider', slider, config).then(
-                    Axios.get('api/getSlider', config).then(
-                        res => {
-                            this.sliders = res.data.data; 
-
-                            console.log(this.sliders)
-                        }
-                    ).catch(err => console.log(err))
+                Axios.post('api/storeSlider', slider, config).then(res => {
+                    this.$store.commit('Edit_Navbar', res.data.data)
+                }
                 ).catch(err => console.log(
                     err))
             },
 
-            delsete() {
+            delsete(id) {
+                this.id = id;
                 const config = {
                     headers: {
                         'content-type': 'multipart/form-data',
