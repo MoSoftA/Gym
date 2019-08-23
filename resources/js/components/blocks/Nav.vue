@@ -168,6 +168,11 @@
     $main-red: rgb(242, 58, 46);
 
     nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999999;
+        width: 100%;
         min-height: 70px;
         background-color: rgb(242, 58, 46);
 

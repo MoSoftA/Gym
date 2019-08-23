@@ -56,7 +56,7 @@ Route::group(["namespace"=>"Api"], function (){
 	
     });
     
-    Route::name('getTrainers')->get('getTainers', 'TrainerController@getTainers');
+    Route::name('getTrainers')->get('getTrainers', 'TrainerController@getTainers');
     Route::name('exerciese')->get('exerciese/{id}', 'ExerciseController@index');
     Route::name('getFooter')->get('getFooter', 'SiteController@getFooter');
     Route::name('getAboutUsr')->get('getAboutUsr', 'SiteController@getAboutUs');
