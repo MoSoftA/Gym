@@ -52,6 +52,15 @@ export const store = new Vuex.Store({
                 date_start: '',
                 date_end: '',
             },
+            
+            trainer:{
+                admin: '',
+                date_end: '',
+                date_start: '',
+                email: '',
+                id: '',
+                name: '',
+            },
             articleEdit: {
                 
             }
@@ -59,16 +68,7 @@ export const store = new Vuex.Store({
         // Start Articles
         articles:[],
         // Start Tasks
-        tasks: [
-            
-            {day: "Saturday", lists: ['Some thing98','Some thing15','Some thing1']},
-            {day: "Sunday", lists: ['Some thing98','Some thing15','Some thing2']},
-            {day: "Monday", lists: ['Some thing98','Some thing15','Some thing3']},
-            {day: "Tuesday", lists: ['Some thing98','Some thing15','Some thing4']},
-            {day: "Wednesday", lists: ['Some thing98','Some thing15','Some thing5']},
-            {day: "Thursday", lists: ['Some thing98','Some thing15','Some thing6']},
-     
-        ]
+        tasks: []
     },
     mutations:{
         // Check if loged
@@ -96,6 +96,10 @@ export const store = new Vuex.Store({
         // Get The targeted user
         target_user(state, payload){
             Object.assign(state.AdminPanel.userEdit, payload)
+        },
+        // Get The targeted user
+        target_trainer(state, payload){
+            Object.assign(state.AdminPanel.trainer, payload)
         },
         // Get The targeted article
         target_article(state, payload){

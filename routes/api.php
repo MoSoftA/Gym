@@ -52,8 +52,7 @@ Route::group(["namespace"=>"Api"], function (){
     // trainers
      Route::name('storeTrainer')->post('storeTrainer', 'TrainerController@store');
      Route::name('updateTrainer')->put('updateTrainer', 'TrainerController@update');
-     Route::name('deleteTrainer')->delete('deleteTrainer', 'TrainerController@destroy');
-	
+     Route::name('deleteTrainer')->delete('deleteTrainer/{id}', 'TrainerController@destroy');	
     });
     
     Route::name('getTrainers')->get('getTrainers', 'TrainerController@getTainers');

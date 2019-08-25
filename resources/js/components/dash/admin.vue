@@ -61,6 +61,10 @@
     import userEdit from './pages/users/user-edit';
     import tasks from './pages/users/Tasks';
 
+    import trainerAdd from './pages/trainer/trainer-add';
+    import trainerAll from './pages/trainer/trainer-all';
+    import trainerEdit from './pages/trainer/trainer-edit';
+
     import articleAll from './pages/articles/article-all';
     import articleAdd from './pages/articles/article-add';
     import articleEdit from './pages/articles/article-edit';
@@ -76,14 +80,22 @@
             dashboard,
             Header,
             Sidebar,
+
             loginPage,
+
             userAdd,
             userAll,
             userEdit,
             tasks,
+
+            trainerAdd,
+            trainerAll,
+            trainerEdit,
+
             articleAdd,
             articleAll,
             articleEdit,
+            
             NavEdit,
             FooterEdit,
             SlidersEdit,

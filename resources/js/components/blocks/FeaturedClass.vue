@@ -4,16 +4,17 @@
             <p class="h1">أخر الأخبار</p>
             <hr>
 
-            <carousel @changed='geet'>
+            <carousel :autoplay="true" :nav="false">
 
-                <div class="card" :key="index" v-for="(s,index) in articles">
+                <div class="card col-sm-12 col-md-3 col-lg-4" :key="index" v-for="(s,index) in articles">
                     <img class="card-img-top" width="50" :src="articles[index].image" />
                     <div class="card-body border">
                         <h5 class="card-title">{{ articles[index].title  }}</h5>
                         <hr>
                         <p class="card-text">{{ articles[index].shortDescription }}</p>
                         <i class="fas fa-user"></i><span class="mr-2"> محمد أيمن - مصر</span>
-                        <router-link :to="'/articles/'+articles[index].id" class="btn btn-success">اقرأ المزيد</router-link>
+                        <br>
+                        <router-link :to="'/articles/'+articles[index].id" class="btn btn-success mt-3">اقرأ المزيد</router-link>
                     </div>
                 </div>
 
@@ -55,18 +56,7 @@ import carousel from 'vue-owl-carousel'
     import Axios from 'axios';
     export default {
         components: { carousel },
-        methods: {
-            geet(){
-                 Axios.get('api/articles', {
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: 'Bearer ' + this.$store.state.user.token
-                },
-            }).then(res => {
-                this.$store.commit('got_articles', res.data.data)
-            })
-            }
-        },
+       
         beforeMount(){
             Axios.get('api/articles', {
                 headers: {
@@ -74,6 +64,7 @@ import carousel from 'vue-owl-carousel'
                     Authorization: 'Bearer ' + this.$store.state.user.token
                 },
             }).then(res => {
+                
                 this.$store.commit('got_articles', res.data.data)
             })
         },

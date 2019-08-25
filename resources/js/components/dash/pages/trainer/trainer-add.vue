@@ -80,6 +80,15 @@
                 Axios.post('api/storeTrainer', about, config).then(res => console.log(res)).catch(err => console.log(
                     err))
             }
+        },
+        mounted(){
+            const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data',
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token
+                    }
+                }
         }
     }
 

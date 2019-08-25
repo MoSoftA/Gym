@@ -50,9 +50,8 @@ export default {
         Axios.get('api/getAboutUsr').then(
             res => {
                 Object.assign(this.about, res.data.data[0]);
-                console.log('dasasdadsasa',res.data.data[0])
                 $('.about-body').append(res.data.data[0].body )
-
+                console.log(this.image)
             }
         ).catch(err => console.log(err));
 
