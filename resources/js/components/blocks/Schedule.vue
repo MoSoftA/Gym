@@ -27,32 +27,32 @@
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-one-tab">
                 <ul>
-                    <li :key="taskc" v-for="taskc in User_tasks_1.lists ">{{ taskc }}</li>
+                    <li :key="index" v-for="(train, index) in listsa[0].exercise">{{ train }}</li>
                 </ul>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-two-tab">
                 <ul>
-                    <li :key="taskc" v-for="taskc in User_tasks_2.lists ">{{ taskc }}</li>
+                    <li :key="index" v-for="(train, index) in listsa[1].exercise">{{ train }}</li>
                 </ul>
             </div>
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-three-tab">
                 <ul>
-                    <li :key="taskc" v-for="taskc in User_tasks_3.lists ">{{ taskc }}</li>
+                    <li :key="index" v-for="(train, index) in listsa[2].exercise">{{ train }}</li>
                 </ul>
             </div>
             <div class="tab-pane fade" id="pills-four" role="tabpanel" aria-labelledby="pills-four-tab">
                 <ul>
-                    <li :key="taskc" v-for="taskc in User_tasks_4.lists ">{{ taskc }}</li>
+                    <li :key="index" v-for="(train, index) in listsa[3].exercise">{{ train }}</li>
                 </ul>
             </div>
             <div class="tab-pane fade" id="pills-five" role="tabpanel" aria-labelledby="pills-five-tab">
                 <ul>
-                    <li :key="taskc" v-for="taskc in User_tasks_5.lists ">{{ taskc }}</li>
+                    <li :key="index" v-for="(train, index) in listsa[4].exercise">{{ train }}</li>
                 </ul>
             </div>
             <div class="tab-pane fade" id="pills-six" role="tabpanel" aria-labelledby="pills-six-tab">
                 <ul>
-                    <li :key="taskc" v-for="taskc in User_tasks_6.lists ">{{ taskc }}</li>
+                    <li :key="index" v-for="(train, index) in listsa[5].exercise">{{ train }}</li>
                 </ul>
             </div>
         </div>
@@ -64,24 +64,7 @@
 import Axios from 'axios';
 export default {
     computed:{
-        User_tasks_1(){
-            return this.$store.state.tasks[0]   
-        },
-        User_tasks_2(){
-            return this.$store.state.tasks[1]   
-        },
-        User_tasks_3(){
-            return this.$store.state.tasks[2]
-        },
-        User_tasks_4(){
-            return this.$store.state.tasks[3]   
-        },
-        User_tasks_5(){
-            return this.$store.state.tasks[4]   
-        },
-        User_tasks_6(){
-            return this.$store.state.tasks[5]   
-        },
+        
     },
     data(){
         return{
@@ -107,12 +90,14 @@ export default {
                             exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
                             exercisea.exercise = exercisea.exercise.split(',');
 
+                            console.log(exercisea.exercise)
+
                         } else {
                             this.listsa.push(exercisea.exercise)
                         }
                         this.listsa.push(exercisea)
                     });
-                    console.log()
+                    console.log(this.listsa)
                 })
                 .catch(err => console.log(err))
     }

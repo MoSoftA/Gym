@@ -2157,13 +2157,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2171,9 +2164,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['user', 'loged']))
+  computed: {
+    end: function end() {
+      return this.$store.state.user;
+    },
+    color: function color() {
+      return this.$store.state.sections.navbar;
+    }
+  }
 });
 
 /***/ }),
@@ -2434,26 +2433,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: {
-    User_tasks_1: function User_tasks_1() {
-      return this.$store.state.tasks[0];
-    },
-    User_tasks_2: function User_tasks_2() {
-      return this.$store.state.tasks[1];
-    },
-    User_tasks_3: function User_tasks_3() {
-      return this.$store.state.tasks[2];
-    },
-    User_tasks_4: function User_tasks_4() {
-      return this.$store.state.tasks[3];
-    },
-    User_tasks_5: function User_tasks_5() {
-      return this.$store.state.tasks[4];
-    },
-    User_tasks_6: function User_tasks_6() {
-      return this.$store.state.tasks[5];
-    }
-  },
+  computed: {},
   data: function data() {
     return {
       listsa: []
@@ -2477,13 +2457,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if (_typeof(exercisea.exercise == 'string')) {
           exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
           exercisea.exercise = exercisea.exercise.split(',');
+          console.log(exercisea.exercise);
         } else {
           _this.listsa.push(exercisea.exercise);
         }
 
         _this.listsa.push(exercisea);
       });
-      console.log();
+      console.log(_this.listsa);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -4477,18 +4458,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8004,15 +7973,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "jumbotron mt-5 pb0" }, [
-    _c("h1", { staticClass: "display-4" }, [
-      _vm._v("أهلاً " + _vm._s(_vm.user.name))
-    ]),
-    _vm._v(" "),
-    _c("p", { staticClass: "lead" }, [
-      _vm._v("ينتهي اشتراكك يوم : " + _vm._s(_vm.user.subscription.end) + " ")
-    ])
-  ])
+  return _c(
+    "div",
+    {
+      staticClass: "jumbotron mt-5 pb0",
+      style: {
+        backgroundColor: _vm.color.background_color,
+        color: _vm.color.font_color
+      }
+    },
+    [
+      _c("h1", { staticClass: "display-4" }, [
+        _vm._v("أهلاً " + _vm._s(_vm.end.name))
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "lead" }, [
+        _vm._v("ينتهي اشتراكك يوم : " + _vm._s(_vm.end.end) + " ")
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -8386,8 +8365,8 @@ var render = function() {
             [
               _c(
                 "ul",
-                _vm._l(_vm.User_tasks_1.lists, function(taskc) {
-                  return _c("li", { key: taskc }, [_vm._v(_vm._s(taskc))])
+                _vm._l(_vm.listsa[0].exercise, function(train, index) {
+                  return _c("li", { key: index }, [_vm._v(_vm._s(train))])
                 }),
                 0
               )
@@ -8407,8 +8386,8 @@ var render = function() {
             [
               _c(
                 "ul",
-                _vm._l(_vm.User_tasks_2.lists, function(taskc) {
-                  return _c("li", { key: taskc }, [_vm._v(_vm._s(taskc))])
+                _vm._l(_vm.listsa[1].exercise, function(train, index) {
+                  return _c("li", { key: index }, [_vm._v(_vm._s(train))])
                 }),
                 0
               )
@@ -8428,8 +8407,8 @@ var render = function() {
             [
               _c(
                 "ul",
-                _vm._l(_vm.User_tasks_3.lists, function(taskc) {
-                  return _c("li", { key: taskc }, [_vm._v(_vm._s(taskc))])
+                _vm._l(_vm.listsa[2].exercise, function(train, index) {
+                  return _c("li", { key: index }, [_vm._v(_vm._s(train))])
                 }),
                 0
               )
@@ -8449,8 +8428,8 @@ var render = function() {
             [
               _c(
                 "ul",
-                _vm._l(_vm.User_tasks_4.lists, function(taskc) {
-                  return _c("li", { key: taskc }, [_vm._v(_vm._s(taskc))])
+                _vm._l(_vm.listsa[3].exercise, function(train, index) {
+                  return _c("li", { key: index }, [_vm._v(_vm._s(train))])
                 }),
                 0
               )
@@ -8470,8 +8449,8 @@ var render = function() {
             [
               _c(
                 "ul",
-                _vm._l(_vm.User_tasks_5.lists, function(taskc) {
-                  return _c("li", { key: taskc }, [_vm._v(_vm._s(taskc))])
+                _vm._l(_vm.listsa[4].exercise, function(train, index) {
+                  return _c("li", { key: index }, [_vm._v(_vm._s(train))])
                 }),
                 0
               )
@@ -8491,8 +8470,8 @@ var render = function() {
             [
               _c(
                 "ul",
-                _vm._l(_vm.User_tasks_6.lists, function(taskc) {
-                  return _c("li", { key: taskc }, [_vm._v(_vm._s(taskc))])
+                _vm._l(_vm.listsa[5].exercise, function(train, index) {
+                  return _c("li", { key: index }, [_vm._v(_vm._s(train))])
                 }),
                 0
               )
