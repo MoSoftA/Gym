@@ -4322,7 +4322,6 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (res) {
       var Trainers = res.data.data;
       Trainers.forEach(function (trainer) {
-        delete trainer.image;
         delete trainer.updated_at;
         _this2.head = Object.keys(trainer);
 
@@ -4403,15 +4402,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4423,20 +4413,24 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
       name: this.$store.state.AdminPanel.trainer[1],
       email: this.$store.state.AdminPanel.trainer[2],
       phone: this.$store.state.AdminPanel.trainer[3],
-      info: this.$store.state.AdminPanel.trainer[4]
+      image: this.$store.state.AdminPanel.trainer[4],
+      info: this.$store.state.AdminPanel.trainer[5]
     };
   },
   methods: {
+    get_image: function get_image(e) {
+      this.image = e.target.files[0];
+    },
     update_user: function update_user() {
-      // Send the request
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/editUser/".concat(this.id), {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        start: this.date_start,
-        end: this.date_end,
-        admin: this.admin
-      }, {
+      var art = new FormData();
+      art.append('id', this.id);
+      art.append('image', this.image);
+      art.append('name', this.name);
+      art.append('email', this.email);
+      art.append('phone', this.phone);
+      art.append('info', this.info); // Send the request
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/updateTrainer", art, {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
@@ -11426,7 +11420,9 @@ var render = function() {
               "tr",
               [
                 _vm._l(_vm.head, function(header, index) {
-                  return _c("th", { key: index }, [_vm._v(_vm._s(header))])
+                  return index != 4
+                    ? _c("th", { key: index }, [_vm._v(_vm._s(header))])
+                    : _vm._e()
                 }),
                 _vm._v(" "),
                 _c("th", [_vm._v("Options")])
@@ -11438,50 +11434,57 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.rows, function(user, index) {
-              return _c(
-                "tr",
-                { key: index },
-                [
-                  _vm._l(user, function(val, index) {
-                    return _c("td", { key: index }, [_vm._v(_vm._s(val))])
-                  }),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { title: "Edit user" },
-                        on: {
-                          click: function($event) {
-                            return _vm.change_component($event, "trainerEdit")
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-edit" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: {
-                          title: "Delete user",
-                          "data-toggle": "modal",
-                          "data-target": "#exampleModalCenter"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.get_id($event)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-user-minus" })]
-                    )
-                  ])
-                ],
-                2
-              )
+              return index != 4
+                ? _c(
+                    "tr",
+                    { key: index },
+                    [
+                      _vm._l(user, function(val, index) {
+                        return index != 4
+                          ? _c("td", { key: index }, [_vm._v(_vm._s(val))])
+                          : _vm._e()
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { title: "Edit user" },
+                            on: {
+                              click: function($event) {
+                                return _vm.change_component(
+                                  $event,
+                                  "trainerEdit"
+                                )
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-edit" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: {
+                              title: "Delete user",
+                              "data-toggle": "modal",
+                              "data-target": "#exampleModalCenter"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.get_id($event)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-user-minus" })]
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                : _vm._e()
             }),
             0
           )
@@ -11663,8 +11666,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model.lazy",
-                    value: _vm.password,
-                    expression: "password",
+                    value: _vm.phone,
+                    expression: "phone",
                     modifiers: { lazy: true }
                   }
                 ],
@@ -11674,10 +11677,10 @@ var render = function() {
                   id: "inputPassword3",
                   placeholder: "ادخل رقم الهاتف"
                 },
-                domProps: { value: _vm.password },
+                domProps: { value: _vm.phone },
                 on: {
                   change: function($event) {
-                    _vm.password = $event.target.value
+                    _vm.phone = $event.target.value
                   }
                 }
               })
@@ -11688,33 +11691,22 @@ var render = function() {
                 "label",
                 {
                   staticClass: "font-wieght-bold control-label",
-                  attrs: { for: "DateStart" }
+                  attrs: { for: "inputPasswosd3" }
                 },
-                [_vm._v("تاريخ بداية الإشتراك")]
+                [_vm._v("الصورة")]
               ),
               _vm._v(" "),
+              _c("img", {
+                staticClass: "img-fluid",
+                attrs: { src: _vm.image, alt: "صورة" }
+              }),
+              _vm._v(" "),
               _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.date_start,
-                    expression: "date_start"
-                  }
-                ],
                 staticClass: "form-control",
-                attrs: {
-                  type: "date",
-                  id: "DateStart",
-                  placeholder: "DD/MM/YYY"
-                },
-                domProps: { value: _vm.date_start },
+                attrs: { type: "file", id: "inputPasswosd3" },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.date_start = $event.target.value
+                  change: function($event) {
+                    return _vm.get_image($event)
                   }
                 }
               })
@@ -11725,89 +11717,30 @@ var render = function() {
                 "label",
                 {
                   staticClass: "font-wieght-bold control-label",
-                  attrs: { for: "DateEnd" }
+                  attrs: { for: "inputEmai3" }
                 },
-                [_vm._v("تاريخ نهاية الإشتراك")]
+                [_vm._v("معلومات عن المدرب")]
               ),
               _vm._v(" "),
-              _c("input", {
+              _c("textarea", {
                 directives: [
                   {
                     name: "model",
-                    rawName: "v-model",
-                    value: _vm.date_end,
-                    expression: "date_end"
+                    rawName: "v-model.lazy",
+                    value: _vm.info,
+                    expression: "info",
+                    modifiers: { lazy: true }
                   }
                 ],
                 staticClass: "form-control",
-                attrs: {
-                  type: "date",
-                  id: "DateEnd",
-                  placeholder: "DD/MM/YYY"
-                },
-                domProps: { value: _vm.date_end },
+                attrs: { type: "email", id: "inputEmai3" },
+                domProps: { value: _vm.info },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.date_end = $event.target.value
+                  change: function($event) {
+                    _vm.info = $event.target.value
                   }
                 }
               })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-4 mb-3" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "font-wieght-bold control-label",
-                  attrs: { for: "inputGroupSelect01" }
-                },
-                [_vm._v("Admin")]
-              ),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.admin,
-                    expression: "admin"
-                  }
-                ],
-                attrs: { type: "radio", id: "one", value: "0" },
-                domProps: { checked: _vm._q(_vm.admin, "0") },
-                on: {
-                  change: function($event) {
-                    _vm.admin = "0"
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "one" } }, [_vm._v("Yes")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.admin,
-                    expression: "admin"
-                  }
-                ],
-                attrs: { type: "radio", id: "two", value: "1" },
-                domProps: { checked: _vm._q(_vm.admin, "1") },
-                on: {
-                  change: function($event) {
-                    _vm.admin = "1"
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "two" } }, [_vm._v("No")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-4 my-4" }, [

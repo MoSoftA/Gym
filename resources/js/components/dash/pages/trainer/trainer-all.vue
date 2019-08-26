@@ -10,13 +10,13 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th :key='index' v-for="(header, index) in head">{{ header }}</th>
+                            <th :key='index' v-for="(header, index) in head" v-if="index!=4">{{ header }}</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr :key='index' v-for="(user, index) in rows">
-                            <td :key='index' v-for="(val, index) in user">{{ val }}</td>
+                        <tr :key='index' v-for="(user, index) in rows" v-if="index!=4">
+                            <td :key='index' v-for="(val, index) in user" v-if="index!=4" >{{ val }}</td>
                             <td>
                                 <button class="btn btn-success" title="Edit user"
                                     @click="change_component($event, 'trainerEdit')"><i class="fas fa-edit"></i></button>
@@ -144,7 +144,7 @@
                 .then(res => {
                     let Trainers = res.data.data;
                     Trainers.forEach(trainer => {
-                        delete trainer.image;
+                        
                         delete trainer.updated_at;
 
                         this.head = Object.keys(trainer);
