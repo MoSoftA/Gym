@@ -21,7 +21,7 @@ class ArticleController extends Controller
     public function index()
     {
         return $this->ApiResponse(200, 'success', 
-        	ArticleResource::collection(Article::all()));
+        	ArticleResource::collection(Article::paginate(8)));
     }
 
 
