@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 $router->pattern('id', '[0-9]+');
-
+    
 Route::group(["namespace"=>"Api"], function (){
 
     Route::group(['namespace'=>'Auth'], function (){
