@@ -4,17 +4,6 @@
             <div class="card-body">
                 <p class="h1 mt-5">Tasks</p>
 
-
-                <!-- <div class="buttons">
-
-                    <button class="btn btn-primary btn-flat" @click="one=!one">Saturday</button>
-                    <button class="btn btn-primary btn-flat" @click="two=!two">Sunday</button>
-                    <button class="btn btn-primary btn-flat" @click="three=!three">Monday</button>
-                    <button class="btn btn-primary btn-flat" @click="four=!four">Tuesday</button>
-                    <button class="btn btn-primary btn-flat" @click="five=!five">Wednesday</button>
-                    <button class="btn btn-primary btn-flat" @click="six=!six">Thursday</button>
-                </div> -->
-
                 <div class="row">
                     <div class="day mb-2 col-sm-12 col-md-4 col-lg-3" :key="index" v-for="(item, index) in listsa">
                         <h1>{{ item.day }}</h1>
@@ -35,7 +24,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- v-model="n_task"  -->
                 </div>
             </div>
         </div>

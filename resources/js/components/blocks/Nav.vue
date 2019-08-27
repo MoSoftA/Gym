@@ -3,12 +3,13 @@
         <nav class="navbar navbar-expand-lg navbar-dark" :style='{backgroundColor: Navbar.background_color}'>
             <div class="container" style="margin-top: 0"><a class="navbar-brand" href="#">{{ Navbar.name }}</a>
                 <button class="navbar-toggler" @click="show()"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse justify-content-end d-lg-flex">
+
+                <div class="collapse justify-content-end d-lg-flex" :style='{backgroundColor: Navbar.background_color}'>
                     <button type="button" @click="show()" class="close d-xl-none d-lg-none"
                         data-dismiss="modal">&times;</button>
                     <ul class="navbar-nav">
                         <li class="nav-item ml-3">
-                            <router-link to="/" active-class="active" class="nav-link"
+                            <router-link to="/" class="nav-link"
                                 :style='{color: Navbar.font_color}' exact>الرئيسية<span class="sr-only">(current)</span>
                             </router-link>
                         <li class="nav-item ml-3" v-if="users.loged">
@@ -168,6 +169,11 @@
     $main-red: rgb(242, 58, 46);
 
     nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999999;
+        width: 100%;
         min-height: 70px;
         background-color: rgb(242, 58, 46);
 
@@ -205,6 +211,8 @@
     }
 
     .modal {
+        z-index: 9999999;
+        top: 20%;
         .modal-header {
             .close {
                 position: absolute;
@@ -260,8 +268,8 @@
 
             &.show {
                 right: 0;
-                background-color: #FFF;
-                color: black !important;
+                // background-color: #FFF;
+                // color: black !important;
                 transform: translate(-0%);
 
                 ul {
@@ -271,7 +279,7 @@
 
                     li a,
                     a.nav-link {
-                        color: black;
+                        // color: black;
                         font-size: 25px;
                     }
                 }

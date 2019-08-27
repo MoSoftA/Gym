@@ -64,6 +64,26 @@
 
                         </ul>
                     </li>
+                    
+                    <li class="nav-item has-treeview" data-drop='4' @click="drop($event)">
+                        <a href="#" class="nav-link" data-drop='4'>
+                            <i class="nav-icon fas fa-users" data-drop='4'></i>
+                            <p data-drop='4'>
+                                Trainers
+                                <i class="fas fa-angle-left right" data-drop='4'></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" data-drop='4'>
+
+                            <li class="nav-item"><a role="button" class="nav-link" @click="change_page('trainerAll')"><i
+                                        class="far fa-circle nav-icon"></i> all Trainers</a>
+                            </li>
+                            <li class="nav-item"><a role="button" class="nav-link" @click="change_page('trainerAdd')"><i
+                                        class="far fa-circle nav-icon"></i> add trainer</a>
+                            </li>
+
+                        </ul>
+                    </li>
 
                     <li class="nav-item has-treeview" data-drop='3' @click="drop($event)">
                         <a href="#" class="nav-link" data-drop='3'>

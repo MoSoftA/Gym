@@ -15,7 +15,7 @@
                                     <h5>{{list[0].text}}</h5>
                                 </div>
                             </div>
-                            <div class="carousel-item" :key="index" v-for="(item, index) in list.slice(1)" :style="{backgroundImage: 'url('+item.image +')', backgroundPosition: 'center center', }">
+                            <div class="carousel-item" :key="index" v-for="(item, index) in list.slice(1)" :style="{backgroundImage: 'url('+item.image+')', backgroundPosition: 'center center', }">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{item.text}}</h5>
                                 </div>
@@ -56,7 +56,6 @@ import Axios from 'axios';
                 }
             Axios.get('api/getSlider', config).then(res => {
                 this.list = res.data.data;
-                console.log(res.data.data)
             }).catch(err => console.log(err))
         }
     }
@@ -66,7 +65,7 @@ import Axios from 'axios';
     .bd-example {
         .carousel-inner {
             .carousel-item {
-                height: 90vh !important;
+                height: 100vh !important;
                 background-position: center center;
                 background-size: cover;
                 background-attachment: fixed;

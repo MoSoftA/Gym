@@ -1,19 +1,20 @@
 <template>
-    <div class="jumbotron mt-5 pb0">
-        <h1 class="display-4">أهلاً {{ user.name }}</h1>
-        <p class="lead">ينتهي اشتراكك يوم : {{ user.subscription.end }} </p>
+    <div class="jumbotron mt-5 pb0" :style="{ backgroundColor: color.background_color, color: color.font_color }">
+        <h1 class="display-4">أهلاً {{ end.name }}</h1>
+        <p class="lead">ينتهي اشتراكك يوم : {{ end.end }} </p>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 export default {
     computed: {
-        ...mapState([
-            'user',
-            'loged',
-        ])
+        end(){
+            return this.$store.state.user
+        },
+        color(){
+            return this.$store.state.sections.navbar
+        }
     }
 }
 </script>

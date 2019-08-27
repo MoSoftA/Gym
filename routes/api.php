@@ -52,11 +52,15 @@ Route::group(["namespace"=>"Api"], function (){
     // trainers
      Route::name('storeTrainer')->post('storeTrainer', 'TrainerController@store');
      Route::name('updateTrainer')->put('updateTrainer', 'TrainerController@update');
+<<<<<<< HEAD
      Route::name('deleteTrainer')->delete('deleteTrainer','TrainerController@destroy');
 	
+=======
+     Route::name('deleteTrainer')->delete('deleteTrainer/{id}', 'TrainerController@destroy');	
+>>>>>>> 186e12d994ed0033c0d071cb6842146d5c36bc2a
     });
     
-    Route::name('getTrainers')->get('getTainers', 'TrainerController@getTainers');
+    Route::name('getTrainers')->get('getTrainers', 'TrainerController@getTainers');
     Route::name('exerciese')->get('exerciese/{id}', 'ExerciseController@index');
     Route::name('getFooter')->get('getFooter', 'SiteController@getFooter');
     Route::name('getAboutUsr')->get('getAboutUsr', 'SiteController@getAboutUs');
