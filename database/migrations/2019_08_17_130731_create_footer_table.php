@@ -15,6 +15,10 @@ class CreateFooterTable extends Migration
     {
         Schema::create('footer', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('section_one')->nullable();
+            $table->string('section_two')->nullable();
+            $table->string('section_three')->nullable();
+            $table->string('section_four')->nullable();
              $table->string('we')->nullable();
              $table->string('info')->nullable();
              $table->string('address')->nullable();

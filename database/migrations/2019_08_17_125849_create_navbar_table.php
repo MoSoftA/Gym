@@ -18,8 +18,10 @@ class CreateNavbarTable extends Migration
              $table->string('logo')->nullable();
              $table->string('background_color')->nullable();
              $table->string('font_color')->nullable();
-             $table->string('button_background')->nullable();
-             $table->string('button_font_color')->nullable();
+             $table->string('login_button_background')->nullable();
+             $table->string('login_button_font_color')->nullable();
+             $table->string('logout_button_background')->nullable();
+             $table->string('logout_button_font_color')->nullable();
             $table->timestamps();
         });
     }
