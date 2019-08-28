@@ -3666,6 +3666,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3694,31 +3754,46 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var foot = new FormData();
-      foot.append('we', this.footer.we);
-      foot.append('info', this.footer.info);
-      foot.append('address', this.footer.address);
-      foot.append('Phone', this.footer.Phone);
-      foot.append('fax', this.footer.fax);
-      foot.append('info', this.footer.info);
-      foot.append('facebook', this.footer.facebook);
-      foot.append('google', this.footer.google);
-      foot.append('linkedIn', this.footer.linkedIn);
-      foot.append('twitter', this.footer.twitter);
+      foot.append("we", this.footer.we);
+      foot.append("info", this.footer.info);
+      foot.append("address", this.footer.address);
+      foot.append("Phone", this.footer.Phone);
+      foot.append("fax", this.footer.fax);
+      foot.append("info", this.footer.info);
+      foot.append("facebook", this.footer.facebook);
+      foot.append("google", this.footer.google);
+      foot.append("linkedIn", this.footer.linkedIn);
+      foot.append("twitter", this.footer.twitter);
       var config = {
         headers: {
-          'content-type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          "content-type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeFooter', foot, config).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getFooter').then(function (res) {
-        _this.$store.commit('Edit_Footer', res.data.data[0]);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/storeFooter", foot, config).then(function (res) {
+        Swal.fire({
+          title: "you Edited Footer",
+          text: res.data.message,
+          type: "success",
+          confirmButtonText: "Cool!"
+        });
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFooter").then(function (res) {
+          _this.$store.commit("Edit_Footer", res.data.data[0]);
 
-        Object.assign(_this.footer, _this.$store.state.sections.footer);
+          Object.assign(_this.footer, _this.$store.state.sections.footer);
+        })["catch"](function (err) {
+          return console.log(err);
+        });
       })["catch"](function (err) {
-        return console.log(err);
-      }))["catch"](function (err) {
-        return console.log(err);
+        return console.log(function (err) {
+          Swal.fire({
+            title: "Proplem ",
+            text: err.message,
+            type: "error",
+            confirmButtonText: "ok!"
+          });
+        });
       });
     }
   },
@@ -3727,12 +3802,12 @@ __webpack_require__.r(__webpack_exports__);
 
     var config = {
       headers: {
-        'content-type': 'multipart/form-data',
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+        "content-type": "multipart/form-data",
+        Accept: "application/json",
+        Authorization: "Bearer " + this.$store.state.user.token
       }
     };
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getFooter').then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFooter").then(function (res) {
       return Object.assign(_this2.footer, res.data.data[0]);
     })["catch"](function (err) {
       return console.log(err);
@@ -10246,10 +10321,10 @@ var render = function() {
         [
           _c("realFooter"),
           _vm._v(" "),
+          _c("p", { staticClass: "h1" }, [_vm._v("Footer")]),
+          _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-              _c("p", { staticClass: "h1" }, [_vm._v("Footer")]),
-              _vm._v(" "),
+            _c("div", { staticClass: "input col-12" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "text" } }, [
                 _vm._v("Who are we")
               ]),
@@ -10280,8 +10355,12 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "input col-12" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "info" } }, [
                 _vm._v("Info")
               ]),
@@ -10308,12 +10387,14 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "h3 mt-3" }, [_vm._v("Contact us")]),
-              _vm._v(" "),
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "input col-sm-12 col-md-4" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "adress" } }, [
-                _vm._v("Adress")
+                _vm._v("Contact us | Adress")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-group" }, [
@@ -10338,10 +10419,12 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-4" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "number" } }, [
-                _vm._v("Phone number")
+                _vm._v("Contact us | number")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-group" }, [
@@ -10370,10 +10453,12 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-4" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "fax" } }, [
-                _vm._v("Fax")
+                _vm._v("Contact us | Fax")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-group" }, [
@@ -10398,8 +10483,12 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "facebook" } }, [
                 _vm._v("Facebook")
               ]),
@@ -10430,8 +10519,10 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "google" } }, [
                 _vm._v("Google")
               ]),
@@ -10458,8 +10549,10 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "linkedIn" } }, [
                 _vm._v("LinkedIn")
               ]),
@@ -10490,8 +10583,10 @@ var render = function() {
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
               _c("label", { staticClass: "my-2", attrs: { for: "twitter" } }, [
                 _vm._v("Twitter")
               ]),
@@ -10524,22 +10619,22 @@ var render = function() {
                 })
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4 my-4" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block btn-flat",
-                attrs: { role: "button" },
-                on: { click: _vm.send }
-              },
-              [_vm._v("Done")]
-            )
           ])
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4 my-4" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block btn-flat",
+            attrs: { role: "button" },
+            on: { click: _vm.send }
+          },
+          [_vm._v("Done")]
+        )
+      ])
     ])
   ])
 }
@@ -31882,7 +31977,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         we: null
       }
     },
-    currentPage: 'dashboard',
+    currentPage: 'FooterEdit',
     // Start Admin Panel
     AdminPanel: {
       userEdit: {
