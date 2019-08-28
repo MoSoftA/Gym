@@ -45,9 +45,9 @@
                             <label class="font-wieght-bold control-label" for="inputGroupSelect01">Admin</label>
                             <br>
                             <label for="one">Yes</label>
-                            <input type="radio" id="two" value="1" v-model="admin">
+                            <input type="radio" id="two" value="0" v-model="admin">
                             <label for="two">No</label>
-                            <input type="radio" id="one" value="0" v-model="admin">
+                            <input type="radio" id="one" value="1" v-model="admin">
                         </div>
 
                     <div class="col-4 my-4">

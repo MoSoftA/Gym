@@ -21,6 +21,8 @@ export const store = new Vuex.Store({
             navbar: {
                 background_color: null,
                 button_background: null,
+                sec_background_color: null,
+                sec_button_background: null,
                 button_font_color: null,
                 font_color: null,
                 name: null,
