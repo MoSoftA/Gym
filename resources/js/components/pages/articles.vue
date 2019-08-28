@@ -1,13 +1,13 @@
 <template>
-    <div id="article">
+    <div id="article" class="py-5">
         <Navabr3/>
             
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         
-                        <div class="img"><img :src="article[0].image" width="100%" height="200px" alt="" class="img-fliud"></div>
-
+                        <div class="img"><img :src="article[0].image" width="100%" height="400px" alt="" class="img-fliud"></div>
+                        <br>
                         <h1>
                             {{ article[0].title }} 
                         </h1>

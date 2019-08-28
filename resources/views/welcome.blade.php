@@ -102,33 +102,33 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script><!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
 
 <script>
-    $(document).ready(function () {
-        $('.owl-carousel').owlCarousel({
-            rtl: true,
-            animateOut: 'fadeOut',
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            nav: false,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1,
-                    nav: false
-                },
-                600: {
-                    items: 2,
-                    loop: true
-                },
-                1000: {
-                    items: 2,
-                    loop: true,
-                }
-            }
-        })
-    });
+    // $(document).ready(function () {
+    //     $('.owl-carousel').owlCarousel({
+    //         rtl: true,
+    //         animateOut: 'fadeOut',
+    //         loop: true,
+    //         margin: 10,
+    //         autoplay: 3000,
+    //         nav: false,
+    //         autoplayTimeout: 3000,
+    //         autoplayHoverPause: true,
+    //         responsiveClass: true,
+    //         responsive: {
+    //             0: {
+    //                 items: 1,
+    //                 nav: false
+    //             },
+    //             600: {
+    //                 items: 2,
+    //                 loop: true
+    //             },
+    //             1000: {
+    //                 items: 2,
+    //                 loop: true,
+    //             }
+    //         }
+    //     })
+    // });
 
 </script>
 

@@ -5,7 +5,7 @@
 
                 <label for="articleName">Article title</label>
                 <div class="input-group">
-                    <input v-model="article.title" type="text" class="form-control" placeholder="Article title">
+                    <input v-model="title" type="text" class="form-control" placeholder="Article title">
                 </div>
 
                 <label for="articleimage">Article image</label>
@@ -15,10 +15,9 @@
 
                 <label for="articleinfo">Article Info</label>
                 <div class="form-group">
-                    <textarea v-model="article.info" class="form-control" placeholder="Article info" id="articleinfo"
+                    <textarea v-model="info" class="form-control" placeholder="Article info" id="articleinfo"
                         rows="2" style="resize: none"></textarea>
                 </div>
-
 
                 <label for="some-textarea">Article Body</label>
                 <textarea class="textarea" id='some-textarea' placeholder="Place some text here"
@@ -50,65 +49,46 @@
     export default {
         data() {
             return {
-                article: {
-                    id: this.$store.state.AdminPanel.articleEdit[0],
-                    img: '',
-                    title: this.$store.state.AdminPanel.articleEdit[1],
-                    body: this.$store.state.AdminPanel.articleEdit[3],
-                    info: this.$store.state.AdminPanel.articleEdit[2],
-                }
+                img: new FormData(),
+                id: this.$store.state.AdminPanel.articleEdit[0],
+                title: '',
+                body: '',
+                info: '',
             }
         },
         methods: {
             get_body() {
                 console.log($('#some-textarea').val());
-                this.article.body = String($('#some-textarea').val())
+                this.body = String($('#some-textarea').val())
             },
             get_image(e) {
-
-                let fileReader = new FileReader();
-
-                fileReader.readAsDataURL(e.target.files[0]);
-
-                fileReader.onload = (e) => {
-                    this.article.img = e.target.result;
-                }
-
+                this.img.append('image', e.target.files[0])
             },
             update() {
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data',
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token 
+                    }
+                };
 
-                this.$store.commit('target_article', this.article);
+            let data = {
+                title: this.title,
+                info: this.info,
+                body: this.body,
+                image: this.img,
+            }
 
-                Axios.put(`api/editArticle/${this.article.id}`, this.article, {
-                        headers: {
-                            Accept: 'application/json',
-                            Authorization: 'Bearer ' + this.$store.state.user.token
-                        },
 
-                    })
-                    .then(res => {
-
-                        if (res.data.message == 'success') {
-                            Swal.fire({
-                                title: 'you Edited the Article',
-                                text: res.data.message,
-                                type: 'success',
-                                confirmButtonText: 'Cool!'
-                            })
-                        }
-                        console.log(res)
-                    }).catch(err => Swal.fire({
-                        title: 'Failed ',
-                        text: err.message,
-                        type: 'error',
-                        confirmButtonText: 'OK'
-                    }));
+                Axios.put(`api/editArticle/${this.id}`, data , config).then(res => {
+                    console.log(res)
+                }).catch(err => console.log(err.message))
             },
 
         },
         mounted() {
             console.log('ok', this.$store.state.AdminPanel.articleEdit);
-            // Object.assign(this.article, this.$store.state.AdminPanel.articleEdit)
 
             $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
                 popover: {

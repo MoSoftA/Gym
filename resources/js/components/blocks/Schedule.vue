@@ -86,18 +86,13 @@ export default {
                     // Convert response to array
                     exercieses.forEach(exercisea => {
                         if (typeof (exercisea.exercise == 'string')) {
-
                             exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
                             exercisea.exercise = exercisea.exercise.split(',');
-
-                            console.log(exercisea.exercise)
-
                         } else {
                             this.listsa.push(exercisea.exercise)
                         }
                         this.listsa.push(exercisea)
                     });
-                    console.log(this.listsa)
                 })
                 .catch(err => console.log(err))
     }

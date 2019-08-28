@@ -1,9 +1,9 @@
 <template>
-    <div id="news">
+    <div id="news" class="py-5">
         <Nav2></Nav2>
-        <div class="jumbotron mt-5 py-0">
+        <div class="jumbotron mt-5" :style="{ backgroundColor: color.background_color, color: color.font_color }">
             <div class="container">
-                <h1 class="display-6 text-right">المقالات</h1>
+                <h1 class="display-4 text-right">المقالات</h1>
             </div>
         </div>
         <div class="container">
@@ -48,7 +48,9 @@
         computed: {
             get_articles() {
                 return this.$store.state.articles
-            }
+            },color(){
+            return this.$store.state.sections.navbar
+        }
         },
         mounted(){
             Axios.get('api/articles',{
@@ -60,9 +62,7 @@
             .then(res => {
                 this.articles = res.data.data;
                 this.$store.commit('got_articles', res.data.data);
-
-                console.log(res)
-                console.log(res.data.data[0]);                
+              
             }).catch(err => err.message);
         }
     }

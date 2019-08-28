@@ -14,7 +14,8 @@
                         <p class="card-text">{{ articles[index].shortDescription }}</p>
                         <i class="fas fa-user"></i><span class="mr-2"> محمد أيمن - مصر</span>
                         <br>
-                        <router-link :to="'/articles/'+articles[index].id" class="btn btn-success mt-3">اقرأ المزيد</router-link>
+                        <router-link :to="'/articles/'+articles[index].id" class="btn btn-success mt-3">اقرأ المزيد
+                        </router-link>
                     </div>
                 </div>
 
@@ -50,23 +51,54 @@
 </style>
 
 <script>
-
-import carousel from 'vue-owl-carousel'
+    import carousel from 'vue-owl-carousel';
 
     import Axios from 'axios';
     export default {
-        components: { carousel },
-       
-        beforeMount(){
+        mounted: function () {
+            var vm = this;
             Axios.get('api/articles', {
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: 'Bearer ' + this.$store.state.user.token
-                },
-            }).then(res => {
-                
-                this.$store.commit('got_articles', res.data.data)
-            })
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + vm.$store.state.user.token
+                    },
+                })
+                .then((res) => {
+                    vm.$store.commit('got_articles', res.data.data)
+                    Vue.nextTick(function () {
+                            $('.owl-carousel').owlCarousel({
+                                rtl: true,
+                                animateOut: 'fadeOut',
+                                loop: true,
+                                margin: 10,
+                                autoplay: true,
+                                nav: false,
+                                autoplayTimeout: 3000,
+                                autoplayHoverPause: true,
+                                responsiveClass: true,
+                                responsive: {
+                                    0: {
+                                        items: 1,
+                                        nav: false
+                                    },
+                                    600: {
+                                        items: 2,
+                                        loop: true
+                                    },
+                                    1000: {
+                                        items: 2,
+                                        loop: true,
+                                    }
+                                }
+                            });
+                    }.bind(vm));
+                })
+                .catch((err) => {
+                    if (err) console.log(err);
+                });
+        },
+        components: {
+            carousel
         },
         computed: {
             articles() {

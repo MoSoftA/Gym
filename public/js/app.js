@@ -2046,23 +2046,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    carousel: vue_owl_carousel__WEBPACK_IMPORTED_MODULE_0___default.a
-  },
-  beforeMount: function beforeMount() {
-    var _this = this;
-
+  mounted: function mounted() {
+    var vm = this;
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/articles', {
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+        Authorization: 'Bearer ' + vm.$store.state.user.token
       }
     }).then(function (res) {
-      _this.$store.commit('got_articles', res.data.data);
+      vm.$store.commit('got_articles', res.data.data);
+      Vue.nextTick(function () {
+        $('.owl-carousel').owlCarousel({
+          rtl: true,
+          animateOut: 'fadeOut',
+          loop: true,
+          margin: 10,
+          autoplay: true,
+          nav: false,
+          autoplayTimeout: 3000,
+          autoplayHoverPause: true,
+          responsiveClass: true,
+          responsive: {
+            0: {
+              items: 1,
+              nav: false
+            },
+            600: {
+              items: 2,
+              loop: true
+            },
+            1000: {
+              items: 2,
+              loop: true
+            }
+          }
+        });
+      }.bind(vm));
+    })["catch"](function (err) {
+      if (err) console.log(err);
     });
+  },
+  components: {
+    carousel: vue_owl_carousel__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   computed: {
     articles: function articles() {
@@ -2157,6 +2186,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -2457,14 +2489,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if (_typeof(exercisea.exercise == 'string')) {
           exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
           exercisea.exercise = exercisea.exercise.split(',');
-          console.log(exercisea.exercise);
         } else {
           _this.listsa.push(exercisea.exercise);
         }
 
         _this.listsa.push(exercisea);
       });
-      console.log(_this.listsa);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -3242,66 +3272,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      article: {
-        id: this.$store.state.AdminPanel.articleEdit[0],
-        img: '',
-        title: this.$store.state.AdminPanel.articleEdit[1],
-        body: this.$store.state.AdminPanel.articleEdit[3],
-        info: this.$store.state.AdminPanel.articleEdit[2]
-      }
+      img: new FormData(),
+      id: this.$store.state.AdminPanel.articleEdit[0],
+      title: '',
+      body: '',
+      info: ''
     };
   },
   methods: {
     get_body: function get_body() {
       console.log($('#some-textarea').val());
-      this.article.body = String($('#some-textarea').val());
+      this.body = String($('#some-textarea').val());
     },
     get_image: function get_image(e) {
-      var _this = this;
-
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = function (e) {
-        _this.article.img = e.target.result;
-      };
+      this.img.append('image', e.target.files[0]);
     },
     update: function update() {
-      this.$store.commit('target_article', this.article);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editArticle/".concat(this.article.id), this.article, {
+      var config = {
         headers: {
+          'content-type': 'multipart/form-data',
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
-      }).then(function (res) {
-        if (res.data.message == 'success') {
-          Swal.fire({
-            title: 'you Edited the Article',
-            text: res.data.message,
-            type: 'success',
-            confirmButtonText: 'Cool!'
-          });
-        }
-
+      };
+      var data = {
+        title: this.title,
+        info: this.info,
+        body: this.body,
+        image: this.img
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editArticle/".concat(this.id), data, config).then(function (res) {
         console.log(res);
       })["catch"](function (err) {
-        return Swal.fire({
-          title: 'Failed ',
-          text: err.message,
-          type: 'error',
-          confirmButtonText: 'OK'
-        });
+        return console.log(err.message);
       });
     }
   },
   mounted: function mounted() {
-    console.log('ok', this.$store.state.AdminPanel.articleEdit); // Object.assign(this.article, this.$store.state.AdminPanel.articleEdit)
-
+    console.log('ok', this.$store.state.AdminPanel.articleEdit);
     $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
       popover: {
         image: [],
@@ -5180,6 +5192,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     get_articles: function get_articles() {
       return this.$store.state.articles;
+    },
+    color: function color() {
+      return this.$store.state.sections.navbar;
     }
   },
   mounted: function mounted() {
@@ -5194,9 +5209,6 @@ __webpack_require__.r(__webpack_exports__);
       _this.articles = res.data.data;
 
       _this.$store.commit('got_articles', res.data.data);
-
-      console.log(res);
-      console.log(res.data.data[0]);
     })["catch"](function (err) {
       return err.message;
     });
@@ -7670,7 +7682,7 @@ var render = function() {
                         staticClass: "btn btn-success mt-3",
                         attrs: { to: "/articles/" + _vm.articles[index].id }
                       },
-                      [_vm._v("اقرأ المزيد")]
+                      [_vm._v("اقرأ المزيد\n                    ")]
                     )
                   ],
                   1
@@ -7983,12 +7995,14 @@ var render = function() {
       }
     },
     [
-      _c("h1", { staticClass: "display-4" }, [
-        _vm._v("أهلاً " + _vm._s(_vm.end.name))
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "lead" }, [
-        _vm._v("ينتهي اشتراكك يوم : " + _vm._s(_vm.end.end) + " ")
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "display-4" }, [
+          _vm._v("أهلاً " + _vm._s(_vm.end.name))
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "lead" }, [
+          _vm._v("ينتهي اشتراكك يوم : " + _vm._s(_vm.end.end) + " ")
+        ])
       ])
     ]
   )
@@ -9612,19 +9626,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.article.title,
-                expression: "article.title"
+                value: _vm.title,
+                expression: "title"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Article title" },
-            domProps: { value: _vm.article.title },
+            domProps: { value: _vm.title },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.article, "title", $event.target.value)
+                _vm.title = $event.target.value
               }
             }
           })
@@ -9655,8 +9669,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.article.info,
-                expression: "article.info"
+                value: _vm.info,
+                expression: "info"
               }
             ],
             staticClass: "form-control",
@@ -9666,13 +9680,13 @@ var render = function() {
               id: "articleinfo",
               rows: "2"
             },
-            domProps: { value: _vm.article.info },
+            domProps: { value: _vm.info },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.article, "info", $event.target.value)
+                _vm.info = $event.target.value
               }
             }
           })
@@ -12695,11 +12709,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "news" } },
+    { staticClass: "py-5", attrs: { id: "news" } },
     [
       _c("Nav2"),
       _vm._v(" "),
-      _vm._m(0),
+      _c(
+        "div",
+        {
+          staticClass: "jumbotron mt-5",
+          style: {
+            backgroundColor: _vm.color.background_color,
+            color: _vm.color.font_color
+          }
+        },
+        [_vm._m(0)]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c(
@@ -12759,10 +12783,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "jumbotron mt-5 py-0" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("h1", { staticClass: "display-6 text-right" }, [_vm._v("المقالات")])
-      ])
+    return _c("div", { staticClass: "container" }, [
+      _c("h1", { staticClass: "display-4 text-right" }, [_vm._v("المقالات")])
     ])
   }
 ]
@@ -12825,7 +12847,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "article" } },
+    { staticClass: "py-5", attrs: { id: "article" } },
     [
       _c("Navabr3"),
       _vm._v(" "),
@@ -12838,11 +12860,13 @@ var render = function() {
                 attrs: {
                   src: _vm.article[0].image,
                   width: "100%",
-                  height: "200px",
+                  height: "400px",
                   alt: ""
                 }
               })
             ]),
+            _vm._v(" "),
+            _c("br"),
             _vm._v(" "),
             _c("h1", [
               _vm._v(

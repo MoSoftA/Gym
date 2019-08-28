@@ -1,7 +1,10 @@
 <template>
     <div class="jumbotron mt-5 pb0" :style="{ backgroundColor: color.background_color, color: color.font_color }">
+        <div class="container">
+
         <h1 class="display-4">أهلاً {{ end.name }}</h1>
         <p class="lead">ينتهي اشتراكك يوم : {{ end.end }} </p>
+        </div>
     </div>
 </template>
 
