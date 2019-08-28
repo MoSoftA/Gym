@@ -2157,6 +2157,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
@@ -2167,8 +2181,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getFooter').then(function (res) {
-      _this.$store.commit('Edit_Footer', res.data.data[0]);
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFooter").then(function (res) {
+      _this.$store.commit("Edit_Footer", res.data.data[0]);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -3726,6 +3740,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3742,7 +3808,13 @@ __webpack_require__.r(__webpack_exports__);
         info: null,
         linkedIn: null,
         twitter: null,
-        we: null
+        we: null,
+        sections: {
+          one: null,
+          two: null,
+          three: null,
+          four: null
+        }
       }
     };
   },
@@ -3763,7 +3835,12 @@ __webpack_require__.r(__webpack_exports__);
       foot.append("facebook", this.footer.facebook);
       foot.append("google", this.footer.google);
       foot.append("linkedIn", this.footer.linkedIn);
-      foot.append("twitter", this.footer.twitter);
+      foot.append("twitter", this.footer.twitter); // ========================= HERE ==========================
+
+      foot.append("one", this.footer.sections.one);
+      foot.append("two", this.footer.sections.two);
+      foot.append("three", this.footer.sections.three);
+      foot.append("four", this.footer.sections.four);
       var config = {
         headers: {
           "content-type": "multipart/form-data",
@@ -8051,17 +8128,44 @@ var render = function() {
             _vm._v("من نحن")
           ]),
           _vm._v(" "),
-          _c("p", [_vm._v(" " + _vm._s(_vm.footer.we) + " ")])
+          _c("p", [_vm._v(_vm._s(_vm.footer.we))])
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-md-6 pr-md-5 col-lg-3 col-xl-2 mx-auto mb-4 font-weight-bold"
+          },
+          [
+            _c("h6", { staticClass: "mb-4 font-weight-bold" }, [
+              _vm._v("أقسام الموقع")
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+              _vm._v(_vm._s(_vm.footer.sections.one))
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+              _vm._v(_vm._s(_vm.footer.sections.two))
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+              _vm._v(_vm._s(_vm.footer.sections.three))
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
+              _vm._v(_vm._s(_vm.footer.sections.four))
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6 col-lg-2 col-xl-2 mx-auto mb-4" }, [
           _c("h6", { staticClass: "font-weight-bold mb-4" }, [
             _vm._v("معلومات التواصل")
           ]),
           _vm._v(" "),
-          _c("p", [_vm._v(" " + _vm._s(_vm.footer.address) + " ")]),
+          _c("p", [_vm._v(_vm._s(_vm.footer.address))]),
           _vm._v(" "),
           _c("div", { staticClass: "social mx-auto" }, [
             _c("h6", { staticClass: "font-weight-bold mb-4" }, [
@@ -8107,22 +8211,22 @@ var render = function() {
             _vm._v(" "),
             _c("p", [
               _c("i", { staticClass: "fas fa-home mr-3" }),
-              _vm._v(" " + _vm._s(_vm.footer.address))
+              _vm._v("\n          " + _vm._s(_vm.footer.address) + "\n        ")
             ]),
             _vm._v(" "),
             _c("p", [
               _c("i", { staticClass: "fas fa-envelope mr-3" }),
-              _vm._v(" " + _vm._s(_vm.footer.google))
+              _vm._v("\n          " + _vm._s(_vm.footer.google) + "\n        ")
             ]),
             _vm._v(" "),
             _c("p", [
               _c("i", { staticClass: "fas fa-phone mr-3" }),
-              _vm._v(" " + _vm._s(_vm.footer.Phone))
+              _vm._v("\n          " + _vm._s(_vm.footer.Phone) + "\n        ")
             ]),
             _vm._v(" "),
             _c("p", [
               _c("i", { staticClass: "fas fa-print mr-3" }),
-              _vm._v(" " + _vm._s(_vm.footer.fax))
+              _vm._v("\n          " + _vm._s(_vm.footer.fax) + "\n        ")
             ])
           ]
         )
@@ -8130,37 +8234,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "col-md-6 pr-md-5 col-lg-3 col-xl-2 mx-auto mb-4 font-weight-bold"
-      },
-      [
-        _c("h6", { staticClass: "mb-4 font-weight-bold" }, [
-          _vm._v("أقسام الموقع")
-        ]),
-        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-          _vm._v("مميزاتنا")
-        ]),
-        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-          _vm._v("معلومات عن مركزنا")
-        ]),
-        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-          _vm._v("خدماتنا\n                    المستقبلية")
-        ]),
-        _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-          _vm._v("مدربينا الخبراء")
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -10352,6 +10426,148 @@ var render = function() {
                         return
                       }
                       _vm.$set(_vm.footer, "we", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
+              _c("label", { staticClass: "my-2", attrs: { for: "text" } }, [
+                _vm._v("section | one")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.sections.one,
+                      expression: "footer.sections.one"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "text",
+                    placeholder: "Who are we"
+                  },
+                  domProps: { value: _vm.footer.sections.one },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer.sections, "one", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
+              _c("label", { staticClass: "my-2", attrs: { for: "text" } }, [
+                _vm._v("section | two")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.sections.two,
+                      expression: "footer.sections.two"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "text",
+                    placeholder: "Who are we"
+                  },
+                  domProps: { value: _vm.footer.sections.two },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer.sections, "two", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
+              _c("label", { staticClass: "my-2", attrs: { for: "text" } }, [
+                _vm._v("section | three")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.sections.three,
+                      expression: "footer.sections.three"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "text",
+                    placeholder: "Who are we"
+                  },
+                  domProps: { value: _vm.footer.sections.three },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.footer.sections,
+                        "three",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input col-sm-12 col-md-3" }, [
+              _c("label", { staticClass: "my-2", attrs: { for: "text" } }, [
+                _vm._v("section | four")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.footer.sections.four,
+                      expression: "footer.sections.four"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "text",
+                    placeholder: "Who are we"
+                  },
+                  domProps: { value: _vm.footer.sections.four },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.footer.sections, "four", $event.target.value)
                     }
                   }
                 })
@@ -31974,7 +32190,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         info: null,
         linkedIn: null,
         twitter: null,
-        we: null
+        we: null,
+        sections: {
+          one: null,
+          two: null,
+          three: null,
+          four: null
+        }
       }
     },
     currentPage: 'FooterEdit',

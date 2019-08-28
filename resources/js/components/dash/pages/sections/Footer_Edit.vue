@@ -18,6 +18,58 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="input col-sm-12 col-md-3">
+            <label for="text" class="my-2">section | one</label>
+            <div class="input-group">
+              <input
+                type="text"
+                id="text"
+                class="form-control"
+                v-model="footer.sections.one"
+                placeholder="Who are we"
+              />
+            </div>
+          </div>
+          <div class="input col-sm-12 col-md-3">
+            <label for="text" class="my-2">section | two</label>
+            <div class="input-group">
+              <input
+                type="text"
+                id="text"
+                class="form-control"
+                v-model="footer.sections.two"
+                placeholder="Who are we"
+              />
+            </div>
+          </div>
+          <div class="input col-sm-12 col-md-3">
+            <label for="text" class="my-2">section | three</label>
+            <div class="input-group">
+              <input
+                type="text"
+                id="text"
+                class="form-control"
+                v-model="footer.sections.three"
+                placeholder="Who are we"
+              />
+            </div>
+          </div>
+          <div class="input col-sm-12 col-md-3">
+            <label for="text" class="my-2">section | four</label>
+            <div class="input-group">
+              <input
+                type="text"
+                id="text"
+                class="form-control"
+                v-model="footer.sections.four"
+                placeholder="Who are we"
+              />
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="input col-12">
             <label for="info" class="my-2">Info</label>
@@ -151,7 +203,13 @@ export default {
         info: null,
         linkedIn: null,
         twitter: null,
-        we: null
+        we: null,
+        sections: {
+            one: null,
+            two: null,
+            three: null,
+            four: null,
+        }
       }
     };
   },
@@ -171,6 +229,11 @@ export default {
       foot.append("google", this.footer.google);
       foot.append("linkedIn", this.footer.linkedIn);
       foot.append("twitter", this.footer.twitter);
+      // ========================= HERE ==========================
+      foot.append("one", this.footer.sections.one);
+      foot.append("two", this.footer.sections.two);
+      foot.append("three", this.footer.sections.three);
+      foot.append("four", this.footer.sections.four);
 
       const config = {
         headers: {
