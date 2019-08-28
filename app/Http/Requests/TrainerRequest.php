@@ -26,27 +26,26 @@ class TrainerRequest extends FormRequest
      */
     public function rules()
     {
-     
-       // 'email' => Rule::unique('users')->ignore($id),
+       
         return [
-           'name'=> 'required', 
-           'email'=>'email|required|unique:trainers'. $this->route('id'),
-            'img' =>'image|required', 
-            'info' =>'required',
-            'phone' =>'required',
+          // 'name'=> 'required', 
+          // 'email'=>'email|required',
+          //'image' =>'image|required', 
+           //'info' =>'required',
+            //'phone' =>'required',
         ];
     }
 
       public function messages(){
         return [
-           "name.required"  => "من فضلك ضع الاسم",
+          "name.required"  => "من فضلك ضع الاسم",
            "email.required"  => "حقل الاميل مطلوب",
            "email.unique"  => "هذا البريد مستخدم من قبل ",
            "email.email"  => "هذا الحقل مخصص فقط للبريد الالكتروني  ",
            'image.image' => "هذا الحقل مخصص للصورة فقط ",
            'image.required' => "من فضلك ضع صورة للمدرب",
-           'info' => 'لم يتم وضع نبذه مختصرة عن المدرب',
-           'phone' => 'من فضلك ضع رقم الهاتف'
+           'info.required' => 'لم يتم وضع نبذه مختصرة عن المدرب',
+           'phone.required' => 'من فضلك ضع رقم الهاتف'
 
         ];
     }

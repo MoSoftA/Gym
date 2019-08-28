@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 $router->pattern('id', '[0-9]+');
-
+    
 Route::group(["namespace"=>"Api"], function (){
 
     Route::group(['namespace'=>'Auth'], function (){
@@ -52,7 +52,9 @@ Route::group(["namespace"=>"Api"], function (){
     // trainers
      Route::name('storeTrainer')->post('storeTrainer', 'TrainerController@store');
      Route::name('updateTrainer')->put('updateTrainer', 'TrainerController@update');
+
      Route::name('deleteTrainer')->delete('deleteTrainer/{id}', 'TrainerController@destroy');	
+
     });
     
     Route::name('getTrainers')->get('getTrainers', 'TrainerController@getTainers');

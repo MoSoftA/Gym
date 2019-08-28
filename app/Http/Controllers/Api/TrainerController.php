@@ -8,6 +8,7 @@ use App\Trainer;
 use Illuminate\Support\Str;
 use App\Traits\ApiResponse;
 use App\Http\Requests\TrainerRequest;
+use Illuminate\Validation\Rule;
 class TrainerController extends Controller
 {
 	 use ApiResponse;
@@ -18,6 +19,7 @@ class TrainerController extends Controller
 
     public function store(TrainerRequest $request)
     {
+    	$this->validate($request, ['email' => Rule::unique('trainers')], ['email.unique'=> "هذا البريد مستخدم من قبل "]);
      if($request->hasFile('img'))
         {
           $img = $request->file('img');
@@ -39,7 +41,10 @@ class TrainerController extends Controller
     }
 
      public function update(TrainerRequest $request)
-    {
+    {	
+    	
+    $this->validate($request, ['email' => Rule::unique('trainers')->ignore($request->id)], ['email.unique'=> "هذا البريد مستخدم من قبل "]);
+
      if($request->hasFile('img'))
         {
           $img = $request->file('img');
@@ -48,7 +53,7 @@ class TrainerController extends Controller
           $url = url('uploads/trainers/'. $imgName);
         }
 
-        Trainer::update([
+        Trainer::find($request->id)->update([
         	'name'	=> $request->name, 
             'email'	=> $request->email,
             'image' => $url, 

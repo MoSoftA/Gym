@@ -52,7 +52,7 @@ class UserController extends Controller
             "email"=> $request->email,
             'start'=> $request->start,
             'end'=> $request->end,
-            'admin' => 1,
+            'admin' =>$request->admin ,
             'updated_at'=> Now()
             
         ]);
