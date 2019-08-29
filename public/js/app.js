@@ -2047,22 +2047,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var vm = this;
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/articles', {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/articles", {
       headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + vm.$store.state.user.token
+        Accept: "application/json",
+        Authorization: "Bearer " + vm.$store.state.user.token
       }
     }).then(function (res) {
-      vm.$store.commit('got_articles', res.data.data);
+      vm.$store.commit("got_articles", res.data.data);
       Vue.nextTick(function () {
-        $('.owl-carousel').owlCarousel({
+        $(".owl-carousel").owlCarousel({
           rtl: true,
-          animateOut: 'fadeOut',
+          animateOut: "fadeOut",
           loop: true,
           margin: 10,
           autoplay: true,
@@ -4642,12 +4643,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       preview: false,
+      update: false,
       feats: [],
       id: null,
       title: null,
@@ -4656,17 +4686,27 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    get_Update_id: function get_Update_id(index) {
+      var element = this.feats.find(function (el) {
+        return el.id == index;
+      });
+      this.id = element.id;
+      this.title = element.title;
+      this.image = element.image;
+      this.text = element.text;
+      this.update = true;
+    },
     get_id: function get_id(index) {
       var element = this.feats.find(function (el) {
         return el.id == index;
       });
       this.id = element.id;
-      console.log(this.id);
+      console.log(element);
     },
     get_image: function get_image(e) {
       this.image = e.target.files[0];
     },
-    send: function send() {
+    update_feat: function update_feat() {
       var _this = this;
 
       var feat = new FormData();
@@ -4680,7 +4720,7 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: "Bearer " + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addFeatures", feat, config).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/updateFeatures/".concat(this.id), feat, config).then(function (res) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
           _this.feats = res.data.data;
           console.log("dasaad", res.data.data);
@@ -4702,8 +4742,44 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    remove_feat: function remove_feat() {
+    send: function send() {
       var _this2 = this;
+
+      var feat = new FormData();
+      feat.append("title", this.title);
+      feat.append("image", this.image);
+      feat.append("text", this.text);
+      var config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
+        }
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addFeatures", feat, config).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
+          _this2.feats = res.data.data;
+          console.log("dasaad", res.data.data);
+        })["catch"](function (err) {
+          console.log(err);
+        });
+        Swal.fire({
+          title: "you Added Feature",
+          text: res.data.message,
+          type: "success",
+          confirmButtonText: "Cool!"
+        });
+      })["catch"](function (err) {
+        Swal.fire({
+          title: "Something wrong",
+          text: res.data.message,
+          type: "error",
+          confirmButtonText: "Cool!"
+        });
+      });
+    },
+    remove_feat: function remove_feat() {
+      var _this3 = this;
 
       var config = {
         headers: {
@@ -4714,7 +4790,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("api/deleteFeatures/".concat(this.id), config).then(function (res) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
-          _this2.feats = res.data.data;
+          _this3.feats = res.data.data;
           console.log("dasaad", res.data.data);
         })["catch"](function (err) {
           console.log(err);
@@ -4736,10 +4812,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
-      _this3.feats = res.data.data;
+      _this4.feats = res.data.data;
       console.log("dasaad", res.data.data);
     })["catch"](function (err) {
       console.log(err);
@@ -8363,8 +8439,9 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("i", { staticClass: "fas fa-user" }),
+                    _vm._v(" "),
                     _c("span", { staticClass: "mr-2" }, [
-                      _vm._v(" محمد أيمن - مصر")
+                      _vm._v("محمد أيمن - مصر")
                     ]),
                     _vm._v(" "),
                     _c("br"),
@@ -8375,7 +8452,7 @@ var render = function() {
                         staticClass: "btn btn-success mt-3",
                         attrs: { to: "/articles/" + _vm.articles[index].id }
                       },
-                      [_vm._v("اقرأ المزيد\n                    ")]
+                      [_vm._v("اقرأ المزيد")]
                     )
                   ],
                   1
@@ -12247,6 +12324,20 @@ var render = function() {
                   _c(
                     "button",
                     {
+                      staticClass: "btn btn-warning btn-block btn-flat",
+                      attrs: { role: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.get_Update_id(feat.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Update this feat")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
                       staticClass: "btn btn-danger btn-block btn-flat",
                       attrs: {
                         "data-toggle": "modal",
@@ -12259,7 +12350,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete this slider")]
+                    [_vm._v("Delete this feat")]
                   )
                 ])
               ]
@@ -12355,6 +12446,20 @@ var render = function() {
               [_vm._v("preview")]
             )
           ]),
+          _vm._v(" "),
+          _vm.update
+            ? _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block btn-flat",
+                    attrs: { role: "button" },
+                    on: { click: _vm.update_feat }
+                  },
+                  [_vm._v("Update")]
+                )
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "col-4 mx-2 my-4" }, [
             _c(
