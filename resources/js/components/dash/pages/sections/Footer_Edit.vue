@@ -27,7 +27,7 @@
                 type="text"
                 id="text"
                 class="form-control"
-                v-model="footer.sections.one"
+                v-model="footer.section_one"
                 placeholder="Who are we"
               />
             </div>
@@ -39,7 +39,7 @@
                 type="text"
                 id="text"
                 class="form-control"
-                v-model="footer.sections.two"
+                v-model="footer.section_two"
                 placeholder="Who are we"
               />
             </div>
@@ -51,7 +51,7 @@
                 type="text"
                 id="text"
                 class="form-control"
-                v-model="footer.sections.three"
+                v-model="footer.section_three"
                 placeholder="Who are we"
               />
             </div>
@@ -63,7 +63,7 @@
                 type="text"
                 id="text"
                 class="form-control"
-                v-model="footer.sections.four"
+                v-model="footer.section_four"
                 placeholder="Who are we"
               />
             </div>
@@ -204,12 +204,12 @@ export default {
         linkedIn: null,
         twitter: null,
         we: null,
-        sections: {
-            one: null,
-            two: null,
-            three: null,
-            four: null,
-        }
+        
+            section_one: null,
+            section_two: null,
+            section_three: null,
+            section_four: null,
+        
       }
     };
   },
@@ -230,10 +230,10 @@ export default {
       foot.append("linkedIn", this.footer.linkedIn);
       foot.append("twitter", this.footer.twitter);
       // ========================= HERE ==========================
-      foot.append("one", this.footer.sections.one);
-      foot.append("two", this.footer.sections.two);
-      foot.append("three", this.footer.sections.three);
-      foot.append("four", this.footer.sections.four);
+      foot.append("one", this.footer.section_one);
+      foot.append("two", this.footer.section_two);
+      foot.append("three", this.footer.section_three);
+      foot.append("four", this.footer.section_four);
 
       const config = {
         headers: {
@@ -253,20 +253,20 @@ export default {
 
           Axios.get("api/getFooter")
             .then(res => {
+              console.log('erer', res.data.data)
               this.$store.commit("Edit_Footer", res.data.data[0]);
-              Object.assign(this.footer, this.$store.state.sections.footer);
             })
             .catch(err => console.log(err));
         })
-        .catch(err =>
-          console.log(err => {
+        .catch(err =>{
+            console.log(err);
             Swal.fire({
               title: "Proplem ",
               text: err.message,
               type: "error",
               confirmButtonText: "ok!"
             });
-          })
+          }
         );
     }
   },

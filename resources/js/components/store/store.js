@@ -40,12 +40,11 @@ export const store = new Vuex.Store({
                 linkedIn: null,
                 twitter:null,
                 we: null,
-                sections: {
-                    one: null,
-                    two: null,
-                    three: null,
-                    four: null,
-                }
+                section_one: null,
+                section_two: null,
+                section_three: null,
+                section_four: null,
+                
             }
         },
         

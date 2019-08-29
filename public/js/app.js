@@ -3809,12 +3809,10 @@ __webpack_require__.r(__webpack_exports__);
         linkedIn: null,
         twitter: null,
         we: null,
-        sections: {
-          one: null,
-          two: null,
-          three: null,
-          four: null
-        }
+        section_one: null,
+        section_two: null,
+        section_three: null,
+        section_four: null
       }
     };
   },
@@ -3837,10 +3835,10 @@ __webpack_require__.r(__webpack_exports__);
       foot.append("linkedIn", this.footer.linkedIn);
       foot.append("twitter", this.footer.twitter); // ========================= HERE ==========================
 
-      foot.append("one", this.footer.sections.one);
-      foot.append("two", this.footer.sections.two);
-      foot.append("three", this.footer.sections.three);
-      foot.append("four", this.footer.sections.four);
+      foot.append("one", this.footer.section_one);
+      foot.append("two", this.footer.section_two);
+      foot.append("three", this.footer.section_three);
+      foot.append("four", this.footer.section_four);
       var config = {
         headers: {
           "content-type": "multipart/form-data",
@@ -3856,20 +3854,19 @@ __webpack_require__.r(__webpack_exports__);
           confirmButtonText: "Cool!"
         });
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFooter").then(function (res) {
-          _this.$store.commit("Edit_Footer", res.data.data[0]);
+          console.log('erer', res.data.data);
 
-          Object.assign(_this.footer, _this.$store.state.sections.footer);
+          _this.$store.commit("Edit_Footer", res.data.data[0]);
         })["catch"](function (err) {
           return console.log(err);
         });
       })["catch"](function (err) {
-        return console.log(function (err) {
-          Swal.fire({
-            title: "Proplem ",
-            text: err.message,
-            type: "error",
-            confirmButtonText: "ok!"
-          });
+        console.log(err);
+        Swal.fire({
+          title: "Proplem ",
+          text: err.message,
+          type: "error",
+          confirmButtonText: "ok!"
         });
       });
     }
@@ -8179,19 +8176,19 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-              _vm._v(_vm._s(_vm.footer.sections.one))
+              _vm._v(_vm._s(_vm.footer.section_one))
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-              _vm._v(_vm._s(_vm.footer.sections.two))
+              _vm._v(_vm._s(_vm.footer.section_two))
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-              _vm._v(_vm._s(_vm.footer.sections.three))
+              _vm._v(_vm._s(_vm.footer.section_three))
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "d-block my-4", attrs: { href: "#!" } }, [
-              _vm._v(_vm._s(_vm.footer.sections.four))
+              _vm._v(_vm._s(_vm.footer.section_four))
             ])
           ]
         ),
@@ -10481,8 +10478,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.footer.sections.one,
-                      expression: "footer.sections.one"
+                      value: _vm.footer.section_one,
+                      expression: "footer.section_one"
                     }
                   ],
                   staticClass: "form-control",
@@ -10491,13 +10488,13 @@ var render = function() {
                     id: "text",
                     placeholder: "Who are we"
                   },
-                  domProps: { value: _vm.footer.sections.one },
+                  domProps: { value: _vm.footer.section_one },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.footer.sections, "one", $event.target.value)
+                      _vm.$set(_vm.footer, "section_one", $event.target.value)
                     }
                   }
                 })
@@ -10515,8 +10512,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.footer.sections.two,
-                      expression: "footer.sections.two"
+                      value: _vm.footer.section_two,
+                      expression: "footer.section_two"
                     }
                   ],
                   staticClass: "form-control",
@@ -10525,13 +10522,13 @@ var render = function() {
                     id: "text",
                     placeholder: "Who are we"
                   },
-                  domProps: { value: _vm.footer.sections.two },
+                  domProps: { value: _vm.footer.section_two },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.footer.sections, "two", $event.target.value)
+                      _vm.$set(_vm.footer, "section_two", $event.target.value)
                     }
                   }
                 })
@@ -10549,8 +10546,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.footer.sections.three,
-                      expression: "footer.sections.three"
+                      value: _vm.footer.section_three,
+                      expression: "footer.section_three"
                     }
                   ],
                   staticClass: "form-control",
@@ -10559,17 +10556,13 @@ var render = function() {
                     id: "text",
                     placeholder: "Who are we"
                   },
-                  domProps: { value: _vm.footer.sections.three },
+                  domProps: { value: _vm.footer.section_three },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(
-                        _vm.footer.sections,
-                        "three",
-                        $event.target.value
-                      )
+                      _vm.$set(_vm.footer, "section_three", $event.target.value)
                     }
                   }
                 })
@@ -10587,8 +10580,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.footer.sections.four,
-                      expression: "footer.sections.four"
+                      value: _vm.footer.section_four,
+                      expression: "footer.section_four"
                     }
                   ],
                   staticClass: "form-control",
@@ -10597,13 +10590,13 @@ var render = function() {
                     id: "text",
                     placeholder: "Who are we"
                   },
-                  domProps: { value: _vm.footer.sections.four },
+                  domProps: { value: _vm.footer.section_four },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.footer.sections, "four", $event.target.value)
+                      _vm.$set(_vm.footer, "section_four", $event.target.value)
                     }
                   }
                 })
@@ -32227,12 +32220,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         linkedIn: null,
         twitter: null,
         we: null,
-        sections: {
-          one: null,
-          two: null,
-          three: null,
-          four: null
-        }
+        section_one: null,
+        section_two: null,
+        section_three: null,
+        section_four: null
       }
     },
     currentPage: 'FooterEdit',

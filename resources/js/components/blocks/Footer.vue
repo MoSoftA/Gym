@@ -8,10 +8,10 @@
         </div>
         <div class="col-md-6 pr-md-5 col-lg-3 col-xl-2 mx-auto mb-4 font-weight-bold">
           <h6 class="mb-4 font-weight-bold">أقسام الموقع</h6>
-          <a class="d-block my-4" href="#!">{{ footer.sections.one }}</a>
-          <a class="d-block my-4" href="#!">{{ footer.sections.two }}</a>
-          <a class="d-block my-4" href="#!">{{ footer.sections.three }}</a>
-          <a class="d-block my-4" href="#!">{{ footer.sections.four }}</a>
+          <a class="d-block my-4" href="#!">{{ footer.section_one }}</a>
+          <a class="d-block my-4" href="#!">{{ footer.section_two }}</a>
+          <a class="d-block my-4" href="#!">{{ footer.section_three }}</a>
+          <a class="d-block my-4" href="#!">{{ footer.section_four }}</a>
         </div>
         <div class="col-md-6 col-lg-2 col-xl-2 mx-auto mb-4">
           <h6 class="font-weight-bold mb-4">معلومات التواصل</h6>
