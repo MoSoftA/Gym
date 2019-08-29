@@ -34,6 +34,9 @@ class SiteController extends Controller
           $imgName = Str::random(50).'.'. $img->extension();
           $img->move(public_path('uploads/navbar'), $imgName); 
           $url = url('uploads/navbar/'. $imgName);
+        }else if (DB::table('navbar')->where('logo', $request->img))
+        {
+        	$url = $request->img;
         }else{$url = null;}
 
 	   	$nav = DB::table('navbar')->first();
@@ -43,8 +46,10 @@ class SiteController extends Controller
 		   		'logo' =>  $url ,
 		   		'background_color' => $request->background_color,
 		   		'font_color' => $request->font_color,
-		   		'button_background' => $request->button_background,
-		   		'button_font_color' => $request->button_font_color,
+		   		'login_button_background' => $request->button_background,
+		   		'login_button_font_color' => $request->button_font_color,
+		   		'logout_button_background' => $request->sec_button_background,
+		   		'logout_button_font_color' => $request->sec_button_font_color,
 		   		'created_at'=> now()
 			]);
 
@@ -55,8 +60,10 @@ class SiteController extends Controller
 	   		'logo' =>  $url ,
 	   		'background_color' => $request->background_color,
 	   		'font_color' => $request->font_color,
-	   		'button_background' => $request->button_background,
-	   		'button_font_color' => $request->button_font_color,
+	   		'login_button_background' => $request->button_background,
+		   	'login_button_font_color' => $request->button_font_color,
+		   	'logout_button_background' => $request->sec_button_background,
+		   	'logout_button_font_color' => $request->sec_button_font_color,
 	   		'updated_at' => now()
 
 	   		]);
@@ -117,19 +124,29 @@ class SiteController extends Controller
     public function storeFooter(Request  $request)
    {
    		$this->validate($request, [
-   			'facebook' =>'email',
-   			'google' =>'email',
-   			'linkedIn' =>'email',
-   			'twitter' =>'email'
+   			'facebook' =>'string',
+   			'google' =>'string',
+   			'linkedIn' =>'string',
+   			'twitter' =>'string',
+   			'one' =>'string',
+   			'two' =>'string',
+   			'three' =>'string',
+   			'foure' =>'string',
+   			'we' =>'string',
+   			'info' =>'string',
+   			'Phone'=> 'numeric',
+   			'fax'=> 'numeric'
+
    		],[
-   			'facebook.email'  => 'مخصص للاميل فقط'   ,
-   			'google.email'  => 'محصص للاميل فقط'   ,
-   			'linkedIn.email'  => 'مخصص للاميل فقط'   ,
-   			'twitter.email'  => 'مخصص للاميل فقط'   ,
+   			'fax.numeric' => 'يجب ان يكون رقم'
    			]);
 	   	$footer = DB::table('footer')->first();
 	   	if(!$footer){
 		   	DB::table('footer')->Insert([
+		   		'section_one' => $request->one,
+		   		'section_two' => $request->two,
+		   		'section_three' => $request->three,
+		   		'section_four' => $request->four,
 		   		'we' => $request->we,
 		   		'info' => $request->info,
 		   		'address' => $request->address,
@@ -144,6 +161,10 @@ class SiteController extends Controller
 
 		}else{
 		   	DB::table('footer')->update([
+		   		'section_one' => $request->one,
+		   		'section_two' => $request->two,
+		   		'section_three' => $request->three,
+		   		'section_four' => $request->four,
 	   			'we' => $request->we,
 		   		'info' => $request->info,
 		   		'address' => $request->address,
@@ -157,6 +178,7 @@ class SiteController extends Controller
 
 	   		]);
 		}
+
    	 return $this->ApiResponse(200,"success");
    }
 
@@ -205,7 +227,64 @@ class SiteController extends Controller
    	 return $this->ApiResponse(200,"success");
    }
 
+/*====================
+	features 
+===================*/
+	public function getFeatures()
+	{
+		$features = DB::table('features')->get();
 
+	   	if($features){
+	   	 return $this->ApiResponse(200,"success",$features);
+	   }	
+	}
+
+	public function storeFeatures(Request $request)
+	{
+		$this->validate($request, [
+			'titel'	=> 'required|string',
+			'text'	=> 'required|string',
+			'image'	=> 'required|image'
+		]);
+		DB::table('features')->create([
+			'titel' => $request->title,
+			'text'	=> $request->text,
+			'image'	=> $request->image
+		]);
+		return $this->ApiResponse(200,"success");
+	}
+
+
+	public function updateFeatures(Request $request, $id)
+	{
+
+		$this->validate($request, [
+			'title'	=> 'required|string',
+			'text'	=> 'required|string',
+			//'image'	=> 'required|image'
+		], [
+			'title.required' => 'من فضلك ضع العنوان',
+			'title.string' => 'العنوان يحتوي علي حروف فقط',
+			'text.required' => 'من فضلك ضع المحتوي',
+			'text.string' => 'يجب ان يحتوي علي حروف فقط',
+
+
+			'image.required'	=> 'من فضلك ضه صورة'
+		]);
+		//return $request;
+		DB::table('features')->where('id', $id)->update([
+			'title' => $request->title,
+			'text'	=> $request->text,
+			'image'	=> $request->image
+		]);
+		return $this->ApiResponse(200,"success");
+	}
+
+	public function destroyFeatures($id)
+	{
+		DB::table('features')->where('id', $id)->delete();
+		return $this->ApiResponse(200,"success");
+	}
 }
 
 

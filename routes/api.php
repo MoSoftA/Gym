@@ -52,8 +52,12 @@ Route::group(["namespace"=>"Api"], function (){
     // trainers
      Route::name('storeTrainer')->post('storeTrainer', 'TrainerController@store');
      Route::name('updateTrainer')->put('updateTrainer', 'TrainerController@update');
-
      Route::name('deleteTrainer')->delete('deleteTrainer/{id}', 'TrainerController@destroy');	
+     // features
+    Route::name('addFeatures')->post('addFeatures', 'SiteController@storeFeatures');
+    Route::name('updateFeatures')->put('updateFeatures/{id}', 'SiteController@updateFeatures');
+    Route::name('deleteFeatures')->delete('deleteFeatures/{id}', 'SiteController@destroyFeatures');
+
 
     });
     
@@ -63,5 +67,6 @@ Route::group(["namespace"=>"Api"], function (){
     Route::name('getAboutUsr')->get('getAboutUsr', 'SiteController@getAboutUs');
     Route::name('getNavbar')->get('getNavbar', 'SiteController@getNavbar');
     Route::name('getSlider')->get('getSlider', 'SiteController@getSlider');
+    Route::name('getFeatures')->get('getFeatures', 'SiteController@getFeatures');
     Route::name('articles')->get('articles', 'ArticleController@index');
 });
