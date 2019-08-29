@@ -168,7 +168,7 @@ export default {
                      Authorization: "Bearer " + this.$store.state.user.token
                  }
              };
-             Axios.put(`api/updateFeatures/${this.id}`, feat, config).then(res => {
+             Axios.post(`api/updateFeatures/${this.id}`, feat, config).then(res => {
                      Axios.get("api/getFeatures")
                          .then(res => {
                              this.feats = res.data.data;

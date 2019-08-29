@@ -39,7 +39,7 @@ Route::group(["namespace"=>"Api"], function (){
     Route::name('storerAboutUs')->post('storerAboutUs', 'SiteController@storerAboutUs');
     // articles
     Route::name('addArticle')->post('addArticle', 'ArticleController@store');
-    Route::name('editArticle')->put('editArticle/{id}', 'ArticleController@update');
+    Route::name('editArticle')->post('editArticle/{id}', 'ArticleController@update');
     Route::name('deleteArticle')->delete('deleteArticle/{id}', 'ArticleController@destroy');
 
     // exerciese
@@ -51,11 +51,11 @@ Route::group(["namespace"=>"Api"], function (){
 
     // trainers
      Route::name('storeTrainer')->post('storeTrainer', 'TrainerController@store');
-     Route::name('updateTrainer')->put('updateTrainer', 'TrainerController@update');
+     Route::name('updateTrainer')->post('updateTrainer', 'TrainerController@update');
      Route::name('deleteTrainer')->delete('deleteTrainer/{id}', 'TrainerController@destroy');	
      // features
     Route::name('addFeatures')->post('addFeatures', 'SiteController@storeFeatures');
-    Route::name('updateFeatures')->put('updateFeatures/{id}', 'SiteController@updateFeatures');
+    Route::name('updateFeatures')->post('updateFeatures/{id}', 'SiteController@updateFeatures');
     Route::name('deleteFeatures')->delete('deleteFeatures/{id}', 'SiteController@destroyFeatures');
 
 

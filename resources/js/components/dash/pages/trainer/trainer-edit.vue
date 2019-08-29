@@ -89,7 +89,7 @@
                  art.append('info', this.info);
 
                 // Send the request
-                axios.put(`api/updateTrainer`, art,  {
+                axios.post(`api/updateTrainer`, art,  {
                         headers: {
                             Accept: 'application/json',
                             Authorization: 'Bearer ' + this.$store.state.user.token
