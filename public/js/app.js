@@ -4186,6 +4186,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4193,8 +4229,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       sliders: [],
       preview: false,
-      img: '',
-      text: '',
+      img: "",
+      text: "",
       id: null
     };
   },
@@ -4218,17 +4254,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var slider = new FormData();
-      slider.append('text', this.text);
-      slider.append('image', this.img);
+      slider.append("text", this.text);
+      slider.append("image", this.img);
       var config = {
         headers: {
-          'content-type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          "content-type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeSlider', slider, config).then(function (res) {
-        _this.$store.commit('Edit_Navbar', res.data.data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/storeSlider", slider, config).then(function (res) {
+        _this.$store.commit("Edit_Navbar", res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -4239,12 +4275,12 @@ __webpack_require__.r(__webpack_exports__);
       this.id = id;
       var config = {
         headers: {
-          'content-type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          "content-type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("api/deleteSlider/".concat(this.id), config).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getSlider', config).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("api/deleteSlider/".concat(this.id), config).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getSlider", config).then(function (res) {
         _this2.sliders = res.data.data;
         console.log(_this2.sliders);
       })["catch"](function (err) {
@@ -4259,12 +4295,12 @@ __webpack_require__.r(__webpack_exports__);
 
     var config = {
       headers: {
-        'content-type': 'multipart/form-data',
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+        "content-type": "multipart/form-data",
+        Accept: "application/json",
+        Authorization: "Bearer " + this.$store.state.user.token
       }
     };
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getSlider', config).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getSlider", config).then(function (res) {
       res.data.data.forEach(function (slider) {
         _this3.sliders.push(slider);
       });
