@@ -204,12 +204,11 @@ export default {
         linkedIn: null,
         twitter: null,
         we: null,
-        
-            section_one: null,
-            section_two: null,
-            section_three: null,
-            section_four: null,
-        
+
+        section_one: null,
+        section_two: null,
+        section_three: null,
+        section_four: null
       }
     };
   },
@@ -253,21 +252,20 @@ export default {
 
           Axios.get("api/getFooter")
             .then(res => {
-              console.log('erer', res.data.data)
+              console.log("erer", res.data.data);
               this.$store.commit("Edit_Footer", res.data.data[0]);
             })
             .catch(err => console.log(err));
         })
-        .catch(err =>{
-            console.log(err);
-            Swal.fire({
-              title: "Proplem ",
-              text: err.message,
-              type: "error",
-              confirmButtonText: "ok!"
-            });
-          }
-        );
+        .catch(err => {
+          console.log(err);
+          Swal.fire({
+            title: "Proplem ",
+            text: err.message,
+            type: "error",
+            confirmButtonText: "ok!"
+          });
+        });
     }
   },
   mounted() {

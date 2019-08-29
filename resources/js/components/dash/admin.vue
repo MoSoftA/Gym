@@ -69,6 +69,7 @@
     import articleAdd from './pages/articles/article-add';
     import articleEdit from './pages/articles/article-edit';
 
+    import features from './pages/sections/features';
     import NavEdit from './pages/sections/Navbar_Edit';
     import FooterEdit from './pages/sections/Footer_Edit';
     import SlidersEdit from './pages/sections/Sliders_Edit';
@@ -96,6 +97,7 @@
             articleAll,
             articleEdit,
             
+            features,
             NavEdit,
             FooterEdit,
             SlidersEdit,

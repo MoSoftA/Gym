@@ -25,6 +25,11 @@
                                         class="far fa-circle nav-icon"></i>
                                     Navbar</a>
                             </li>
+
+                            <li class="nav-item"><a role="button" class="nav-link" @click="change_page('features')"><i
+                                        class="far fa-circle nav-icon"></i>
+                                    Features</a>
+                            </li>
                             <li class="nav-item"><a role="button" class="nav-link"
                                     @click="change_page('SlidersEdit')"><i class="far fa-circle nav-icon"></i>
                                     Slieders</a>

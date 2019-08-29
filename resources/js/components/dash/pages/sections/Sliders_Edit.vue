@@ -1,74 +1,81 @@
 <template>
   <div class="container">
+    <div class="bd-example col-12" v-if="preview ">
+      <div class="carousel slide" id="carouselExampleCaptions" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li
+                  data-target="#carouselExampleCaptions"
+                  :data-slide-to="index"
+                  :key="index"
+                  v-for="(slider, index) in sliders"
+                ></li>
+              </ol>
+              <div class="carousel-inner">
+                <div
+                  class="carousel-item active"
+                  :style="{backgroundImage: 'url('+sliders[0].image+')', backgroundPosition: 'center center', } "
+                >
+                  <div class="carousel-caption d-md-block">
+                    <h5>{{sliders[0].text}}</h5>
+
+                    <button
+                      class="btn btn-danger btn-block btn-flat"
+                      data-toggle="modal"
+                      data-target="#exampleModalCenter"
+                      @click="get_slider(sliders[0].id)"
+                      role="button"
+                    >Delete this slider</button>
+
+                  </div>
+                </div>
+                <div
+                  class="carousel-item"
+                  :key="index"
+                  v-for="(item, index) in sliders.slice(1)"
+                  :style="{backgroundImage: 'url('+item.image+')', backgroundPosition: 'center center', }"
+                >
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{item.text}}</h5>
+
+                    <button
+                      class="btn btn-danger btn-block btn-flat"
+                      data-toggle="modal"
+                      data-target="#exampleModalCenter"
+                      @click="get_slider(item.id)"
+                      role="button"
+                    >Delete this slider</button>
+                  </div>
+                </div>
+              </div>
+              <a
+                class="carousel-control-prev"
+                href="#carouselExampleCaptions"
+                role="button"
+                data-slide="prev"
+              >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a
+                class="carousel-control-next"
+                href="#carouselExampleCaptions"
+                role="button"
+                data-slide="next"
+              >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card">
       <div class="card-body row">
         <p class="h1 mt-5">SLider Edit</p>
-
-        <div v-if="preview" class="bd-example col-12">
-          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li
-                data-target="#carouselExampleCaptions"
-                :data-slide-to="index"
-                :key="index"
-                v-for="(slider, index) in sliders"
-              ></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active" @click="get_slider(sliders[0].id)">
-                <img :src="sliders[0].image" class="d-block w-100" :alt="sliders[0].text" />
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>{{ sliders[0].text }}</h5>
-                  <button
-                    class="btn btn-danger btn-block btn-flat"
-                    @click="delsete(sliders[0].id)"
-                    role="button"
-                  >Delete this slider</button>
-                </div>
-              </div>
-              <div
-                class="carousel-item"
-                @click="get_slider(slider.id)"
-                :key="index"
-                v-for="(slider, index) in sliders.slice(1)"
-              >
-                <img :src="slider.image" class="d-block w-100" :alt="slider.text" />
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>{{ slider.text }}</h5>
-                  <button
-                    class="btn btn-danger btn-block btn-flat"
-                    @click="delsete(sliders[0].id)"
-                    role="button"
-                  >Delete this slider</button>
-                </div>
-              </div>
-            </div>
-            <a
-              class="carousel-control-prev"
-              href="#carouselExampleCaptions"
-              role="button"
-              data-slide="prev"
-            >
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a
-              class="carousel-control-next"
-              href="#carouselExampleCaptions"
-              role="button"
-              data-slide="next"
-            >
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-        </div>
-
-        <center v-if="id" class="my-4">
-          <p>
-            <mark>you selected the slider with title {{ text }}</mark>
-          </p>
-        </center>
 
         <div class="input col-sm-12 mt-4">
           <label for="image">image</label>
@@ -103,10 +110,48 @@
         </div>
       </div>
     </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+
+                  <div class="modal-body">
+                      <p class="h2">Are you sure you wanna delete this user?</p>
+                      <button class="btn btn-warning btn-flat my-4 mx-auto" data-dismiss="modal" type="button"
+                          id="button-addon2" @click="delsete">Just Do It</button>
+                      <button type="button" class="btn btn-primary btn-flat my-4 mx-auto" data-dismiss="modal">cancel</button>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.bd-example {
+  height: 400px !important;
+  * {
+    height: 400px !important;
+  }
+  h5{
+    height: 60px !important
+  }
+  button{
+    height: 60px !important
+  } 
+
+  .carousel-caption {
+    top: 50%;
+    }
+
+  .carousel-indicators,
+  .carousel-indicators * {
+    height: 5px !important;
+  }
+}
+
 .carousel-item.active {
   border: 2px solid #000;
 }
@@ -126,20 +171,9 @@ export default {
       id: null
     };
   },
-  components: {
-    realCarousel
-  },
   methods: {
     get_image(e) {
       this.img = e.target.files[0];
-    },
-    get_slider(slide) {
-      let it = this.sliders.filter(thing => thing.id == slide);
-
-      this.img = it[0].image;
-      this.text = it[0].text;
-      this.id = it[0].id;
-      console.log(it);
     },
     send() {
       let slider = new FormData();
@@ -155,13 +189,26 @@ export default {
       };
       Axios.post("api/storeSlider", slider, config)
         .then(res => {
-          this.$store.commit("Edit_Navbar", res.data.data);
-        })
-        .catch(err => console.log(err));
+          Axios.get("api/getSlider", config)
+            .then(res => {
+              this.sliders = res.data.data;
+              console.log(this.sliders);
+            })
+            .catch(err => console.log(err));
+        })        .catch(err => console.log(err));
+
+
+          Swal.fire({
+            title: "you Added Slider",
+            text: res.data.message,
+            type: "success",
+            confirmButtonText: "Cool!"
+          });
+
     },
 
-    delsete(id) {
-      this.id = id;
+    delsete() {
+
       const config = {
         headers: {
           "content-type": "multipart/form-data",
@@ -182,7 +229,7 @@ export default {
         .catch(err => console.log(err));
     }
   },
-  beforeMount() {
+  mounted() {
     const config = {
       headers: {
         "content-type": "multipart/form-data",

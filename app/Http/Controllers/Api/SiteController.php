@@ -242,12 +242,12 @@ class SiteController extends Controller
 	public function storeFeatures(Request $request)
 	{
 		$this->validate($request, [
-			'titel'	=> 'required|string',
+			'title'	=> 'required|string',
 			'text'	=> 'required|string',
 			'image'	=> 'required|image'
 		]);
-		DB::table('features')->create([
-			'titel' => $request->title,
+		DB::table('features')->Insert([
+			'title' => $request->title,
 			'text'	=> $request->text,
 			'image'	=> $request->image
 		]);
