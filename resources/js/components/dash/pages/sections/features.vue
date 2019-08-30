@@ -195,8 +195,6 @@ export default {
                 });
         },
         send() {
-            // Validation
-            if (this.feats.length < 4) {
                 let feat = new FormData();
                 feat.append("title", this.title);
                 feat.append("image", this.image);
@@ -235,9 +233,7 @@ export default {
                             confirmButtonText: "Cool!"
                         });
                     });
-            }else{
-                alert("Sorry you can't add more then 4 feat")
-            }
+            
         },
         remove_feat() {
             const config = {

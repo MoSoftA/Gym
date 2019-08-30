@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" type="text/css" href='{{ asset("css/owlCarouselTheme.css") }}'>
 
+
     <!-- For Admin panel -->
 
     <!-- IonIcons -->
@@ -99,36 +100,41 @@
 <script src=" {{ asset('Admin/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script><!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
 
 <script>
-    // $(document).ready(function () {
-    //     $('.owl-carousel').owlCarousel({
-    //         rtl: true,
-    //         animateOut: 'fadeOut',
-    //         loop: true,
-    //         margin: 10,
-    //         autoplay: 3000,
-    //         nav: false,
-    //         autoplayTimeout: 3000,
-    //         autoplayHoverPause: true,
-    //         responsiveClass: true,
-    //         responsive: {
-    //             0: {
-    //                 items: 1,
-    //                 nav: false
-    //             },
-    //             600: {
-    //                 items: 2,
-    //                 loop: true
-    //             },
-    //             1000: {
-    //                 items: 2,
-    //                 loop: true,
-    //             }
-    //         }
-    //     })
-    // });
+    $(document).ready(function () {
+        setTimeout(() => {
+            $('.owl-carousel').owlCarousel({
+                rtl: true,
+                center:true,
+                animateOut: 'fadeOut',
+                loop: false,
+                margin: 10,
+                autoplay: false,
+                nav: false,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    600: {
+                        items: 2,
+                        loop: true
+                    },
+                    1000: {
+                        items: 2,
+                        loop: true,
+                    }
+                }
+            })
+        }, 1500);
+        
+    });
 
 </script>
 

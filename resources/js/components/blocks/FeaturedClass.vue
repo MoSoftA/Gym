@@ -3,9 +3,14 @@
         <div class="container">
             <p class="h1">أخر الأخبار</p>
             <hr />
-
+<!-- 
             <carousel :autoplay="true" :nav="false">
-                <div class="card col-sm-12 col-md-3 col-lg-4" :key="index" v-for="(s,index) in articles">
+                
+            </carousel> -->
+
+
+            <div class="owl-carousel">
+                 <div class="card col-sm-12 col-md-3 col-lg-4" :key="index" v-for="(s,index) in articles">
                     <img class="card-img-top" width="50" :src="articles[index].image" />
                     <div class="card-body border">
                         <h5 class="card-title">{{ articles[index].title }}</h5>
@@ -18,7 +23,7 @@
                         </router-link>
                     </div>
                 </div>
-            </carousel>
+            </div>
         </div>
     </div>
 </template>
@@ -51,21 +56,6 @@
 
     import Axios from "axios";
     export default {
-        mounted: function () {
-            var vm = this;
-            Axios.get("api/articles", {
-                    headers: {
-                        Accept: "application/json",
-                        Authorization: "Bearer " + vm.$store.state.user.token
-                    }
-                })
-                .then(res => {
-                    vm.$store.commit("got_articles", res.data.data);
-                })
-                .catch(err => {
-                    if (err) console.log(err);
-                });
-        },
         components: {
             carousel
         },
@@ -75,36 +65,48 @@
             }
         },
         mounted() {
-            // this.$nextTick(() => {
-            //     $(document).ready(function () {
-            //         var owl = $('.owl-carousel');
-            //        owl  .owlCarousel({
-            //             rtl: true,
-            //             animateOut: 'fadeOut',
-            //             loop: true,
-            //             margin: 10,
-            //             autoplay: 3000,
-            //             nav: false,
-            //             autoplayTimeout: 3000,
-            //             autoplayHoverPause: true,
-            //             responsiveClass: true,
-            //             responsive: {
-            //                 0: {
-            //                     items: 1,
-            //                     nav: false
-            //                 },
-            //                 600: {
-            //                     items: 2,
-            //                     loop: true
-            //                 },
-            //                 1000: {
-            //                     items: 2,
-            //                     loop: true,
-            //                 }
-            //             }
-            //         })
-            //     });
-            // })
+
+             Axios.get("api/articles", {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: "Bearer " + this.$store.state.user.token
+                    }
+                })
+                .then(res => {
+                    this.$store.commit("got_articles", res.data.data);
+                })
+                .catch(err => {
+                    if (err) console.log(err);
+                });
+
+             this.$nextTick(() =>{
+                 (
+                    $('.owl-carousel').owlCarousel({
+                         rtl: true,
+                         animateOut: 'fadeOut',
+                         loop: true,
+                         margin: 10,
+                         autoplay: 3000,
+                         nav: false,
+                         autoplayTimeout: 3000,
+                         autoplayHoverPause: true,
+                         responsiveClass: true,
+                         responsive: {
+                             0: {
+                                 items: 1,
+                                 nav: false
+                             },
+                             600: {
+                                 items: 2,
+                                 loop: true
+                             },
+                             1000: {
+                                 items: 2,
+                                 loop: true,
+                             }
+                         }
+                    })
+                 )})
         }
     }
 </script>

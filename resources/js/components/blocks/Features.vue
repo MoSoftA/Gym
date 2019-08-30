@@ -1,7 +1,21 @@
 <template>
 <div class="my-5" id="feats">
     <div class="container">
-        <div class="row">
+        
+        <div v-if="feats.length > 4">
+            <div class="owl-carousel">
+                <div class="p-5 k" @click="get_id(index)" :key="index" v-for="(feat , index) in feats">
+                    <div class="feat" >
+                        <img class="mb-2" :src="feat.image" width="56px" style="width: 56px !important; height: 56px !important" height="56px"/>
+                        <p class="h4">{{ feat.title }}</p>
+                        <hr>
+                        <p>{{ feat.text }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" v-else>
         <div class="col-md-6 col-lg-3 p-5 k" @click="get_id(index)" :key="index" v-for="(feat , index) in feats">
             <div class="feat">
                 <img class="mb-2" :src="feat.image" width="56" height="56"/>
@@ -10,27 +24,8 @@
                 <p>{{ feat.text }}</p>
             </div>
         </div>
-        <!-- <div class="col-md-6 col-lg-3 p-5 k">
-                <div class="feat"><img class="mb-2" src="../../assets/002-dumbbell.svg" width="56" height="56"/>
-                <p class="h4">خسارة الوزن</p>
-                <hr/>
-                <p> لوريم ايبسوم دولار سيت أميت أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أيوسمود.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 p-5 k">
-                <div class="feat"><img class="mb-2" src="../../assets/003-boxing-gloves.svg" width="56" height="56"/>
-                <p class="h4">الملاكمة</p>
-                <hr/>
-                <p> لوريم ايبسوم دولار سيت أميت أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أيوسمود.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 p-5 k">
-                <div class="feat"><img class="mb-2" src="../../assets/004-running.svg" width="56" height="56"/>
-                <p class="h4">الركض</p>
-                <hr/>
-                <p> لوريم ايبسوم دولار سيت أميت أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أيوسمود.</p>
-                </div>
-            </div> -->
+
+
         </div>
     </div>
 </div>

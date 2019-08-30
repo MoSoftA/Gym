@@ -1995,72 +1995,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_owl_carousel__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_owl_carousel__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
-
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
-  mounted: function mounted() {
-    var vm = this;
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/articles", {
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + vm.$store.state.user.token
-      }
-    }).then(function (res) {
-      vm.$store.commit("got_articles", res.data.data);
-    })["catch"](function (err) {
-      if (err) console.log(err);
-    });
-  },
+/* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     carousel: vue_owl_carousel__WEBPACK_IMPORTED_MODULE_0___default.a
   },
@@ -2068,38 +2058,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     articles: function articles() {
       return this.$store.state.articles;
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/articles", {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + this.$store.state.user.token
+      }
+    }).then(function (res) {
+      _this.$store.commit("got_articles", res.data.data);
+    })["catch"](function (err) {
+      if (err) console.log(err);
+    });
+    this.$nextTick(function () {
+      $('.owl-carousel').owlCarousel({
+        rtl: true,
+        animateOut: 'fadeOut',
+        loop: true,
+        margin: 10,
+        autoplay: 3000,
+        nav: false,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1,
+            nav: false
+          },
+          600: {
+            items: 2,
+            loop: true
+          },
+          1000: {
+            items: 2,
+            loop: true
+          }
+        }
+      });
+    });
   }
-}, "mounted", function mounted() {// this.$nextTick(() => {
-  //     $(document).ready(function () {
-  //         var owl = $('.owl-carousel');
-  //        owl  .owlCarousel({
-  //             rtl: true,
-  //             animateOut: 'fadeOut',
-  //             loop: true,
-  //             margin: 10,
-  //             autoplay: 3000,
-  //             nav: false,
-  //             autoplayTimeout: 3000,
-  //             autoplayHoverPause: true,
-  //             responsiveClass: true,
-  //             responsive: {
-  //                 0: {
-  //                     items: 1,
-  //                     nav: false
-  //                 },
-  //                 600: {
-  //                     items: 2,
-  //                     loop: true
-  //                 },
-  //                 1000: {
-  //                     items: 2,
-  //                     loop: true,
-  //                 }
-  //             }
-  //         })
-  //     });
-  // })
-}));
+});
 
 /***/ }),
 
@@ -2114,11 +2115,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4812,43 +4808,38 @@ __webpack_require__.r(__webpack_exports__);
     send: function send() {
       var _this2 = this;
 
-      // Validation
-      if (this.feats.length < 4) {
-        var feat = new FormData();
-        feat.append("title", this.title);
-        feat.append("image", this.image);
-        feat.append("text", this.text);
-        var config = {
-          headers: {
-            "content-type": "multipart/form-data",
-            Accept: "application/json",
-            Authorization: "Bearer " + this.$store.state.user.token
-          }
-        };
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addFeatures", feat, config).then(function (res) {
-          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
-            _this2.feats = res.data.data;
-            console.log("dasaad", res.data.data);
-          })["catch"](function (err) {
-            console.log(err);
-          });
-          Swal.fire({
-            title: "you Added Feature",
-            text: res.data.message,
-            type: "success",
-            confirmButtonText: "Cool!"
-          });
+      var feat = new FormData();
+      feat.append("title", this.title);
+      feat.append("image", this.image);
+      feat.append("text", this.text);
+      var config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
+        }
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addFeatures", feat, config).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
+          _this2.feats = res.data.data;
+          console.log("dasaad", res.data.data);
         })["catch"](function (err) {
-          Swal.fire({
-            title: "Something wrong",
-            text: res.data.message,
-            type: "error",
-            confirmButtonText: "Cool!"
-          });
+          console.log(err);
         });
-      } else {
-        alert("Sorry you can't add more then 4 feat");
-      }
+        Swal.fire({
+          title: "you Added Feature",
+          text: res.data.message,
+          type: "success",
+          confirmButtonText: "Cool!"
+        });
+      })["catch"](function (err) {
+        Swal.fire({
+          title: "Something wrong",
+          text: res.data.message,
+          type: "error",
+          confirmButtonText: "Cool!"
+        });
+      });
     },
     remove_feat: function remove_feat() {
       var _this3 = this;
@@ -8475,68 +8466,63 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "mt-5", attrs: { id: "featClass" } }, [
-    _c(
-      "div",
-      { staticClass: "container" },
-      [
-        _c("p", { staticClass: "h1" }, [_vm._v("أخر الأخبار")]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c(
-          "carousel",
-          { attrs: { autoplay: true, nav: false } },
-          _vm._l(_vm.articles, function(s, index) {
-            return _c(
-              "div",
-              { key: index, staticClass: "card col-sm-12 col-md-3 col-lg-4" },
-              [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: { width: "50", src: _vm.articles[index].image }
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "card-body border" },
-                  [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(_vm.articles[index].title))
-                    ]),
-                    _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(_vm.articles[index].shortDescription))
-                    ]),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fas fa-user" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mr-2" }, [
-                      _vm._v("محمد أيمن - مصر")
-                    ]),
-                    _vm._v(" "),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-success mt-3",
-                        attrs: { to: "/articles/" + _vm.articles[index].id }
-                      },
-                      [_vm._v("اقرأ المزيد\n                    ")]
-                    )
-                  ],
-                  1
-                )
-              ]
-            )
-          }),
-          0
-        )
-      ],
-      1
-    )
+    _c("div", { staticClass: "container" }, [
+      _c("p", { staticClass: "h1" }, [_vm._v("أخر الأخبار")]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "owl-carousel" },
+        _vm._l(_vm.articles, function(s, index) {
+          return _c(
+            "div",
+            { key: index, staticClass: "card col-sm-12 col-md-3 col-lg-4" },
+            [
+              _c("img", {
+                staticClass: "card-img-top",
+                attrs: { width: "50", src: _vm.articles[index].image }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-body border" },
+                [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(_vm.articles[index].title))
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(_vm._s(_vm.articles[index].shortDescription))
+                  ]),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "fas fa-user" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "mr-2" }, [
+                    _vm._v("محمد أيمن - مصر")
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-success mt-3",
+                      attrs: { to: "/articles/" + _vm.articles[index].id }
+                    },
+                    [_vm._v("اقرأ المزيد\n                        ")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -8563,39 +8549,87 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "my-5", attrs: { id: "feats" } }, [
     _c("div", { staticClass: "container" }, [
-      _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.feats, function(feat, index) {
-          return _c(
+      _vm.feats.length > 4
+        ? _c("div", [
+            _c(
+              "div",
+              { staticClass: "owl-carousel" },
+              _vm._l(_vm.feats, function(feat, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "p-5 k",
+                    on: {
+                      click: function($event) {
+                        return _vm.get_id(index)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "feat" }, [
+                      _c("img", {
+                        staticClass: "mb-2",
+                        staticStyle: {
+                          width: "56px !important",
+                          height: "56px !important"
+                        },
+                        attrs: {
+                          src: feat.image,
+                          width: "56px",
+                          height: "56px"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "h4" }, [
+                        _vm._v(_vm._s(feat.title))
+                      ]),
+                      _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(feat.text))])
+                    ])
+                  ]
+                )
+              }),
+              0
+            )
+          ])
+        : _c(
             "div",
-            {
-              key: index,
-              staticClass: "col-md-6 col-lg-3 p-5 k",
-              on: {
-                click: function($event) {
-                  return _vm.get_id(index)
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "feat" }, [
-                _c("img", {
-                  staticClass: "mb-2",
-                  attrs: { src: feat.image, width: "56", height: "56" }
-                }),
-                _vm._v(" "),
-                _c("p", { staticClass: "h4" }, [_vm._v(_vm._s(feat.title))]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(feat.text))])
-              ])
-            ]
+            { staticClass: "row" },
+            _vm._l(_vm.feats, function(feat, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass: "col-md-6 col-lg-3 p-5 k",
+                  on: {
+                    click: function($event) {
+                      return _vm.get_id(index)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "feat" }, [
+                    _c("img", {
+                      staticClass: "mb-2",
+                      attrs: { src: feat.image, width: "56", height: "56" }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "h4" }, [
+                      _vm._v(_vm._s(feat.title))
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(feat.text))])
+                  ])
+                ]
+              )
+            }),
+            0
           )
-        }),
-        0
-      )
     ])
   ])
 }
