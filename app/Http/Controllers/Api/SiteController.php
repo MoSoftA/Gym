@@ -246,10 +246,21 @@ class SiteController extends Controller
 			'text'	=> 'required|string',
 			'image'	=> 'required|image'
 		]);
+		if($request->hasFile('image'))
+        {
+          $img = $request->file('image');
+          $imgName = Str::random(50).'.'. $img->extension();
+          $img->move(public_path('uploads/features'), $imgName); 
+          $url = url('uploads/features/'. $imgName);
+        }else if (DB::table('features')->where('image', $request->image))
+        {
+        	$url = $request->image;
+        }else{$url = null;}
+        
 		DB::table('features')->Insert([
 			'title' => $request->title,
 			'text'	=> $request->text,
-			'image'	=> $request->image
+			'image'	=> $url
 		]);
 		return $this->ApiResponse(200,"success");
 	}

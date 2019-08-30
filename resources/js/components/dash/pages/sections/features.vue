@@ -160,18 +160,17 @@ export default {
             feat.append("image", this.image);
             feat.append("text", this.text);
 
-            const config = {
-                headers: {
-                    "content-type": "multipart/form-data",
-                    Accept: "application/json",
-                    Authorization: "Bearer " + this.$store.state.user.token
-                }
-            };
-            Axios.put(`api/updateFeatures/${this.id}`, feat, config)
-                .then(res => {
-                    Axios.get("api/getFeatures")
-                        .then(res => {
-                            this.feats = res.data.data;
+             const config = {
+                 headers: {
+                     "content-type": "multipart/form-data",
+                     Accept: "application/json",
+                     Authorization: "Bearer " + this.$store.state.user.token
+                 }
+             };
+             Axios.post(`api/updateFeatures/${this.id}`, feat, config).then(res => {
+                     Axios.get("api/getFeatures")
+                         .then(res => {
+                             this.feats = res.data.data;
 
                             console.log("dasaad", res.data.data);
                         })

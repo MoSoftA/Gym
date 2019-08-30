@@ -3469,7 +3469,7 @@ __webpack_require__.r(__webpack_exports__);
         body: this.body,
         image: this.img
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editArticle/".concat(this.id), data, config).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/editArticle/".concat(this.id), data, config).then(function (res) {
         console.log(res);
       })["catch"](function (err) {
         return console.log(err.message);
@@ -4787,7 +4787,7 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: "Bearer " + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/updateFeatures/".concat(this.id), feat, config).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/updateFeatures/".concat(this.id), feat, config).then(function (res) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
           _this.feats = res.data.data;
           console.log("dasaad", res.data.data);
@@ -5215,7 +5215,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
       art.append('phone', this.phone);
       art.append('info', this.info); // Send the request
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/updateTrainer", art, {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/updateTrainer", art, {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
