@@ -4812,38 +4812,43 @@ __webpack_require__.r(__webpack_exports__);
     send: function send() {
       var _this2 = this;
 
-      var feat = new FormData();
-      feat.append("title", this.title);
-      feat.append("image", this.image);
-      feat.append("text", this.text);
-      var config = {
-        headers: {
-          "content-type": "multipart/form-data",
-          Accept: "application/json",
-          Authorization: "Bearer " + this.$store.state.user.token
-        }
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addFeatures", feat, config).then(function (res) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
-          _this2.feats = res.data.data;
-          console.log("dasaad", res.data.data);
+      // Validation
+      if (this.feats.length < 4) {
+        var feat = new FormData();
+        feat.append("title", this.title);
+        feat.append("image", this.image);
+        feat.append("text", this.text);
+        var config = {
+          headers: {
+            "content-type": "multipart/form-data",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        };
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addFeatures", feat, config).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
+            _this2.feats = res.data.data;
+            console.log("dasaad", res.data.data);
+          })["catch"](function (err) {
+            console.log(err);
+          });
+          Swal.fire({
+            title: "you Added Feature",
+            text: res.data.message,
+            type: "success",
+            confirmButtonText: "Cool!"
+          });
         })["catch"](function (err) {
-          console.log(err);
+          Swal.fire({
+            title: "Something wrong",
+            text: res.data.message,
+            type: "error",
+            confirmButtonText: "Cool!"
+          });
         });
-        Swal.fire({
-          title: "you Added Feature",
-          text: res.data.message,
-          type: "success",
-          confirmButtonText: "Cool!"
-        });
-      })["catch"](function (err) {
-        Swal.fire({
-          title: "Something wrong",
-          text: res.data.message,
-          type: "error",
-          confirmButtonText: "Cool!"
-        });
-      });
+      } else {
+        alert("Sorry you can't add more then 4 feat");
+      }
     },
     remove_feat: function remove_feat() {
       var _this3 = this;

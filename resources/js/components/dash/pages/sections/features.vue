@@ -160,45 +160,6 @@ export default {
             feat.append("image", this.image);
             feat.append("text", this.text);
 
-             const config = {
-                 headers: {
-                     "content-type": "multipart/form-data",
-                     Accept: "application/json",
-                     Authorization: "Bearer " + this.$store.state.user.token
-                 }
-             };
-             Axios.post(`api/updateFeatures/${this.id}`, feat, config).then(res => {
-                     Axios.get("api/getFeatures")
-                         .then(res => {
-                             this.feats = res.data.data;
-
-                            console.log("dasaad", res.data.data);
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
-                    Swal.fire({
-                        title: "you Added Feature",
-                        text: res.data.message,
-                        type: "success",
-                        confirmButtonText: "Cool!"
-                    });
-                })
-                .catch(err => {
-                    Swal.fire({
-                        title: "Something wrong",
-                        text: res.data.message,
-                        type: "error",
-                        confirmButtonText: "Cool!"
-                    });
-                });
-        },
-        send() {
-            let feat = new FormData();
-            feat.append("title", this.title);
-            feat.append("image", this.image);
-            feat.append("text", this.text);
-
             const config = {
                 headers: {
                     "content-type": "multipart/form-data",
@@ -206,7 +167,7 @@ export default {
                     Authorization: "Bearer " + this.$store.state.user.token
                 }
             };
-            Axios.post("api/addFeatures", feat, config)
+            Axios.post(`api/updateFeatures/${this.id}`, feat, config)
                 .then(res => {
                     Axios.get("api/getFeatures")
                         .then(res => {
@@ -232,6 +193,51 @@ export default {
                         confirmButtonText: "Cool!"
                     });
                 });
+        },
+        send() {
+            // Validation
+            if (this.feats.length < 4) {
+                let feat = new FormData();
+                feat.append("title", this.title);
+                feat.append("image", this.image);
+                feat.append("text", this.text);
+
+                const config = {
+                    headers: {
+                        "content-type": "multipart/form-data",
+                        Accept: "application/json",
+                        Authorization: "Bearer " + this.$store.state.user.token
+                    }
+                };
+                Axios.post("api/addFeatures", feat, config)
+                    .then(res => {
+                        Axios.get("api/getFeatures")
+                            .then(res => {
+                                this.feats = res.data.data;
+
+                                console.log("dasaad", res.data.data);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                        Swal.fire({
+                            title: "you Added Feature",
+                            text: res.data.message,
+                            type: "success",
+                            confirmButtonText: "Cool!"
+                        });
+                    })
+                    .catch(err => {
+                        Swal.fire({
+                            title: "Something wrong",
+                            text: res.data.message,
+                            type: "error",
+                            confirmButtonText: "Cool!"
+                        });
+                    });
+            }else{
+                alert("Sorry you can't add more then 4 feat")
+            }
         },
         remove_feat() {
             const config = {
