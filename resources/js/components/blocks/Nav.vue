@@ -13,7 +13,7 @@
         <a
           class="navbar-brand"
           href="#"
-          v-if='(Navbar.name==null || Navbar.name=="") && Navbar.logo'
+          v-else-if='(Navbar.name==null || Navbar.name=="") && Navbar.logo'
           style="width: 200px"
         >
           <img :src="Navbar.logo" alt="logo" class="img-fluid" width="40%" />

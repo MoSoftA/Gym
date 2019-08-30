@@ -175,6 +175,11 @@ export default {
     get_image(e) {
       this.img = e.target.files[0];
     },
+    get_slider(index) {
+        let element = this.sliders.find(el => el.id == index);
+        this.id = element.id;
+        console.log(element);
+    },
     send() {
       let slider = new FormData();
       slider.append("text", this.text);

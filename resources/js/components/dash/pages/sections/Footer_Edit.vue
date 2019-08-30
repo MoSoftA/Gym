@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card">
       <div class="card-body">
-        <realFooter></realFooter>
+        <realFooter  v-if="preview"></realFooter>
         <p class="h1">Footer</p>
         <div class="row">
           <div class="input col-12">
@@ -178,9 +178,19 @@
         </div>
       </div>
 
+<div class="row">
+
+        <div class="col-4 mx-2 my-4">
+          <button
+            class="btn btn-primary btn-block btn-flat"
+            @click="preview = !preview"
+            role="button"
+          >preview</button>
+        </div>
       <div class="col-4 my-4">
         <button class="btn btn-primary btn-block btn-flat" @click="send" role="button">Done</button>
       </div>
+</div>
     </div>
   </div>
 </template>
@@ -192,6 +202,7 @@ import realFooter from "../../../blocks/Footer";
 export default {
   data() {
     return {
+      preview: false,
       footer: {
         Phone: null,
         address: null,

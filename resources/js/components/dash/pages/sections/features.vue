@@ -62,15 +62,15 @@
                         ></textarea>
                     </div>
 
-                    <div class="col-4 mx-2 my-4">
+                    <div class="col-sm-12 col-md-4 mx-2 my-4">
                         <button
                             class="btn btn-primary btn-block btn-flat"
                             @click="preview = !preview"
                             role="button"
                         >preview</button>
                     </div>
-                    
-                    <div class="col-4 mx-2 my-4" v-if="update">
+
+                    <div class="col-sm-12 col-md-4 mx-2 my-4" v-if="update">
                         <button
                             class="btn btn-primary btn-block btn-flat"
                             @click="update_feat"
@@ -78,7 +78,7 @@
                         >Update</button>
                     </div>
 
-                    <div class="col-4 mx-2 my-4">
+                    <div class="col-sm-12 col-md-4 mx-2 my-4">
                         <button
                             class="btn btn-primary btn-block btn-flat"
                             @click="send"
@@ -95,8 +95,8 @@
             tabindex="-1"
             role="dialog"
             aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-
+            aria-hidden="true"
+        >
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -152,47 +152,47 @@ export default {
             console.log(element);
         },
         get_image(e) {
-          this.image = e.target.files[0];
+            this.image = e.target.files[0];
         },
-        update_feat(){         
+        update_feat() {
+            let feat = new FormData();
+            feat.append("title", this.title);
+            feat.append("image", this.image);
+            feat.append("text", this.text);
 
-           let feat = new FormData();
-             feat.append("title", this.title);
-             feat.append("image", this.image);
-             feat.append("text", this.text);
+            const config = {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    Accept: "application/json",
+                    Authorization: "Bearer " + this.$store.state.user.token
+                }
+            };
+            Axios.put(`api/updateFeatures/${this.id}`, feat, config)
+                .then(res => {
+                    Axios.get("api/getFeatures")
+                        .then(res => {
+                            this.feats = res.data.data;
 
-             const config = {
-                 headers: {
-                     "content-type": "multipart/form-data",
-                     Accept: "application/json",
-                     Authorization: "Bearer " + this.$store.state.user.token
-                 }
-             };
-             Axios.put(`api/updateFeatures/${this.id}`, feat, config).then(res => {
-                     Axios.get("api/getFeatures")
-                         .then(res => {
-                             this.feats = res.data.data;
-
-                             console.log("dasaad", res.data.data);
-                         })
-                         .catch(err => {
-                             console.log(err);
-                         });
-                     Swal.fire({
-                         title: "you Added Feature",
-                         text: res.data.message,
-                         type: "success",
-                         confirmButtonText: "Cool!"
-                     });
-                 })
-                 .catch(err => {
-                     Swal.fire({
-                         title: "Something wrong",
-                         text: res.data.message,
-                         type: "error",
-                         confirmButtonText: "Cool!"
-                     });
-                 });
+                            console.log("dasaad", res.data.data);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                    Swal.fire({
+                        title: "you Added Feature",
+                        text: res.data.message,
+                        type: "success",
+                        confirmButtonText: "Cool!"
+                    });
+                })
+                .catch(err => {
+                    Swal.fire({
+                        title: "Something wrong",
+                        text: res.data.message,
+                        type: "error",
+                        confirmButtonText: "Cool!"
+                    });
+                });
         },
         send() {
             let feat = new FormData();

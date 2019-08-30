@@ -1995,11 +1995,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_owl_carousel__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_owl_carousel__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2050,7 +2047,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   mounted: function mounted() {
     var vm = this;
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/articles", {
@@ -2060,33 +2057,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     }).then(function (res) {
       vm.$store.commit("got_articles", res.data.data);
-      Vue.nextTick(function () {
-        $(".owl-carousel").owlCarousel({
-          rtl: true,
-          animateOut: "fadeOut",
-          loop: true,
-          margin: 10,
-          autoplay: true,
-          nav: false,
-          autoplayTimeout: 3000,
-          autoplayHoverPause: true,
-          responsiveClass: true,
-          responsive: {
-            0: {
-              items: 1,
-              nav: false
-            },
-            600: {
-              items: 2,
-              loop: true
-            },
-            1000: {
-              items: 2,
-              loop: true
-            }
-          }
-        });
-      }.bind(vm));
     })["catch"](function (err) {
       if (err) console.log(err);
     });
@@ -2099,7 +2069,37 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.articles;
     }
   }
-});
+}, "mounted", function mounted() {// this.$nextTick(() => {
+  //     $(document).ready(function () {
+  //         var owl = $('.owl-carousel');
+  //        owl  .owlCarousel({
+  //             rtl: true,
+  //             animateOut: 'fadeOut',
+  //             loop: true,
+  //             margin: 10,
+  //             autoplay: 3000,
+  //             nav: false,
+  //             autoplayTimeout: 3000,
+  //             autoplayHoverPause: true,
+  //             responsiveClass: true,
+  //             responsive: {
+  //                 0: {
+  //                     items: 1,
+  //                     nav: false
+  //                 },
+  //                 600: {
+  //                     items: 2,
+  //                     loop: true
+  //                 },
+  //                 1000: {
+  //                     items: 2,
+  //                     loop: true,
+  //                 }
+  //             }
+  //         })
+  //     });
+  // })
+}));
 
 /***/ }),
 
@@ -3609,8 +3609,30 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _blocks_About__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../blocks/About */ "./resources/js/components/blocks/About.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3637,43 +3659,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      body: '',
-      image: ''
+      preview: false,
+      about: {
+        body: '',
+        image: ''
+      },
+      body: "",
+      image: ""
     };
+  },
+  components: {
+    realAboutus: _blocks_About__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     get_image: function get_image(e) {
       this.image = e.target.files[0];
     },
     send: function send() {
+      var _this = this;
+
       var about = new FormData();
-      about.append('body', String($('#some-textarea').val()));
-      about.append('image', this.image);
+      about.append("body", String($("#some-textarea").val()));
+      about.append("image", this.image);
       var config = {
         headers: {
-          'content-type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          "content-type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storerAboutUs', about, config).then(function (res) {
-        return console.log(res);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/storerAboutUs", about, config).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/getAboutUsr").then(function (res) {
+          Object.assign(_this.about, res.data.data[0]);
+          $(".about-body").append(res.data.data[0].body);
+        });
+        Swal.fire({
+          title: "you Edited About",
+          text: res.data.message,
+          type: "success",
+          confirmButtonText: "Cool!"
+        });
       })["catch"](function (err) {
         return console.log(err);
       });
     }
   },
   mounted: function mounted() {
+    var _this2 = this;
+
     // Summernote
-    $('.textarea').summernote({
+    $(".textarea").summernote({
       popover: {
         image: [],
         link: [],
         air: []
       }
+    });
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/getAboutUsr").then(function (res) {
+      Object.assign(_this2.about, res.data.data[0]);
+      $(".about-body").append(res.data.data[0].body);
+      console.log(_this2.image);
     });
   }
 });
@@ -3879,11 +3928,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      preview: false,
       footer: {
         Phone: null,
         address: null,
@@ -4366,6 +4426,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     get_image: function get_image(e) {
       this.img = e.target.files[0];
+    },
+    get_slider: function get_slider(index) {
+      var element = this.sliders.find(function (el) {
+        return el.id == index;
+      });
+      this.id = element.id;
+      console.log(element);
     },
     send: function send() {
       var _this = this;
@@ -8452,7 +8519,7 @@ var render = function() {
                         staticClass: "btn btn-success mt-3",
                         attrs: { to: "/articles/" + _vm.articles[index].id }
                       },
-                      [_vm._v("اقرأ المزيد")]
+                      [_vm._v("اقرأ المزيد\n                    ")]
                     )
                   ],
                   1
@@ -8746,10 +8813,8 @@ var render = function() {
               ? _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
                   _vm._v(_vm._s(_vm.Navbar.name))
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            (_vm.Navbar.name == null || _vm.Navbar.name == "") &&
-            _vm.Navbar.logo
+              : (_vm.Navbar.name == null || _vm.Navbar.name == "") &&
+                _vm.Navbar.logo
               ? _c(
                   "a",
                   {
@@ -10751,43 +10816,66 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("label", { attrs: { for: "image" } }, [_vm._v("Image")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "file", id: "image" },
-              on: {
-                change: function($event) {
-                  return _vm.get_image($event)
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _vm.preview ? _c("realAboutus") : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("label", { attrs: { for: "image" } }, [_vm._v("Image")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "file", id: "image" },
+                on: {
+                  change: function($event) {
+                    return _vm.get_image($event)
+                  }
                 }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4 my-4" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block btn-flat",
-                attrs: { role: "button" },
-                on: { click: _vm.send }
-              },
-              [_vm._v("Done")]
-            )
+              })
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block btn-flat",
+                  attrs: { role: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.preview = !_vm.preview
+                    }
+                  }
+                },
+                [_vm._v("preview")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4 my-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block btn-flat",
+                  attrs: { role: "button" },
+                  on: { click: _vm.send }
+                },
+                [_vm._v("Done")]
+              )
+            ])
           ])
         ])
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -10841,7 +10929,7 @@ var render = function() {
         "div",
         { staticClass: "card-body" },
         [
-          _c("realFooter"),
+          _vm.preview ? _c("realFooter") : _vm._e(),
           _vm._v(" "),
           _c("p", { staticClass: "h1" }, [_vm._v("Footer")]),
           _vm._v(" "),
@@ -11284,16 +11372,34 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-4 my-4" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block btn-flat",
-            attrs: { role: "button" },
-            on: { click: _vm.send }
-          },
-          [_vm._v("Done")]
-        )
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-block btn-flat",
+              attrs: { role: "button" },
+              on: {
+                click: function($event) {
+                  _vm.preview = !_vm.preview
+                }
+              }
+            },
+            [_vm._v("preview")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 my-4" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-block btn-flat",
+              attrs: { role: "button" },
+              on: { click: _vm.send }
+            },
+            [_vm._v("Done")]
+          )
+        ])
       ])
     ])
   ])
@@ -11356,6 +11462,9 @@ var render = function() {
               attrs: { type: "radio", id: "one", value: "0", name: "thi" },
               domProps: { checked: _vm._q(_vm.picked, "0") },
               on: {
+                click: function($event) {
+                  _vm.navbar.logo = ""
+                },
                 change: function($event) {
                   _vm.picked = "0"
                 }
@@ -11376,6 +11485,9 @@ var render = function() {
               attrs: { type: "radio", id: "two", value: "1", name: "thi" },
               domProps: { checked: _vm._q(_vm.picked, "1") },
               on: {
+                click: function($event) {
+                  _vm.navbar.name = ""
+                },
                 change: function($event) {
                   _vm.picked = "1"
                 }
@@ -12431,7 +12543,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+          _c("div", { staticClass: "col-sm-12 col-md-4 mx-2 my-4" }, [
             _c(
               "button",
               {
@@ -12448,7 +12560,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm.update
-            ? _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+            ? _c("div", { staticClass: "col-sm-12 col-md-4 mx-2 my-4" }, [
                 _c(
                   "button",
                   {
@@ -12461,7 +12573,7 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "col-4 mx-2 my-4" }, [
+          _c("div", { staticClass: "col-sm-12 col-md-4 mx-2 my-4" }, [
             _c(
               "button",
               {

@@ -9,9 +9,9 @@
             <label class="font-wieght-bold control-label" for="inputGroupSelect01">choose</label>
             <br>
             <label for="one">text logo</label>
-            <input type="radio" id="one" value="0" v-model="picked" name="thi">
+            <input type="radio" id="one" value="0" v-model="picked" @click="navbar.logo = '' " name="thi">
             <label for="two">image logo</label>
-            <input type="radio" id="two" value="1" v-model="picked" name="thi">
+            <input type="radio" id="two" value="1" v-model="picked" @click="navbar.name = '' " name="thi">
         </div>
 
         <div class="row">
@@ -141,6 +141,9 @@ export default {
 
       Nav.append("sec_button_background", this.navbar.sec_button_background);
       Nav.append("sec_button_font_color", this.navbar.sec_button_font_color);
+
+
+      
 
       Nav.append("img", this.navbar.logo);
 
