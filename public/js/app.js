@@ -6251,6 +6251,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6260,7 +6276,7 @@ __webpack_require__.r(__webpack_exports__);
       all_articles: null,
       articles: null,
       current_page: 0,
-      first_page: 0
+      type: 'الكل'
     };
   },
   components: {
@@ -6663,7 +6679,7 @@ exports.push([module.i, ".day[data-v-51c9d3ac] {\n  background-color: #fff;\n  p
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#news[data-v-1b491be9] {\n  text-align: right;\n}\n.fade-enter-active[data-v-1b491be9],\n.fade-leave-active[data-v-1b491be9] {\n  transition-duration: 0.3s;\n  transition-property: opacity;\n  transition-timing-function: ease;\n}\n.fade-enter[data-v-1b491be9],\n.fade-leave-active[data-v-1b491be9] {\n  opacity: 0;\n}\n.jumbotron[data-v-1b491be9] {\n  background-color: #f23a2e;\n  color: white;\n}\nul[data-v-1b491be9] {\n  list-style: none;\n}\n.page-item .page-link[data-v-1b491be9] {\n  border-radius: 0;\n}\nfooter[data-v-1b491be9] {\n  margin-top: 130px;\n}", ""]);
+exports.push([module.i, "#news[data-v-1b491be9] {\n  text-align: right;\n}\n.jumbotron[data-v-1b491be9] {\n  background-color: #f23a2e;\n  color: white;\n}\nul[data-v-1b491be9] {\n  list-style: none;\n  padding: 0;\n}\n.page-item .page-link[data-v-1b491be9] {\n  border-radius: 0;\n}\nfooter[data-v-1b491be9] {\n  margin-top: 130px;\n}", ""]);
 
 
 /***/ }),
@@ -14675,146 +14691,189 @@ var render = function() {
         [_vm._m(0)]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container" },
-        [
-          _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row mb-4" }, [
+          _c("div", { staticClass: "form-group col-md-4" }, [
+            _c("label", { attrs: { for: "inputState" } }, [
+              _vm._v("ابحث عن نوع:")
+            ]),
+            _vm._v(" "),
             _c(
-              "ul",
-              { staticClass: "row" },
-              _vm._l(_vm.view_article, function(article) {
-                return _c(
-                  "li",
+              "select",
+              {
+                directives: [
                   {
-                    key: article.id,
-                    staticClass: "listItem col-sm-12 col-md-3"
-                  },
-                  [
-                    _c("div", { staticClass: "border-white" }, [
-                      _c("div", { staticClass: "card" }, [
-                        _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: { src: article.image, alt: "Card image cap" }
-                        }),
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.type,
+                    expression: "type"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.type = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { selected: "" } }, [_vm._v("الكل")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("نوع 1")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("نوع 2")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("نوع 3")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("نوع 4")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("نوع 5")])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "row" },
+          _vm._l(_vm.view_article, function(article) {
+            return _c(
+              "li",
+              { key: article.id, staticClass: "listItem col-sm-12 col-md-3" },
+              [
+                _c("div", { staticClass: "border-white" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("img", {
+                      staticClass: "card-img-top",
+                      attrs: { src: article.image, alt: "Card image cap" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [
+                        _c("h5", { staticClass: "card-title mb-3" }, [
+                          _vm._v(_vm._s(article.title))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(article.shortDescription))
+                        ]),
                         _vm._v(" "),
                         _c(
-                          "div",
-                          { staticClass: "card-body" },
-                          [
-                            _c("h5", { staticClass: "card-title" }, [
-                              _vm._v(_vm._s(article.title))
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "card-text" }, [
-                              _vm._v(_vm._s(article.shortDescription))
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "btn btn-success",
-                                attrs: { to: "/articles/" + article.id }
-                              },
-                              [_vm._v("اقرأ المزيد")]
-                            )
-                          ],
-                          1
+                          "router-link",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { to: "/articles/" + article.id }
+                          },
+                          [_vm._v("اقرأ المزيد")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "badge badge-pill badge-dark mr-1" },
+                          [_vm._v("نوع المقال")]
                         )
-                      ])
-                    ])
-                  ]
-                )
-              }),
-              0
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]
             )
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("div", { staticClass: "row" }, [
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
               _c(
-                "nav",
-                { attrs: { "aria-label": "Page navigation example" } },
+                "ul",
+                { staticClass: "pagination" },
                 [
                   _c(
-                    "ul",
-                    { staticClass: "pagination" },
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      class: { disabled: _vm.current_page == 0 }
+                    },
                     [
                       _c(
-                        "li",
+                        "a",
                         {
-                          staticClass: "page-item",
-                          class: { disabled: _vm.current_page == 0 }
+                          staticClass: "page-link",
+                          attrs: { role: "button" },
+                          on: { click: _vm.go_back }
                         },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              attrs: { role: "button" },
-                              on: { click: _vm.go_back }
-                            },
-                            [_vm._v("Previous")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(this.page_counter, function(pages, index) {
-                        return _c(
-                          "li",
-                          {
-                            key: index,
-                            staticClass: "page-item",
-                            class: { active: index == _vm.current_page }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "page-link",
-                                attrs: { role: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.go_to(index)
-                                  }
-                                }
-                              },
-                              [_vm._v(_vm._s(index + 1))]
-                            )
-                          ]
-                        )
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass: "page-item",
-                          class: {
-                            disabled: _vm.current_page == _vm.page_counter - 1
-                          }
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              attrs: { role: "button" },
-                              on: { click: _vm.go_forward }
-                            },
-                            [_vm._v("Next")]
-                          )
-                        ]
+                        [_vm._v("Previous")]
                       )
-                    ],
-                    2
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(this.page_counter, function(pages, index) {
+                    return _c(
+                      "li",
+                      {
+                        key: index,
+                        staticClass: "page-item",
+                        class: { active: index == _vm.current_page }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "page-link",
+                            attrs: { role: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.go_to(index)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(index + 1))]
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      class: {
+                        disabled: _vm.current_page == _vm.page_counter - 1
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { role: "button" },
+                          on: { click: _vm.go_forward }
+                        },
+                        [_vm._v("Next")]
+                      )
+                    ]
                   )
-                ]
+                ],
+                2
               )
             ])
           ])
-        ],
-        1
-      ),
+        ])
+      ]),
       _vm._v(" "),
       _c("Footer2")
     ],
