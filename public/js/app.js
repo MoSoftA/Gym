@@ -5453,6 +5453,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5469,16 +5479,132 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   },
   computed: {},
   methods: {
+    Saturday: function Saturday() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+        day: 'Saturday',
+        lists: ['sd', 'dasadsadsda'],
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        _this.listsa.push(res.data);
+
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    Sunday: function Sunday() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+        day: 'Sunday',
+        lists: [''],
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    Monday: function Monday() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+        day: 'Monday',
+        lists: [''],
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    Thursday: function Thursday() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+        day: 'Thursday',
+        lists: [''],
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    Wednesday: function Wednesday() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+        day: 'Wednesday',
+        lists: [''],
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    Thuesday: function Thuesday() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+        day: 'Thuesday',
+        lists: [''],
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    Friday: function Friday() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+        day: 'Friday',
+        lists: ['sd'],
+        user_id: this.$store.state.AdminPanel.userEdit[0]
+      }, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     add: function add(index, i) {
       var source = {
         day: i.day,
         lists: this.listsa.filter(function (w) {
-          return w.day == i.day;
+          return w.id == i.id;
         })[0].exercise,
         user_id: this.$store.state.AdminPanel.userEdit[0]
       };
       source.lists.push(this.D[index]);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/addExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + this.$store.state.user.token
@@ -5491,7 +5617,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       this.D[index] = null;
     },
     remove: function remove(index, i) {
-      var _this = this;
+      var _this2 = this;
 
       var source = {
         day: i.day,
@@ -5513,7 +5639,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       }).then(function (res) {
-        _this.listsa = [];
+        _this2.listsa = [];
         var exercieses = res.data.data; // Convert response to array
 
         exercieses.forEach(function (exercisea) {
@@ -5521,10 +5647,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
             exercisea.exercise = exercisea.exercise.split(',');
           } else {
-            _this.listsa.push(exercisea.exercise);
+            _this2.listsa.push(exercisea.exercise);
           }
 
-          _this.listsa.push(exercisea);
+          _this2.listsa.push(exercisea);
         });
       })["catch"](function (err) {
         return console.log(err);
@@ -5534,7 +5660,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
       headers: {
@@ -5542,19 +5668,22 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         Authorization: 'Bearer ' + this.$store.state.user.token
       }
     }).then(function (res) {
-      _this2.listsa = [];
-      var exercieses = res.data.data; // Convert response to array
+      console.log(res);
+      var exercieses = res.data.data;
 
-      exercieses.forEach(function (exercisea) {
-        if (_typeof(exercisea.exercise == 'string')) {
-          exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
-          exercisea.exercise = exercisea.exercise.split(',');
-        } else {
-          _this2.listsa.push(exercisea.exercise);
-        }
+      if (exercieses != []) {
+        // Convert response to array
+        exercieses.forEach(function (exercisea) {
+          if (_typeof(exercisea.exercise == 'string')) {
+            exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+            exercisea.exercise = exercisea.exercise.split(',');
+          } else {
+            _this3.listsa.push(exercisea.exercise);
+          }
 
-        _this2.listsa.push(exercisea);
-      });
+          _this3.listsa.push(exercisea);
+        });
+      }
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -13509,6 +13638,106 @@ var render = function() {
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-body" }, [
         _c("p", { staticClass: "h1 mt-5" }, [_vm._v("Tasks")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+              on: {
+                click: function($event) {
+                  return _vm.Saturday()
+                }
+              }
+            },
+            [_vm._v("Saturday")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+              on: {
+                click: function($event) {
+                  return _vm.Sunday()
+                }
+              }
+            },
+            [_vm._v("Sunday")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+              on: {
+                click: function($event) {
+                  return _vm.Monday()
+                }
+              }
+            },
+            [_vm._v("Monday")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+              on: {
+                click: function($event) {
+                  return _vm.Thursday()
+                }
+              }
+            },
+            [_vm._v("Thursday")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+              on: {
+                click: function($event) {
+                  return _vm.Wednesday()
+                }
+              }
+            },
+            [_vm._v("Wednesday")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+              on: {
+                click: function($event) {
+                  return _vm.Thuesday()
+                }
+              }
+            },
+            [_vm._v("Thuesday")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+              on: {
+                click: function($event) {
+                  return _vm.Friday()
+                }
+              }
+            },
+            [_vm._v("Friday")]
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",
