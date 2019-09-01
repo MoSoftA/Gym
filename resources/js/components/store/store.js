@@ -48,7 +48,7 @@ export const store = new Vuex.Store({
             }
         },
         
-        currentPage: 'FooterEdit',
+        currentPage: 'dashboard',
         // Start Admin Panel
         AdminPanel: {
             userEdit: {

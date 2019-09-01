@@ -86,52 +86,6 @@
             get_id(e) {
                 this.id = $(e.target).parents('tr').first().children()[0].innerText;
             },
-            // deleteUser(e) {
-            //     axios.delete(`api/deleteTrainer/${this.id}`, {id : this.id} ,  {
-            //             headers: {
-            //                 Accept: 'application/json',
-            //                 Authorization: 'Bearer ' + this.$store.state.user.token,
-            //             },
-
-            //         })
-            //         .then(res => {
-            //             Swal.fire({
-            //                 title: 'Deleted successfully',
-            //                 text: null,
-            //                 type: 'success',
-            //                 confirmButtonText: 'good'
-            //             });
-                        
-            //             this.rows =[]
-
-            //             axios.get('api/getTrainers', {
-            //                     headers: {
-            //                         Accept: 'application/json',
-            //                         Authorization: 'Bearer ' + this.$store.state.user.token
-            //                     },
-            //                 })
-            //                 .then(res => {
-            //                     let users = res.data.data;
-            //                     users.forEach(user => {
-            //                         delete user.admin;
-                                    
-
-            //                         this.head = Object.keys(user);
-            //                         this.rows.push(Object.values(user));
-            //                     })
-            //                 })
-            //                 .catch(err => err.message);
-
-
-            //             console.log(res)
-            //         })
-            //         .catch(err =>  Swal.fire({
-            //                 title: 'Faild',
-            //                 text: err.message,
-            //                 type: 'error',
-            //                 confirmButtonText: 'good'
-            //             }));
-            // }
         },
 
         mounted() {
