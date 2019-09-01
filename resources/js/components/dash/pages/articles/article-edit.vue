@@ -49,7 +49,7 @@
     export default {
         data() {
             return {
-                img: new FormData(),
+                img: '',
                 id: this.$store.state.AdminPanel.articleEdit[0],
                 title: '',
                 body: '',
@@ -62,7 +62,7 @@
                 this.body = String($('#some-textarea').val())
             },
             get_image(e) {
-                this.img.append('image', e.target.files[0])
+                this.img = e.target.files[0]
             },
             update() {
                 const config = {
@@ -73,12 +73,11 @@
                     }
                 };
 
-            let data = {
-                title: this.title,
-                info: this.info,
-                body: this.body,
-                image: this.img,
-            }
+            let data = new FormData();
+                 data.append('title', this.title);
+                 data.append('body', this.body);
+                 data.append('info', this.info);
+                 data.append('img', this.img) 
 
 
                 Axios.post(`api/editArticle/${this.id}`, data , config).then(res => {

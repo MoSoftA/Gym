@@ -3464,7 +3464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      img: new FormData(),
+      img: '',
       id: this.$store.state.AdminPanel.articleEdit[0],
       title: '',
       body: '',
@@ -3477,7 +3477,7 @@ __webpack_require__.r(__webpack_exports__);
       this.body = String($('#some-textarea').val());
     },
     get_image: function get_image(e) {
-      this.img.append('image', e.target.files[0]);
+      this.img = e.target.files[0];
     },
     update: function update() {
       var config = {
@@ -3487,12 +3487,11 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: 'Bearer ' + this.$store.state.user.token
         }
       };
-      var data = {
-        title: this.title,
-        info: this.info,
-        body: this.body,
-        image: this.img
-      };
+      var data = new FormData();
+      data.append('title', this.title);
+      data.append('body', this.body);
+      data.append('info', this.info);
+      data.append('img', this.img);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/editArticle/".concat(this.id), data, config).then(function (res) {
         console.log(res);
       })["catch"](function (err) {
