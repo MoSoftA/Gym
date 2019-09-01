@@ -1955,24 +1955,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      list: []
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    var config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+      list: [],
+      config: {
+        headers: {
+          "content-type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
+        }
       }
     };
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getSlider', config).then(function (res) {
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getSlider", this.config).then(function (res) {
       _this.list = res.data.data;
     })["catch"](function (err) {
       return console.log(err);
@@ -2072,33 +2088,6 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (err) {
       if (err) console.log(err);
     });
-    this.$nextTick(function () {
-      $('.owl-carousel').owlCarousel({
-        rtl: true,
-        animateOut: 'fadeOut',
-        loop: true,
-        margin: 10,
-        autoplay: 3000,
-        nav: false,
-        autoplayTimeout: 3000,
-        autoplayHoverPause: true,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
-            nav: false
-          },
-          600: {
-            items: 2,
-            loop: true
-          },
-          1000: {
-            items: 2,
-            loop: true
-          }
-        }
-      });
-    });
   }
 });
 
@@ -2115,6 +2104,22 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2168,7 +2173,6 @@ __webpack_require__.r(__webpack_exports__);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getFeatures").then(function (res) {
       _this.feats = res.data.data;
-      console.log('dasaad', res.data.data);
     })["catch"](function (err) {
       console.log(err);
     });
@@ -2493,9 +2497,8 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           _this.user.admin = false;
           _this.$store.state.user.admin = false;
-        }
+        } // Make it
 
-        console.log(_this.$store.state.user); // Make it
 
         _this.$store.state.user.loged = true;
         _this.$store.state.user.token = res.data.data.token;
@@ -2530,8 +2533,6 @@ __webpack_require__.r(__webpack_exports__);
     };
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getNavbar").then(function (res) {
       _this2.$store.commit("Edit_Navbar", res.data.data);
-
-      console.log("Navbeat", res.data.data);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -4975,9 +4976,19 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/storeTrainer', about, config).then(function (res) {
-        return console.log(res);
+        Swal.fire({
+          title: "You added Trainer",
+          text: res.data.message,
+          type: "success",
+          confirmButtonText: "Cool!"
+        });
       })["catch"](function (err) {
-        return console.log(err);
+        Swal.fire({
+          title: "Something wrong",
+          text: res.data.message,
+          type: "error",
+          confirmButtonText: "ok!"
+        });
       });
     }
   },
@@ -5964,39 +5975,89 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      articles: null
+      all_articles: null,
+      articles: null,
+      current_page: 0,
+      first_page: 0
     };
   },
   components: {
     Nav2: _blocks_Nav__WEBPACK_IMPORTED_MODULE_0__["default"],
     Footer2: _blocks_Footer__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  methods: {
+    go_back: function go_back() {
+      this.current_page -= 1;
+    },
+    go_to: function go_to(index) {
+      this.current_page = index;
+    },
+    go_forward: function go_forward() {
+      this.current_page += 1;
+    }
+  },
   computed: {
+    page_counter: function page_counter() {
+      return Math.round(this.all_articles.length / 8);
+    },
     get_articles: function get_articles() {
       return this.$store.state.articles;
     },
     color: function color() {
       return this.$store.state.sections.navbar;
+    },
+    view_article: function view_article() {
+      var last_article = 8 * this.current_page;
+      return this.get_articles.slice(last_article, last_article + 8);
     }
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('api/articles', {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("api/articles", {
       headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+        Accept: "application/json",
+        Authorization: "Bearer " + this.$store.state.user.token
       }
     }).then(function (res) {
-      _this.articles = res.data.data;
+      console.log(res.data.data);
 
-      _this.$store.commit('got_articles', res.data.data);
+      _this.$store.commit("got_articles", res.data.data);
+
+      _this.all_articles = res.data.data;
     })["catch"](function (err) {
       return err.message;
     });
@@ -6168,7 +6229,7 @@ exports.push([module.i, "#featClass[data-v-8237f568] {\n  text-align: right;\n}\
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#feats .k[data-v-64e4244b]:nth-child(even) {\n  background-color: #eee !important;\n}\n#feats .feat[data-v-64e4244b] {\n  text-align: right;\n}", ""]);
+exports.push([module.i, "#feats[data-v-64e4244b] {\n  text-align: right;\n  direction: rtl;\n}\n#feats .k[data-v-64e4244b]:nth-child(even) {\n  background-color: #eee !important;\n}\n#feats .feat[data-v-64e4244b] {\n  text-align: right;\n}", ""]);
 
 
 /***/ }),
@@ -6241,7 +6302,7 @@ exports.push([module.i, "#Schedule[data-v-610b15a5] {\n  background-image: url("
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#Trainer[data-v-dec57c28] {\n  background-color: #ddd;\n}\n.container > p[data-v-dec57c28] {\n  text-align: center;\n}\n.container hr[data-v-dec57c28] {\n  width: 10%;\n  left: 0;\n}\n.container .overlay[data-v-dec57c28]:hover {\n  background-color: rgba(242, 58, 46, 0.8);\n}\n.container .overlay:hover img[data-v-dec57c28] {\n  opacity: 0.3;\n}\n.container .overlay:hover .middle[data-v-dec57c28] {\n  opacity: 0.8;\n}\n.container .overlay img[data-v-dec57c28] {\n  opacity: 1;\n  display: block;\n  width: 100%;\n  height: auto;\n  transition: 0.5s ease;\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n}\n.container .overlay .middle[data-v-dec57c28] {\n  color: white;\n  transition: 0.5s ease;\n  opacity: 0;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  text-align: center;\n}\n.container .overlay .middle .text p[data-v-dec57c28] {\n  max-width: 50%;\n  margin: auto;\n}", ""]);
+exports.push([module.i, "#Trainer[data-v-dec57c28] {\n  background-color: #ddd;\n}\n.container > p[data-v-dec57c28] {\n  text-align: center;\n}\n.container hr[data-v-dec57c28] {\n  width: 10%;\n  left: 0;\n}\n.container .overlay[data-v-dec57c28] {\n  position: relative;\n}\n.container .overlay[data-v-dec57c28]:hover {\n  background-color: rgba(242, 58, 46, 0.8);\n}\n.container .overlay:hover img[data-v-dec57c28] {\n  opacity: 0.3;\n}\n.container .overlay:hover .middle[data-v-dec57c28] {\n  opacity: 0.8;\n}\n.container .overlay img[data-v-dec57c28] {\n  opacity: 1;\n  display: block;\n  width: 100%;\n  height: auto;\n  transition: 0.5s ease;\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n}\n.container .overlay .middle[data-v-dec57c28] {\n  color: white;\n  transition: 0.5s ease;\n  opacity: 0;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  text-align: center;\n}\n.container .overlay .middle .text p[data-v-dec57c28] {\n  margin: auto;\n}", ""]);
 
 
 /***/ }),
@@ -6353,7 +6414,7 @@ exports.push([module.i, ".day[data-v-51c9d3ac] {\n  background-color: #fff;\n  p
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#news[data-v-1b491be9] {\n  text-align: right;\n}\n.jumbotron[data-v-1b491be9] {\n  background-color: #f23a2e;\n  color: white;\n}\nul[data-v-1b491be9] {\n  list-style: none;\n}\n.paginacaoCursor[data-v-1b491be9] {\n  position: relative;\n  display: block;\n  padding: 0.5rem 0.75rem;\n  margin-left: -1px;\n  line-height: 1.25;\n  color: #007bff;\n  background-color: #fff;\n  border: 1px solid #dee2e6;\n}\n#pagination-container[data-v-1b491be9] {\n  float: right;\n}\n#pagination-container *[data-v-1b491be9] {\n  float: right;\n}\nfooter[data-v-1b491be9] {\n  margin-top: 130px;\n}", ""]);
+exports.push([module.i, "#news[data-v-1b491be9] {\n  text-align: right;\n}\n.fade-enter-active[data-v-1b491be9],\n.fade-leave-active[data-v-1b491be9] {\n  transition-duration: 0.3s;\n  transition-property: opacity;\n  transition-timing-function: ease;\n}\n.fade-enter[data-v-1b491be9],\n.fade-leave-active[data-v-1b491be9] {\n  opacity: 0;\n}\n.jumbotron[data-v-1b491be9] {\n  background-color: #f23a2e;\n  color: white;\n}\nul[data-v-1b491be9] {\n  list-style: none;\n}\n.page-item .page-link[data-v-1b491be9] {\n  border-radius: 0;\n}\nfooter[data-v-1b491be9] {\n  margin-top: 130px;\n}", ""]);
 
 
 /***/ }),
@@ -8364,7 +8425,7 @@ var render = function() {
                           key: index,
                           staticClass: "carousel-item",
                           style: {
-                            backgroundImage: "url(" + item.image + ")",
+                            backgroundImage: "url('" + item.image + ")",
                             backgroundPosition: "center center"
                           }
                         },
@@ -8512,7 +8573,7 @@ var render = function() {
                       staticClass: "btn btn-success mt-3",
                       attrs: { to: "/articles/" + _vm.articles[index].id }
                     },
-                    [_vm._v("اقرأ المزيد\n                        ")]
+                    [_vm._v("اقرأ المزيد")]
                   )
                 ],
                 1
@@ -8549,6 +8610,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "my-5", attrs: { id: "feats" } }, [
     _c("div", { staticClass: "container" }, [
+      _c("p", { staticClass: "h1" }, [_vm._v("خدماتنا")]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
       _vm.feats.length > 4
         ? _c("div", [
             _c(
@@ -9486,37 +9551,44 @@ var render = function() {
         _vm._l(_vm.traniners, function(trainer, index) {
           return _c(
             "div",
-            { key: index, staticClass: "col-md-4 col-sm-12 mb-3" },
+            { key: index, staticClass: "col-md-4 col-sm-12 mb-3 " },
             [
-              _c("div", { staticClass: "overlay" }, [
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: { src: trainer.image }
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "middle d-flex justify-content-center align-items-center"
-                  },
-                  [
-                    _c("div", { staticClass: "text" }, [
-                      _c("p", { staticClass: "h2 mb-2" }, [
-                        _vm._v(_vm._s(trainer.name))
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v(" " + _vm._s(trainer.info) + " ")]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(" للتواصل: " + _vm._s(trainer.phone) + " ")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v(" أو: " + _vm._s(trainer.email) + " ")])
-                    ])
-                  ]
-                )
-              ])
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "overlay d-flex justify-content-center align-items-center"
+                },
+                [
+                  _c("img", {
+                    staticClass: "img-fluid",
+                    attrs: { src: trainer.image }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "middle d-flex justify-content-center align-items-center right-text"
+                    },
+                    [
+                      _c("div", { staticClass: "text" }, [
+                        _c("p", { staticClass: "h2 mb-2" }, [
+                          _vm._v(_vm._s(trainer.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(" " + _vm._s(trainer.info) + " ")]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(" للتواصل: " + _vm._s(trainer.phone) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(" أو: " + _vm._s(trainer.email) + " ")])
+                      ])
+                    ]
+                  )
+                ]
+              )
             ]
           )
         }),
@@ -14234,53 +14306,146 @@ var render = function() {
         [_vm._m(0)]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "ul",
-          { staticClass: "paginationList row" },
-          _vm._l(_vm.articles, function(article) {
-            return _c(
-              "li",
-              { key: article.id, staticClass: "listItem col-sm-12 col-md-3" },
-              [
-                _c("div", { staticClass: "border-white " }, [
-                  _c("div", { staticClass: "card" }, [
-                    _c("img", {
-                      staticClass: "card-img-top",
-                      attrs: { src: article.image, alt: "Card image cap" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "card-body" },
-                      [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v(_vm._s(article.title))
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(article.shortDescription))
-                        ]),
+      _c(
+        "div",
+        { staticClass: "container" },
+        [
+          _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+            _c(
+              "ul",
+              { staticClass: "row" },
+              _vm._l(_vm.view_article, function(article) {
+                return _c(
+                  "li",
+                  {
+                    key: article.id,
+                    staticClass: "listItem col-sm-12 col-md-3"
+                  },
+                  [
+                    _c("div", { staticClass: "border-white" }, [
+                      _c("div", { staticClass: "card" }, [
+                        _c("img", {
+                          staticClass: "card-img-top",
+                          attrs: { src: article.image, alt: "Card image cap" }
+                        }),
                         _vm._v(" "),
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "btn btn-success",
-                            attrs: { to: "/articles/" + article.id }
-                          },
-                          [_vm._v("اقرأ المزيد\n                            ")]
+                          "div",
+                          { staticClass: "card-body" },
+                          [
+                            _c("h5", { staticClass: "card-title" }, [
+                              _vm._v(_vm._s(article.title))
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "card-text" }, [
+                              _vm._v(_vm._s(article.shortDescription))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: { to: "/articles/" + article.id }
+                              },
+                              [_vm._v("اقرأ المزيد")]
+                            )
+                          ],
+                          1
                         )
-                      ],
-                      1
-                    )
-                  ])
-                ])
-              ]
+                      ])
+                    ])
+                  ]
+                )
+              }),
+              0
             )
-          }),
-          0
-        )
-      ]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "nav",
+                { attrs: { "aria-label": "Page navigation example" } },
+                [
+                  _c(
+                    "ul",
+                    { staticClass: "pagination" },
+                    [
+                      _c(
+                        "li",
+                        {
+                          staticClass: "page-item",
+                          class: { disabled: _vm.current_page == 0 }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { role: "button" },
+                              on: { click: _vm.go_back }
+                            },
+                            [_vm._v("Previous")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(this.page_counter, function(pages, index) {
+                        return _c(
+                          "li",
+                          {
+                            key: index,
+                            staticClass: "page-item",
+                            class: { active: index == _vm.current_page }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "page-link",
+                                attrs: { role: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.go_to(index)
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(index + 1))]
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        {
+                          staticClass: "page-item",
+                          class: {
+                            disabled: _vm.current_page == _vm.page_counter - 1
+                          }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { role: "button" },
+                              on: { click: _vm.go_forward }
+                            },
+                            [_vm._v("Next")]
+                          )
+                        ]
+                      )
+                    ],
+                    2
+                  )
+                ]
+              )
+            ])
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("Footer2")
     ],

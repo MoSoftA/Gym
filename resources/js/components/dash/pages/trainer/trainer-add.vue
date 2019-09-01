@@ -77,8 +77,21 @@
                         Authorization: 'Bearer ' + this.$store.state.user.token
                     }
                 }
-                Axios.post('api/storeTrainer', about, config).then(res => console.log(res)).catch(err => console.log(
-                    err))
+                Axios.post('api/storeTrainer', about, config).then(res => {
+                    Swal.fire({
+                        title: "You added Trainer",
+                        text: res.data.message,
+                        type: "success",
+                        confirmButtonText: "Cool!"
+                    });
+                }).catch(err => {
+                    Swal.fire({
+                        title: "Something wrong",
+                        text: res.data.message,
+                        type: "error",
+                        confirmButtonText: "ok!"
+                    });
+                })
             }
         },
         mounted(){

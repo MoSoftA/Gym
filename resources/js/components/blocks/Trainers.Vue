@@ -5,10 +5,10 @@
             <hr />
             <div class="row">
 
-                <div class="col-md-4 col-sm-12 mb-3" :key="index" v-for="(trainer, index) in traniners">
-                    <div class="overlay">
+                <div class="col-md-4 col-sm-12 mb-3 " :key="index" v-for="(trainer, index) in traniners">
+                    <div class="overlay d-flex justify-content-center align-items-center">
 						<img class="img-fluid" :src="trainer.image" />
-                        <div class="middle d-flex justify-content-center align-items-center">
+                        <div class="middle d-flex justify-content-center align-items-center right-text">
                             <div class="text">
                                 <p class="h2 mb-2">{{ trainer.name }}</p>
                                 <p> {{ trainer.info }} </p>
@@ -40,6 +40,7 @@
         }
 
         .overlay {
+            position: relative;
             &:hover {
                 background-color: rgba(242, 58, 46, 0.8);
 
@@ -76,7 +77,6 @@
 
                 .text {
                     p {
-                        max-width: 50%;
                         margin: auto;
                     }
                 }

@@ -186,7 +186,6 @@ export default {
             this.$store.state.user.admin = false;
           }
 
-          console.log(this.$store.state.user);
 
           // Make it
           this.$store.state.user.loged = true;
@@ -221,7 +220,6 @@ export default {
       .get("api/getNavbar")
       .then(res => {
         this.$store.commit("Edit_Navbar", res.data.data);
-        console.log("Navbeat", res.data.data);
       })
       .catch(err => console.log(err));
   }
