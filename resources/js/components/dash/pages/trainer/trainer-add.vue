@@ -68,7 +68,7 @@
                 about.append('email', this.email);
                 about.append('info', this.info);
                 about.append('phone', this.phone);
-                about.append('img', this.image);
+                about.append('image', this.image);
 
                 const config = {
                     headers: {

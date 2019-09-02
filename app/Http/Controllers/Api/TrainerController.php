@@ -14,15 +14,15 @@ class TrainerController extends Controller
 	 use ApiResponse;
     public function getTainers()
     {
-    	 return $this->ApiResponse(200, 'success', Trainer::all());
+    	 return $this->ApiResponse(200, 'success', Trainer::orderBy('id', 'desc')->get());
     }
 
     public function store(TrainerRequest $request)
     {
     	$this->validate($request, ['email' => Rule::unique('trainers')], ['email.unique'=> "هذا البريد مستخدم من قبل "]);
-     if($request->hasFile('img'))
+     if($request->hasFile('image'))
         {
-          $img = $request->file('img');
+          $img = $request->file('image');
           $imgName = Str::random(50).'.'. $img->extension();
           $img->move(public_path('uploads/trainers'), $imgName); 
              $url = url('uploads/trainers/'. $imgName);
@@ -45,12 +45,15 @@ class TrainerController extends Controller
     	
     $this->validate($request, ['email' => Rule::unique('trainers')->ignore($request->id)], ['email.unique'=> "هذا البريد مستخدم من قبل "]);
 
-     if($request->hasFile('img'))
+     if($request->hasFile('image'))
         {
-          $img = $request->file('img');
+          $img = $request->file('image');
           $imgName = Str::random(50).'.'. $img->extension();
            $img->move(public_path('uploads/trainers'), $imgName); 
           $url = url('uploads/trainers/'. $imgName);
+        }else if (Trainer::where('image', $request->image))
+        {
+          $url = $request->image;
         }
 
         Trainer::find($request->id)->update([

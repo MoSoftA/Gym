@@ -75,7 +75,7 @@ class SiteController extends Controller
 //===========================
    public function getSlider(){
 
-	   	$slider = DB::table('sliders')->get();
+	   	$slider = DB::table('sliders')->orderBy('id', 'desc')->get();
 
 	   	if($slider){
 	   	 return $this->ApiResponse(200,"success", $slider);
@@ -85,6 +85,7 @@ class SiteController extends Controller
 
    public function storeSlider(Request  $request)
    {
+   $request->validate(['image' => 'required|image']);
 	   	if($request->hasFile('image'))
         {
          $this->validate($request,['image'=>'image'],[],[]);
@@ -198,6 +199,7 @@ class SiteController extends Controller
 
     public function storerAboutUs(Request  $request)
    {
+   	$request->validate(['image'=> 'required|image', 'body' => 'required']);
    	 	if($request->hasFile('image'))
         {
          $this->validate($request,['image'=>'image'],[],[]);
@@ -232,7 +234,7 @@ class SiteController extends Controller
 ===================*/
 	public function getFeatures()
 	{
-		$features = DB::table('features')->get();
+		$features = DB::table('features')->orderBy('id', 'desc')->get();
 
 	   	if($features){
 	   	 return $this->ApiResponse(200,"success",$features);
@@ -252,9 +254,6 @@ class SiteController extends Controller
           $imgName = Str::random(50).'.'. $img->extension();
           $img->move(public_path('uploads/features'), $imgName); 
           $url = url('uploads/features/'. $imgName);
-        }else if (DB::table('features')->where('image', $request->image))
-        {
-        	$url = $request->image;
         }else{$url = null;}
         
 		DB::table('features')->Insert([
@@ -272,21 +271,29 @@ class SiteController extends Controller
 		$this->validate($request, [
 			'title'	=> 'required|string',
 			'text'	=> 'required|string',
-			//'image'	=> 'required|image'
+			'image'	=> 'required'
 		], [
 			'title.required' => 'من فضلك ضع العنوان',
 			'title.string' => 'العنوان يحتوي علي حروف فقط',
 			'text.required' => 'من فضلك ضع المحتوي',
 			'text.string' => 'يجب ان يحتوي علي حروف فقط',
-
-
 			'image.required'	=> 'من فضلك ضه صورة'
 		]);
+		if($request->hasFile('image'))
+        {
+          $img = $request->file('image');
+          $imgName = Str::random(50).'.'. $img->extension();
+          $img->move(public_path('uploads/features'), $imgName); 
+          $url = url('uploads/features/'. $imgName);
+        }else if (DB::table('features')->where(['id', 'image'], [$id, $request->image]))
+        {
+        	$url = $request->image;
+        }else{$url = null;}
 		//return $request;
 		DB::table('features')->where('id', $id)->update([
 			'title' => $request->title,
 			'text'	=> $request->text,
-			'image'	=> $request->image
+			'image'	=> $url
 		]);
 		return $this->ApiResponse(200,"success");
 	}

@@ -5087,7 +5087,7 @@ __webpack_require__.r(__webpack_exports__);
       about.append('email', this.email);
       about.append('info', this.info);
       about.append('phone', this.phone);
-      about.append('img', this.image);
+      about.append('image', this.image);
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
@@ -8545,7 +8545,7 @@ var render = function() {
                           key: index,
                           staticClass: "carousel-item",
                           style: {
-                            backgroundImage: "url('" + item.image + ")",
+                            backgroundImage: "url(" + item.image + ")",
                             backgroundPosition: "center center"
                           }
                         },
@@ -11973,7 +11973,7 @@ var render = function() {
               },
               [
                 _c("label", { attrs: { for: "bf" } }, [
-                  _vm._v("log out font color")
+                  _vm._v("log out bgc color")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-group" }, [
@@ -12014,7 +12014,7 @@ var render = function() {
               },
               [
                 _c("label", { attrs: { for: "bf" } }, [
-                  _vm._v("log out bgc color")
+                  _vm._v("log out font color")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-group" }, [
@@ -31990,15 +31990,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************!*\
   !*** ./resources/js/components/dash/pages/dashboard.vue ***!
   \**********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dashboard_vue_vue_type_template_id_2d82a857___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dashboard.vue?vue&type=template&id=2d82a857& */ "./resources/js/components/dash/pages/dashboard.vue?vue&type=template&id=2d82a857&");
 /* harmony import */ var _dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dashboard.vue?vue&type=script&lang=js& */ "./resources/js/components/dash/pages/dashboard.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -32028,7 +32027,7 @@ component.options.__file = "resources/js/components/dash/pages/dashboard.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/dash/pages/dashboard.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33575,8 +33574,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\Gym-Manager\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\Gym-Manager\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! c:\xampp\htdocs\Gym\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! c:\xampp\htdocs\Gym\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

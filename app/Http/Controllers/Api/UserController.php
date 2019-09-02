@@ -18,7 +18,7 @@ class UserController extends Controller
     use ApiResponse;
 
     public function all(){
-        return $this->ApiResponse(200,"success", UserResource::collection(User::all()));
+        return $this->ApiResponse(200,"success", UserResource::collection(User::orderBy('id', 'desc')->get()));
     }
     public function get(Request $request){
         $user = User::find($request->id);

@@ -10,8 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+$router->pattern('id', '[0-9]+');
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+Route::get('/{any}/{id}', 'SpaController@index');
 
 Route::group(["middleware"=>"auth"], function (){
 	// articles
