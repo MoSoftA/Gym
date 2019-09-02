@@ -10,6 +10,7 @@
 
                 <label for="articleimage">Article image</label>
                 <div class="input-group">
+                    <img :src="img" alt="صورة" class="img-fluid" width="200px">
                     <input type="file" id="img" accept="image/*" name="img" @change="get_image($event)">
                 </div>
 
@@ -69,7 +70,7 @@
                     headers: {
                         'content-type': 'multipart/form-data',
                         Accept: 'application/json',
-                        Authorization: 'Bearer ' + this.$store.state.user.token 
+                        Authorization: 'Bearer ' + this.$store.state.user.token     
                     }
                 };
 
@@ -81,13 +82,30 @@
 
 
                 Axios.post(`api/editArticle/${this.id}`, data , config).then(res => {
+                     Swal.fire({
+                        title: 'Done',
+                        text: err.data,
+                        type: 'success',
+                        confirmButtonText: 'ok'
+                    })
                     console.log(res)
-                }).catch(err => console.log(err.message))
+                }).catch(err => {
+                     Swal.fire({
+                            title: 'فشلت العملية',
+                            text: err.data,
+                            type: 'error',
+                            confirmButtonText: 'حسناً'
+                        })
+                })
             },
 
         },
         mounted() {
             console.log('ok', this.$store.state.AdminPanel.articleEdit);
+
+            this.title = this.$store.state.AdminPanel.articleEdit[1];
+            this.info = this.$store.state.AdminPanel.articleEdit[2];
+            this.img = this.$store.state.AdminPanel.articleEdit[5];
 
             $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
                 popover: {

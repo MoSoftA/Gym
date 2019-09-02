@@ -61,12 +61,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a role="button" class="nav-link" @click="change_page('TrainersEdit')">
-                  <i class="far fa-circle nav-icon"></i>
-                  Our trainers
-                </a>
-              </li>
-              <li class="nav-item">
                 <a role="button" class="nav-link" @click="change_page('FooterEdit')">
                   <i class="far fa-circle nav-icon"></i>
                   Footer

@@ -3191,12 +3191,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     admin: function admin() {
@@ -3421,6 +3415,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3434,7 +3447,7 @@ __webpack_require__.r(__webpack_exports__);
     change_component: function change_component(e, payload) {
       var _this = this;
 
-      var id = $(e.target).parents('tr').first().children()[0].innerText;
+      var id = $(e.target).parents("tr").first().children()[0].innerText;
       var articles = this.rows;
       articles.forEach(function (article) {
         for (var key in article) {
@@ -3444,31 +3457,31 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       });
-      this.$store.commit('change_current_page', payload);
+      this.$store.commit("change_current_page", payload);
     },
     get_id: function get_id(e) {
-      this.id = $(e.target).parents('tr').first().children()[0].innerText;
+      this.id = $(e.target).parents("tr").first().children()[0].innerText;
     },
     deleteArticle: function deleteArticle(e) {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("api/deleteArticle/".concat(this.id), {
         headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       }).then(function (res) {
         Swal.fire({
-          title: 'Deleted successfully',
+          title: "Deleted successfully",
           text: null,
-          type: 'success',
-          confirmButtonText: 'good'
+          type: "success",
+          confirmButtonText: "good"
         });
         _this2.rows = [];
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/articles', {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/articles", {
           headers: {
-            Accept: 'application/json',
-            Authorization: 'Bearer ' + _this2.$store.state.user.token
+            Accept: "application/json",
+            Authorization: "Bearer " + _this2.$store.state.user.token
           }
         }).then(function (res) {
           var articles = res.data.data;
@@ -3483,10 +3496,10 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (err) {
         return Swal.fire({
-          title: 'Faild',
+          title: "Faild",
           text: err.message,
-          type: 'error',
-          confirmButtonText: 'ok!'
+          type: "error",
+          confirmButtonText: "ok!"
         });
       });
     }
@@ -3494,10 +3507,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this3 = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/articles', {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/articles", {
       headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+        Accept: "application/json",
+        Authorization: "Bearer " + this.$store.state.user.token
       }
     }).then(function (res) {
       var articles = res.data.data;
@@ -3505,7 +3518,6 @@ __webpack_require__.r(__webpack_exports__);
         // delete article.created_at;
         delete article.updated_at; // delete article.longDescription;
 
-        delete article.image;
         _this3.head = Object.keys(article);
 
         _this3.rows.push(Object.values(article));
@@ -3530,6 +3542,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -3609,14 +3622,28 @@ __webpack_require__.r(__webpack_exports__);
       data.append('info', this.info);
       data.append('img', this.img);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/editArticle/".concat(this.id), data, config).then(function (res) {
+        Swal.fire({
+          title: 'Done',
+          text: err.data,
+          type: 'success',
+          confirmButtonText: 'ok'
+        });
         console.log(res);
       })["catch"](function (err) {
-        return console.log(err.message);
+        Swal.fire({
+          title: 'فشلت العملية',
+          text: err.data,
+          type: 'error',
+          confirmButtonText: 'حسناً'
+        });
       });
     }
   },
   mounted: function mounted() {
     console.log('ok', this.$store.state.AdminPanel.articleEdit);
+    this.title = this.$store.state.AdminPanel.articleEdit[1];
+    this.info = this.$store.state.AdminPanel.articleEdit[2];
+    this.img = this.$store.state.AdminPanel.articleEdit[5];
     $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
       popover: {
         image: [],
@@ -10371,27 +10398,6 @@ var render = function() {
                             attrs: { role: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.change_page("TrainersEdit")
-                              }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "far fa-circle nav-icon" }),
-                            _vm._v(
-                              "\n                Our trainers\n              "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "nav-item" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { role: "button" },
-                            on: {
-                              click: function($event) {
                                 return _vm.change_page("FooterEdit")
                               }
                             }
@@ -10861,7 +10867,7 @@ var render = function() {
               "tr",
               [
                 _vm._l(_vm.head, function(header, index) {
-                  return index != 3
+                  return index != 4 && index != 3 && index != 5 && index != 6
                     ? _c("th", { key: index }, [_vm._v(_vm._s(header))])
                     : _vm._e()
                 }),
@@ -10880,7 +10886,7 @@ var render = function() {
                 { key: index },
                 [
                   _vm._l(user, function(val, index) {
-                    return index != 3
+                    return index != 4 && index != 3 && index != 5 && index != 6
                       ? _c("td", { key: index }, [_vm._v(_vm._s(val))])
                       : _vm._e()
                   }),
@@ -11064,6 +11070,11 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "input-group" }, [
+          _c("img", {
+            staticClass: "img-fluid",
+            attrs: { src: _vm.img, alt: "صورة", width: "200px" }
+          }),
+          _vm._v(" "),
           _c("input", {
             attrs: { type: "file", id: "img", accept: "image/*", name: "img" },
             on: {
@@ -13752,7 +13763,12 @@ var render = function() {
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "file", id: "inputPasswosd3" },
+                attrs: {
+                  type: "file",
+                  accept: "image/*",
+                  name: "img",
+                  id: "inputPasswosd3"
+                },
                 on: {
                   change: function($event) {
                     return _vm.get_image($event)

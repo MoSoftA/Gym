@@ -30,7 +30,7 @@
                         <div class="form-group col-4">
                             <label for="inputPasswosd3" class="font-wieght-bold control-label">الصورة</label>
                             <img :src="image" alt="صورة" class="img-fluid">
-                            <input type="file" class="form-control" id="inputPasswosd3" @change="get_image($event)">
+                            <input type="file" accept="image/*" name="img" class="form-control" id="inputPasswosd3" @change="get_image($event)">
                         </div>
                         
                         <div class="form-group col-4">
