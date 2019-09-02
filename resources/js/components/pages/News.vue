@@ -10,7 +10,20 @@
       </div>
     </div>
     <div class="container">
-      <transition name="fade" mode="out-in">
+
+      <div class="row mb-4">
+        <div class="form-group col-md-4">
+          <label for="inputState">ابحث عن نوع:</label>
+          <select  v-model="type" class="form-control">
+            <option selected>الكل</option>
+            <option>نوع 1</option>
+            <option>نوع 2</option>
+            <option>نوع 3</option>
+            <option>نوع 4</option>
+            <option>نوع 5</option>
+          </select>
+        </div>
+      </div>
 
         <ul class="row">
           <li class="listItem col-sm-12 col-md-3" :key="article.id" v-for="article in view_article">
@@ -18,16 +31,19 @@
               <div class="card">
                 <img class="card-img-top" :src="article.image" alt="Card image cap" />
                 <div class="card-body">
-                  <h5 class="card-title">{{ article.title }}</h5>
+                  <h5 class="card-title mb-3">{{ article.title }}</h5> 
                   <p class="card-text">{{ article.shortDescription }}</p>
                   <router-link :to="'/articles/'+article.id" class="btn btn-success">اقرأ المزيد</router-link>
+
+                  <!-- =============================== Catigory =============================== -->
+                  <span class="badge badge-pill badge-dark mr-1">نوع المقال</span>
+
                 </div>
               </div>
             </div>
           </li>
         </ul>
 
-      </transition>
 
       <div>
         <div class="row">
@@ -68,8 +84,7 @@ export default {
       all_articles: null,
       articles: null,
       current_page: 0,
-
-      first_page: 0
+      type: 'الكل'
     };
   },
   components: {
@@ -126,18 +141,6 @@ export default {
   text-align: right;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.3s;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0
-}
-
 .jumbotron {
   background-color: rgb(242, 58, 46);
   color: white;
@@ -145,6 +148,7 @@ export default {
 
 ul {
   list-style: none;
+  padding: 0  
 }
 .page-item .page-link{
   border-radius: 0

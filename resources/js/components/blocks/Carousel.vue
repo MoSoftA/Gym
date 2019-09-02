@@ -25,7 +25,7 @@
                                 class="carousel-item"
                                 :key="index"
                                 v-for="(item, index) in list.slice(1)"
-                                :style="{backgroundImage: `url(${item.image})`, backgroundPosition: 'center center', }"
+                                :style="{backgroundImage: `url('${item.image})`, backgroundPosition: 'center center', }"
                             >
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{item.text}}</h5>

@@ -5,6 +5,15 @@
                 <p class="h1 mt-5">Tasks</p>
 
                 <div class="row">
+                    <button class="col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1" @click="Saturday()">Saturday</button>
+                    <button class="col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1" @click="Sunday()">Sunday</button>
+                    <button class="col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1" @click="Monday()">Monday</button>
+                    <button class="col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1" @click="Thursday()">Thursday</button>
+                    <button class="col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1" @click="Wednesday()">Wednesday</button>
+                    <button class="col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1" @click="Thuesday()">Thuesday</button>
+                    <button class="col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1" @click="Friday()">Friday</button>
+                </div>
+                <div class="row">
                     <div class="day mb-2 col-sm-12 col-md-4 col-lg-3" :key="index" v-for="(item, index) in listsa">
                         <h1>{{ item.day }}</h1>
                         <ul class="list-unstyled">
@@ -25,6 +34,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -68,9 +78,7 @@
 
         data() {
             return {
-                listsa: [
-
-                ],
+                listsa: [],
                 addList: {
                     day: '',
                     exercieses: [],
@@ -84,18 +92,131 @@
 
         },
         methods: {
+            Saturday(){
+                Axios.post(`api/addExerciese`, {
+                    day: 'Saturday',
+                    lists: ['sd','dasadsadsda'],
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                }, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => {
+                    this.listsa.push(res.data);
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            Sunday(){
+                Axios.post(`api/addExerciese`, {
+                    day: 'Sunday',
+                    lists: [''],
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                }, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            Monday(){
+                Axios.post(`api/addExerciese`, {
+                    day: 'Monday',
+                    lists: [''],
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                }, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            Thursday(){
+                Axios.post(`api/addExerciese`, {
+                    day: 'Thursday',
+                    lists: [''],
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                }, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            Wednesday(){
+                Axios.post(`api/addExerciese`, {
+                    day: 'Wednesday',
+                    lists: [''],
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                }, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            Thuesday(){
+                Axios.post(`api/addExerciese`, {
+                    day: 'Thuesday',
+                    lists: [''],
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                }, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            Friday(){
+                Axios.post(`api/addExerciese`, {
+                    day: 'Friday',
+                    lists: ['sd'],
+                    user_id: this.$store.state.AdminPanel.userEdit[0]
+                }, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + this.$store.state.user.token,
+                    }
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
 
             add(index, i) {
                 let source = {
                     day: i.day,
-                    lists: this.listsa.filter(w => w.day == i.day)[0].exercise,
+                    lists: this.listsa.filter(w => w.id == i.id)[0].exercise,
                     user_id: this.$store.state.AdminPanel.userEdit[0]
                 };
 
                 source.lists.push(this.D[index]);
 
 
-                Axios.put(`api/editExerciese/${this.$store.state.AdminPanel.userEdit[0]}`, source, {
+                Axios.put(`api/addExerciese/${this.$store.state.AdminPanel.userEdit[0]}`, source, {
                     headers: {
                         Accept: 'application/json',
                         Authorization: 'Bearer ' + this.$store.state.user.token,
@@ -160,20 +281,23 @@
                     }
                 })
                 .then(res => {
-                    this.listsa = [];
+                    console.log(res);
                     let exercieses = res.data.data;
-                    // Convert response to array
-                    exercieses.forEach(exercisea => {
-                        if (typeof (exercisea.exercise == 'string')) {
+                    if(exercieses != []){
+                        
+                        // Convert response to array
+                        exercieses.forEach(exercisea => {
+                            if (typeof (exercisea.exercise == 'string')) {
+                                
+                                exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                                exercisea.exercise = exercisea.exercise.split(',');
 
-                            exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
-                            exercisea.exercise = exercisea.exercise.split(',');
-
-                        } else {
-                            this.listsa.push(exercisea.exercise)
-                        }
-                        this.listsa.push(exercisea)
-                    });
+                            } else {
+                                this.listsa.push(exercisea.exercise)
+                            }
+                            this.listsa.push(exercisea)
+                        });
+                    }   
                 })
                 .catch(err => console.log(err))
         }
