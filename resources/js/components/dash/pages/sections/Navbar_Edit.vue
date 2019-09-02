@@ -72,14 +72,14 @@
           </div>
 
           <div class="input col-md-4 col-sm-10 mx-sm-auto mx-md-0 col-lg-2 mt-3">
-            <label for="bf">log out font color</label>
+            <label for="bf">log out bgc color</label>
             <div class="input-group">
               <input type="color" id="bf" class="form-control" v-model="navbar.sec_button_background" />
             </div>
           </div>
 
           <div class="input col-md-4 col-sm-10 mx-sm-auto mx-md-0 col-lg-2 mt-3">
-            <label for="bf">log out bgc color</label>
+            <label for="bf">log out font color</label>
             <div class="input-group">
               <input type="color" id="bf" class="form-control" v-model="navbar.sec_button_font_color" />
             </div>

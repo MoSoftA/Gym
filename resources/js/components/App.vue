@@ -26,3 +26,19 @@ hr{
   opacity: 0
 }
 </style>
+
+
+<script>
+import Axios from 'axios';
+export default {
+  mounted() {
+        Axios.get("api/getFeatures")
+            .then(res => {
+                this.$store.commit("got_feats", res.data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+}
+</script>

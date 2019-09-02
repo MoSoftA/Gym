@@ -74,7 +74,9 @@ export const store = new Vuex.Store({
         // Start Articles
         articles:[],
         // Start Tasks
-        tasks: []
+        tasks: [],
+        // Start feats
+        feats: []
     },
     mutations:{
         // Check if loged
@@ -96,6 +98,11 @@ export const store = new Vuex.Store({
         Edit_Footer: (state, payload) => {
             Object.assign(state.sections.footer, payload)
         },
+        // Get Feats
+
+        got_feats: (state, payload) => {
+            state.feats = payload
+        },
         got_articles: (state, payload) => {
             state.articles = payload
         },
@@ -115,6 +122,9 @@ export const store = new Vuex.Store({
     getters: {
         article: (state) => (id) => {
             return state.articles.filter(function(v){ return v["id"] == id })
+        },
+        feats_num: (state) => {
+            return state.feats.length
         }
     }
 });

@@ -77,6 +77,33 @@ export default {
             .catch(err => {
                 if (err) console.log(err);
             });
+
+            $('.owl-carousel').owlCarousel({
+                rtl: true,
+                center:true,
+                animateOut: 'fadeOut',
+                loop: false,
+                margin: 10,
+                autoplay: false,
+                nav: false,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    600: {
+                        items: 2,
+                        loop: true
+                    },
+                    1000: {
+                        items: 2,
+                        loop: true,
+                    }
+                }
+            })
     }
 };
 </script>
