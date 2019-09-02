@@ -5309,6 +5309,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5322,38 +5344,80 @@ __webpack_require__.r(__webpack_exports__);
     change_component: function change_component(e, payload) {
       var _this = this;
 
-      var id = $(e.target).parents('tr').first().children()[0].innerText;
+      var id = $(e.target).parents("tr").first().children()[0].innerText;
       var trainers = this.rows;
       trainers.forEach(function (trainer) {
         for (var key in trainer) {
           if (trainer[key] == id) {
-            _this.$store.commit('target_trainer', trainer);
+            _this.$store.commit("target_trainer", trainer);
 
             console.log(_this.$store.state.AdminPanel.trainer);
           }
         }
       });
-      this.$store.commit('change_current_page', payload);
+      this.$store.commit("change_current_page", payload);
     },
     get_id: function get_id(e) {
-      this.id = $(e.target).parents('tr').first().children()[0].innerText;
+      this.id = $(e.target).parents("tr").first().children()[0].innerText;
+    },
+    deleteUser: function deleteUser(e) {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("api/deleteTrainer/".concat(this.id), {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
+        }
+      }).then(function (res) {
+        Swal.fire({
+          title: "Deleted successfully",
+          text: null,
+          type: "success",
+          confirmButtonText: "good"
+        });
+        _this2.rows = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getTrainers", {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + _this2.$store.state.user.token
+          }
+        }).then(function (res) {
+          var Trainers = res.data.data;
+          Trainers.forEach(function (trainer) {
+            delete trainer.updated_at;
+            _this2.head = Object.keys(trainer);
+
+            _this2.rows.push(Object.values(trainer));
+          });
+        })["catch"](function (err) {
+          return err.message;
+        });
+        console.log(res);
+      })["catch"](function (err) {
+        return Swal.fire({
+          title: "Faild",
+          text: err.message,
+          type: "error",
+          confirmButtonText: "good"
+        });
+      });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getTrainers', {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getTrainers", {
       headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+        Accept: "application/json",
+        Authorization: "Bearer " + this.$store.state.user.token
       }
     }).then(function (res) {
       var Trainers = res.data.data;
       Trainers.forEach(function (trainer) {
         delete trainer.updated_at;
-        _this2.head = Object.keys(trainer);
+        _this3.head = Object.keys(trainer);
 
-        _this2.rows.push(Object.values(trainer));
+        _this3.rows.push(Object.values(trainer));
       });
     })["catch"](function (err) {
       return err.message;
