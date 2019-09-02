@@ -20,8 +20,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return $this->ApiResponse(200, 'success', 
-        	ArticleResource::collection(Article::paginate()));
+        return $this->ApiResponse(200, 'success',   
+        	ArticleResource::collection(Article::orderBy('id', 'desc')->get()));
     }
 
 

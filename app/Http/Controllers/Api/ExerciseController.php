@@ -19,7 +19,7 @@ class ExerciseController extends Controller
     public function index($id)
     {
 
-        $exercises = Exercise::where('user_id', $id)->get();
+        $exercises = Exercise::orderBy('id', 'desc')->where('user_id', $id)->get();
         return $this->ApiResponse(200, 'success',  $exercises);
     }
 

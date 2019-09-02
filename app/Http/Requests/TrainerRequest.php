@@ -28,11 +28,11 @@ class TrainerRequest extends FormRequest
     {
        
         return [
-          // 'name'=> 'required', 
-          // 'email'=>'email|required',
-          //'image' =>'image|required', 
-           //'info' =>'required',
-            //'phone' =>'required',
+           'name'=> 'required', 
+           'email'=>'email|required',
+          'image' =>'required', 
+           'info' =>'required',
+            'phone' =>'required',
         ];
     }
 

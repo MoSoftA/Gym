@@ -2046,7 +2046,6 @@ __webpack_require__.r(__webpack_exports__);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/getSlider", this.config).then(function (res) {
       _this.list = res.data.data;
-      console.log(res);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -5230,7 +5229,7 @@ __webpack_require__.r(__webpack_exports__);
       about.append('email', this.email);
       about.append('info', this.info);
       about.append('phone', this.phone);
-      about.append('img', this.image);
+      about.append('image', this.image);
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
@@ -8903,7 +8902,7 @@ var render = function() {
                           key: index,
                           staticClass: "carousel-item",
                           style: {
-                            backgroundImage: "url(" + item.image + ")",
+                            backgroundImage: "url('" + item.image + ")",
                             backgroundPosition: "center center"
                           }
                         },
@@ -34100,8 +34099,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\Gym-Manager\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\Gym-Manager\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! c:\xampp\htdocs\Gym\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! c:\xampp\htdocs\Gym\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
