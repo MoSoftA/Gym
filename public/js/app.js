@@ -2070,15 +2070,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5721,137 +5712,427 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       listsa: [],
+      days: {
+        Saturday: true,
+        Sunday: true,
+        Monday: true,
+        Thursday: true,
+        Wednesday: true,
+        Thuesday: true,
+        Friday: true
+      },
       addList: {
-        day: '',
+        day: "",
         exercieses: [],
         user_id: null
       },
-      task: '',
+      task: "",
       D: [null, null, null, null, null, null]
     };
   },
   computed: {},
   methods: {
-    Saturday: function Saturday() {
+    dayso: function dayso(name) {
+      var exist = this.listsa.filter(function (w) {
+        return w.day == name;
+      });
+
+      if (this.listsa == [] || exist[0]) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    Saturday_fn: function Saturday_fn() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
-        day: 'Saturday',
-        lists: ['sd', 'dasadsadsda'],
-        user_id: this.$store.state.AdminPanel.userEdit[0]
-      }, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
-        _this.listsa.push(res.data);
+      if (this.dayso("Saturday")) {
+        this.days.Saturday = false;
+        return;
+      } else {
+        this.listsa = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+          day: "Saturday",
+          lists: ["Add exersice"],
+          user_id: this.$store.state.AdminPanel.userEdit[0]
+        }, {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        }).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(_this.$store.state.AdminPanel.userEdit[0]), {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + _this.$store.state.user.token
+            }
+          }).then(function (res) {
+            console.log(res);
+            var exercieses = res.data.data;
 
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+            if (exercieses != []) {
+              // Convert response to array
+              exercieses.forEach(function (exercisea) {
+                if (_typeof(exercisea.exercise == "string")) {
+                  exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                  exercisea.exercise = exercisea.exercise.split(",");
+                } else {
+                  _this.listsa = [];
+
+                  _this.listsa.push(exercisea.exercise);
+                }
+
+                _this.listsa.push(exercisea);
+              });
+            }
+          });
+          _this.days.Saturday = false;
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
-    Sunday: function Sunday() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
-        day: 'Sunday',
-        lists: [''],
-        user_id: this.$store.state.AdminPanel.userEdit[0]
-      }, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+    Sunday_fn: function Sunday_fn() {
+      var _this2 = this;
+
+      if (this.dayso("Sunday")) {
+        this.days.Sunday = false;
+        return;
+      } else {
+        this.listsa = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+          day: "Sunday",
+          lists: ["Add exersices"],
+          user_id: this.$store.state.AdminPanel.userEdit[0]
+        }, {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        }).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(_this2.$store.state.AdminPanel.userEdit[0]), {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + _this2.$store.state.user.token
+            }
+          }).then(function (res) {
+            console.log(res);
+            var exercieses = res.data.data;
+
+            if (exercieses != []) {
+              // Convert response to array
+              exercieses.forEach(function (exercisea) {
+                if (_typeof(exercisea.exercise == "string")) {
+                  exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                  exercisea.exercise = exercisea.exercise.split(",");
+                } else {
+                  _this2.listsa = [];
+
+                  _this2.listsa.push(exercisea.exercise);
+                }
+
+                _this2.listsa.push(exercisea);
+              });
+            }
+          });
+          _this2.days.Sunday = false;
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
-    Monday: function Monday() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
-        day: 'Monday',
-        lists: [''],
-        user_id: this.$store.state.AdminPanel.userEdit[0]
-      }, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+    Monday_fn: function Monday_fn() {
+      var _this3 = this;
+
+      if (this.dayso("Monday")) {
+        this.days.Monday = false;
+        return;
+      } else {
+        this.listsa = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+          day: "Monday",
+          lists: ["Add exersices"],
+          user_id: this.$store.state.AdminPanel.userEdit[0]
+        }, {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        }).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(_this3.$store.state.AdminPanel.userEdit[0]), {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + _this3.$store.state.user.token
+            }
+          }).then(function (res) {
+            console.log(res);
+            var exercieses = res.data.data;
+
+            if (exercieses != []) {
+              // Convert response to array
+              exercieses.forEach(function (exercisea) {
+                if (_typeof(exercisea.exercise == "string")) {
+                  exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                  exercisea.exercise = exercisea.exercise.split(",");
+                } else {
+                  _this3.listsa = [];
+
+                  _this3.listsa.push(exercisea.exercise);
+                }
+
+                _this3.listsa.push(exercisea);
+              });
+            }
+
+            _this3.days.Monday = false;
+          });
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
-    Thursday: function Thursday() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
-        day: 'Thursday',
-        lists: [''],
-        user_id: this.$store.state.AdminPanel.userEdit[0]
-      }, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+    Thursday_fn: function Thursday_fn() {
+      var _this4 = this;
+
+      if (this.dayso("Thursday")) {
+        this.days.Thursday = false;
+        return;
+      } else {
+        this.listsa = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+          day: "Thursday",
+          lists: ["Add exersices"],
+          user_id: this.$store.state.AdminPanel.userEdit[0]
+        }, {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        }).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(_this4.$store.state.AdminPanel.userEdit[0]), {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + _this4.$store.state.user.token
+            }
+          }).then(function (res) {
+            console.log(res);
+            var exercieses = res.data.data;
+
+            if (exercieses != []) {
+              // Convert response to array
+              exercieses.forEach(function (exercisea) {
+                if (_typeof(exercisea.exercise == "string")) {
+                  exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                  exercisea.exercise = exercisea.exercise.split(",");
+                } else {
+                  _this4.listsa = [];
+
+                  _this4.listsa.push(exercisea.exercise);
+                }
+
+                _this4.listsa.push(exercisea);
+              });
+            }
+
+            _this4.days.Thursday = false;
+          });
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
-    Wednesday: function Wednesday() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
-        day: 'Wednesday',
-        lists: [''],
-        user_id: this.$store.state.AdminPanel.userEdit[0]
-      }, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+    Wednesday_fn: function Wednesday_fn() {
+      var _this5 = this;
+
+      if (this.dayso("Wednesday")) {
+        this.days.Wednesday = false;
+        return;
+      } else {
+        this.listsa = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+          day: "Wednesday",
+          lists: ["Add exersices"],
+          user_id: this.$store.state.AdminPanel.userEdit[0]
+        }, {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        }).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(_this5.$store.state.AdminPanel.userEdit[0]), {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + _this5.$store.state.user.token
+            }
+          }).then(function (res) {
+            console.log(res);
+            var exercieses = res.data.data;
+
+            if (exercieses != []) {
+              // Convert response to array
+              exercieses.forEach(function (exercisea) {
+                if (_typeof(exercisea.exercise == "string")) {
+                  exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                  exercisea.exercise = exercisea.exercise.split(",");
+                } else {
+                  _this5.listsa = [];
+
+                  _this5.listsa.push(exercisea.exercise);
+                }
+
+                _this5.listsa.push(exercisea);
+              });
+            }
+          });
+          _this5.days.Wednesday = false;
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
-    Thuesday: function Thuesday() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
-        day: 'Thuesday',
-        lists: [''],
-        user_id: this.$store.state.AdminPanel.userEdit[0]
-      }, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+    Thuesday_fn: function Thuesday_fn() {
+      var _this6 = this;
+
+      if (this.dayso("Thuesday")) {
+        this.days.Thuesday = false;
+        return;
+      } else {
+        this.listsa = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+          day: "Thuesday",
+          lists: ["Add exersices"],
+          user_id: this.$store.state.AdminPanel.userEdit[0]
+        }, {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        }).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(_this6.$store.state.AdminPanel.userEdit[0]), {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + _this6.$store.state.user.token
+            }
+          }).then(function (res) {
+            console.log(res);
+            var exercieses = res.data.data;
+
+            if (exercieses != []) {
+              // Convert response to array
+              exercieses.forEach(function (exercisea) {
+                if (_typeof(exercisea.exercise == "string")) {
+                  exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                  exercisea.exercise = exercisea.exercise.split(",");
+                } else {
+                  _this6.listsa = [];
+
+                  _this6.listsa.push(exercisea.exercise);
+                }
+
+                _this6.listsa.push(exercisea);
+              });
+            }
+          });
+          _this6.days.Thuesday = false;
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
-    Friday: function Friday() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
-        day: 'Friday',
-        lists: ['sd'],
-        user_id: this.$store.state.AdminPanel.userEdit[0]
-      }, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
-        }
-      }).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+    Friday_fn: function Friday_fn() {
+      var _this7 = this;
+
+      if (this.dayso("Friday")) {
+        this.days.Friday = false;
+        return;
+      } else {
+        this.listsa = [];
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/addExerciese", {
+          day: "Friday",
+          lists: ["Add exersices"],
+          user_id: this.$store.state.AdminPanel.userEdit[0]
+        }, {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$store.state.user.token
+          }
+        }).then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(_this7.$store.state.AdminPanel.userEdit[0]), {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + _this7.$store.state.user.token
+            }
+          }).then(function (res) {
+            console.log(res);
+            var exercieses = res.data.data;
+
+            if (exercieses != []) {
+              // Convert response to array
+              exercieses.forEach(function (exercisea) {
+                if (_typeof(exercisea.exercise == "string")) {
+                  exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
+                  exercisea.exercise = exercisea.exercise.split(",");
+                } else {
+                  _this7.listsa = [];
+
+                  _this7.listsa.push(exercisea.exercise);
+                }
+
+                _this7.listsa.push(exercisea);
+              });
+            }
+          });
+          _this7.days.Friday = false;
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
     add: function add(index, i) {
       var source = {
@@ -5864,8 +6145,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       source.lists.push(this.D[index]);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/addExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
         headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       }).then(function (res) {
         return console.log(res);
@@ -5875,7 +6156,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       this.D[index] = null;
     },
     remove: function remove(index, i) {
-      var _this2 = this;
+      var _this8 = this;
 
       var source = {
         day: i.day,
@@ -5888,27 +6169,27 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       source.lists = i.exercise;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/editExerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), source, {
         headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       }).then(axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
         headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.user.token
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.user.token
         }
       }).then(function (res) {
-        _this2.listsa = [];
+        _this8.listsa = [];
         var exercieses = res.data.data; // Convert response to array
 
         exercieses.forEach(function (exercisea) {
-          if (_typeof(exercisea.exercise == 'string')) {
+          if (_typeof(exercisea.exercise == "string")) {
             exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
-            exercisea.exercise = exercisea.exercise.split(',');
+            exercisea.exercise = exercisea.exercise.split(",");
           } else {
-            _this2.listsa.push(exercisea.exercise);
+            _this8.listsa.push(exercisea.exercise);
           }
 
-          _this2.listsa.push(exercisea);
+          _this8.listsa.push(exercisea);
         });
       })["catch"](function (err) {
         return console.log(err);
@@ -5918,12 +6199,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this9 = this;
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/exerciese/".concat(this.$store.state.AdminPanel.userEdit[0]), {
       headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + this.$store.state.user.token
+        Accept: "application/json",
+        Authorization: "Bearer " + this.$store.state.user.token
       }
     }).then(function (res) {
       console.log(res);
@@ -5932,14 +6213,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       if (exercieses != []) {
         // Convert response to array
         exercieses.forEach(function (exercisea) {
-          if (_typeof(exercisea.exercise == 'string')) {
+          if (_typeof(exercisea.exercise == "string")) {
             exercisea.exercise = exercisea.exercise.replace(/[^a-zA-Zأ-ي0-9\, ]/g, "");
-            exercisea.exercise = exercisea.exercise.split(',');
+            exercisea.exercise = exercisea.exercise.split(",");
           } else {
-            _this3.listsa.push(exercisea.exercise);
+            _this9.listsa.push(exercisea.exercise);
           }
 
-          _this3.listsa.push(exercisea);
+          _this9.listsa.push(exercisea);
         });
       }
     })["catch"](function (err) {
@@ -8886,8 +9167,265 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "bd-example" }, [
+    _c(
+      "div",
+      {
+        staticClass: "carousel slide",
+        attrs: { id: "carouselExampleCaptions", "data-ride": "carousel" }
+      },
+      [
+        _c("div", { staticClass: "carousel-inner" }, [
+          _c("div", { staticClass: "bd-example" }, [
+            _c(
+              "div",
+              {
+                staticClass: "carousel slide",
+                attrs: {
+                  id: "carouselExampleCaptions",
+                  "data-ride": "carousel"
+                }
+              },
+              [
+                _c(
+                  "ol",
+                  { staticClass: "carousel-indicators" },
+                  _vm._l(_vm.list, function(slider, index) {
+                    return _c("li", {
+                      key: index,
+                      attrs: {
+                        "data-target": "#carouselExampleCaptions",
+                        "data-slide-to": index
+                      }
+                    })
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "carousel-inner" }, [
+                  _c("div", { staticClass: "bd-example" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "carousel slide",
+                        attrs: {
+                          id: "carouselExampleCaptions",
+                          "data-ride": "carousel"
+                        }
+                      },
+                      [
+                        _c(
+                          "ol",
+                          { staticClass: "carousel-indicators" },
+                          _vm._l(_vm.list, function(slider, index) {
+                            return _c("li", {
+                              key: index,
+                              attrs: {
+                                "data-target": "#carouselExampleCaptions",
+                                "data-slide-to": index
+                              }
+                            })
+                          }),
+                          0
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "carousel-inner" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "carousel-item active",
+                                style: {
+                                  backgroundImage:
+                                    "url(" + _vm.list[0].image + ")",
+                                  backgroundPosition: "center center"
+                                }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "carousel-caption d-none d-md-block"
+                                  },
+                                  [_c("h5", [_vm._v(_vm._s(_vm.list[0].text))])]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.list.slice(1), function(item, index) {
+                              return _c(
+                                "div",
+                                {
+                                  key: index,
+                                  staticClass: "carousel-item",
+                                  style: {
+                                    backgroundImage: "url(" + item.image + ")",
+                                    backgroundPosition: "center center"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "carousel-caption d-none d-md-block"
+                                    },
+                                    [_c("h5", [_vm._v(_vm._s(item.text))])]
+                                  )
+                                ]
+                              )
+                            })
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.list.slice(1), function(item, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "carousel-item",
+                      style: {
+                        backgroundImage: "url(" + item.image + ")",
+                        backgroundPosition: "center center"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "carousel-caption d-none d-md-block" },
+                        [_c("h5", [_vm._v(_vm._s(item.text))])]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3)
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-prev",
+        attrs: {
+          href: "#carouselExampleCaptions",
+          role: "button",
+          "data-slide": "prev"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-prev-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-next",
+        attrs: {
+          href: "#carouselExampleCaptions",
+          role: "button",
+          "data-slide": "next"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-next-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-prev",
+        attrs: {
+          href: "#carouselExampleCaptions",
+          role: "button",
+          "data-slide": "prev"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-prev-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-next",
+        attrs: {
+          href: "#carouselExampleCaptions",
+          role: "button",
+          "data-slide": "next"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-next-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
+  }
+]
+render._withStripped = true
 
 
 
@@ -13767,103 +14305,117 @@ var render = function() {
         _c("p", { staticClass: "h1 mt-5" }, [_vm._v("Tasks")]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.Saturday()
-                }
-              }
-            },
-            [_vm._v("Saturday")]
-          ),
+          _vm.days.Saturday
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.Saturday_fn()
+                    }
+                  }
+                },
+                [_vm._v("Saturday")]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.Sunday()
-                }
-              }
-            },
-            [_vm._v("Sunday")]
-          ),
+          _vm.days.Sunday
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.Sunday_fn()
+                    }
+                  }
+                },
+                [_vm._v("Sunday")]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.Monday()
-                }
-              }
-            },
-            [_vm._v("Monday")]
-          ),
+          _vm.days.Monday
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.Monday_fn()
+                    }
+                  }
+                },
+                [_vm._v("Monday")]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.Thursday()
-                }
-              }
-            },
-            [_vm._v("Thursday")]
-          ),
+          _vm.days.Thursday
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.Thursday_fn()
+                    }
+                  }
+                },
+                [_vm._v("Thursday")]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.Wednesday()
-                }
-              }
-            },
-            [_vm._v("Wednesday")]
-          ),
+          _vm.days.Wednesday
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.Wednesday_fn()
+                    }
+                  }
+                },
+                [_vm._v("Wednesday")]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.Thuesday()
-                }
-              }
-            },
-            [_vm._v("Thuesday")]
-          ),
+          _vm.days.Thuesday
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.Thuesday_fn()
+                    }
+                  }
+                },
+                [_vm._v("Thuesday")]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.Friday()
-                }
-              }
-            },
-            [_vm._v("Friday")]
-          )
+          _vm.days.Friday
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "col-xs-4 col-md-3 btn btn-flat btn-outline-primary m-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.Friday_fn()
+                    }
+                  }
+                },
+                [_vm._v("Friday")]
+              )
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c(
@@ -13885,9 +14437,7 @@ var render = function() {
                   _vm._l(item.exercise, function(itemd, index) {
                     return _c("li", { key: index }, [
                       _vm._v(
-                        "\n                            " +
-                          _vm._s(itemd) +
-                          "\n                            "
+                        "\n              " + _vm._s(itemd) + "\n              "
                       ),
                       _c(
                         "button",
@@ -13899,11 +14449,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                                Remove\n                            "
-                          )
-                        ]
+                        [_vm._v("Remove")]
                       )
                     ])
                   }),

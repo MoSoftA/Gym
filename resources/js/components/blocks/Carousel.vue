@@ -13,14 +13,6 @@
               ></li>
             </ol>
             <div class="carousel-inner">
-<<<<<<< HEAD
-              <div
-                class="carousel-item active"
-                :style="{backgroundImage: `url(${list[0].image})`, backgroundPosition: 'center center', } "
-              >
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>{{list[0].text}}</h5>
-=======
                 <div class="bd-example">
                     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
@@ -70,7 +62,6 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
->>>>>>> 672d36cab170928855bd254854891563c2b30e77
                 </div>
               </div>
               <div
