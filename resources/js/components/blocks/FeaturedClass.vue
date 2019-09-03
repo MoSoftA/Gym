@@ -10,7 +10,7 @@
                     :key="index"
                     v-for="(s,index) in articles"
                 >
-                    <img class="card-img-top" width="50" :src="articles[index].image" />
+                    <img class="card-img-top" width="50" style="height: 200px" :src="articles[index].image" />
                     <div class="card-body border">
                         <h5 class="card-title">{{ articles[index].title }}</h5>
                         <hr />

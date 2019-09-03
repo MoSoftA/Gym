@@ -105,7 +105,7 @@
 
             this.title = this.$store.state.AdminPanel.articleEdit[1];
             this.info = this.$store.state.AdminPanel.articleEdit[2];
-            this.img = this.$store.state.AdminPanel.articleEdit[5];
+            // this.img = this.$store.state.AdminPanel.articleEdit[5];
 
             $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
                 popover: {

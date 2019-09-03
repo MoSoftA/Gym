@@ -3641,8 +3641,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log('ok', this.$store.state.AdminPanel.articleEdit);
     this.title = this.$store.state.AdminPanel.articleEdit[1];
-    this.info = this.$store.state.AdminPanel.articleEdit[2];
-    this.img = this.$store.state.AdminPanel.articleEdit[5];
+    this.info = this.$store.state.AdminPanel.articleEdit[2]; // this.img = this.$store.state.AdminPanel.articleEdit[5];
+
     $('.textarea').summernote('code', this.$store.state.AdminPanel.articleEdit[3], {
       popover: {
         image: [],
@@ -8902,7 +8902,7 @@ var render = function() {
                           key: index,
                           staticClass: "carousel-item",
                           style: {
-                            backgroundImage: "url('" + item.image + ")",
+                            backgroundImage: "url(" + item.image + ")",
                             backgroundPosition: "center center"
                           }
                         },
@@ -9019,6 +9019,7 @@ var render = function() {
             [
               _c("img", {
                 staticClass: "card-img-top",
+                staticStyle: { height: "200px" },
                 attrs: { width: "50", src: _vm.articles[index].image }
               }),
               _vm._v(" "),
@@ -34099,8 +34100,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\xampp\htdocs\Gym\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! c:\xampp\htdocs\Gym\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\Gym-Manager\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\Gym-Manager\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
