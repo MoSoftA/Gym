@@ -13,12 +13,64 @@
               ></li>
             </ol>
             <div class="carousel-inner">
+<<<<<<< HEAD
               <div
                 class="carousel-item active"
                 :style="{backgroundImage: `url(${list[0].image})`, backgroundPosition: 'center center', } "
               >
                 <div class="carousel-caption d-none d-md-block">
                   <h5>{{list[0].text}}</h5>
+=======
+                <div class="bd-example">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li
+                                data-target="#carouselExampleCaptions"
+                                :data-slide-to="index"
+                                :key="index"
+                                v-for="(slider, index) in list"
+                            ></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div
+                                class="carousel-item active"
+                                :style="{backgroundImage: `url(${list[0].image})`, backgroundPosition: 'center center', } "
+                            >
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{list[0].text}}</h5>
+                                </div>
+                            </div>
+                            <div
+                                class="carousel-item"
+                                :key="index"
+                                v-for="(item, index) in list.slice(1)"
+                                :style="{backgroundImage: `url(${item.image})`, backgroundPosition: 'center center', }"
+                            >
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{item.text}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <a
+                            class="carousel-control-prev"
+                            href="#carouselExampleCaptions"
+                            role="button"
+                            data-slide="prev"
+                        >
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a
+                            class="carousel-control-next"
+                            href="#carouselExampleCaptions"
+                            role="button"
+                            data-slide="next"
+                        >
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+>>>>>>> 672d36cab170928855bd254854891563c2b30e77
                 </div>
               </div>
               <div

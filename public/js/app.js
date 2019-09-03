@@ -2027,6 +2027,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -8834,155 +8886,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "bd-example" }, [
-    _c(
-      "div",
-      {
-        staticClass: "carousel slide",
-        attrs: { id: "carouselExampleCaptions", "data-ride": "carousel" }
-      },
-      [
-        _c("div", { staticClass: "carousel-inner" }, [
-          _c("div", { staticClass: "bd-example" }, [
-            _c(
-              "div",
-              {
-                staticClass: "carousel slide",
-                attrs: {
-                  id: "carouselExampleCaptions",
-                  "data-ride": "carousel"
-                }
-              },
-              [
-                _c(
-                  "ol",
-                  { staticClass: "carousel-indicators" },
-                  _vm._l(_vm.list, function(slider, index) {
-                    return _c("li", {
-                      key: index,
-                      attrs: {
-                        "data-target": "#carouselExampleCaptions",
-                        "data-slide-to": index
-                      }
-                    })
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "carousel-inner" },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "carousel-item active",
-                        style: {
-                          backgroundImage: "url(" + _vm.list[0].image + ")",
-                          backgroundPosition: "center center"
-                        }
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "carousel-caption d-none d-md-block" },
-                          [_c("h5", [_vm._v(_vm._s(_vm.list[0].text))])]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.list.slice(1), function(item, index) {
-                      return _c(
-                        "div",
-                        {
-                          key: index,
-                          staticClass: "carousel-item",
-                          style: {
-                            backgroundImage: "url(" + item.image + ")",
-                            backgroundPosition: "center center"
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "carousel-caption d-none d-md-block"
-                            },
-                            [_c("h5", [_vm._v(_vm._s(item.text))])]
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._m(1)
-              ]
-            )
-          ])
-        ])
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "carousel-control-prev",
-        attrs: {
-          href: "#carouselExampleCaptions",
-          role: "button",
-          "data-slide": "prev"
-        }
-      },
-      [
-        _c("span", {
-          staticClass: "carousel-control-prev-icon",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "carousel-control-next",
-        attrs: {
-          href: "#carouselExampleCaptions",
-          role: "button",
-          "data-slide": "next"
-        }
-      },
-      [
-        _c("span", {
-          staticClass: "carousel-control-next-icon",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-      ]
-    )
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 

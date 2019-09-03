@@ -32,10 +32,11 @@ class ExerciseController extends Controller
      */
     public function store(ExerciseRequest $request)
     {
-        return $request->lists;
+        $request->validate(['day'=> 'required|string', 'lists' => 'required', 'user_id'=> 'required|numeric']);
        Exercise::create([
             'day' =>  $request->day,
-            'exercise' => $request->lists,
+           
+            'exercise' => json_encode($request->lists),
             'user_id' => $request->user_id,
        ]); 
        return $this->ApiResponse(200,"success");
