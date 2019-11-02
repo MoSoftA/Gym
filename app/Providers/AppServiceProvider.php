@@ -28,5 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Schema::defaultStringLength(191);
+        /*
+        if($this->app->environment() == 'production') {
+            \URL::forceScheme('https');
+            \URL::forceRootUrl(\Config::get('app.url'));
+            */
     }
 }

@@ -11,8 +11,8 @@
 |
 */
 $router->pattern('id', '[0-9]+');
-Route::get('/{any}', 'SpaController@index')->where('any', '.*');
-Route::get('/{any}/{id}', 'SpaController@index');
+Route::get('/{any}', 'SpaController@index')->where(['any'=> '.*']);
+//Route::get('/{any}/{id}', 'SpaController@index');
 
 Route::group(["middleware"=>"auth"], function (){
 	// articles
